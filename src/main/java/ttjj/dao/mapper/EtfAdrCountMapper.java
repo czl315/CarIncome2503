@@ -67,6 +67,7 @@ public interface EtfAdrCountMapper {
             "    <if test='f8 != null'>f8=#{f8},</if>",
             "    <if test='f9 != null'>f9=#{f9},</if>",
             "    <if test='f10 != null'>f10=#{f10},</if>",
+            "    <if test='f14 != null'>f14=#{f14},</if>",
             "    <if test='f15 != null'>f15=#{f15},</if>",
             "    <if test='f16 != null'>f16=#{f16},</if>",
             "    <if test='f17 != null'>f17=#{f17},</if>",
