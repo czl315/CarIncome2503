@@ -8,6 +8,7 @@ import java.util.Date;
  *
  * @author Administrator
  * @date 2025-02-27 创建实体类
+ * 20250302：增加字段：最近交易日的涨幅，latestAdr_1，latestAdr_2，latestAdr_3
  *
  */
 public class EtfAdrCount {
@@ -306,6 +307,43 @@ public class EtfAdrCount {
      * UPDATE_TIME
      */
     private Date UPDATE_TIME;
+
+    /**
+     * 最近交易日的涨幅:最近交易日-1
+     */
+    private BigDecimal latestAdr_1;
+    /**
+     * 最近交易日的涨幅:最近交易日-2
+     */
+    private BigDecimal latestAdr_2;
+    /**
+     * 最近交易日的涨幅:最近交易日-3
+     */
+    private BigDecimal latestAdr_3;
+
+    public BigDecimal getLatestAdr_1() {
+        return latestAdr_1;
+    }
+
+    public void setLatestAdr_1(BigDecimal latestAdr_1) {
+        this.latestAdr_1 = latestAdr_1;
+    }
+
+    public BigDecimal getLatestAdr_2() {
+        return latestAdr_2;
+    }
+
+    public void setLatestAdr_2(BigDecimal latestAdr_2) {
+        this.latestAdr_2 = latestAdr_2;
+    }
+
+    public BigDecimal getLatestAdr_3() {
+        return latestAdr_3;
+    }
+
+    public void setLatestAdr_3(BigDecimal latestAdr_3) {
+        this.latestAdr_3 = latestAdr_3;
+    }
 
     public Date getUPDATE_TIME() {
         return UPDATE_TIME;

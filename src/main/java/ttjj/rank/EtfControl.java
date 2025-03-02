@@ -18,7 +18,7 @@ import java.util.List;
 import static utils.Content.*;
 
 /**
- * ETF涨幅
+ * ETF涨幅统计
  * 查询etf列表
  * 保存：查询etf列表，批量插入
  * 更新-上涨之和
@@ -36,19 +36,88 @@ public class EtfControl {
 
 //        updateUpSum(date, etfList);//更新-上涨之和
 
-        CondStockAdrCount condFind = new CondStockAdrCount();
-        condFind.setDate(date);
-        condFind.setMvMin(NUM_YI_500);
-        condFind.setMvMax(NUM_YI_1000);
+        CondStockAdrCount condition = new CondStockAdrCount();
+        condition.setDate(date);
+        condition.setMvMin(NUM_YI_1000);
+//        condition.setMvMax(NUM_YI_1000);
 //        condFind.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condFind);//查询列表-根据条件
 
-//        updateUpMa(date, stockAdrCountList, condFind);//更新-超过均线信息
+//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 
-        saveOrUpdateListNetLastDay(condFind, date);
+//        saveOrUpdateListNetLastDay(condition, date);
 
+        updateLatestDayAdr(condition, date);
+
+    }
+
+    /**
+     * ETF涨幅统计：更新最近交易日的涨幅，最近3日
+     *
+     * @param condition 条件
+     */
+    private static void updateLatestDayAdr(CondStockAdrCount condition, String date) {
+        String funcName = "保存或更新ETF涨幅次数-批量更新基础信息";
+        String klineType = DB_RANK_BIZ_TYPE_ETF;
+
+        List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
+        //1、查询etf列表
+        List<RankBizDataDiff> etfList = listEtfListLastDay();
+        for (RankBizDataDiff etf : etfList) {
+            int days = 4;
+            //市值过滤
+            BigDecimal marketValue = etf.getF20();
+            BigDecimal mvMin = condition.getMvMin();
+            BigDecimal mvMax = condition.getMvMax();
+            if (handlerMarketValueFilter(marketValue, mvMin, mvMax)) {
+                continue;
+            }
+
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setDate(date);
+            entity.setF12(etf.getF12());
+
+            //显示指定日期最近3个K线交易日的涨跌
+            StringBuffer sbDaysAdr = new StringBuffer();
+            String zqdm = etf.getF12();
+            List<Kline> klineListDays = KlineService.kline(zqdm, days, KLT_101, false, null, date, klineType);
+            if (klineListDays != null) {
+                for (Kline klineListDay : klineListDays) {
+                    if (days == 4) {
+                        entity.setLatestAdr_3(klineListDay.getZhangDieFu());
+                    }
+                    if (days == 3) {
+                        entity.setLatestAdr_2(klineListDay.getZhangDieFu());
+                    }
+                    if (days == 2) {
+                        entity.setLatestAdr_1(klineListDay.getZhangDieFu());
+                    }
+                    if (days == 1) {
+                        break;
+                    }
+                    days--;
+                }
+            }
+            entity.setUPDATE_TIME(new Date());
+
+            etfAdrCountList.add(entity);
+        }
+
+        int rs = 0;
+        for (EtfAdrCount etfAdrCount : etfAdrCountList) {
+//            if(etfAdrCount.getF14().equals("上证50ETF")){
+//                System.out.println(funcName + "更新-特定：" + JSON.toJSONString(etfAdrCount));
+//            }
+            int updateRs = EtfAdrCountService.update(etfAdrCount);
+            if (updateRs != 1) {
+                System.out.println(funcName + "更新-失败：" + rs + "" + JSON.toJSONString(etfAdrCount));
+                System.out.println(funcName + "如果更新失败，可能是没有插入，执行一次插入操作：" + EtfAdrCountService.insert(etfAdrCount));
+            } else {
+                rs++;
+            }
+        }
     }
 
     /**
@@ -77,6 +146,7 @@ public class EtfControl {
             EtfAdrCount entity = new EtfAdrCount();
             entity.setDate(date);
             entity.setF12(etf.getF12());
+
             if (etf.getF2() != null) {
                 entity.setF2(etf.getF2());
             }
