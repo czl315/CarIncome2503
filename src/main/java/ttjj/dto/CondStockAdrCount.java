@@ -130,6 +130,19 @@ public class CondStockAdrCount extends StockAdrCount {
      */
     private boolean showMaDayCountUpDown;
 
+    /**
+     * 模糊查询名称列表
+     */
+    List<String> likeNameList;
+
+    public List<String> getLikeNameList() {
+        return likeNameList;
+    }
+
+    public void setLikeNameList(List<String> likeNameList) {
+        this.likeNameList = likeNameList;
+    }
+
     public BigDecimal getAdrUpSumOrder1to60Min() {
         return adrUpSumOrder1to60Min;
     }

@@ -274,6 +274,41 @@ public interface EtfAdrCountMapper {
             "</script>"})
     List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition);
 
+
+    /**
+     *  ETF涨幅数据：查询列表，模糊查询：名称列表
+     * @param condition 条件
+     * @return rs
+     */
+    @Select({"<script>",
+            "   SELECT ",
+            "       * ",
+            "   FROM etf_adr_count ",
+            "   WHERE 1=1  ",
+            "       AND date = #{date}  ",
+//            "       AND conception LIKE CONCAT('%',#{conception},'%')",
+            "       <if test='f20 != null'> ",
+            "       AND f20 >= #{f20} ",
+            "       </if> ",
+            "       <if test='type_name != null'> ",
+            "       AND type_name = #{type_name} ",
+            "       </if> ",
+
+            "       <if test='likeNameList != null'> ",
+            "       <foreach collection='likeNameList' item='item' open='AND  (' separator='or' close=')'>  ",
+            "           f14 LIKE CONCAT('%',#{item},'%') ",
+            "       </foreach> ",
+            "       </if> ",
+
+            "       <if test='orderBy != null '> ",
+            "        ORDER BY  ${orderBy} ",
+            "       </if> ",
+            "       <if test='limitCount != null '> ",
+            "        LIMIT #{limitCount} ",
+            "       </if> ",
+            "</script>"})
+    List<EtfAdrCountVo> listEtfAdrCountLikeName(CondStockAdrCount condition);
+
     /**
      * @param condition
      * @return

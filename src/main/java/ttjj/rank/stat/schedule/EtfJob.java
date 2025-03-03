@@ -23,8 +23,8 @@ public class EtfJob {
      */
     private static void statShowEtfUpMaSchedule() {
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
-//            String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-            String date = "2025-02-28";
+            String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//            String date = "2025-02-28";
             System.out.println();
             long begTime = System.currentTimeMillis();
             System.out.println("定时任务-etf-检查均线-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));

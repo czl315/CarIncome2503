@@ -89,6 +89,25 @@ public class EtfAdrCountDao {
     }
 
     /**
+     * ETF涨幅数据：查询列表，模糊查询：名称列表
+     * @param condition
+     * @return
+     */
+    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondStockAdrCount condition) {
+        SqlSession session = sqlSessionFactory.openSession();
+        List<EtfAdrCountVo> rs = null;
+        try {
+            rs = session.selectList("ttjj.dao.mapper.EtfAdrCountMapper.listEtfAdrCountLikeName", condition);
+            session.commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            session.close();
+        }
+        return rs;
+    }
+
+    /**
      * 删除-根据条件
      * @param condition 条件
      * @return 删除个数

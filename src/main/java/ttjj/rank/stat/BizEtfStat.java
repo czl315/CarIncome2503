@@ -25,8 +25,8 @@ import static utils.DateUtil.YYYY_MM_DD;
  */
 public class BizEtfStat {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-02-21";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-02-28";
 
 
         String spDate = null;//
@@ -394,11 +394,10 @@ public class BizEtfStat {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-02-21";
         boolean isShowAreaRisePctLastDay0ToLastDay20 = true;
-        boolean isShowAreaRisePctLastDay20ToLastDay40 = false;
-        boolean isShowAreaRisePctLastDay40ToLastDay60 = false;
+        boolean isShowAreaRisePctLastDay20ToLastDay40 = true;
+        boolean isShowAreaRisePctLastDay40ToLastDay60 = true;
         int curNo = 1;//序号
-        BigDecimal limitMarketValueYi = new BigDecimal("100" +
-                "");
+        BigDecimal limitMarketValueYi = new BigDecimal("0");
         Map<String, String> mapMyEtf = ContMapEtf.ETF_All;
         System.out.println(date + "我的etf共收录：" + mapMyEtf.size());
 
@@ -422,9 +421,9 @@ public class BizEtfStat {
             String name = rankBizDataDiff.getF14();
 //            if (!name.contains("软") && !name.contains("数据") && !name.contains("云") && !name.contains("AI") && !name.contains("计算")) {
 //            if (!name.contains("物流") && !name.contains("快递")) {
-//            if (!name.contains("芯片")) {
-//                continue;
-//            }
+            if (!name.contains("港股科技") && !name.contains("港股通科技") && !name.contains("香港科技") && !name.contains("恒生新经济") && !name.contains("恒生科技指数") && !name.contains("港股通互联网")&& !name.contains("港股互联网")&& !name.contains("港股消费")&& !name.contains("中概互联网")) {
+                continue;
+            }
 
             //市值过滤
             BigDecimal marketValue = rankBizDataDiff.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
@@ -466,7 +465,7 @@ public class BizEtfStat {
 
 
             //计算区间涨幅-最近20
-            if (isShowAreaRisePctLastDay0ToLastDay20 && klines.size() >=  tradeDayLimit60 - tradeDayLimit20) {
+            if (isShowAreaRisePctLastDay0ToLastDay20 && klines.size() >= tradeDayLimit60 - tradeDayLimit20) {
                 Kline klineBegDate = klines.get(tradeDayLimit60 - tradeDayLimit20 - 1);
                 Kline klineEndDate = klines.get(klines.size() - 1);
                 begDate = klineBegDate.getKtime();
@@ -478,7 +477,7 @@ public class BizEtfStat {
             }
 
             //计算区间涨幅-最近20至40
-            if (isShowAreaRisePctLastDay20ToLastDay40 && klines.size() >= tradeDayLimit60 - tradeDayLimit20 ) {
+            if (isShowAreaRisePctLastDay20ToLastDay40 && klines.size() >= tradeDayLimit60 - tradeDayLimit20) {
                 Kline klineBegDate = klines.get(tradeDayLimit60 - tradeDayLimit40 - 1);
                 Kline klineEndDate = klines.get(tradeDayLimit60 - tradeDayLimit20 - 1);
                 begDate = klineBegDate.getKtime();
@@ -490,7 +489,7 @@ public class BizEtfStat {
             }
 
             //计算区间涨幅-最近40至60
-            if (isShowAreaRisePctLastDay40ToLastDay60 && klines.size() >= tradeDayLimit60 ) {
+            if (isShowAreaRisePctLastDay40ToLastDay60 && klines.size() >= tradeDayLimit60) {
                 Kline klineBegDate = klines.get(tradeDayLimit60 - 1);
                 Kline klineEndDate = klines.get(tradeDayLimit60 - tradeDayLimit20 - 1);
                 begDate = klineBegDate.getKtime();
@@ -506,8 +505,8 @@ public class BizEtfStat {
 
         //对数据列表进行排序
 //        bizList = bizList.stream().filter(e -> e != null).sorted(Comparator.comparing(RankBizDataDiff::getF20, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
-//        bizDtoList = bizDtoList.stream().filter(e -> e != null).sorted(Comparator.comparing(BizDto::getAreaF3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
-        bizDtoList = bizDtoList.stream().filter(e -> e != null).sorted(Comparator.comparing(BizDto::getF3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        bizDtoList = bizDtoList.stream().filter(e -> e != null).sorted(Comparator.comparing(BizDto::getAreaF3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+//        bizDtoList = bizDtoList.stream().filter(e -> e != null).sorted(Comparator.comparing(BizDto::getF3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
         System.out.println("http etf共：" + bizDtoList.size());
 
         //遍历列表，查询最近n个交易日的数据，计算涨幅
@@ -533,44 +532,65 @@ public class BizEtfStat {
                 sb.append(StockUtil.formatInt(curNo++, 5));
                 sb.append(StockUtil.formatStName(code, 8));
                 sb.append(StockUtil.formatStName(name, 22));
-                sb.append(StockUtil.formatStName((adr + "%"), 10));
+//                sb.append(StockUtil.formatStName((adr + "%"), 10));
                 sb.append(mvFormat).append(" ");
 
                 if (begDate != null) {
                     sb.append(StockUtil.formatStr(begDate, 14));
-                }
-                if (adrArea != null) {
-                    sb.append(StockUtil.formatStr(adrArea + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
                 if (endDate != null) {
                     sb.append(StockUtil.formatStr(endDate, 14));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
+                if (adrArea != null) {
+                    sb.append(StockUtil.formatStr(adrArea + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 10));
+                }
+
 
                 String begDateLastDay20 = biz.getBegDateLastDay20();//开始日期
                 String endDateLastDay20 = biz.getEndDateLastDay20();//结束日期
                 BigDecimal adrAreaLastDay20 = biz.getAdrAreaLastDay20();
                 if (begDateLastDay20 != null) {
                     sb.append(StockUtil.formatStr(begDateLastDay20, 14));
-                }
-                if (adrAreaLastDay20 != null) {
-                    sb.append(StockUtil.formatStr(adrAreaLastDay20 + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
                 if (endDateLastDay20 != null) {
                     sb.append(StockUtil.formatStr(endDateLastDay20, 14));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
+                if (adrAreaLastDay20 != null) {
+                    sb.append(StockUtil.formatStr(adrAreaLastDay20 + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 10));
+                }
+
 
                 String begDateLastDay20To40 = biz.getBegDateLastDay20To40();//开始日期
                 String endDateLastDay20To40 = biz.getEndDateLastDay20To40();//结束日期
                 BigDecimal adrAreaLastDay20To40 = biz.getAdrAreaLastDay20To40();
                 if (begDateLastDay20To40 != null) {
                     sb.append(StockUtil.formatStr(begDateLastDay20To40, 14));
-                }
-                if (adrAreaLastDay20To40 != null) {
-                    sb.append(StockUtil.formatStr(adrAreaLastDay20To40 + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
                 if (endDateLastDay20To40 != null) {
                     sb.append(StockUtil.formatStr(endDateLastDay20To40, 14));
+                } else {
+                    sb.append(StockUtil.formatStr("", 14));
                 }
+                if (adrAreaLastDay20To40 != null) {
+                    sb.append(StockUtil.formatStr(adrAreaLastDay20To40 + "%", 10));
+                } else {
+                    sb.append(StockUtil.formatStr("", 10));
+                }
+
 
                 System.out.println(sb);
 //            System.out.println("etf.put(\"" + code + "\", \"" + nameFormat + "\");//" + mvFormat + "\t" + adr + "%");

@@ -27,30 +27,62 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-02-28";
-//        insertList(date);//保存：查询etf列表，批量插入。250228：1054
-
-        //1、查询etf列表
-//        BigDecimal limitMarketValueYi = NUM_YI_1000;
-//        List<RankBizDataDiff> etfList = listEtfListLastDay(limitMarketValueYi);
-
-//        updateUpSum(date, etfList);//更新-上涨之和
+        String date = "2025-03-03";
 
         CondStockAdrCount condition = new CondStockAdrCount();
         condition.setDate(date);
-        condition.setMvMin(NUM_YI_1000);
+//        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condFind.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condFind);//查询列表-根据条件
+        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+
+//        insertList(date);//保存：查询etf列表，批量插入。250228：1054
+//        saveOrUpdateListNetLastDay(condition, date);
+
+        //1、查询etf列表
+//        List<RankBizDataDiff> etfList = listEtfListLastDay(null);
+//        updateUpSum(date, etfList);//更新-上涨之和
+
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
 
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 
-//        saveOrUpdateListNetLastDay(condition, date);
+//        updateLatestDayAdr(condition, date);
 
-        updateLatestDayAdr(condition, date);
+        condition.setLikeNameList(Arrays.asList("标普"));
+        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
+        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+        showStat(etfListLikeName);//ETF涨幅数据
 
+    }
+
+    /**
+     * ETF涨幅数据：统计数据，模糊查询：名称列表
+     *
+     * @param etfListLikeName
+     */
+    private static void showStat(List<EtfAdrCountVo> etfListLikeName) {
+        if (etfListLikeName == null) {
+            System.out.println("数据为null");
+        }
+        for (EtfAdrCountVo vo : etfListLikeName) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(StockUtil.formatStName(vo.getF14(), 22));
+            sb.append(StockUtil.formatStName(vo.getF12(), 10));
+            sb.append(StockUtil.formatStName("累涨：", 6));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            if (vo.getADR_UP_SUM_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+            } else {
+                sb.append(StockUtil.formatStName("", 6));
+            }
+            System.out.println(sb);
+        }
     }
 
     /**
@@ -165,7 +197,9 @@ public class EtfControl {
             if (etf.getF9() != null) {
                 entity.setF9(new BigDecimal(etf.getF9()));
             }
-            entity.setF10(BigDecimal.valueOf(etf.getF10()));
+            if (etf.getF10() != null) {
+                entity.setF10(BigDecimal.valueOf(etf.getF10()));
+            }
             entity.setF14(etf.getF14());
             if (etf.getF15() != null) {
                 entity.setF15(new BigDecimal(etf.getF15().toString()));
@@ -307,9 +341,13 @@ public class EtfControl {
      * @param stockAdrCountList 更新列表
      */
     private static void updateNetArea(String date, List<EtfAdrCountVo> stockAdrCountList) {
+        boolean isShowLog = true;
+        long begTime = System.currentTimeMillis();
+        String methodName = "ETF涨幅数据：更新-价格区间";
+
         int updateRs = 0;//更新成功个数
         if (stockAdrCountList == null) {
-            System.out.println("更新-净值区间:stockAdrCountList==null");
+            System.out.println(methodName + "没有数据需要更新，stockAdrCountList==null");
             return;
         }
         for (EtfAdrCountVo stockAdrCount : stockAdrCountList) {
@@ -330,6 +368,9 @@ public class EtfControl {
             //更新
             updateRs += EtfAdrCountService.update(entity);
 //            System.out.println("更新-净值区间:" + stockAdrCount.getF14() + StockAdrCountService.update(entity));
+        }
+        if (isShowLog) {
+            System.out.println(methodName + "-需要更新个数:" + stockAdrCountList.size() + ",更新成功个数：" + updateRs + "end," + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
         System.out.println("更新-净值区间-个数:" + stockAdrCountList.size() + ",更新成功：" + updateRs);
     }

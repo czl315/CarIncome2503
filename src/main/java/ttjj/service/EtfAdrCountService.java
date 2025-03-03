@@ -7,6 +7,7 @@ import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 import ttjj.dto.Kline;
 import ttjj.dto.StockAdrCountVo;
+import utils.DateUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -114,13 +115,43 @@ public class EtfAdrCountService {
     }
 
     /**
-     * 查询列表-根据条件
+     * ETF涨幅数据：查询列表，模糊查询：名称列表
+     *
+     * @param condition condition
+     * @return rs
+     */
+    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondStockAdrCount condition) {
+        boolean isShowLog = true;
+        long begTime = System.currentTimeMillis();
+        String methodName = "ETF涨幅数据：查询列表，模糊查询：名称列表";
+//        if(isShowLog){
+//            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
+//        }
+        List<EtfAdrCountVo> rs = EtfAdrCountDao.listEtfAdrCountLikeName(condition);
+        if(isShowLog){
+            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
+        return rs;
+    }
+
+    /**
+     * ETF涨幅数据：查询列表，根据条件
      *
      * @param condition condition
      * @return rs
      */
     public static List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition) {
-        return EtfAdrCountDao.listStAdrCount(condition);
+        boolean isShowLog = true;
+        long begTime = System.currentTimeMillis();
+        String methodName = "ETF涨幅数据：查询列表";
+//        if(isShowLog){
+//            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
+//        }
+        List<EtfAdrCountVo> rs = EtfAdrCountDao.listStAdrCount(condition);
+        if(isShowLog){
+            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
+        return rs;
     }
 
     /**
