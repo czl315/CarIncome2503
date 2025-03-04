@@ -28,6 +28,7 @@ public class EtfControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-03-03";
+//        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
         CondStockAdrCount condition = new CondStockAdrCount();
         condition.setDate(date);
@@ -35,19 +36,18 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        insertList(date);//保存：查询etf列表，批量插入。250228：1054
-//        saveOrUpdateListNetLastDay(condition, date);
+        saveOrUpdateListNetLastDay(condition, date);
 
-//        List<RankBizDataDiff> etfList = listEtfListLastDay(null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
+        List<RankBizDataDiff> etfList = listEtfListLastDay(null);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
 
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
-
+//
 //        updateLatestDayAdr(condition, date);
 
-        condition.setLikeNameList(Arrays.asList("2000"));//非国内
+        condition.setLikeNameList(Arrays.asList("1000"));//国内指数-中证："2000","1000","300","500","800","A50ETF"
         condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
         showStat(etfListLikeName);//ETF涨幅数据
