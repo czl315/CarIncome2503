@@ -12,7 +12,6 @@ import utils.DateUtil;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
-
 import static utils.Content.*;
 
 /**
@@ -129,7 +128,7 @@ public class EtfAdrCountService {
 //        }
         List<EtfAdrCountVo> rs = EtfAdrCountDao.listEtfAdrCountLikeName(condition);
         if(isShowLog){
-            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2,BigDecimal.ROUND_HALF_UP));
         }
         return rs;
     }
@@ -149,7 +148,7 @@ public class EtfAdrCountService {
 //        }
         List<EtfAdrCountVo> rs = EtfAdrCountDao.listStAdrCount(condition);
         if(isShowLog){
-            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2,BigDecimal.ROUND_HALF_UP));
         }
         return rs;
     }
