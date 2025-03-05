@@ -134,6 +134,18 @@ public class CondStockAdrCount extends StockAdrCount {
      * 模糊查询名称列表
      */
     List<String> likeNameList;
+    /**
+     * 模糊查询名称列表-过滤掉不查询
+     */
+    List<String> notLikeNameList;
+
+    public List<String> getNotLikeNameList() {
+        return notLikeNameList;
+    }
+
+    public void setNotLikeNameList(List<String> notLikeNameList) {
+        this.notLikeNameList = notLikeNameList;
+    }
 
     public List<String> getLikeNameList() {
         return likeNameList;

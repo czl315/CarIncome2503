@@ -299,6 +299,11 @@ public interface EtfAdrCountMapper {
             "           f14 LIKE CONCAT('%',#{item},'%') ",
             "       </foreach> ",
             "       </if> ",
+            "       <if test='notLikeNameList != null'> ",
+            "       <foreach collection='notLikeNameList' item='item' open='AND  (' separator='AND' close=')'>  ",
+            "           f14 NOT LIKE CONCAT('%',#{item},'%') ",
+            "       </foreach> ",
+            "       </if> ",
 
             "       <if test='orderBy != null '> ",
             "        ORDER BY  ${orderBy} ",
