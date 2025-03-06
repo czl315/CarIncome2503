@@ -7,6 +7,7 @@ import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 import utils.DateUtil;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -18,6 +19,8 @@ import static utils.Content.*;
  * 定时任务-etf涨幅统计
  */
 public class EtfAdrJob {
+    public static int jobCountUpdateUpSum = 0;//定时次数
+
     public static void main(String[] args) {
         statShowEtfAdrCountSchedule();
     }
@@ -46,13 +49,36 @@ public class EtfAdrJob {
          * 更新-上涨之和
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
+            String methodName = "更新上涨之和（Job）";
             try {
-                List<RankBizDataDiff> etfList = EtfControl.listEtfListLastDay(null);//1、查询etf列表
+                BigDecimal minMv = null;
+                BigDecimal maxMv = null;
+                if (jobCountUpdateUpSum % 5 == 0) {
+                    minMv = NUM_YI_30;
+                    maxMv = null;
+                } else if (jobCountUpdateUpSum % 5 == 1) {
+                    minMv = NUM_YI_10;
+                    maxMv = NUM_YI_30;
+                } else if (jobCountUpdateUpSum % 5 == 2) {
+                    minMv = NUM_YI_2;
+                    maxMv = NUM_YI_10;
+                } else if (jobCountUpdateUpSum % 5 == 3) {
+                    minMv = NUM_YI_1;
+                    maxMv = NUM_YI_2;
+                } else if (jobCountUpdateUpSum % 5 == 4) {
+                    minMv = null;
+                    maxMv = NUM_YI_1;
+                }
+                List<RankBizDataDiff> etfList = EtfControl.listEtfListLastDayByMarketValue(minMv, maxMv);//1、查询etf列表
+                String minMvYi = minMv != null ? minMv.divide(NUM_YI_1).setScale(0, BigDecimal.ROUND_HALF_UP) + "" : "0";
+                String maxMvYi = maxMv != null ? maxMv.divide(NUM_YI_1).setScale(0, BigDecimal.ROUND_HALF_UP) + "" : "无上限";
+                System.out.println(methodName + ",循环次数：" + jobCountUpdateUpSum + ",最低" + minMvYi + "亿，最高" + maxMvYi + "亿：" + etfList.size());
                 EtfControl.updateUpSum(date, etfList);//更新-上涨之和
+                jobCountUpdateUpSum++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 5, 600, TimeUnit.SECONDS);
+        }, 3, 120, TimeUnit.SECONDS);
 
         /**
          * 更新-超过均线信息
