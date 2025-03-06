@@ -243,16 +243,16 @@ public class StockUtil {
      * @return rs
      */
     public static String formatStName(String name, Integer length) {
-        name = name.replace(" ", "");
         StringBuffer rs = new StringBuffer();
-        if (length == null) {
-            return rs.append(name).toString();
-        }
         if (name == null || name.length() == 0) {
             for (int i = 0; i < length; i++) {
                 rs.append(" ");
             }
             return rs.toString();
+        }
+        name = name.replace(" ", "");
+        if (length == null) {
+            return rs.append(name).toString();
         }
         char[] chars = name.toCharArray();
         for (char aChar : chars) {

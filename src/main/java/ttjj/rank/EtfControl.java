@@ -3,9 +3,11 @@ package ttjj.rank;
 import com.alibaba.fastjson.JSON;
 import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
-import ttjj.db.StockAdrCount;
 import ttjj.dto.*;
-import ttjj.service.*;
+import ttjj.service.BizService;
+import ttjj.service.EtfAdrCountService;
+import ttjj.service.KlineService;
+import ttjj.service.StockService;
 import utils.DateUtil;
 import utils.StockUtil;
 
@@ -25,9 +27,11 @@ import static utils.Content.*;
  * 更新-超过均线信息
  */
 public class EtfControl {
+    static int jobCountUpdateUpSum = 0;
+
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-04";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-03-05";
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
         CondStockAdrCount condition = new CondStockAdrCount();
@@ -36,20 +40,23 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDay(null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//
-//        updateLatestDayAdr(condition, date);
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
+        updateLatestDayAdr(condition, date);
 
-        condition.setLikeNameList(Arrays.asList("上证", "上证指数", "上证综合"));//上证指数：
-        condition.setNotLikeNameList(Arrays.asList("50", "80", "券商"));//上证指数：
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
-        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-        showStat(etfListLikeName);//ETF涨幅数据
+//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
+//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
+//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
+//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI);//消费
+
+//        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
+//        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+//        showStat(etfListLikeName);//ETF涨幅数据
+
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
 //        condition.setLikeNameList(Arrays.asList("科创","双创"));//科创板：
@@ -60,6 +67,8 @@ public class EtfControl {
 //        condition.setNotLikeNameList(Arrays.asList("创300","沪港深300"));//沪深300：
 //        condition.setLikeNameList(Arrays.asList("证50","A50"));//上证50：
 //        condition.setNotLikeNameList(Arrays.asList("500","深证50"));//上证50：
+        //        condition.setLikeNameList(Arrays.asList("上证", "上证指数", "上证综合"));//上证指数：
+//        condition.setNotLikeNameList(Arrays.asList("50", "80", "券商"));//上证指数：
 
     }
 
@@ -72,7 +81,7 @@ public class EtfControl {
         if (etfListLikeName == null) {
             System.out.println("数据为null");
         }
-        String etfMapKey = "INDEX_MORE_CN";
+        String etfMapKey = "XIAO_FEI";
         int size6 = 6;
         int size10 = 10;
         int num = 0;//序号
@@ -666,24 +675,51 @@ public class EtfControl {
     /**
      * 查询etf列表:市值过滤
      *
-     * @param limitMarketValueYi
+     * @param minMv 最低市值
      * @return
      */
-    public static List<RankBizDataDiff> listEtfListLastDay(BigDecimal limitMarketValueYi) {
-        List<RankBizDataDiff> etfList = listEtfListLastDay();
-        if (limitMarketValueYi != null && limitMarketValueYi.compareTo(new BigDecimal("0")) > 0) {
-            List<RankBizDataDiff> etfListLimit = new ArrayList<>();
-            for (RankBizDataDiff etf : etfList) {
-                BigDecimal marketValue = etf.getF20();
-                //市值过滤
-                if (marketValue != null && marketValue.compareTo(limitMarketValueYi) > 0) {
-                    etfListLimit.add(etf);
-                }
-            }
-            return etfListLimit;
-        }
-        return etfList;
+    public static List<RankBizDataDiff> listEtfListLastDay(BigDecimal minMv) {
+        return listEtfListLastDayByMarketValue(minMv, null);
     }
 
-
+    /**
+     * 查询etf列表:市值过滤
+     *
+     * @param minMv 最低市值
+     * @param maxMv 最高市值
+     * @return
+     */
+    public static List<RankBizDataDiff> listEtfListLastDayByMarketValue(BigDecimal minMv, BigDecimal maxMv) {
+        boolean isShowLog = false;
+        int countMinMvLimit = 0;
+        int countMaxMvLimit = 0;
+        List<RankBizDataDiff> etfList = listEtfListLastDay();
+        if (minMv == null && maxMv == null) {
+            return etfList;
+        }
+        List<RankBizDataDiff> etfListLimit = new ArrayList<>();
+        for (RankBizDataDiff etf : etfList) {
+            BigDecimal marketValue = etf.getF20();
+            //市值过滤
+            if (marketValue == null) {
+                etfListLimit.add(etf);
+                continue;
+            }
+            if (minMv != null && marketValue.compareTo(minMv) < 0) {
+//                    System.out.println("市值低于限定");
+                countMinMvLimit++;
+                continue;
+            }
+            if (maxMv != null && marketValue.compareTo(maxMv) > 0) {
+//                    System.out.println("市值高于限定");
+                countMaxMvLimit++;
+                continue;
+            }
+            etfListLimit.add(etf);
+        }
+        if (isShowLog) {
+            System.out.println("查询etf列表,源数据个数：" + etfList.size() + "||" + "市值低于限定个数：" + countMinMvLimit + "||" + "市值高于限定个数：" + countMaxMvLimit + "||" + "市值过滤符合条件个数：" + etfListLimit.size() + ",校对：" + (countMinMvLimit + countMaxMvLimit + etfListLimit.size()) + "==" + etfList.size());
+        }
+        return etfListLimit;
+    }
 }
