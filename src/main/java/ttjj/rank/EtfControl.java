@@ -8,6 +8,7 @@ import ttjj.service.BizService;
 import ttjj.service.EtfAdrCountService;
 import ttjj.service.KlineService;
 import ttjj.service.StockService;
+import utils.ContEtfNameKey;
 import utils.DateUtil;
 import utils.StockUtil;
 
@@ -30,8 +31,8 @@ public class EtfControl {
     static int jobCountUpdateUpSum = 0;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-03-05";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-03-05";
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
         CondStockAdrCount condition = new CondStockAdrCount();
@@ -52,7 +53,7 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI);//消费
-
+//
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 //        showStat(etfListLikeName);//ETF涨幅数据
