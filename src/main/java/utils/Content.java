@@ -275,6 +275,11 @@ public class Content {
     public static long DB_RANK_BIZ_F148_STOCK_STATUS_SUSPENSION = 32;
 
     /**
+     * DESC
+     */
+    public static String DB_DESC = " DESC";
+
+    /**
      * HTTP_KLINE_SECID_PREFIX_BANKUAI 请求前缀-板块
      */
     public static String HTTP_KLINE_SECID_PREFIX_BANKUAI = "90.";
@@ -723,8 +728,24 @@ public class Content {
      * ORDER_FIELD_ADR_UP_SUM_1_60
      */
     public static String ORDER_FIELD_ADR_UP_SUM_1_60 = "ADR_UP_SUM_1_60";
+    /**
+     * ORDER_FIELD_ADR_UP_SUM_1_40
+     */
     public static String ORDER_FIELD_ADR_UP_SUM_1_40 = "ADR_UP_SUM_1_40";
+    /**
+     * ORDER_FIELD_ADR_UP_SUM_1_20
+     */
     public static String ORDER_FIELD_ADR_UP_SUM_1_20 = "ADR_UP_SUM_1_20";
+    /**
+     *  ORDER_FIELD_ADR_UP_SUM_1_10
+     */
+    public static String ORDER_FIELD_ADR_UP_SUM_1_10 = "ADR_UP_SUM_1_10";
+    /**
+     *  ADR_UP_SUM_1_5
+     */
+    public static String ORDER_FIELD_ADR_UP_SUM_1_5 = "ADR_UP_SUM_1_5";
+
+
     /**
      * ORDER_FIELD_F3
      */

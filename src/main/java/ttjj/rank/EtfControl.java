@@ -41,22 +41,22 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-        updateUpSum(date, etfList);//更新-上涨之和
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-        updateLatestDayAdr(condition, date);
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        updateUpSum(date, etfList);//更新-上涨之和
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
 
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
-//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI);//消费
+        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI);//消费
 //
-//        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + "   DESC");
-//        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName);//ETF涨幅数据
+        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_5 + DB_DESC);
+        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+        showStat(etfListLikeName);//ETF涨幅数据
 
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
@@ -121,7 +121,12 @@ public class EtfControl {
                 sb.append(StockUtil.formatStName("", size10));
             }
             if (vo.getADR_UP_SUM_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), 10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), size10));
+            } else {
+                sb.append(StockUtil.formatStName("", size10));
+            }
+            if (vo.getADR_UP_SUM_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), size10));
             } else {
                 sb.append(StockUtil.formatStName("", size10));
             }
