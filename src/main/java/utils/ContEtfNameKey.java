@@ -21,6 +21,7 @@ public class ContEtfNameKey {
     public static List XIAOFEI_OLD = Arrays.asList("养老");//消费-养老
     public static List XIAOFEI_EXPRESS = Arrays.asList("物流");//消费-物流
     public static List XIAOFEI = new ArrayList();//消费-
+
     static {
         XIAOFEI.addAll(XIAOFEI_HK);
         XIAOFEI.addAll(XIAOFEI_GAME);
@@ -32,6 +33,63 @@ public class ContEtfNameKey {
         XIAOFEI.addAll(XIAOFEI_OLD);
         XIAOFEI.addAll(XIAOFEI_EXPRESS);
         XIAOFEI.addAll(XIAOFEI_WINE);
+    }
+
+    public static void main(String[] args) {
+        showSqlNameLike(XIAOFEI );
+        showSqlNameLikeNot(XIAOFEI_HK );
+        showSqlNameLikeNot(XIAOFEI_GAME );
+    }
+
+    /**
+     * 显示sql表达式:模糊查询
+     *
+     * @param list list
+     */
+    private static void showSqlNameLike(List<String> list ) {
+        int i = 0;
+        StringBuffer sql = new StringBuffer();
+        sql.append(" AND ");
+        sql.append(" ( ");
+            for (String str : list) {
+                if (i == 0) {
+                    sql.append(" f14 LIKE '%" + str + "%'");
+                } else {
+                    sql.append(" OR f14 LIKE '%" + str + "%'");
+                }
+                i++;
+            }
+            for (String str : list) {
+                if (i == 0) {
+                    sql.append(" f14 NOT LIKE '%" + str + "%'");
+                } else {
+                    sql.append(" AND f14 NOT LIKE '%" + str + "%'");
+                }
+                i++;
+        }
+        sql.append(" ) ");
+        System.out.println(sql);
+    }
+    /**
+     * 显示sql表达式:非模糊查询
+     *
+     * @param list list
+     */
+    private static void showSqlNameLikeNot(List<String> list ) {
+        int i = 0;
+        StringBuffer sql = new StringBuffer();
+        sql.append(" AND ");
+        sql.append(" ( ");
+        for (String str : list) {
+            if (i == 0) {
+                sql.append(" f14 NOT LIKE '%" + str + "%'");
+            } else {
+                sql.append(" AND f14 NOT LIKE '%" + str + "%'");
+            }
+            i++;
+        }
+        sql.append(" ) ");
+        System.out.println(sql);
     }
 
 }

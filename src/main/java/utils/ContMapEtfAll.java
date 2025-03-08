@@ -122,8 +122,6 @@ public class ContMapEtfAll {
         INDEX_ALL_CN_HK.put("520550", "港股红利低波ETF       ");//    市值：1.84      累涨：10.88               2.23      8.65      4.68      107
     }
 
-
-
     /**
      * 消费-香港消费
      */
@@ -215,7 +213,6 @@ public class ContMapEtfAll {
         XIAOFEI_EXPRESS.put("516530", "消费-物流             ");//物流快递ETF           市值：0.71      累涨：18.50     6.53      7.61      5.63      2.43      1.27      1
         XIAOFEI_EXPRESS.put("516910", "消费-物流             ");//物流ETF               市值：0.56      累涨：17.85     6.39      7.37      5.19      2.30      1.10      2
     }
-
 
     /**
      * 消费
