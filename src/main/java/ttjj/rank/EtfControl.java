@@ -31,8 +31,8 @@ public class EtfControl {
     static int jobCountUpdateUpSum = 0;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-05";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-03-07";
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
         CondStockAdrCount condition = new CondStockAdrCount();
@@ -52,11 +52,13 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
-        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI);//消费
+//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
+        condition.setLikeNameList(ContEtfNameKey.XIAOFEI);
 //
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_5 + DB_DESC);
+        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-        showStat(etfListLikeName);//ETF涨幅数据
+//        showStat(etfListLikeName,"XIAOFEI_ALL_HK","消费-香港消费");
+        showStat(etfListLikeName,"XIAOFEI","消费");
 
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
@@ -76,29 +78,30 @@ public class EtfControl {
     /**
      * ETF涨幅数据：统计数据，模糊查询：名称列表
      *
-     * @param etfListLikeName
+     * @param etfListLikeName etf列表
+     * @param typeEn 类型英文
+     * @param typeCn 类型中文
      */
-    private static void showStat(List<EtfAdrCountVo> etfListLikeName) {
+    private static void showStat(List<EtfAdrCountVo> etfListLikeName, String typeEn, String typeCn) {
         if (etfListLikeName == null) {
             System.out.println("数据为null");
         }
-        String etfMapKey = "XIAO_FEI";
         int size6 = 6;
         int size10 = 10;
+        int size22 = 22;
         int num = 0;//序号
         for (EtfAdrCountVo vo : etfListLikeName) {
             StringBuffer sb = new StringBuffer();
-            sb.append(etfMapKey + ".put(\"").append(StockUtil.formatStName(vo.getF12(), size6)).append("\"");
-            sb.append(", \"" + StockUtil.formatStName(vo.getF14(), 22) + "\");");
-//            sb.append(StockUtil.formatStName(vo.getF12(), 10));
-//            sb.append(StockUtil.formatStName(vo.getF14(), 22));
-            sb.append(StockUtil.formatStName("//", size6));
+            sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), size6)).append("\"");
+            sb.append(", \"" + StockUtil.formatStName(typeCn, size22) + "\");");
+            sb.append("//");
+            sb.append(StockUtil.formatStName(vo.getF14(), size22));
             sb.append(StockUtil.formatStName("市值：", size6));
             BigDecimal marketValue = null;
             if (vo.getF20() != null) {
                 marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
             }
-            sb.append(StockUtil.formatDouble(marketValue, 10));
+            sb.append(StockUtil.formatDouble(marketValue, size10));
             sb.append(StockUtil.formatStName("累涨：", size6));
             if (vo.getADR_UP_SUM_1_60() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), size10));
