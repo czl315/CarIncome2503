@@ -53,12 +53,12 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-        condition.setLikeNameList(ContEtfNameKey.XIAOFEI);
+        condition.setLikeNameList(ContEtfNameKey.YILIAO);
 //
         condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 //        showStat(etfListLikeName,"XIAOFEI_ALL_HK","消费-香港消费");
-        showStat(etfListLikeName,"XIAOFEI","消费");
+        showStat(etfListLikeName,"YILIAO","医疗");
 
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
