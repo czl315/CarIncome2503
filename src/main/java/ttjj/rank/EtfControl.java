@@ -32,7 +32,11 @@ public class EtfControl {
 
     public static void main(String[] args) {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-03-07";
+        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-03-10";
+        if (!date.equals(today)) {
+            System.out.println("注意！！！非今日数据");
+        }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
         CondStockAdrCount condition = new CondStockAdrCount();
@@ -41,24 +45,24 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
+        updateLatestDayAdr(condition, date);
 
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-        condition.setLikeNameList(ContEtfNameKey.YILIAO);
+//        condition.setLikeNameList(ContEtfNameKey.YILIAO);
 //
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
-        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+//        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
+//        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 //        showStat(etfListLikeName,"XIAOFEI_ALL_HK","消费-香港消费");
-        showStat(etfListLikeName,"YILIAO","医疗");
+//        showStat(etfListLikeName,"YILIAO","医疗");
 
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
@@ -79,8 +83,8 @@ public class EtfControl {
      * ETF涨幅数据：统计数据，模糊查询：名称列表
      *
      * @param etfListLikeName etf列表
-     * @param typeEn 类型英文
-     * @param typeCn 类型中文
+     * @param typeEn          类型英文
+     * @param typeCn          类型中文
      */
     private static void showStat(List<EtfAdrCountVo> etfListLikeName, String typeEn, String typeCn) {
         if (etfListLikeName == null) {

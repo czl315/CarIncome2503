@@ -22,7 +22,14 @@ public class ContEtfNameKey {
     public static List INDEX_688 = Arrays.asList("科创", "双创");//指数-科创板
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股","沪港深");//指数-港股
 
-    public static List YILIAO = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗", "中药");//医疗
+    public static List YILIAO = new ArrayList();//医疗
+    public static List YILIAO_CN_NOT = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗");//医疗
+    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗
+
+    static {
+        YILIAO.addAll(YILIAO_CN_NOT);
+        YILIAO.addAll(YILIAO_CN_MEDICINE);
+    }
 
     public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商", "黄金", "金融", "银行", "金ETF");//金融-证券
     public static List JINRONG_FANGDICHAN = Arrays.asList("地产","建材","基建","交","电力","公用");//金融-地产
@@ -63,8 +70,10 @@ public class ContEtfNameKey {
     }
 
     public static void main(String[] args) {
-        showSqlNameLike(KEJI_HK);
-        showSqlNameLike(XIAOFEI);
+//        showSqlNameLike(KEJI_HK);
+//        showSqlNameLike(XIAOFEI);
+//        showSqlNameLike(YILIAO);
+        showSqlNameLike(INDEX_CN_NOT);
 
 //        showSqlNameLikeNot(XIAOFEI);
 //        showSqlNameLikeNot(KEJI_HK);

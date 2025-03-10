@@ -25,6 +25,8 @@ public class EtfAdrJob {
         statShowEtfAdrCountSchedule();
     }
 
+    static int jobSeconds = 300;//定时间隔时间
+
     /**
      * 定时任务-etf涨幅统计
      */
@@ -39,10 +41,11 @@ public class EtfAdrJob {
                 CondStockAdrCount condition = new CondStockAdrCount();
                 condition.setDate(date);
                 EtfControl.saveOrUpdateListNetLastDay(condition, date);
+                jobSeconds++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, 300, TimeUnit.SECONDS);
+        }, 0, jobSeconds, TimeUnit.SECONDS);
 
 
         /**
