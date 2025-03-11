@@ -128,6 +128,10 @@ public interface EtfAdrCountMapper {
             "    <if test='latestAdr_1 != null'>latestAdr_1=#{latestAdr_1},</if>",
             "    <if test='latestAdr_2 != null'>latestAdr_2=#{latestAdr_2},</if>",
             "    <if test='latestAdr_3 != null'>latestAdr_3=#{latestAdr_3},</if>",
+            "    <if test='maxDown != null'>maxDown=#{maxDown},</if>",
+            "    <if test='minRise != null'>minRise=#{minRise},</if>",
+            "    <if test='maxPct != null'>maxPct=#{maxPct},</if>",
+            "    <if test='minPct != null'>minPct=#{minPct},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",
             "</script>"})

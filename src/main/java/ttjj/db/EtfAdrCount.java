@@ -9,6 +9,8 @@ import java.util.Date;
  * @author Administrator
  * @date 2025-02-27 创建实体类
  * 20250302：增加字段：最近交易日的涨幅，latestAdr_1，latestAdr_2，latestAdr_3
+ * 20250311：增加字段：最高回撤、最低上涨、最高上涨百分比、最低下跌百分比
+ *
  *
  */
 public class EtfAdrCount {
@@ -320,6 +322,55 @@ public class EtfAdrCount {
      * 最近交易日的涨幅:最近交易日-3
      */
     private BigDecimal latestAdr_3;
+
+    /**
+     * 最高回撤
+     */
+    private BigDecimal maxDown;
+    /**
+     * 最低上涨
+     */
+    private BigDecimal minRise;
+    /**
+     * 最高上涨百分比
+     */
+    private BigDecimal maxPct;
+    /**
+     * 最低下跌百分比
+     */
+    private BigDecimal minPct;
+
+    public BigDecimal getMaxDown() {
+        return maxDown;
+    }
+
+    public void setMaxDown(BigDecimal maxDown) {
+        this.maxDown = maxDown;
+    }
+
+    public BigDecimal getMinRise() {
+        return minRise;
+    }
+
+    public void setMinRise(BigDecimal minRise) {
+        this.minRise = minRise;
+    }
+
+    public BigDecimal getMaxPct() {
+        return maxPct;
+    }
+
+    public void setMaxPct(BigDecimal maxPct) {
+        this.maxPct = maxPct;
+    }
+
+    public BigDecimal getMinPct() {
+        return minPct;
+    }
+
+    public void setMinPct(BigDecimal minPct) {
+        this.minPct = minPct;
+    }
 
     public BigDecimal getLatestAdr_1() {
         return latestAdr_1;

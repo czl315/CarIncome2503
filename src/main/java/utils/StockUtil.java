@@ -506,4 +506,17 @@ public class StockUtil {
         }
         return null;
     }
+
+    /**
+     * 计算最大回撤
+     * @param curAmt 当前金额
+     * @param maxAmt 最高金额
+     * @return 最大回撤
+     */
+    public static BigDecimal handlerMaxDown(BigDecimal curAmt,BigDecimal maxAmt) {
+        if (curAmt != null && maxAmt != null) {
+            return curAmt.subtract(maxAmt).divide(curAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+        }
+        return null;
+    }
 }
