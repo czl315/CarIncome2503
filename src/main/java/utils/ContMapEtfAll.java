@@ -231,6 +231,19 @@ public class ContMapEtfAll {
         INDEX_HK.put("520660", "指数-港股             ");//港股通央企红利ETF南方 市值：11.02     累涨：24.80     12.14     6.42      6.46      2.52      1.65      90
         INDEX_HK.put("513830", "指数-港股             ");//N港股红利ETF          市值：8.49      累涨：                                                            91
     }
+
+    /**
+     * 科技-工业
+     */
+    public static Map<String, String> KEJI_JUNGONG = new HashMap<>();
+    static {
+        KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：32.52     累涨：40.87     9.22      15.14     16.51     10.53     8.19      1
+        KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：68.16     累涨：38.12     9.60      14.85     13.67     8.71      7.53      2
+        KEJI_JUNGONG.put("512660", "科技-军工             ");//军工ETF               市值：116.81    累涨：38.59     9.36      15.61     13.62     8.02      6.56      3
+        KEJI_JUNGONG.put("512560", "科技-军工             ");//军工ETF易方达         市值：8.42      累涨：38.34     9.48      15.59     13.27     7.63      6.51      4
+        KEJI_JUNGONG.put("512810", "科技-军工             ");//国防军工ETF           市值：6.80      累涨：37.57     9.36      15.72     12.49     7.63      6.11      5
+        KEJI_JUNGONG.put("512680", "科技-军工             ");//军工ETF龙头           市值：36.49     累涨：37.94     9.40      15.51     13.03     7.56      6.32      6
+    }
     /**
      * 科技-工业
      */
@@ -437,6 +450,7 @@ public class ContMapEtfAll {
         KEJI.putAll(KEJI_XIN_PIAN);
         KEJI.putAll(KEJI_RUAN_JIAN);
         KEJI.putAll(KEJI_GONG_YE);
+        KEJI.putAll(KEJI_JUNGONG);
     }
 
     /**

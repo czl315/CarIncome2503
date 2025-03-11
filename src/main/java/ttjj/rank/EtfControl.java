@@ -46,7 +46,7 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
@@ -58,12 +58,13 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-//        condition.setLikeNameList(ContEtfNameKey.YILIAO);
-//
+        condition.setLikeNameList(ContEtfNameKey.KEJI_JUNGONG);
+
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName,"XIAOFEI_ALL_HK","消费-香港消费");
-//        showStat(etfListLikeName,"YILIAO","医疗");
+//        showStat(etfListLikeName,"KEJI_JUNGONG","科技-军工");
+
+        showStatSimpleByTypeAll();
 
 //        condition.setLikeNameList(Arrays.asList("创业","创大盘","创中盘","创300","创400"));//创业板："创业","创大盘","创中盘","创300","创400"
 //        condition.setNotLikeNameList(Arrays.asList("人工智能","科创创业"));
@@ -78,6 +79,19 @@ public class EtfControl {
         //        condition.setLikeNameList(Arrays.asList("上证", "上证指数", "上证综合"));//上证指数：
 //        condition.setNotLikeNameList(Arrays.asList("50", "80", "券商"));//上证指数：
 
+    }
+
+    /**
+     * 查询单一数据，全部类型
+     */
+    private static void showStatSimpleByTypeAll() {
+        CondStockAdrCount condition = new CondStockAdrCount();
+        condition.setDate(DateUtil.getToday(DateUtil.YYYY_MM_DD));
+        condition.setLikeNameList(ContEtfNameKey.KEJI_JUNGONG);
+        condition.setLimitCount(1);
+        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
+        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+        showStat(etfListLikeName,"KEJI_MORE","科技-军工");
     }
 
     /**
@@ -98,7 +112,8 @@ public class EtfControl {
         for (EtfAdrCountVo vo : etfListLikeName) {
             StringBuffer sb = new StringBuffer();
             sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), size6)).append("\"");
-            sb.append(", \"" + StockUtil.formatStName(typeCn, size22) + "\");");
+//            sb.append(", \"" + StockUtil.formatStName(typeCn, size22) + "\");");
+            sb.append(", \"" + StockUtil.formatStName(vo.getF14(), size22) + "\");");
             sb.append("//");
             sb.append(StockUtil.formatStName(vo.getF14(), size22));
             sb.append(StockUtil.formatStName("市值：", size6));
@@ -677,9 +692,8 @@ public class EtfControl {
                 rs++;
             }
         }
-        System.out.println("更新ETF-上涨之和-成功：" + dbField + "," + rs);
         if (isShowLog) {
-            System.out.println(methodName + "-end:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000));
+            System.out.println(methodName + "-end:" + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",字段："+ dbField + ",成功个数：" + rs);
         }
         return rs;
     }
