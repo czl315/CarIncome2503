@@ -11,8 +11,14 @@ public class ContEtfNameKey {
 
 //    public static List INDEX_CN_CITY= Arrays.asList("111");//指数-国内城市
 
-    public static List ZIYUAN = Arrays.asList("新材料", "稀有金属", "钢铁", "稀土", "有色", "豆粕", "矿业", "农", "材料", "化工", "畜牧", "养殖", "大宗", "资源", "石油", "石化", "煤炭", "能源", "油气");//资源
-    public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");//资源
+    public static List ZIYUAN = new ArrayList();//资源
+    public static List ZIYUAN_UNKNOW = Arrays.asList("新材料",  "钢铁",  "豆粕", "矿业", "材料", "化工",  "大宗", "资源", "石油", "石化", "煤炭", "能源", "油气");//资源
+    public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");
+    public static List ZIYUAN_NONGYE = Arrays.asList("农","畜牧", "养殖","粮食");
+    static {
+        ZIYUAN.addAll(ZIYUAN_XIYOU);
+        ZIYUAN.addAll(ZIYUAN_NONGYE);
+    }
 
     public static List INDEX_CN_NOT = Arrays.asList("标普", "纳", "道琼斯", "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
@@ -49,7 +55,7 @@ public class ContEtfNameKey {
     public static List XIAOFEI_MEDIA = Arrays.asList("传媒");//消费-游戏
     public static List XIAOFEI_TRAVEL = Arrays.asList("航空", "旅游");//消费-旅游
     public static List XIAOFEI_FILM = Arrays.asList("影视");//消费-影视
-    public static List XIAOFEI_FOOD = Arrays.asList("食品", "饮食", "粮食");//消费-食品
+    public static List XIAOFEI_FOOD = Arrays.asList("食品", "饮食");//消费-食品
     public static List XIAOFEI_WINE = Arrays.asList("酒");//消费-酒
     public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
     public static List XIAOFEI_OLD = Arrays.asList("养老");//消费-养老
@@ -74,7 +80,9 @@ public class ContEtfNameKey {
 //        showSqlNameLike(KEJI_HK);
 //        showSqlNameLike(XIAOFEI);
 //        showSqlNameLike(YILIAO);
-        showSqlNameLike(KEJI_JUNGONG);
+//        showSqlNameLike(KEJI_JUNGONG);
+
+        showSqlNameLike(ZIYUAN_XIYOU);
 
 //        showSqlNameLikeNot(XIAOFEI);
 //        showSqlNameLikeNot(KEJI_HK);

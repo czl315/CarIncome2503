@@ -1187,12 +1187,14 @@ public class ContMapEtf {
         ZIYUAN.put("515220", "煤炭ETF       ");//51.65   	1.62
         ZIYUAN.put("159930", "能源ETF       ");//2.67    	1.41
 //        ZIYUAN.put("515210", "钢铁ETF       ");//17.02   	1.1
-        ZIYUAN.put("516150", "稀土ETF基金   ");//24.14   	0.36
         ZIYUAN.put("159870", "化工ETF       ");//7.80    	0.34
-        ZIYUAN.put("512400", "有色金属ETF   ");//30.77   	-0.08
         ZIYUAN.put("159865", "养殖ETF       ");//41.80   	0.59
 //        ZIYUAN.put("159825", "农业ETF       ");//17.63   	0.41
         ZIYUAN.put("159985", "豆粕ETF");//豆粕ETF	159985	2.43
+
+//        ZIYUAN.put("512400", "有色金属ETF   ");//30.77   	-0.08
+//        ZIYUAN.put("516150", "稀土ETF基金   ");//24.14   	0.36
+        ZIYUAN.put("561800", "稀有金属ETF基金       ");//稀有金属ETF基金       市值：0.95      累涨：34.23     6.18      15.56     14.87     10.21     4.11      1
     }
 
     public static Map<String, String> ZIYUAN_MORE = new HashMap<>();//资源
