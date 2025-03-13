@@ -20,12 +20,13 @@ import static utils.Content.*;
  */
 public class EtfAdrJob {
     public static int jobCountUpdateUpSum = 0;//定时次数
+    static int jobSeconds = 300;//定时间隔时间
+    static volatile int jobSecondsUpdateUpSum = 60;//定时间隔时间
 
     public static void main(String[] args) {
         statShowEtfAdrCountSchedule();
     }
 
-    static int jobSeconds = 300;//定时间隔时间
 
     /**
      * 定时任务-etf涨幅统计
@@ -78,10 +79,13 @@ public class EtfAdrJob {
                 System.out.println(methodName + ",循环次数：" + jobCountUpdateUpSum + ",最低" + minMvYi + "亿，最高" + maxMvYi + "亿：" + etfList.size());
                 EtfControl.updateUpSum(date, etfList);//更新-上涨之和
                 jobCountUpdateUpSum++;
+                if (jobCountUpdateUpSum > 5) {
+                    jobSecondsUpdateUpSum = 300;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 3, 60, TimeUnit.SECONDS);
+        }, 3, jobSecondsUpdateUpSum, TimeUnit.SECONDS);
 
         /**
          * 更新-超过均线信息

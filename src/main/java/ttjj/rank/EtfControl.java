@@ -59,11 +59,11 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-//        condition.setLikeNameList(ContEtfNameKey.YILIAO);
+//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
 //
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName, "KEJI_JUNGONG", "科技-军工");
+//        showStat(etfListLikeName, "INDEX_CN_NOT_NSDK", "科技-军工");
 
 //        showStatSimpleByTypeAll();
 

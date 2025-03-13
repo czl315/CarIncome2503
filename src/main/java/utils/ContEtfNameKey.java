@@ -20,7 +20,14 @@ public class ContEtfNameKey {
         ZIYUAN.addAll(ZIYUAN_NONGYE);
     }
 
-    public static List INDEX_CN_NOT = Arrays.asList("标普", "纳", "道琼斯", "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
+    public static List INDEX_CN_NOT = new ArrayList();//指数-外盘
+    public static List INDEX_CN_NOT_XXX = Arrays.asList("标普", "纳", "道琼斯", "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
+    public static List INDEX_CN_NOT_NSDK = Arrays.asList("纳");//指数-外盘:纳斯达克
+    static {
+        INDEX_CN_NOT.addAll(INDEX_CN_NOT_NSDK);
+        INDEX_CN_NOT.addAll(INDEX_CN_NOT_XXX);
+    }
+
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘
     public static List INDEX_CN_BIG = Arrays.asList("沪深300", "深证", "上证50", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "300", "50ETF", "上证综指",

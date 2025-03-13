@@ -24,7 +24,7 @@ public class EtfJob {
     private static void statShowEtfUpMaSchedule() {
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//            String date = "2025-03-10";
+//            String date = "2025-03-12";
             String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
             if (!date.equals(today)) {
                 System.out.println("注意！！！非今日数据");
