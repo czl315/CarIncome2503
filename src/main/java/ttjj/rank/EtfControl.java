@@ -8,7 +8,6 @@ import ttjj.service.BizService;
 import ttjj.service.EtfAdrCountService;
 import ttjj.service.KlineService;
 import ttjj.service.StockService;
-import utils.ContEtfNameKey;
 import utils.DateUtil;
 import utils.StockUtil;
 
@@ -28,6 +27,11 @@ import static utils.Content.*;
  * 保存：查询etf列表，批量插入
  * 更新-上涨之和
  * 更新-超过均线信息
+ *
+ * 数据分析
+ * 1、查询每日涨幅最多的Etf
+ * 2、均线突破：周、日、60
+ * 3、
  */
 public class EtfControl {
     static int jobCountUpdateUpSum = 0;
@@ -60,7 +64,9 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
-//
+//        condition.setLikeNameList(INDEX_300);
+//        condition.setNotLikeNameList(INDEX_300_NOLIKE);
+
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 //        showStat(etfListLikeName, "INDEX_CN_NOT_NSDK", "科技-军工");
@@ -646,7 +652,7 @@ public class EtfControl {
     private static int updateAdrSumByBiz(String date, String dbField, List<String> dateList, List<RankBizDataDiff> etfList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "更新上涨之和";
+        String methodName = "更新上涨之和-";
         int rs = 0;
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         CondStockAdrCount condStockAdrCount = new CondStockAdrCount();

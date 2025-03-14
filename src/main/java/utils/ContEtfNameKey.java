@@ -33,6 +33,7 @@ public class ContEtfNameKey {
     public static List INDEX_CN_BIG = Arrays.asList("沪深300", "深证", "上证50", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "300", "50ETF", "上证综指",
             "央视", "深价值", "A50", "红利", "深100", "国企", "380", "MSCI", "质量", "上证综合", "上证中盘", "基本面", "价值", "上证指数", "高股息", "一带一路");//指数-大盘
     public static List INDEX_300 = Arrays.asList("创业", "创中盘", "创400", "创300", "创大盘", "创50", "创100", "深创");//指数-创业板
+    public static List INDEX_300_NOLIKE = Arrays.asList("信创", "人工智能", "科创");//指数-创业板（不匹配）
     public static List INDEX_688 = Arrays.asList("科创", "双创");//指数-科创板
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股", "沪港深");//指数-港股
 
@@ -88,11 +89,21 @@ public class ContEtfNameKey {
 //        showSqlNameLike(XIAOFEI);
 //        showSqlNameLike(YILIAO);
 //        showSqlNameLike(KEJI_JUNGONG);
+//        showSqlNameLike(ZIYUAN_XIYOU);
 
-        showSqlNameLike(ZIYUAN_XIYOU);
+        //消费-
+//        showSqlNameLike(XIAOFEI);
+        showSqlNameLikeNot(XIAOFEI);
 
-//        showSqlNameLikeNot(XIAOFEI);
-//        showSqlNameLikeNot(KEJI_HK);
+
+        //创业板
+//        showSqlNameLike(INDEX_300);
+//        showSqlNameLikeNot(INDEX_300_NOLIKE);
+        showSqlNameLikeNot(INDEX_300);
+
+        //科创板
+        showSqlNameLikeNot(INDEX_688);
+
 //        showSqlNameLikeNot(KEJI_XIN_PIAN);
 //        showSqlNameLikeNot(KEJI_RUAN_JIAN);
 //        showSqlNameLikeNot(KEJI_GONG_YE);
@@ -143,7 +154,7 @@ public class ContEtfNameKey {
     private static void showSqlNameLikeNot(List<String> list) {
         int i = 0;
         StringBuffer sql = new StringBuffer();
-        sql.append("AND");
+        sql.append(" AND");
         sql.append("(");
         for (String str : list) {
             if (i == 0) {

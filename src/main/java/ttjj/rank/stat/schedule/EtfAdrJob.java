@@ -21,7 +21,7 @@ import static utils.Content.*;
 public class EtfAdrJob {
     public static int jobCountUpdateUpSum = 0;//定时次数
     static int jobSeconds = 300;//定时间隔时间
-    static volatile int jobSecondsUpdateUpSum = 60;//定时间隔时间
+    static volatile int jobSecondsUpdateUpSum = 180;//定时间隔时间
 
     public static void main(String[] args) {
         statShowEtfAdrCountSchedule();
