@@ -93,16 +93,17 @@ public class ContEtfNameKey {
 
         //消费-
 //        showSqlNameLike(XIAOFEI);
-        showSqlNameLikeNot(XIAOFEI);
+        showSqlNameLike(XIAOFEI_FOOD);
+//        showSqlNameLikeNot(XIAOFEI);
 
 
         //创业板
 //        showSqlNameLike(INDEX_300);
 //        showSqlNameLikeNot(INDEX_300_NOLIKE);
-        showSqlNameLikeNot(INDEX_300);
+//        showSqlNameLikeNot(INDEX_300);
 
         //科创板
-        showSqlNameLikeNot(INDEX_688);
+//        showSqlNameLikeNot(INDEX_688);
 
 //        showSqlNameLikeNot(KEJI_XIN_PIAN);
 //        showSqlNameLikeNot(KEJI_RUAN_JIAN);
