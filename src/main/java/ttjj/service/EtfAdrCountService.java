@@ -140,7 +140,7 @@ public class EtfAdrCountService {
      * @return rs
      */
     public static List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition) {
-        boolean isShowLog = true;
+        boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据：查询列表";
 //        if(isShowLog){

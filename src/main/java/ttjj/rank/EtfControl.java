@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static utils.ContEtfNameKey.*;
+import static utils.ContEtfTypeName.TYPE_ALL;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
@@ -33,8 +34,8 @@ public class EtfControl {
     static int jobCountUpdateUpSum = 0;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-03-14";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-03-14";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据");
@@ -48,9 +49,9 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        updateUpSumOrder(date);
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
-        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
@@ -69,7 +70,13 @@ public class EtfControl {
 //        condition.setNotLikeNameList(XIAOFEI_HK);
 
 //        condition.setNotLikeNameList(JINRONG);
-        condition.setLikeNameList(JINRONG_ZHENGQUAN);
+//        condition.setLikeNameList(JINRONG_ZHENGQUAN);
+//        condition.setLikeNameList(JINRONG_GOLD);
+//        condition.setLikeNameList(JINRONG_BANK);
+//        condition.setLikeNameList(JINRONG_FANGDICHAN);
+//        condition.setLikeNameList(JINRONG_CASH);
+//        condition.setLikeNameList(JINRONG_COMMON);
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 
 
 //        condition.setLikeNameList(YILIAO_COMMON);
@@ -81,8 +88,7 @@ public class EtfControl {
 
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName, "JINRONG_ZHENGQUAN", "金融-证券");
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        showStat(etfListLikeName, "JINRONG_COMMON", "金融-通用");
 
 //        showStatSimpleByTypeAll();
 
@@ -937,16 +943,18 @@ public class EtfControl {
             BigDecimal adr_up_sum_order_1_20 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_20();
             BigDecimal adr_up_sum_order_20_40 = etfAdrCountVo.getADR_UP_SUM_ORDER_20_40();
             BigDecimal adr_up_sum_order_40_60 = etfAdrCountVo.getADR_UP_SUM_ORDER_40_60();
-            adr_up_sum_order_stat.add(adr_up_sum_order_1_3);
-            adr_up_sum_order_stat.add(adr_up_sum_order_1_5);
-            adr_up_sum_order_stat.add(adr_up_sum_order_1_10);
-            adr_up_sum_order_stat.add(adr_up_sum_order_1_20);
-            adr_up_sum_order_stat.add(adr_up_sum_order_20_40);
-            adr_up_sum_order_stat.add(adr_up_sum_order_40_60);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_3);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_5);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_10);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_20);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_20_40);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_40_60);
+            etfAdrCountVo.setADR_UP_SUM_ORDER_STAT(adr_up_sum_order_stat);
+            adr_up_sum_order_stat = new BigDecimal("0");
         }
 
         //排序
-        stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_ORDER_STAT, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_ORDER_STAT, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
 
         int order = 0;
         //查询每只股票的涨幅次数
@@ -959,12 +967,12 @@ public class EtfControl {
             //更新
             int updateRs = EtfAdrCountService.update(entity);
             if (updateRs != 1) {
-                System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(entity));
+                System.out.println(methodName + "(" + bizName + ")" + "-失败：" + rs + "" + JSON.toJSONString(entity));
             } else {
                 rs++;
             }
         }
-        System.out.println(methodName + "-成功：" + rs);
+        System.out.println(methodName + "(" + bizName + ")" + "-成功：" + rs);
         return rs;
     }
 }

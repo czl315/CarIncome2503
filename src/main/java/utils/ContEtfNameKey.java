@@ -8,16 +8,6 @@ import java.util.*;
  */
 public class ContEtfNameKey {
 
-
-//    public static List INDEX_CN_CITY= Arrays.asList("111");//指数-国内城市
-
-    public static List TYPE_ZIYUAN = Arrays.asList("资源");//资源
-    public static List TYPE_JINRONG = Arrays.asList("金融-证券");//金融
-    public static List TYPE_ALL = new ArrayList();
-    static {
-        TYPE_ALL.addAll(TYPE_JINRONG);
-    }
-
     public static List ZIYUAN = new ArrayList();//资源
     public static List ZIYUAN_UNKNOW = Arrays.asList("新材料",  "钢铁",  "豆粕", "矿业", "材料", "化工",  "大宗", "资源", "石油", "石化", "煤炭", "能源", "油气");//资源
     public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");
@@ -50,16 +40,20 @@ public class ContEtfNameKey {
     /**
      * 金融
      */
-    public static List JINRONG_COMMON = Arrays.asList("黄金", "金融", "银行", "金ETF");//金融-证券
+    public static List JINRONG_GOLD = Arrays.asList("黄金");//金融-黄金
+    public static List JINRONG_BANK = Arrays.asList("银行");//金融-银行
+    public static List JINRONG_COMMON = Arrays.asList("金融");//金融-通用
     public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商");//金融-证券
-    public static List JINRONG_FANGDICHAN = Arrays.asList("地产", "建材", "基建", "交", "电力", "公用");//金融-地产
-    public static List JINRONG_CASH = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快", "财富");//金融-现金
+    public static List JINRONG_FANGDICHAN = Arrays.asList("地产", "建材", "基建", "交运","交通", "电力", "公用");//金融-地产
+    public static List JINRONG_CASH = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快线","快钱", "财富");//金融-现金
     public static List JINRONG = new ArrayList();//金融
     static {
+        JINRONG.addAll(JINRONG_BANK);
         JINRONG.addAll(JINRONG_COMMON);
         JINRONG.addAll(JINRONG_ZHENGQUAN);
         JINRONG.addAll(JINRONG_FANGDICHAN);
         JINRONG.addAll(JINRONG_CASH);
+        JINRONG.addAll(JINRONG_GOLD);
     }
 
     public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "新能车", "央企科技", "科技50", "科技ETF", "新经济", "战略", "创新", "科技100", "高端", "核心", "科技", "VR", "漂亮", "国货", "ESG", "可持续", "产业");//科技-工业
