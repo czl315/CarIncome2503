@@ -4,19 +4,14 @@ import com.alibaba.fastjson.JSON;
 import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
 import ttjj.dto.*;
-import ttjj.service.BizService;
-import ttjj.service.EtfAdrCountService;
-import ttjj.service.KlineService;
-import ttjj.service.StockService;
+import ttjj.service.*;
 import utils.DateUtil;
 import utils.StockUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static utils.ContEtfNameKey.*;
 import static utils.ContMapEtfAll.ETF_All;
@@ -55,10 +50,12 @@ public class EtfControl {
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
+        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
+
 
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
@@ -75,7 +72,6 @@ public class EtfControl {
         condition.setLikeNameList(JINRONG_ZHENGQUAN);
 
 
-
 //        condition.setLikeNameList(YILIAO_COMMON);
 //        condition.setLikeNameList(YILIAO_CN_MEDICINE);
 
@@ -86,7 +82,7 @@ public class EtfControl {
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 //        showStat(etfListLikeName, "JINRONG_ZHENGQUAN", "金融-证券");
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 
 //        showStatSimpleByTypeAll();
 
@@ -668,6 +664,24 @@ public class EtfControl {
     }
 
     /**
+     * 更新-上涨之和排序
+     *
+     * @param date date
+     */
+    public static void updateUpSumOrder(String date) {
+        List<String> bizNameList = TYPE_ALL;
+        for (String type : bizNameList) {
+            //更新-上涨之和排序
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
+        }
+    }
+
+    /**
      * 更新上涨之和
      *
      * @param date
@@ -814,5 +828,89 @@ public class EtfControl {
             System.out.println("查询etf列表,源数据个数：" + etfList.size() + "||" + "市值低于限定个数：" + countMinMvLimit + "||" + "市值高于限定个数：" + countMaxMvLimit + "||" + "市值过滤符合条件个数：" + etfListLimit.size() + ",校对：" + (countMinMvLimit + countMaxMvLimit + etfListLimit.size()) + "==" + etfList.size());
         }
         return etfListLimit;
+    }
+
+    /**
+     * 更新上涨累计排序
+     *
+     * @param date    日期
+     * @param bizName 业务名称
+     * @param dbField 字段
+     */
+    private static int updateAdrSumOrderByBiz(String date, String bizName, String dbField) {
+        int rs = 0;
+        //查询股票列表-根据板块
+        CondStockAdrCount condition = new CondStockAdrCount();
+        condition.setDate(date);
+        condition.setType_name(bizName);
+        List<EtfAdrCountVo> stList = EtfAdrCountService.listStAdrCount(condition);
+
+        //排序
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_1, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_2, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_5, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_10, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_20, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_20_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_40_60, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        }
+
+        int order = 0;
+        //查询每只股票的涨幅次数
+        for (EtfAdrCountVo etf : stList) {
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setF12(etf.getF12());
+            entity.setDate(date);
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_1_3(new BigDecimal(++order));
+            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_1_5(new BigDecimal(++order));
+            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_1_10(new BigDecimal(++order));
+            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_1_20(new BigDecimal(++order));
+            }
+//            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40.equals(dbField)) {
+//                entity.setADR_UP_SUM_ORDER_1_40(new BigDecimal(++order));
+//            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_20_40(new BigDecimal(++order));
+            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60.equals(dbField)) {
+                entity.setADR_UP_SUM_ORDER_40_60(new BigDecimal(++order));
+            }
+
+            //更新
+            int updateRs = EtfAdrCountService.update(entity);
+            if (updateRs != 1) {
+                System.out.println("更新-上涨之和排序-失败：" + rs + "" + JSON.toJSONString(entity));
+            } else {
+                rs++;
+            }
+        }
+        System.out.println("更新-上涨之和排序-成功：" + rs);
+        return rs;
     }
 }

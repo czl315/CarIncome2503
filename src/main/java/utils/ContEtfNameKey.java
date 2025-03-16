@@ -11,6 +11,13 @@ public class ContEtfNameKey {
 
 //    public static List INDEX_CN_CITY= Arrays.asList("111");//指数-国内城市
 
+    public static List TYPE_ZIYUAN = Arrays.asList("资源");//资源
+    public static List TYPE_JINRONG = Arrays.asList("金融-证券");//金融
+    public static List TYPE_ALL = new ArrayList();
+    static {
+        TYPE_ALL.addAll(TYPE_JINRONG);
+    }
+
     public static List ZIYUAN = new ArrayList();//资源
     public static List ZIYUAN_UNKNOW = Arrays.asList("新材料",  "钢铁",  "豆粕", "矿业", "材料", "化工",  "大宗", "资源", "石油", "石化", "煤炭", "能源", "油气");//资源
     public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");

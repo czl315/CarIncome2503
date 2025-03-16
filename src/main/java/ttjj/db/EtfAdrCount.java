@@ -184,6 +184,10 @@ public class EtfAdrCount {
      */
     private BigDecimal ADR_UP_SUM_1_60;
     /**
+     * ADR_UP_SUM_ORDER_1_3 上涨之和排序
+     */
+    private BigDecimal ADR_UP_SUM_ORDER_1_3;
+    /**
      * ADR_UP_SUM_ORDER_1_5 上涨之和排序
      */
     private BigDecimal ADR_UP_SUM_ORDER_1_5;
@@ -978,5 +982,13 @@ public class EtfAdrCount {
 
     public void setMA_NET_60_102(BigDecimal MA_NET_60_102) {
         this.MA_NET_60_102 = MA_NET_60_102;
+    }
+
+    public BigDecimal getADR_UP_SUM_ORDER_1_3() {
+        return ADR_UP_SUM_ORDER_1_3;
+    }
+
+    public void setADR_UP_SUM_ORDER_1_3(BigDecimal ADR_UP_SUM_ORDER_1_3) {
+        this.ADR_UP_SUM_ORDER_1_3 = ADR_UP_SUM_ORDER_1_3;
     }
 }
