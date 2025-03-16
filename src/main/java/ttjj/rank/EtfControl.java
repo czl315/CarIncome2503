@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import static utils.ContEtfNameKey.*;
-import static utils.ContMapEtfAll.BIZ_ALL;
+import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
 /**
@@ -52,7 +52,7 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
@@ -65,13 +65,28 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
+
 //        condition.setLikeNameList(XIAOFEI_FOOD);
+//        condition.setLikeNameList(XIAOFEI_HK);
+//        condition.setLikeNameList(XIAOFEI_COMMON);
+//        condition.setNotLikeNameList(XIAOFEI_HK);
+
+//        condition.setNotLikeNameList(JINRONG);
+        condition.setLikeNameList(JINRONG_ZHENGQUAN);
+
+
+
+//        condition.setLikeNameList(YILIAO_COMMON);
+//        condition.setLikeNameList(YILIAO_CN_MEDICINE);
+
+//        condition.setLikeNameList(INDEX_CN_NOT);
 
 //        condition.setNotLikeNameList(INDEX_300_NOLIKE);
 
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName, "XIAOFEI_FOOD", "消费-食品");
+//        showStat(etfListLikeName, "JINRONG_ZHENGQUAN", "金融-证券");
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 
 //        showStatSimpleByTypeAll();
 
@@ -336,7 +351,7 @@ public class EtfControl {
             }
 
             //更新类型
-            String type = BIZ_ALL.get(code);
+            String type = ETF_All.get(code);
             if (type != null) {
                 type = type.replace(" ", "");
                 entity.setType_name(type);

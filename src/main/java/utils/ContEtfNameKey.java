@@ -20,13 +20,7 @@ public class ContEtfNameKey {
         ZIYUAN.addAll(ZIYUAN_NONGYE);
     }
 
-    public static List INDEX_CN_NOT = new ArrayList();//指数-外盘
-    public static List INDEX_CN_NOT_XXX = Arrays.asList("标普", "纳", "道琼斯", "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
-    public static List INDEX_CN_NOT_NSDK = Arrays.asList("纳");//指数-外盘:纳斯达克
-    static {
-        INDEX_CN_NOT.addAll(INDEX_CN_NOT_NSDK);
-        INDEX_CN_NOT.addAll(INDEX_CN_NOT_XXX);
-    }
+    public static List INDEX_CN_NOT = Arrays.asList("标普", "纳", "道琼斯", "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
 
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘
@@ -38,17 +32,28 @@ public class ContEtfNameKey {
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股", "沪港深");//指数-港股
 
     public static List YILIAO = new ArrayList();//医疗
-    public static List YILIAO_CN_NOT = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗");//医疗
-    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗
+    public static List YILIAO_COMMON= Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗");//医疗-通用
+    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗-中药
 
     static {
-        YILIAO.addAll(YILIAO_CN_NOT);
+        YILIAO.addAll(YILIAO_COMMON);
         YILIAO.addAll(YILIAO_CN_MEDICINE);
     }
 
-    public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商", "黄金", "金融", "银行", "金ETF");//金融-证券
+    /**
+     * 金融
+     */
+    public static List JINRONG_COMMON = Arrays.asList("黄金", "金融", "银行", "金ETF");//金融-证券
+    public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商");//金融-证券
     public static List JINRONG_FANGDICHAN = Arrays.asList("地产", "建材", "基建", "交", "电力", "公用");//金融-地产
     public static List JINRONG_CASH = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快", "财富");//金融-现金
+    public static List JINRONG = new ArrayList();//金融
+    static {
+        JINRONG.addAll(JINRONG_COMMON);
+        JINRONG.addAll(JINRONG_ZHENGQUAN);
+        JINRONG.addAll(JINRONG_FANGDICHAN);
+        JINRONG.addAll(JINRONG_CASH);
+    }
 
     public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "新能车", "央企科技", "科技50", "科技ETF", "新经济", "战略", "创新", "科技100", "高端", "核心", "科技", "VR", "漂亮", "国货", "ESG", "可持续", "产业");//科技-工业
     public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车");//科技-汽车
@@ -58,7 +63,11 @@ public class ContEtfNameKey {
     public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技龙头");//科技-香港
     public static List KEJI_JUNGONG = Arrays.asList("国防", "军工");//科技-军工
 
-    public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费", "消费");//消费-香港消费
+    /**
+     * 消费
+     */
+    public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费");//消费-通用
+    public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-香港消费
     public static List XIAOFEI_GAME = Arrays.asList("游戏");//消费-游戏
     public static List XIAOFEI_MEDIA = Arrays.asList("传媒");//消费-游戏
     public static List XIAOFEI_TRAVEL = Arrays.asList("航空", "旅游");//消费-旅游
@@ -71,6 +80,7 @@ public class ContEtfNameKey {
     public static List XIAOFEI = new ArrayList();//消费-
 
     static {
+        XIAOFEI.addAll(XIAOFEI_COMMON);
         XIAOFEI.addAll(XIAOFEI_HK);
         XIAOFEI.addAll(XIAOFEI_GAME);
         XIAOFEI.addAll(XIAOFEI_TRAVEL);
@@ -93,8 +103,11 @@ public class ContEtfNameKey {
 
         //消费-
 //        showSqlNameLike(XIAOFEI);
-        showSqlNameLike(XIAOFEI_FOOD);
+//        showSqlNameLike(XIAOFEI_HK);
+//        showSqlNameLike(XIAOFEI_FOOD);
 //        showSqlNameLikeNot(XIAOFEI);
+
+        showSqlNameLikeNot(YILIAO);
 
 
         //创业板
