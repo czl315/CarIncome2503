@@ -678,6 +678,7 @@ public class EtfControl {
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
+            updateAdrSumOrderStatByBiz(date, type);
         }
     }
 
@@ -911,6 +912,59 @@ public class EtfControl {
             }
         }
         System.out.println("更新-上涨之和排序-成功：" + rs);
+        return rs;
+    }
+
+    /**
+     * 更新上涨累计排序的统计数值
+     *
+     * @param date    日期
+     * @param bizName 业务名称
+     */
+    private static int updateAdrSumOrderStatByBiz(String date, String bizName) {
+        String methodName = "更新上涨累计排序的统计数值";
+        int rs = 0;
+        //查询股票列表-根据板块
+        CondStockAdrCount condition = new CondStockAdrCount();
+        condition.setDate(date);
+        condition.setType_name(bizName);
+        List<EtfAdrCountVo> stList = EtfAdrCountService.listStAdrCount(condition);
+        BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
+        for (EtfAdrCountVo etfAdrCountVo : stList) {
+            BigDecimal adr_up_sum_order_1_3 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_3();
+            BigDecimal adr_up_sum_order_1_5 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_5();
+            BigDecimal adr_up_sum_order_1_10 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_10();
+            BigDecimal adr_up_sum_order_1_20 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_20();
+            BigDecimal adr_up_sum_order_20_40 = etfAdrCountVo.getADR_UP_SUM_ORDER_20_40();
+            BigDecimal adr_up_sum_order_40_60 = etfAdrCountVo.getADR_UP_SUM_ORDER_40_60();
+            adr_up_sum_order_stat.add(adr_up_sum_order_1_3);
+            adr_up_sum_order_stat.add(adr_up_sum_order_1_5);
+            adr_up_sum_order_stat.add(adr_up_sum_order_1_10);
+            adr_up_sum_order_stat.add(adr_up_sum_order_1_20);
+            adr_up_sum_order_stat.add(adr_up_sum_order_20_40);
+            adr_up_sum_order_stat.add(adr_up_sum_order_40_60);
+        }
+
+        //排序
+        stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_ORDER_STAT, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+
+        int order = 0;
+        //查询每只股票的涨幅次数
+        for (EtfAdrCountVo etf : stList) {
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setF12(etf.getF12());
+            entity.setDate(date);
+            entity.setADR_UP_SUM_ORDER_STAT(new BigDecimal(++order));
+
+            //更新
+            int updateRs = EtfAdrCountService.update(entity);
+            if (updateRs != 1) {
+                System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(entity));
+            } else {
+                rs++;
+            }
+        }
+        System.out.println(methodName + "-成功：" + rs);
         return rs;
     }
 }

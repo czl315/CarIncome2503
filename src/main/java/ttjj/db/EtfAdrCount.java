@@ -184,9 +184,14 @@ public class EtfAdrCount {
      */
     private BigDecimal ADR_UP_SUM_1_60;
     /**
+     * 上涨排序统计
+     */
+    private BigDecimal ADR_UP_SUM_ORDER_STAT;
+    /**
      * ADR_UP_SUM_ORDER_1_3 上涨之和排序
      */
     private BigDecimal ADR_UP_SUM_ORDER_1_3;
+
     /**
      * ADR_UP_SUM_ORDER_1_5 上涨之和排序
      */
@@ -343,6 +348,14 @@ public class EtfAdrCount {
      * 最低下跌百分比
      */
     private BigDecimal minPct;
+
+    public BigDecimal getADR_UP_SUM_ORDER_STAT() {
+        return ADR_UP_SUM_ORDER_STAT;
+    }
+
+    public void setADR_UP_SUM_ORDER_STAT(BigDecimal ADR_UP_SUM_ORDER_STAT) {
+        this.ADR_UP_SUM_ORDER_STAT = ADR_UP_SUM_ORDER_STAT;
+    }
 
     public BigDecimal getMaxDown() {
         return maxDown;

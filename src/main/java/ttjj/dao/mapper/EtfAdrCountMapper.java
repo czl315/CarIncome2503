@@ -118,6 +118,7 @@ public interface EtfAdrCountMapper {
             "    <if test='ADR_UP_SUM_20_40 != null'>ADR_UP_SUM_20_40=#{ADR_UP_SUM_20_40},</if>",
             "    <if test='ADR_UP_SUM_40_60 != null'>ADR_UP_SUM_40_60=#{ADR_UP_SUM_40_60},</if>",
             "    <if test='ADR_UP_SUM_1_60 != null'>ADR_UP_SUM_1_60=#{ADR_UP_SUM_1_60},</if>",
+            "    <if test='ADR_UP_SUM_ORDER_STAT != null'>ADR_UP_SUM_ORDER_STAT=#{ADR_UP_SUM_ORDER_STAT},</if>",
             "    <if test='ADR_UP_SUM_ORDER_1_3 != null'>ADR_UP_SUM_ORDER_1_3=#{ADR_UP_SUM_ORDER_1_3},</if>",
             "    <if test='ADR_UP_SUM_ORDER_1_5 != null'>ADR_UP_SUM_ORDER_1_5=#{ADR_UP_SUM_ORDER_1_5},</if>",
             "    <if test='ADR_UP_SUM_ORDER_1_10 != null'>ADR_UP_SUM_ORDER_1_10=#{ADR_UP_SUM_ORDER_1_10},</if>",
