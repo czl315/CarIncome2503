@@ -5,6 +5,7 @@ import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
 import ttjj.dto.*;
 import ttjj.service.*;
+import utils.ContEtfNameKey;
 import utils.DateUtil;
 import utils.StockUtil;
 
@@ -14,7 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static utils.ContEtfNameKey.*;
-import static utils.ContEtfTypeName.TYPE_ALL;
+import static utils.ContEtfTypeName.*;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
@@ -35,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-14";
+//        String date = "2025-03-17";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据");
@@ -46,16 +47,16 @@ public class EtfControl {
         condition.setDate(date);
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
         updateUpSumOrder(date);
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
+        updateLatestDayAdr(condition, date);
 
 
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
@@ -63,6 +64,8 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_RUAN_JIAN);//科技-软件
 //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
+//        condition.setLikeNameList(ContEtfNameKey.KEJI_NEW_ENERGY);
+        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
 //        condition.setLikeNameList(XIAOFEI_FOOD);
 //        condition.setLikeNameList(XIAOFEI_HK);
@@ -76,19 +79,23 @@ public class EtfControl {
 //        condition.setLikeNameList(JINRONG_FANGDICHAN);
 //        condition.setLikeNameList(JINRONG_CASH);
 //        condition.setLikeNameList(JINRONG_COMMON);
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-
 
 //        condition.setLikeNameList(YILIAO_COMMON);
 //        condition.setLikeNameList(YILIAO_CN_MEDICINE);
 
 //        condition.setLikeNameList(INDEX_CN_NOT);
-
+//        condition.setLikeNameList(INDEX_CN_BIG);
+//        condition.setLikeNameList(INDEX_300);
 //        condition.setNotLikeNameList(INDEX_300_NOLIKE);
+//        condition.setLikeNameList(INDEX_CN_1000);
+//        condition.setNotLikeNameList(INDEX_CN_NOT);
 
+//        condition.setLikeNameList(ZIYUAN_OIL);
+//        condition.setLikeNameList(ZIYUAN_NONGYE);
+//
 //        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        showStat(etfListLikeName, "JINRONG_COMMON", "金融-通用");
+//        showStat(etfListLikeName, "KEJI_ELECTRICITY", TYPE_KEJI_ELECTRICITY);
 
 //        showStatSimpleByTypeAll();
 
@@ -755,7 +762,7 @@ public class EtfControl {
         for (EtfAdrCount stockAdrCount : etfAdrCountList) {
             int updateRs = EtfAdrCountService.update(stockAdrCount);
             if (updateRs != 1) {
-                System.out.println("更新ETF-上涨之和-失败：" + rs + "" + JSON.toJSONString(stockAdrCount));
+                System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(stockAdrCount));
             } else {
                 rs++;
             }
@@ -845,6 +852,9 @@ public class EtfControl {
      * @param dbField 字段
      */
     private static int updateAdrSumOrderByBiz(String date, String bizName, String dbField) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = false;
+        String methodName = "更新-上涨之和排序-";
         int rs = 0;
         //查询股票列表-根据板块
         CondStockAdrCount condition = new CondStockAdrCount();
@@ -912,12 +922,14 @@ public class EtfControl {
             //更新
             int updateRs = EtfAdrCountService.update(entity);
             if (updateRs != 1) {
-                System.out.println("更新-上涨之和排序-失败：" + rs + "" + JSON.toJSONString(entity));
+                System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(entity));
             } else {
                 rs++;
             }
         }
-        System.out.println("更新-上涨之和排序-成功：" + rs);
+        if (isShowLog) {
+            System.out.println(methodName + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",字段：" + dbField + ",成功个数：" + rs);
+        }
         return rs;
     }
 

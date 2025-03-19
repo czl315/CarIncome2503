@@ -88,6 +88,18 @@ public class EtfAdrJob {
         }, 3, jobSecondsUpdateUpSum, TimeUnit.SECONDS);
 
         /**
+         * 更新-上涨之和排序
+         */
+        new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
+            String methodName = "更新-上涨之和排序（Job）";
+            try {
+                EtfControl.updateUpSumOrder(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 100, 600, TimeUnit.SECONDS);
+
+        /**
          * 更新-超过均线信息
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
