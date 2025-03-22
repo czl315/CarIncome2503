@@ -9,15 +9,12 @@ import utils.ContEtfNameKey;
 import utils.ContEtfTypeName;
 import utils.DateUtil;
 import utils.StockUtil;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import static utils.ContEtfNameKey.ZIYUAN_NONGYE;
-import static utils.ContEtfTypeName.ALL;
-import static utils.ContEtfTypeName.XIAOFEI;
+import static utils.ContEtfTypeName.*;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
@@ -48,16 +45,17 @@ public class EtfControl {
         condition.setDate(date);
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
+//        condition.setType_name(ZIYUAN_OIL);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-        updateUpSum(date, etfList);//更新-上涨之和
-        updateUpSumOrder(date);
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        updateUpSum(date, etfList);//更新-上涨之和
+//        updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
         updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-        updateLatestDayAdr(condition, date);
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
 
 //        showStat(date);
 
@@ -591,7 +589,8 @@ public class EtfControl {
     }
 
     /**
-     * 更新-超过均线信息:均线净值
+     * 更新-突破均线:突破均线百分比、均线净值
+     * 250322：更新突破百分比，如果均线未突破，但是数据库中的均线突破，则也更新
      *
      * @param maDate            日期
      * @param stockAdrCountList 需要更新的列表数据
@@ -600,7 +599,7 @@ public class EtfControl {
     public static void updateUpMa(String maDate, List<EtfAdrCountVo> stockAdrCountList, CondStockAdrCount stockAdrCountCond) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "更新-超过均线信息：";
+        String methodName = "更新-突破均线：";
         int updateRs = 0;//更新成功个数
         if (stockAdrCountList == null) {
             System.out.println(methodName + "stockAdrCountList==null");
@@ -608,7 +607,9 @@ public class EtfControl {
         }
         for (EtfAdrCountVo stockAdrCount : stockAdrCountList) {
             EtfAdrCountVo entity = new EtfAdrCountVo();
-            entity.setF12(stockAdrCount.getF12());
+            String code = stockAdrCount.getF12();
+            entity.setF2(stockAdrCount.getF2());
+            entity.setF12(code);
             entity.setDate(stockAdrCount.getDate());
 
             boolean isUp = true;//检查上涨
@@ -626,16 +627,27 @@ public class EtfControl {
             boolean isMa60 = false;
             boolean isMa101 = false;
             boolean isMa102 = false;
+//            if (code.equals("561570")) {
+//                System.out.println("特定代码：" + code);
+//            }
             if (maKltList.contains(KLT_15)) {
 //                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
                 BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, maDate);
                 if (breakMa == null) {
                     continue;
                 }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                ;
                 entity.setMA_NET_60_15(breakMa.getMaNet());
                 isMa15 = breakMa.isMaBreakUp();
                 if (isMa15) {
-                    entity.setUP_MA_15(KLT_15 + "(" + MA_60 + ")");
+//                    entity.setUP_MA_15(KLT_15 + "(" + MA_60 + ")");
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else if (!isMa15 && stockAdrCount.getUP_MA_15() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_15(breakPctUp.toString());
                 } else {
 //                    entity.setUP_MA_15("");
                 }
@@ -646,10 +658,18 @@ public class EtfControl {
                 if (breakMa == null) {
                     continue;
                 }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                ;
                 entity.setMA_NET_60_30(breakMa.getMaNet());
                 isMa30 = breakMa.isMaBreakUp();
                 if (isMa30) {
-                    entity.setUP_MA_30(KLT_30 + "(" + MA_60 + ")");
+//                    entity.setUP_MA_30(KLT_30 + "(" + MA_60 + ")");
+                    entity.setUP_MA_30(breakPctUp.toString());
+                } else if (!isMa30 && stockAdrCount.getUP_MA_30() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_30(breakPctUp.toString());
                 } else {
 //                    entity.setUP_MA_30("");
                 }
@@ -660,10 +680,18 @@ public class EtfControl {
                 if (breakMa == null) {
                     continue;
                 }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                ;
                 entity.setMA_NET_60_60(breakMa.getMaNet());
                 isMa60 = breakMa.isMaBreakUp();
                 if (isMa60) {
-                    entity.setUP_MA_60(KLT_60 + "(" + MA_60 + ")");
+//                    entity.setUP_MA_60(KLT_60 + "(" + MA_60 + ")");
+                    entity.setUP_MA_60(breakPctUp.toString());
+                } else if (!isMa60 && stockAdrCount.getUP_MA_60() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_60(breakPctUp.toString());
                 } else {
 //                    entity.setUP_MA_60("");
                 }
@@ -674,10 +702,17 @@ public class EtfControl {
                 if (breakMa == null) {
                     continue;
                 }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_101(breakMa.getMaNet());
                 isMa101 = breakMa.isMaBreakUp();
                 if (isMa101) {
-                    entity.setUP_MA_101(KLT_101 + "(" + MA_60 + ")");
+//                    entity.setUP_MA_101(KLT_101 + "(" + MA_60 + ")");
+                    entity.setUP_MA_101(breakPctUp.toString());
+                } else if (!isMa101 && stockAdrCount.getUP_MA_101() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_101(breakPctUp.toString());
                 } else {
 //                    entity.setUP_MA_101("");
                 }
@@ -688,10 +723,17 @@ public class EtfControl {
                 if (breakMa == null) {
                     continue;
                 }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_102(breakMa.getMaNet());
                 isMa102 = breakMa.isMaBreakUp();
                 if (isMa102) {
-                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
+//                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
+                    entity.setUP_MA_102(breakPctUp.toString());
+                } else if (!isMa102 && stockAdrCount.getUP_MA_102() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_102(breakPctUp.toString());
                 } else {
 //                    entity.setUP_MA_102("");
                 }
