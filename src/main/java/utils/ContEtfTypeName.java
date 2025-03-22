@@ -14,11 +14,11 @@ public class ContEtfTypeName {
      * 医疗
      */
     public static String YILIAO_COMMON = "医疗-通用";
-    public static String YILIAO_CN_MEDICINE = "医疗-中药";
+//    public static String YILIAO_CN_MEDICINE = "医疗-中药";
     public static List YILIAO = new ArrayList();//医疗
     static {
         YILIAO.add(YILIAO_COMMON);
-        YILIAO.add(YILIAO_CN_MEDICINE);
+//        YILIAO.add(YILIAO_CN_MEDICINE);
     }
 
     /**
@@ -58,8 +58,8 @@ public class ContEtfTypeName {
     public static String XIAOFEI_FOOD = "消费-食品";
     public static String XIAOFEI_WINE = "消费-酒";
     public static String XIAOFEI_HOUSE = "消费-家电";
-    public static String XIAOFEI_OLD = "消费-养老";
-    public static String XIAOFEI_EXPRESS = "消费-物流";
+//    public static String XIAOFEI_OLD = "消费-养老";
+//    public static String XIAOFEI_EXPRESS = "消费-物流";
     public static List XIAOFEI = new ArrayList();//消费
     static {
         XIAOFEI.add(XIAOFEI_COMMON);
@@ -71,9 +71,6 @@ public class ContEtfTypeName {
         XIAOFEI.add(XIAOFEI_FOOD);
         XIAOFEI.add(XIAOFEI_WINE);
         XIAOFEI.add(XIAOFEI_HOUSE);
-        XIAOFEI.add(XIAOFEI_OLD);
-        XIAOFEI.add(XIAOFEI_EXPRESS);
-        XIAOFEI.add(XIAOFEI_WINE);
     }
 
     /**

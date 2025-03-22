@@ -12,6 +12,7 @@ public class ContEtfNameKey {
      * 资源
      */
     public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源");
+    public static List ZIYUAN_COMMON_NOLIKE = Arrays.asList("油气", "新能源");
     public static List ZIYUAN_CAILIAO = Arrays.asList("新材料", "材料");//资源-材料
     public static List ZIYUAN_OIL = Arrays.asList("石油", "石化", "油气");//资源-石油
     public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");
@@ -51,12 +52,12 @@ public class ContEtfNameKey {
     }
 
     public static List YILIAO = new ArrayList();//医疗
-    public static List YILIAO_COMMON = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗");//医疗-通用
-    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗-中药
+    public static List YILIAO_COMMON = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗","中药");//医疗-通用
+//    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗-中药，涨幅累计太少
 
     static {
         YILIAO.addAll(YILIAO_COMMON);
-        YILIAO.addAll(YILIAO_CN_MEDICINE);
+//        YILIAO.addAll(YILIAO_CN_MEDICINE);
     }
 
     /**
@@ -99,7 +100,7 @@ public class ContEtfNameKey {
     /**
      * 消费
      */
-    public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务");//消费-通用
+    public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务","物流","养老");//消费-通用
     public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普","香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-通用
     public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-香港消费
     public static List XIAOFEI_GAME = Arrays.asList("游戏");//消费-游戏
@@ -109,8 +110,6 @@ public class ContEtfNameKey {
     public static List XIAOFEI_FOOD = Arrays.asList("食品", "饮食");//消费-食品
     public static List XIAOFEI_WINE = Arrays.asList("酒");//消费-酒
     public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
-    public static List XIAOFEI_OLD = Arrays.asList("养老");//消费-养老
-    public static List XIAOFEI_EXPRESS = Arrays.asList("物流");//消费-物流
     public static List XIAOFEI = new ArrayList();//消费-
 
     static {
@@ -123,8 +122,6 @@ public class ContEtfNameKey {
         XIAOFEI.addAll(XIAOFEI_FOOD);
         XIAOFEI.addAll(XIAOFEI_WINE);
         XIAOFEI.addAll(XIAOFEI_HOUSE);
-        XIAOFEI.addAll(XIAOFEI_OLD);
-        XIAOFEI.addAll(XIAOFEI_EXPRESS);
         XIAOFEI.addAll(XIAOFEI_WINE);
     }
 
