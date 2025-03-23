@@ -136,6 +136,7 @@ public interface EtfAdrCountMapper {
             "    <if test='minPct != null'>minPct=#{minPct},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",
+            " LIMIT 1; ",
             "</script>"})
     void update(EtfAdrCount entity);
 

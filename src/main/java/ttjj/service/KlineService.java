@@ -961,6 +961,9 @@ public class KlineService {
 //        Map<String, BigDecimal> netMap = KlineService.findNetMinMaxAvg(zqdm, maType, klt, false, "", date, "");
 //        BigDecimal curMaAmt = netMap.get(Content.keyRsNetCloseAvg);
         KlineDto maKline = KlineService.findHttpMaNet(zqdm, maType, klt, false, "", date, "");
+        if (maKline == null) {
+            return rs;
+        }
         BigDecimal curMaAmt = maKline.getNetMa();
         curAmt = maKline.getNetCur();
 
