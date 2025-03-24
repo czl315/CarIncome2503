@@ -154,15 +154,18 @@ public class ContMapEtfAll {
         XIAOFEI_HK.put("159699", "消费-香港消费         ");//恒生消费ETF           市值：11.70     累涨：33.04     6.63      14.72     12.56     5.36      2.60      11
         XIAOFEI_HK.put("517880", "消费-香港消费         ");//品牌消费ETF           市值：0.39      累涨：26.62     7.28      10.68     9.71      5.32      2.57      12
     }
-    /**
-     * 消费-游戏
-     */
-    public static Map<String, String> XIAOFEI_GAME = new HashMap<>();
+
+    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
     static {
-        XIAOFEI_GAME.put("517770", "消费-游戏             ");//游戏传媒ETF           市值：0.30      累涨：53.93     10.10     17.90     26.66     14.30     9.13      1
-        XIAOFEI_GAME.put("516770", "消费-游戏             ");//游戏ETF华泰柏瑞       市值：1.13      累涨：67.08     12.02     25.66     30.79     11.37     7.33      2
-        XIAOFEI_GAME.put("159869", "消费-游戏             ");//游戏ETF               市值：49.74     累涨：66.75     12.44     26.03     30.25     10.98     7.15      3
-        XIAOFEI_GAME.put("516010", "消费-游戏             ");//游戏ETF               市值：13.38     累涨：66.58     12.56     26.03     29.61     10.77     6.67      4
+        XIAOFEI_MEDIA.put("159855", "消费-文娱传媒         ");//影视ETF               市值：0.60      累涨：56.53     9.41      33.61     13.51     6.89      0.10      1
+        XIAOFEI_MEDIA.put("516620", "消费-文娱传媒         ");//影视ETF               市值：0.57      累涨：56.99     9.84      33.97     13.18     6.76                2
+        XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：16.49     累涨：61.86     10.82     38.08     12.96     5.56                3
+        XIAOFEI_MEDIA.put("516770", "消费-文娱传媒         ");//游戏ETF华泰柏瑞       市值：1.36      累涨：62.99     10.82     38.54     13.63     5.44                4
+        XIAOFEI_MEDIA.put("159869", "消费-文娱传媒         ");//游戏ETF               市值：51.74     累涨：62.10     10.65     38.14     13.31     5.43                5
+        XIAOFEI_MEDIA.put("517770", "消费-文娱传媒         ");//游戏传媒ETF           市值：0.30      累涨：51.15     8.60      26.72     15.83     5.34      1.41      6
+        XIAOFEI_MEDIA.put("159805", "消费-文娱传媒         ");//传媒ETF               市值：1.78      累涨：49.33     10.90     25.53     12.90     4.66      0.33      7
+        XIAOFEI_MEDIA.put("516190", "消费-文娱传媒         ");//文娱传媒ETF           市值：0.21      累涨：45.70     9.72      24.63     11.35     4.66                8
+        XIAOFEI_MEDIA.put("512980", "消费-文娱传媒         ");//传媒ETF               市值：24.76     累涨：48.63     10.40     25.08     13.15     4.64      0.34      9
     }
     /**
      * 消费-旅游
@@ -173,38 +176,19 @@ public class ContMapEtfAll {
         XIAOFEI_TRAVEL.put("159766", "消费-旅游             ");//旅游ETF               市值：23.99     累涨：27.65     10.74     8.56      8.96      5.33      1.35      2
         XIAOFEI_TRAVEL.put("562510", "消费-旅游             ");//旅游ETF               市值：6.83      累涨：27.34     11.03     8.32      8.59      4.98      1.35      3
     }
+
     /**
-     * 消费-影视
-     */
-    public static Map<String, String> XIAOFEI_FILM = new HashMap<>();
-    static {
-        XIAOFEI_FILM.put("159855", "消费-影视             ");//影视ETF               市值：0.65      累涨：64.86     15.92     19.39     30.92     8.60      5.77      1
-        XIAOFEI_FILM.put("516620", "消费-影视             ");//影视ETF               市值：0.62      累涨：64.35     15.26     19.46     30.56     8.47      5.57      2
-    }
-    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();
-    static {
-        XIAOFEI_MEDIA.put("512980", "消费-传媒             ");//传媒ETF               市值：26.26     累涨：50.32     11.69     23.13     16.16     9.64      2.44      1
-        XIAOFEI_MEDIA.put("159805", "消费-传媒             ");//传媒ETF               市值：1.86      累涨：50.80     12.28     23.02     15.88     9.61      2.58      2
-        XIAOFEI_MEDIA.put("516190", "消费-传媒             ");//文娱传媒ETF           市值：0.21      累涨：46.18     10.20     23.20     13.96     9.01      2.76      3
-    }
-    /**
-     * 消费-食品
-     */
-    public static Map<String, String> XIAOFEI_FOOD = new HashMap<>();
-    static {
-        XIAOFEI_FOOD.put("516900", "消费-食品             ");//食品饮料ETF基金       市值：0.56      累涨：25.91     4.59      9.63      11.86     7.37      3.43      1
-        XIAOFEI_FOOD.put("515170", "消费-食品             ");//食品饮料ETF           市值：35.01     累涨：24.37     5.38      8.99      10.00     4.86      3.45      2
-        XIAOFEI_FOOD.put("515710", "消费-食品             ");//食品ETF               市值：9.66      累涨：23.48     5.26      9.31      9.08      4.57      2.75      3
-        XIAOFEI_FOOD.put("159843", "消费-食品             ");//食品饮料ETF           市值：3.04      累涨：24.12     5.02      9.36      9.90      4.44      2.89      4
-        XIAOFEI_FOOD.put("159862", "消费-食品             ");//食品ETF               市值：0.51      累涨：24.31     5.57      8.88      9.86      4.27      2.63      5
-        XIAOFEI_FOOD.put("159736", "消费-食品             ");//饮食ETF               市值：51.63     累涨：23.74     6.13      8.84      8.77      3.83      2.68      6
-    }
-    /**
-     * 消费-酒
+     * 消费-吃喝
      */
     public static Map<String, String> XIAOFEI_WINE = new HashMap<>();
     static {
-        XIAOFEI_WINE.put("512690", "消费-酒               ");//酒ETF                 市值：127.91    累涨：29.62     7.98      8.74      14.32     6.79      1.69      1
+        XIAOFEI_WINE.put("516900", "消费-吃喝             ");//食品饮料ETF基金       市值：0.84      累涨：28.88     4.48      8.77      17.13     9.21                1
+        XIAOFEI_WINE.put("512690", "消费-吃喝             ");//酒ETF                 市值：122.09    累涨：32.01     6.70      11.66     15.53     7.42                2
+        XIAOFEI_WINE.put("515710", "消费-吃喝             ");//食品ETF               市值：9.41      累涨：25.42     4.95      8.12      13.52     7.39                3
+        XIAOFEI_WINE.put("515170", "消费-吃喝             ");//食品饮料ETF           市值：34.20     累涨：25.41     4.73      8.25      13.67     7.33                4
+        XIAOFEI_WINE.put("159843", "消费-吃喝             ");//食品饮料ETF           市值：3.01      累涨：25.53     4.36      8.23      14.04     7.21                5
+        XIAOFEI_WINE.put("159736", "消费-吃喝             ");//饮食ETF               市值：49.00     累涨：24.44     4.89      8.23      12.77     6.85                6
+        XIAOFEI_WINE.put("159862", "消费-吃喝             ");//食品ETF               市值：0.46      累涨：25.54     4.61      8.11      14.03     6.83                7
     }
     /**
      * 消费-家电
@@ -226,11 +210,8 @@ public class ContMapEtfAll {
     static {
         XIAOFEI.putAll(XIAOFEI_COMMON);
         XIAOFEI.putAll(XIAOFEI_HK);
-        XIAOFEI.putAll(XIAOFEI_GAME);
         XIAOFEI.putAll(XIAOFEI_MEDIA);
         XIAOFEI.putAll(XIAOFEI_TRAVEL);
-        XIAOFEI.putAll(XIAOFEI_FILM);
-        XIAOFEI.putAll(XIAOFEI_FOOD);
         XIAOFEI.putAll(XIAOFEI_WINE);
         XIAOFEI.putAll(XIAOFEI_HOUSE);
     }

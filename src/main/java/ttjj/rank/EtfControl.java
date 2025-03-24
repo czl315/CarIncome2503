@@ -23,6 +23,7 @@ import static utils.Content.*;
  * 保存：查询etf列表，批量插入
  * 更新-上涨之和
  * 更新-超过均线信息
+ *
  * <p>
  * 数据分析
  * 1、查询每日涨幅最多的Etf
@@ -31,12 +32,12 @@ import static utils.Content.*;
  */
 public class EtfControl {
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-03-20";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-03-20";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
-//            return;
+            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
@@ -47,18 +48,18 @@ public class EtfControl {
 //        condition.setType_name(INDEX_CN_NOT_USA);
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
-//        updateUpSumOrder(date);
+        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
 
-//        showStat(date);
+        showStat(date);
 
-        updateNetHis();
+//        updateNetHis();
 
 //        showStatSimpleByTypeAll();
 
@@ -252,18 +253,20 @@ public class EtfControl {
 //        typeEn = "KEJI_NEW_ENERGY";
 //        typeCn = ContEtfTypeName.KEJI_NEW_ENERGY;
 
-//        condition.setLikeNameList(XIAOFEI_FOOD);
+        // 消费
 //        condition.setLikeNameList(XIAOFEI_HK);
+//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
+//        typeEn = "XIAOFEI_WINE";
+//        typeCn = ContEtfTypeName.XIAOFEI_WINE;
 
-        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_COMMON);
-        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_COMMON_NOLIKE);
-        typeEn = "XIAOFEI_COMMON";
-        typeCn = ContEtfTypeName.XIAOFEI_COMMON;
+//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_COMMON);
+//        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_COMMON_NOLIKE);
+//        typeEn = "XIAOFEI_COMMON";
+//        typeCn = ContEtfTypeName.XIAOFEI_COMMON;
 
-//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_MEDIA);
-//        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_GAME);
-//        typeEn = "XIAOFEI_MEDIA";
-//        typeCn = ContEtfTypeName.XIAOFEI_MEDIA;
+        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_MEDIA);
+        typeEn = "XIAOFEI_MEDIA";
+        typeCn = ContEtfTypeName.XIAOFEI_MEDIA;
 
 //        condition.setNotLikeNameList(JINRONG);
 //        condition.setLikeNameList(JINRONG_ZHENGQUAN);

@@ -103,23 +103,17 @@ public class ContEtfNameKey {
     public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务","物流","养老");//消费-通用
     public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普","香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-通用
     public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-香港消费
-    public static List XIAOFEI_GAME = Arrays.asList("游戏");//消费-游戏
-    public static List XIAOFEI_MEDIA = Arrays.asList("传媒");//消费-传媒
+    public static List XIAOFEI_MEDIA = Arrays.asList("游戏","影视","传媒");//消费-文娱传媒
     public static List XIAOFEI_TRAVEL = Arrays.asList("航空", "旅游");//消费-旅游
-    public static List XIAOFEI_FILM = Arrays.asList("影视");//消费-影视
-    public static List XIAOFEI_FOOD = Arrays.asList("食品", "饮食");//消费-食品
-    public static List XIAOFEI_WINE = Arrays.asList("酒");//消费-酒
+    public static List XIAOFEI_WINE = Arrays.asList("酒","食品", "饮食");//消费-酒
     public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
     public static List XIAOFEI = new ArrayList();//消费-
 
     static {
         XIAOFEI.addAll(XIAOFEI_COMMON);
         XIAOFEI.addAll(XIAOFEI_HK);
-        XIAOFEI.addAll(XIAOFEI_GAME);
-        XIAOFEI.addAll(XIAOFEI_TRAVEL);
-        XIAOFEI.addAll(XIAOFEI_FILM);
         XIAOFEI.addAll(XIAOFEI_MEDIA);
-        XIAOFEI.addAll(XIAOFEI_FOOD);
+        XIAOFEI.addAll(XIAOFEI_TRAVEL);
         XIAOFEI.addAll(XIAOFEI_WINE);
         XIAOFEI.addAll(XIAOFEI_HOUSE);
         XIAOFEI.addAll(XIAOFEI_WINE);
