@@ -76,6 +76,10 @@ public class CondStockAdrCount extends StockAdrCount {
      * 涨幅次数非空
      */
     private boolean adrUpSumOrder1to60NotNull;
+    /**
+     * 涨幅次数非空
+     */
+    private boolean adrUpSumOrder40to60NotNull;
 
     /**
      * 均线周期列表
@@ -90,6 +94,11 @@ public class CondStockAdrCount extends StockAdrCount {
      * 业务列表
      */
     private List<String> bizList;
+
+    /**
+     * 业务列表（过滤）
+     */
+    private List<String> typeNameListNotIn;
 
     /**
      * 均线之上-60-周线
@@ -138,6 +147,22 @@ public class CondStockAdrCount extends StockAdrCount {
      * 模糊查询名称列表-过滤掉不查询
      */
     List<String> notLikeNameList;
+
+    public boolean isAdrUpSumOrder40to60NotNull() {
+        return adrUpSumOrder40to60NotNull;
+    }
+
+    public void setAdrUpSumOrder40to60NotNull(boolean adrUpSumOrder40to60NotNull) {
+        this.adrUpSumOrder40to60NotNull = adrUpSumOrder40to60NotNull;
+    }
+
+    public List<String> getTypeNameListNotIn() {
+        return typeNameListNotIn;
+    }
+
+    public void setTypeNameListNotIn(List<String> typeNameListNotIn) {
+        this.typeNameListNotIn = typeNameListNotIn;
+    }
 
     public List<String> getNotLikeNameList() {
         return notLikeNameList;

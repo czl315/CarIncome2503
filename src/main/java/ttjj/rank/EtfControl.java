@@ -49,13 +49,13 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
-//        updateUpSumOrder(date);
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
+        updateUpSumOrder(date);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
+        updateLatestDayAdr(condition, date);
 
 //        showStat(date);
 
@@ -63,13 +63,12 @@ public class EtfControl {
 
 //        showStatSimpleByTypeAll();
 
-//        //查询超过均线数据
-//        List<String> dateList = StockService.findListDateBefore(date, 3);//查询n个交易日之前的日期
+////        //查询超过均线数据
+//        List<String> dateList = StockService.findListDateBefore(date, 2);//查询n个交易日之前的日期
 //        for (String day : dateList) {
 //            findBreakUpMa(day, Arrays.asList(KLT_102), null);
-////            findBreakUpMa(day, Arrays.asList(KLT_102), new BigDecimal("20"));
+////            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
 //        }
-//        findBreakUpMa(date, Arrays.asList(KLT_102,KLT_101));
 
 
     }
@@ -92,7 +91,9 @@ public class EtfControl {
         condition.setDate(date);
         condition.setUpMaKltOrList(asList);
         condition.setADR_UP_SUM_1_60(adrSum60PctMin);
+        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
 //        condition.setType_name(INDEX_CN_NOT_USA);
+//        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
@@ -417,6 +418,11 @@ public class EtfControl {
         condition.setDate(date);
         condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 
+        //指数
+//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_BIG);//科技-软件
+//        typeEn = "INDEX_CN_BIG";
+//        typeCn = ContEtfTypeName.INDEX_CN_BIG;
+
 
         // 科技
         //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
@@ -425,9 +431,9 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
-        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
-        typeEn = "KEJI_RUAN_JIAN";
-        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
+//        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
+//        typeEn = "KEJI_RUAN_JIAN";
+//        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
 
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);
 //        typeEn = "KEJI_RUAN_JIAN";
@@ -483,8 +489,10 @@ public class EtfControl {
 //        typeCn = ContEtfTypeName.JINRONG_GOLD;
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 
-
-//        condition.setLikeNameList(YILIAO_COMMON);
+        // 医疗
+        condition.setLikeNameList(ContEtfNameKey.YILIAO_COMMON);
+        typeEn = "YILIAO_COMMON";
+        typeCn = ContEtfTypeName.YILIAO_COMMON;
 //        condition.setLikeNameList(YILIAO_CN_MEDICINE);
 
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_USA);
@@ -1278,6 +1286,7 @@ public class EtfControl {
 
     /**
      * 更新上涨累计排序
+     * 如果上涨累计非null，累加排名，否则排名不变
      *
      * @param date    日期
      * @param bizName 业务名称
@@ -1330,25 +1339,41 @@ public class EtfControl {
             entity.setF12(etf.getF12());
             entity.setDate(date);
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_1_3(new BigDecimal(++order));
+                //如果上涨累计非null，累加排名，否则排名不变
+                if (etf.getADR_UP_SUM_1_3() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_1_3(new BigDecimal(order));
             }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_1_5(new BigDecimal(++order));
+                if (etf.getADR_UP_SUM_1_5() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_1_5(new BigDecimal(order));
             }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_1_10(new BigDecimal(++order));
+                if (etf.getADR_UP_SUM_1_10() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_1_5(new BigDecimal(order));
             }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_1_20(new BigDecimal(++order));
+                if (etf.getADR_UP_SUM_1_20() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_1_20(new BigDecimal(order));
             }
-//            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40.equals(dbField)) {
-//                entity.setADR_UP_SUM_ORDER_1_40(new BigDecimal(++order));
-//            }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_20_40(new BigDecimal(++order));
+                if (etf.getADR_UP_SUM_20_40() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_20_40(new BigDecimal(order));
             }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60.equals(dbField)) {
-                entity.setADR_UP_SUM_ORDER_40_60(new BigDecimal(++order));
+                if (etf.getADR_UP_SUM_40_60() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_40_60(new BigDecimal(order));
             }
 
             //更新
@@ -1387,12 +1412,12 @@ public class EtfControl {
             BigDecimal adr_up_sum_order_1_20 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_20();
             BigDecimal adr_up_sum_order_20_40 = etfAdrCountVo.getADR_UP_SUM_ORDER_20_40();
             BigDecimal adr_up_sum_order_40_60 = etfAdrCountVo.getADR_UP_SUM_ORDER_40_60();
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_3);
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_5);
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_10);
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_20);
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_20_40);
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_40_60);
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_3 != null ? adr_up_sum_order_1_3 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_5 != null ? adr_up_sum_order_1_5 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_10 != null ? adr_up_sum_order_1_10 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_20 != null ? adr_up_sum_order_1_20 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_20_40 != null ? adr_up_sum_order_20_40 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_40_60 != null ? adr_up_sum_order_40_60 : new BigDecimal("0"));
             etfAdrCountVo.setADR_UP_SUM_ORDER_STAT(adr_up_sum_order_stat);
             adr_up_sum_order_stat = new BigDecimal("0");
         }
