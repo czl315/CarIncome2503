@@ -117,7 +117,6 @@ public class ContEtfTypeName {
     public static String JINRONG_ZHENGQUAN = "金融-证券";
     public static String JINRONG_GOLD = "金融-黄金";
     public static String JINRONG_BANK = "金融-银行";
-    public static String JINRONG_COMMON = "金融-通用";
     public static String JINRONG_FANGDICHAN = "金融-地产";
     public static String JINRONG_CASH  = "金融-现金";
     public static List JINRONG = new ArrayList();
@@ -125,7 +124,6 @@ public class ContEtfTypeName {
         JINRONG.add(JINRONG_ZHENGQUAN);
         JINRONG.add(JINRONG_GOLD);
         JINRONG.add(JINRONG_BANK);
-        JINRONG.add(JINRONG_COMMON);
         JINRONG.add(JINRONG_FANGDICHAN);
         JINRONG.add(JINRONG_CASH);
     }

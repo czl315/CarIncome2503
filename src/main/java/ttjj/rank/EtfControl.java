@@ -33,7 +33,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-24";
+//        String date = "2025-03-27";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -472,10 +472,14 @@ public class EtfControl {
 //        typeEn = "XIAOFEI_MEDIA";
 //        typeCn = ContEtfTypeName.XIAOFEI_MEDIA;
 
+        // 金融
 //        condition.setNotLikeNameList(JINRONG);
-//        condition.setLikeNameList(JINRONG_ZHENGQUAN);
 //        condition.setLikeNameList(JINRONG_BANK);
 //        condition.setLikeNameList(JINRONG_FANGDICHAN);
+//        condition.setLikeNameList(ContEtfNameKey.JINRONG_ZHENGQUAN);
+//        condition.setNotLikeNameList(ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE);
+//        typeEn = "JINRONG_ZHENGQUAN";
+//        typeCn = ContEtfTypeName.JINRONG_ZHENGQUAN;
 
 //        condition.setLikeNameList(ContEtfNameKey.JINRONG_CASH);
 //        typeEn = "JINRONG_CASH";
@@ -490,10 +494,9 @@ public class EtfControl {
 //        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
 
         // 医疗
-        condition.setLikeNameList(ContEtfNameKey.YILIAO_COMMON);
-        typeEn = "YILIAO_COMMON";
-        typeCn = ContEtfTypeName.YILIAO_COMMON;
-//        condition.setLikeNameList(YILIAO_CN_MEDICINE);
+//        condition.setLikeNameList(ContEtfNameKey.YILIAO_COMMON);
+//        typeEn = "YILIAO_COMMON";
+//        typeCn = ContEtfTypeName.YILIAO_COMMON;
 
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_USA);
 //        typeEn = "INDEX_CN_NOT_USA";
@@ -531,10 +534,10 @@ public class EtfControl {
 //        typeEn = "ZIYUAN_XIYOU";
 //        typeCn = ContEtfTypeName.ZIYUAN_XIYOU;
 
-//        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_COMMON);
-//        condition.setNotLikeNameList(ContEtfNameKey.ZIYUAN_COMMON_NOLIKE);
-//        typeEn = "ZIYUAN_COMMON";
-//        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
+        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_COMMON);
+        condition.setNotLikeNameList(ContEtfNameKey.ZIYUAN_COMMON_NOLIKE);
+        typeEn = "ZIYUAN_COMMON";
+        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
@@ -1355,7 +1358,7 @@ public class EtfControl {
                 if (etf.getADR_UP_SUM_1_10() != null) {
                     ++order;
                 }
-                entity.setADR_UP_SUM_ORDER_1_5(new BigDecimal(order));
+                entity.setADR_UP_SUM_ORDER_1_10(new BigDecimal(order));
             }
             if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20.equals(dbField)) {
                 if (etf.getADR_UP_SUM_1_20() != null) {
@@ -1406,18 +1409,20 @@ public class EtfControl {
         List<EtfAdrCountVo> stList = EtfAdrCountService.listStAdrCount(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
         for (EtfAdrCountVo etfAdrCountVo : stList) {
-            BigDecimal adr_up_sum_order_1_3 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_3();
+//            BigDecimal adr_up_sum_order_1_3 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_3();
             BigDecimal adr_up_sum_order_1_5 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_5();
             BigDecimal adr_up_sum_order_1_10 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_10();
             BigDecimal adr_up_sum_order_1_20 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_20();
             BigDecimal adr_up_sum_order_20_40 = etfAdrCountVo.getADR_UP_SUM_ORDER_20_40();
             BigDecimal adr_up_sum_order_40_60 = etfAdrCountVo.getADR_UP_SUM_ORDER_40_60();
-            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_3 != null ? adr_up_sum_order_1_3 : new BigDecimal("0"));
+            BigDecimal adr_up_sum_order_1_60 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_60();
+//            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_3 != null ? adr_up_sum_order_1_3 : new BigDecimal("0"));
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_5 != null ? adr_up_sum_order_1_5 : new BigDecimal("0"));
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_10 != null ? adr_up_sum_order_1_10 : new BigDecimal("0"));
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_20 != null ? adr_up_sum_order_1_20 : new BigDecimal("0"));
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_20_40 != null ? adr_up_sum_order_20_40 : new BigDecimal("0"));
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_40_60 != null ? adr_up_sum_order_40_60 : new BigDecimal("0"));
+            adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_60 != null ? adr_up_sum_order_1_60 : new BigDecimal("0"));
             etfAdrCountVo.setADR_UP_SUM_ORDER_STAT(adr_up_sum_order_stat);
             adr_up_sum_order_stat = new BigDecimal("0");
         }

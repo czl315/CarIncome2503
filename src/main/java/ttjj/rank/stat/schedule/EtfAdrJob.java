@@ -97,7 +97,7 @@ public class EtfAdrJob {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 100, 600, TimeUnit.SECONDS);
+        }, 300, 600, TimeUnit.SECONDS);
 
         /**
          * 更新-超过均线信息

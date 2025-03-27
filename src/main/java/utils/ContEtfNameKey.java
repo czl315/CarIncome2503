@@ -11,9 +11,8 @@ public class ContEtfNameKey {
     /**
      * 资源
      */
-    public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源");
+    public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源","新材料", "材料");
     public static List ZIYUAN_COMMON_NOLIKE = Arrays.asList("油气", "新能源");
-    public static List ZIYUAN_CAILIAO = Arrays.asList("新材料", "材料");//资源-材料
     public static List ZIYUAN_OIL = Arrays.asList("石油", "石化", "油气");//资源-石油
     public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");
     public static List ZIYUAN_NONGYE = Arrays.asList("农", "畜牧", "养殖", "粮食");
@@ -24,10 +23,9 @@ public class ContEtfNameKey {
         ZIYUAN.addAll(ZIYUAN_NONGYE);
         ZIYUAN.addAll(ZIYUAN_OIL);
         ZIYUAN.addAll(ZIYUAN_COMMON);
-        ZIYUAN.addAll(ZIYUAN_CAILIAO);
     }
 
-    public static List INDEX_CN_NOT = Arrays.asList( "德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
+    public static List INDEX_CN_NOT = Arrays.asList("德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
     public static List INDEX_CN_NOT_USA = Arrays.asList("标普", "纳", "道琼斯", "美国");//指数-外盘-美股
 
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
@@ -52,7 +50,7 @@ public class ContEtfNameKey {
     }
 
     public static List YILIAO = new ArrayList();//医疗
-    public static List YILIAO_COMMON = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗","中药");//医疗-通用
+    public static List YILIAO_COMMON = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗", "中药");//医疗-通用
 //    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗-中药，涨幅累计太少
 
     static {
@@ -63,36 +61,36 @@ public class ContEtfNameKey {
     /**
      * 金融
      */
-    public static List JINRONG_GOLD = Arrays.asList("黄金","金ETF");//金融-黄金
-    public static List JINRONG_GOLD_NOLIKE = Arrays.asList("天天金","货币基金ETF");//金融-黄金（过滤）
+    public static List JINRONG_GOLD = Arrays.asList("黄金", "金ETF");//金融-黄金
+    public static List JINRONG_GOLD_NOLIKE = Arrays.asList("天天金", "货币基金ETF");//金融-黄金（过滤）
     public static List JINRONG_BANK = Arrays.asList("银行");//金融-银行
-    public static List JINRONG_COMMON = Arrays.asList("金融");//金融-通用
-    public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商");//金融-证券
+    public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商", "金融");//金融-证券
+    public static List JINRONG_ZHENGQUAN_NOLIKE = Arrays.asList("金融科技");
     public static List JINRONG_FANGDICHAN = Arrays.asList("地产", "建材", "基建", "交运", "交通", "公用");//金融-地产
     public static List JINRONG_CASH = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快线", "快钱", "财富", "天天金");//金融-现金
     public static List JINRONG = new ArrayList();//金融
 
     static {
         JINRONG.addAll(JINRONG_BANK);
-        JINRONG.addAll(JINRONG_COMMON);
         JINRONG.addAll(JINRONG_ZHENGQUAN);
         JINRONG.addAll(JINRONG_FANGDICHAN);
         JINRONG.addAll(JINRONG_CASH);
         JINRONG.addAll(JINRONG_GOLD);
     }
 
-    public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械",  "央企科技", "科技50", "科技ETF", "战略", "科技100", "高端", "核心",
+    public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "高端", "核心",
             "科技", "VR", "漂亮", "国货", "ESG", "可持续", "卫星", "产业升级", "创新100", "G60创新");//科技-工业
-    public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指","标普","港股","香港", "恒生", "中概","东南亚", "生物", "金融");//科技-工业
-    public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车","新能车");//科技-汽车
-    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50","新能源ETF","新能源主题","新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "碳");//科技-新能源
+    public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指", "标普", "港股", "香港", "恒生", "中概", "东南亚", "生物", "金融");//科技-工业
+    public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
+    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "碳");//科技-新能源
     public static List KEJI_ELECTRICITY = Arrays.asList("绿电", "电力");//科技-电力
     public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济", "新经济");//科技-软件
-    public static List KEJI_XIN_PIAN = Arrays.asList("芯片","集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
+    public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
     public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技龙头");//科技-香港
     public static List KEJI_JUNGONG = Arrays.asList("国防", "军工");//科技-军工
     public static List KEJI = new ArrayList();//科技
+
     static {
         KEJI.addAll(KEJI_GONG_YE);
     }
@@ -100,12 +98,12 @@ public class ContEtfNameKey {
     /**
      * 消费
      */
-    public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务","物流","养老");//消费-通用
-    public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普","香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-通用
+    public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务", "物流", "养老");//消费-通用
+    public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普", "香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-通用
     public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-香港消费
-    public static List XIAOFEI_MEDIA = Arrays.asList("游戏","影视","传媒");//消费-文娱传媒
+    public static List XIAOFEI_MEDIA = Arrays.asList("游戏", "影视", "传媒");//消费-文娱传媒
     public static List XIAOFEI_TRAVEL = Arrays.asList("航空", "旅游");//消费-旅游
-    public static List XIAOFEI_WINE = Arrays.asList("酒","食品", "饮食");//消费-酒
+    public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食");//消费-酒
     public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
     public static List XIAOFEI = new ArrayList();//消费-
 
