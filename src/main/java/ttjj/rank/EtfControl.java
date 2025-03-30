@@ -32,12 +32,12 @@ import static utils.Content.*;
  */
 public class EtfControl {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-27";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-03-28";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
-            return;
+//            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
@@ -46,16 +46,17 @@ public class EtfControl {
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);
-        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+//        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_5));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-        updateUpSum(date, etfList);//更新-上涨之和
-        updateUpSumOrder(date);
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        updateUpSum(date, etfList);//更新-上涨之和
+//        updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
         updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-        updateLatestDayAdr(condition, date);
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
 
 //        showStat(date);
 
@@ -607,7 +608,7 @@ public class EtfControl {
      * @param condition 条件
      */
     public static void updateLatestDayAdr(CondStockAdrCount condition, String date) {
-        String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
+        String methodName = "更新最近交易日的涨幅";
         boolean isShowLog = true;
         long begTime = System.currentTimeMillis();
         String klineType = DB_RANK_BIZ_TYPE_ETF;
@@ -663,7 +664,6 @@ public class EtfControl {
             int updateRs = EtfAdrCountService.update(etfAdrCount);
             if (updateRs != 1) {
                 System.out.println(methodName + "更新-失败：" + updateRs + "" + JSON.toJSONString(etfAdrCount));
-                System.out.println(methodName + "如果更新失败，可能是没有插入，执行一次插入操作：" + EtfAdrCountService.insert(etfAdrCount));
             } else {
                 updateCount++;
             }
@@ -780,7 +780,7 @@ public class EtfControl {
             int updateRs = EtfAdrCountService.update(etfAdrCount);
             if (updateRs != 1) {
                 rsCountInsert = rsCountInsert + EtfAdrCountService.insert(etfAdrCount);
-                System.out.println(methodName + "更新-失败：" + JSON.toJSONString(etfAdrCount));
+//                System.out.println(methodName + "更新-失败：" + JSON.toJSONString(etfAdrCount));
 //                System.out.println(methodName + "如果更新失败，可能是没有插入，执行一次插入操作：" + rsCountInsert);
             } else {
                 rsCountUpdate++;
@@ -931,6 +931,7 @@ public class EtfControl {
     /**
      * 更新-突破均线:突破均线百分比、均线净值
      * 250322：更新突破百分比，如果均线未突破，但是数据库中的均线突破，则也更新
+     * 250330：更新突破百分比，类型为5分钟的60均线
      *
      * @param maDate            日期
      * @param stockAdrCountList 需要更新的列表数据
@@ -962,6 +963,7 @@ public class EtfControl {
             stock.setF14(stockAdrCount.getF14());
             List<String> maKltList = stockAdrCountCond.getMaKltList();
             //显示信息-上涨均线
+            boolean isMa5 = false;
             boolean isMa15 = false;
             boolean isMa30 = false;
             boolean isMa60 = false;
@@ -970,6 +972,26 @@ public class EtfControl {
 //            if (code.equals("561570")) {
 //                System.out.println("特定代码：" + code);
 //            }
+            if (maKltList.contains(KLT_5)) {
+//                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_5, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_15(breakMa.getMaNet());
+                isMa5 = breakMa.isMaBreakUp();
+                if (isMa5) {
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else if (!isMa5 && stockAdrCount.getUP_MA_5() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_5(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_15("");
+                }
+            }
             if (maKltList.contains(KLT_15)) {
 //                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
                 BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, maDate);
