@@ -36,12 +36,14 @@ public class FupanControl {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2022-10-17";
 
-        insertOrUpdate(date, KLT_101, DAYS_1, ContentCookie.COOKIE_DFCF);//保存复盘和仓位
-        checkMaByMyPosition(date);//检查我的持仓：超过均线、价格区间、今日涨跌
+//        insertOrUpdate(date, KLT_101, DAYS_1, ContentCookie.COOKIE_DFCF);//保存复盘和仓位
+//        checkMaByMyPosition(date);//检查我的持仓：超过均线、价格区间、今日涨跌
 
 //        checkFundFlowByMyPosition(date);//检查资金流向-我的仓位
 
 //        listMyPosition(date, KLT_101);//查询我的仓位 KLT_102;//检查周期类型
+
+        queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
 
     }
 
@@ -542,6 +544,42 @@ public class FupanControl {
 //        System.out.println(rsDate);
     }
 
+    /**
+     * 查询-我的股票-资产持仓-证券代码:从东财http
+     *
+     * @param cookie
+     * @param dateType
+     * @param date
+     * @return
+     */
+    private static String queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
+        StringBuffer rs = new StringBuffer();
+        String url = "https://jywg.18.cn/Com/queryAssetAndPositionV1?validatekey=734d22f9-364d-4460-bac6-e6df18953822&moneyType=RMB";
+
+        StringBuffer urlParam = new StringBuffer();
+//        urlParam.append("moneyType=").append("RMB");
+
+//        System.out.println("请求url:"+url+ JSON.toJSONString(urlParam));
+        String assetPositionRs = HttpUtil.sendPost(url, urlParam.toString(), cookie);
+        System.out.println("queryAssetPositionRs:" + assetPositionRs);
+
+        JSONObject assetPositionRsJsonObject = JSON.parseObject(assetPositionRs);
+        JSONArray assetPositionDataArray = JSON.parseArray(assetPositionRsJsonObject.getString("Data"));
+        for (int i = 0; i < assetPositionDataArray.size(); i++) {
+            Asset asset = JSON.parseObject(assetPositionDataArray.getString(i), Asset.class);
+            List<AssetPosition> assetPositionList = asset.getPositions();
+            List<AssetPosition> assetPositionListSortDrykbl = assetPositionList.stream().filter(e -> e != null).sorted(Comparator.comparing(AssetPosition::getDrykbl, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            rs.append("(");
+            for (AssetPosition assetPosition : assetPositionListSortDrykbl) {
+                rs.append("'" + assetPosition.getZqdm() + "',");
+            }
+            rs.append(")");
+        }
+        System.out.println(rs);
+
+        return rs.toString();
+
+    }
 
     /**
      * 查询-我的股票-资产持仓:从东财http
