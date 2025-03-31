@@ -431,9 +431,9 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
-        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
-        typeEn = "KEJI_RUAN_JIAN";
-        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
+//        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
+//        typeEn = "KEJI_RUAN_JIAN";
+//        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
 
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);
 //        typeEn = "KEJI_RUAN_JIAN";
@@ -465,9 +465,10 @@ public class EtfControl {
 
         // 消费
 //        condition.setLikeNameList(XIAOFEI_HK);
-//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
-//        typeEn = "XIAOFEI_WINE";
-//        typeCn = ContEtfTypeName.XIAOFEI_WINE;
+
+        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
+        typeEn = "XIAOFEI_WINE";
+        typeCn = ContEtfTypeName.XIAOFEI_WINE;
 
 //        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_COMMON);
 //        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_COMMON_NOLIKE);

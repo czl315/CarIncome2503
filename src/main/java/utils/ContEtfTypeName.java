@@ -53,7 +53,7 @@ public class ContEtfTypeName {
     public static String XIAOFEI_HK = "消费-香港消费";
     public static String XIAOFEI_MEDIA = "消费-文娱传媒";
     public static String XIAOFEI_TRAVEL = "消费-旅游";
-    public static String XIAOFEI_WINE = "消费-吃喝";
+    public static String XIAOFEI_WINE = "消费-吃喝玩乐";
     public static String XIAOFEI_HOUSE = "消费-家电";
 //    public static String XIAOFEI_FILM = "消费-影视";
 //    public static String XIAOFEI_GAME = "消费-游戏";
@@ -99,16 +99,16 @@ public class ContEtfTypeName {
      */
     public static String ZIYUAN_OIL  = "资源-石油";
     public static String ZIYUAN_NONGYE  = "资源-农业";
-    public static String ZIYUAN_CAILIAO = "资源-材料";
+//    public static String ZIYUAN_CAILIAO = "资源-材料";
     public static String ZIYUAN_XIYOU = "资源-稀有";
     public static String ZIYUAN_COMMON = "资源-通用";
     public static List ZIYUAN = new ArrayList();
     static {
         ZIYUAN.add(ZIYUAN_OIL);
         ZIYUAN.add(ZIYUAN_NONGYE);
-        ZIYUAN.add(ZIYUAN_CAILIAO);
         ZIYUAN.add(ZIYUAN_XIYOU);
         ZIYUAN.add(ZIYUAN_COMMON);
+//        ZIYUAN.add(ZIYUAN_CAILIAO);
     }
 
     /**

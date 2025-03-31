@@ -101,8 +101,7 @@ public class ContEtfNameKey {
     public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普", "香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-通用
     public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深");//消费-香港消费
     public static List XIAOFEI_MEDIA = Arrays.asList("游戏", "影视", "传媒");//消费-文娱传媒
-    public static List XIAOFEI_TRAVEL = Arrays.asList("航空", "旅游");//消费-旅游
-    public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食");//消费-酒
+    public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食","航空", "旅游");//消费-酒
     public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
     public static List XIAOFEI = new ArrayList();//消费-
 
@@ -110,10 +109,10 @@ public class ContEtfNameKey {
         XIAOFEI.addAll(XIAOFEI_COMMON);
         XIAOFEI.addAll(XIAOFEI_HK);
         XIAOFEI.addAll(XIAOFEI_MEDIA);
-        XIAOFEI.addAll(XIAOFEI_TRAVEL);
         XIAOFEI.addAll(XIAOFEI_WINE);
         XIAOFEI.addAll(XIAOFEI_HOUSE);
         XIAOFEI.addAll(XIAOFEI_WINE);
+//        XIAOFEI.addAll(XIAOFEI_TRAVEL);
     }
 
     public static void main(String[] args) {
