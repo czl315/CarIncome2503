@@ -46,7 +46,7 @@ public class EtfControl {
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);
-        condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
         List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
@@ -460,7 +460,6 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_HK);
 //        typeEn = "KEJI_HK";
 //        typeCn = ContEtfTypeName.KEJI_HK;
-
 
 
         // 消费
