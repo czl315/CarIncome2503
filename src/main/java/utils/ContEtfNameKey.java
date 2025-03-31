@@ -82,12 +82,11 @@ public class ContEtfNameKey {
             "科技", "VR", "漂亮", "国货", "ESG", "可持续", "卫星", "产业升级", "创新100", "G60创新");//科技-工业
     public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指", "标普", "港股", "香港", "恒生", "中概", "东南亚", "生物", "金融");//科技-工业
     public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
-    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "碳");//科技-新能源
-    public static List KEJI_ELECTRICITY = Arrays.asList("绿电", "电力");//科技-电力
-    public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济", "新经济");//科技-软件
+    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "绿电", "电力");//科技-新能源
+    public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济");//科技-软件
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
-    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技龙头");//科技-香港
+    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技龙头", "新经济");//科技-香港
     public static List KEJI_JUNGONG = Arrays.asList("国防", "军工");//科技-军工
     public static List KEJI = new ArrayList();//科技
 

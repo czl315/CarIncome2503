@@ -27,7 +27,7 @@ public class ContEtfTypeName {
     public static String KEJI_GONG_YE = "科技-工业";
     public static String KEJI_NEW_CAR = "科技-汽车";
     public static String KEJI_NEW_ENERGY = "科技-新能源";
-    public static String KEJI_ELECTRICITY = "科技-电力";
+//    public static String KEJI_ELECTRICITY = "科技-电力";
     public static String KEJI_RUAN_JIAN = "科技-软件";
     public static String KEJI_XIN_PIAN = "科技-芯片";
     public static String KEJI_TONG_XIN = "科技-通信";
@@ -43,7 +43,7 @@ public class ContEtfTypeName {
         KEJI.add(KEJI_TONG_XIN);
         KEJI.add(KEJI_HK);
         KEJI.add(KEJI_JUNGONG);
-        KEJI.add(KEJI_ELECTRICITY);
+//        KEJI.add(KEJI_ELECTRICITY);
     }
 
     /**

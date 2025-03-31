@@ -46,7 +46,7 @@ public class EtfControl {
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);
-//        condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
         List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
@@ -431,9 +431,9 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
-//        typeEn = "KEJI_RUAN_JIAN";
-//        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
+        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
+        typeEn = "KEJI_RUAN_JIAN";
+        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
 
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);
 //        typeEn = "KEJI_RUAN_JIAN";
@@ -456,6 +456,12 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_NEW_ENERGY);
 //        typeEn = "KEJI_NEW_ENERGY";
 //        typeCn = ContEtfTypeName.KEJI_NEW_ENERGY;
+
+//        condition.setLikeNameList(ContEtfNameKey.KEJI_HK);
+//        typeEn = "KEJI_HK";
+//        typeCn = ContEtfTypeName.KEJI_HK;
+
+
 
         // 消费
 //        condition.setLikeNameList(XIAOFEI_HK);
@@ -534,10 +540,10 @@ public class EtfControl {
 //        typeEn = "ZIYUAN_XIYOU";
 //        typeCn = ContEtfTypeName.ZIYUAN_XIYOU;
 
-        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_COMMON);
-        condition.setNotLikeNameList(ContEtfNameKey.ZIYUAN_COMMON_NOLIKE);
-        typeEn = "ZIYUAN_COMMON";
-        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
+//        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_COMMON);
+//        condition.setNotLikeNameList(ContEtfNameKey.ZIYUAN_COMMON_NOLIKE);
+//        typeEn = "ZIYUAN_COMMON";
+//        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
@@ -759,6 +765,10 @@ public class EtfControl {
                 BigDecimal minPct = minAmt.subtract(yesterdayAmt).divide(yesterdayAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMinPct(minPct);
             }
+
+//            if(code.equals("562550")){
+//                System.out.println("特定代码："+code);
+//            }
 
             //更新类型
             String type = ETF_All.get(code);

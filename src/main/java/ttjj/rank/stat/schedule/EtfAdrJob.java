@@ -122,7 +122,7 @@ public class EtfAdrJob {
             try {
                 CondStockAdrCount condition = new CondStockAdrCount();
                 condition.setDate(date);
-                condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+                condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
                 List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
                 EtfControl.updateNetArea(date, stockAdrCountList);//更新-价格区间
