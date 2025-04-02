@@ -48,6 +48,19 @@ public class EtfAdrJob {
             }
         }, 0, jobSeconds, TimeUnit.SECONDS);
 
+        /**
+         * 更新最近交易日的涨幅，最近3日
+         */
+        new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
+            try {
+                CondStockAdrCount condition = new CondStockAdrCount();
+                condition.setDate(date);
+                EtfControl.updateLatestDayAdr(condition, date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 10, 3600, TimeUnit.SECONDS);
+
 
         /**
          * 更新-上涨之和
@@ -122,8 +135,6 @@ public class EtfAdrJob {
             try {
                 CondStockAdrCount condition = new CondStockAdrCount();
                 condition.setDate(date);
-                condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-
                 List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
                 EtfControl.updateNetArea(date, stockAdrCountList);//更新-价格区间
             } catch (Exception e) {
@@ -131,20 +142,7 @@ public class EtfAdrJob {
             }
         }, 3, 15, TimeUnit.MINUTES);
 
-        /**
-         * 更新最近交易日的涨幅，最近3日
-         */
-        new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
-            try {
-                CondStockAdrCount condition = new CondStockAdrCount();
-                condition.setDate(date);
-                condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-                EtfControl.updateLatestDayAdr(condition, date);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }, 4, 60, TimeUnit.MINUTES);
     }
 
 }

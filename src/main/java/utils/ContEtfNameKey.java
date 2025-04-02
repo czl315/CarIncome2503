@@ -92,6 +92,7 @@ public class ContEtfNameKey {
 
     static {
         KEJI.addAll(KEJI_GONG_YE);
+        KEJI.addAll(KEJI_RUAN_JIAN);
     }
 
     /**

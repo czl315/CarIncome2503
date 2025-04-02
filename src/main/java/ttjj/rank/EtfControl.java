@@ -33,7 +33,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-03-28";
+//        String date = "2025-04-01";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -46,17 +46,18 @@ public class EtfControl {
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);
-        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+//        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList( KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
         List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
         updateUpSum(date, etfList);//更新-上涨之和
         updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
-        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
         updateNetArea(date, stockAdrCountList);//更新-价格区间
         updateLatestDayAdr(condition, date);
-
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+//
 //        showStat(date);
 
 //        updateNetHis();
@@ -431,9 +432,9 @@ public class EtfControl {
 //        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
-//        typeEn = "KEJI_RUAN_JIAN";
-//        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
+        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
+        typeEn = "KEJI_RUAN_JIAN";
+        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
 
 //        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);
 //        typeEn = "KEJI_RUAN_JIAN";
@@ -465,9 +466,9 @@ public class EtfControl {
         // 消费
 //        condition.setLikeNameList(XIAOFEI_HK);
 
-        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
-        typeEn = "XIAOFEI_WINE";
-        typeCn = ContEtfTypeName.XIAOFEI_WINE;
+//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
+//        typeEn = "XIAOFEI_WINE";
+//        typeCn = ContEtfTypeName.XIAOFEI_WINE;
 
 //        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_COMMON);
 //        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_COMMON_NOLIKE);
