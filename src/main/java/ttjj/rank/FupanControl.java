@@ -570,9 +570,14 @@ public class FupanControl {
             List<AssetPosition> assetPositionList = asset.getPositions();
             List<AssetPosition> assetPositionListSortDrykbl = assetPositionList.stream().filter(e -> e != null).sorted(Comparator.comparing(AssetPosition::getDrykbl, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             rs.append("(");
+            String codes = "";
             for (AssetPosition assetPosition : assetPositionListSortDrykbl) {
-                rs.append("'" + assetPosition.getZqdm() + "',");
+                codes = codes + "'" + assetPosition.getZqdm() + "',";
             }
+            if (codes.toString().endsWith(",")) {
+                codes = codes.substring(0, codes.length() - 1);
+            }
+            rs.append(codes);
             rs.append(")");
         }
         System.out.println(rs);
