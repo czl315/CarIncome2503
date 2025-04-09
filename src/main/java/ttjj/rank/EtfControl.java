@@ -33,7 +33,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-07";
+//        String date = "2025-04-09";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -57,7 +57,7 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-//
+
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
         findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
@@ -77,12 +77,19 @@ public class EtfControl {
     }
 
     /**
-     * 查询数据根据日期，按照涨幅倒序，检查限定类型个数显示
+     * 查询数据根据日期，按照涨幅倒序
+     * 过滤1：涨序排序前n的数据
+     * 过滤2：每个类型限定n个
      *
      * @param date 日期
      */
     private static void findByDateOrderByDescAdr(String date) {
-        boolean isShowTypeLimit = true;//是否限定类型个数显示
+        //过滤1：涨序排序前n的数据
+        boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("5");//涨序排序前n个限定
+
+        //过滤2：每个类型限定n个
+        boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
         int showTypeLimitCount = 2;//限定类型个数
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
 
@@ -105,7 +112,11 @@ public class EtfControl {
         handlerShowHead();//首行标题信息
 
         for (EtfAdrCountVo vo : stockAdrCountList) {
-            //检查限定类型个数的键值对设置个数，如果超过限定个数，则不显示
+            //过滤1：涨序排序前n的数据
+            if (isFilterAdrUpSumOrderStat && vo.getADR_UP_SUM_ORDER_STAT() != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(limitAdrUpSumOrderStat) > 0) {
+                continue;
+            }
+            //过滤2：每个类型限定n个
             if (isShowTypeLimit && checkShowTypeLimit(vo, showTypeLimitCount, showTypeLimitCountMap)) {
                 continue;
             }
@@ -577,225 +588,6 @@ public class EtfControl {
     }
 
     /**
-     * 查询单一数据，全部类型
-     */
-    private static void showStatSimpleByTypeAll() {
-        List<List<String>> etfNameList = Arrays.asList(XIAOFEI, ZIYUAN_NONGYE);
-        for (List<String> etfName : etfNameList) {
-            CondStockAdrCount condition = new CondStockAdrCount();
-            condition.setDate(DateUtil.getToday(DateUtil.YYYY_MM_DD));
-            condition.setLimitCount(1);
-            condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
-
-            condition.setLikeNameList(etfName);
-
-            List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-
-            findByTypeName(DateUtil.getToday(DateUtil.YYYY_MM_DD));
-        }
-
-    }
-
-    /**
-     * ETF涨幅数据：查询数据根据名称列表模糊查询
-     */
-    private static void findByTypeName(String date) {
-        String typeEn = "";
-        String typeCn = "";
-        CondStockAdrCount condition = new CondStockAdrCount();
-        condition.setDate(date);
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
-
-        //指数
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_BIG);//科技-软件
-//        typeEn = "INDEX_CN_BIG";
-//        typeCn = ContEtfTypeName.INDEX_CN_BIG;
-
-
-        // 科技
-        //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
-//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
-//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
-
-        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
-        typeEn = "KEJI_RUAN_JIAN";
-        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);
-//        typeEn = "KEJI_RUAN_JIAN";
-//        typeCn = ContEtfTypeName.KEJI_RUAN_JIAN;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_GONG_YE);
-//        condition.setNotLikeNameList(ContEtfNameKey.KEJI_GONG_YE_NOLIKE);
-//        typeEn = "KEJI_GONG_YE";
-//        typeCn = ContEtfTypeName.KEJI_GONG_YE;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_TONG_XIN);
-//        condition.setNotLikeNameList(ContEtfNameKey.KEJI_GONG_YE_NOLIKE);
-//        typeEn = "KEJI_TONG_XIN";
-//        typeCn = ContEtfTypeName.KEJI_TONG_XIN;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_NEW_CAR);
-//        typeEn = "KEJI_NEW_CAR";
-//        typeCn = ContEtfTypeName.KEJI_NEW_CAR;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_NEW_ENERGY);
-//        typeEn = "KEJI_NEW_ENERGY";
-//        typeCn = ContEtfTypeName.KEJI_NEW_ENERGY;
-
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_HK);
-//        typeEn = "KEJI_HK";
-//        typeCn = ContEtfTypeName.KEJI_HK;
-
-
-        // 消费
-//        condition.setLikeNameList(XIAOFEI_HK);
-
-//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_WINE);
-//        typeEn = "XIAOFEI_WINE";
-//        typeCn = ContEtfTypeName.XIAOFEI_WINE;
-
-//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_COMMON);
-//        condition.setNotLikeNameList(ContEtfNameKey.XIAOFEI_COMMON_NOLIKE);
-//        typeEn = "XIAOFEI_COMMON";
-//        typeCn = ContEtfTypeName.XIAOFEI_COMMON;
-
-//        condition.setLikeNameList(ContEtfNameKey.XIAOFEI_MEDIA);
-//        typeEn = "XIAOFEI_MEDIA";
-//        typeCn = ContEtfTypeName.XIAOFEI_MEDIA;
-
-        // 金融
-//        condition.setNotLikeNameList(JINRONG);
-//        condition.setLikeNameList(JINRONG_BANK);
-//        condition.setLikeNameList(JINRONG_FANGDICHAN);
-//        condition.setLikeNameList(ContEtfNameKey.JINRONG_ZHENGQUAN);
-//        condition.setNotLikeNameList(ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE);
-//        typeEn = "JINRONG_ZHENGQUAN";
-//        typeCn = ContEtfTypeName.JINRONG_ZHENGQUAN;
-
-//        condition.setLikeNameList(ContEtfNameKey.JINRONG_CASH);
-//        typeEn = "JINRONG_CASH";
-//        typeCn = ContEtfTypeName.JINRONG_CASH;
-
-//        condition.setLikeNameList(JINRONG_COMMON);
-//        condition.setLikeNameList(ContEtfNameKey.JINRONG_GOLD);
-//        condition.setNotLikeNameList(ContEtfNameKey.JINRONG_GOLD_NOLIKE);
-
-//        typeEn = "JINRONG_GOLD";
-//        typeCn = ContEtfTypeName.JINRONG_GOLD;
-//        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-
-        // 医疗
-//        condition.setLikeNameList(ContEtfNameKey.YILIAO_COMMON);
-//        typeEn = "YILIAO_COMMON";
-//        typeCn = ContEtfTypeName.YILIAO_COMMON;
-
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_USA);
-//        typeEn = "INDEX_CN_NOT_USA";
-//        typeCn = ContEtfTypeName.INDEX_CN_NOT_USA;
-
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT);
-//        typeEn = "INDEX_CN_NOT";
-//        typeCn = ContEtfTypeName.INDEX_CN_NOT;
-
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_BIG);
-//        condition.setNotLikeNameList(INDEX_CN_BIG_NOLIKE);
-//        typeEn = "INDEX_CN_BIG";
-//        typeCn = ContEtfTypeName.INDEX_CN_BIG;
-
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_HK);
-//        typeEn = "INDEX_HK";
-//        typeCn = ContEtfTypeName.INDEX_HK;
-
-//        condition.setLikeNameList(INDEX_300);
-//        condition.setNotLikeNameList(INDEX_300_NOLIKE);
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_688);
-//        typeEn = "INDEX_688";
-//        typeCn = ContEtfTypeName.INDEX_688;
-//        condition.setLikeNameList(INDEX_CN_1000);
-//        condition.setNotLikeNameList(INDEX_CN_NOT);
-
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_CITY);
-//        typeEn = "INDEX_CN_CITY";
-//        typeCn = ContEtfTypeName.INDEX_CN_CITY;
-
-//        condition.setLikeNameList(ZIYUAN_OIL);
-//        condition.setLikeNameList(ZIYUAN_NONGYE);
-//        condition.setLikeNameList(ZIYUAN_CAILIAO);
-//        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_XIYOU);
-//        typeEn = "ZIYUAN_XIYOU";
-//        typeCn = ContEtfTypeName.ZIYUAN_XIYOU;
-
-//        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_COMMON);
-//        condition.setNotLikeNameList(ContEtfNameKey.ZIYUAN_COMMON_NOLIKE);
-//        typeEn = "ZIYUAN_COMMON";
-//        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
-//
-        List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-
-
-        if (etfListLikeName == null) {
-            System.out.println("数据为null");
-        }
-        int size6 = 6;
-        int SIZE_10 = 10;
-        int SIZE_22 = 22;
-        int num = 0;//序号
-        for (EtfAdrCountVo vo : etfListLikeName) {
-            StringBuffer sb = new StringBuffer();
-
-            sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), size6)).append("\"");
-            sb.append(", \"" + StockUtil.formatStName(typeCn, SIZE_22) + "\");");
-//            sb.append(", \"" + StockUtil.formatStName(vo.getF14(), SIZE_22) + "\");");
-            sb.append("//");
-            sb.append(StockUtil.formatStName(vo.getF14(), SIZE_22));
-            sb.append(StockUtil.formatStName("市值：", size6));
-            BigDecimal marketValue = null;
-            if (vo.getF20() != null) {
-                marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
-            }
-            sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
-            sb.append(StockUtil.formatStName("累涨：", size6));
-            if (vo.getADR_UP_SUM_1_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-
-            sb.append(StockUtil.formatInt(++num, size6));
-            System.out.println(sb);
-        }
-    }
-
-    /**
      * ETF涨幅统计：更新最近交易日的涨幅，最近3日
      *
      * @param condition 条件
@@ -879,6 +671,12 @@ public class EtfControl {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
+
+        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        if (!date.equals(today)) {
+            System.out.println("注意！！！非今日数据:" + date);
+            return;
+        }
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         //1、查询etf列表
