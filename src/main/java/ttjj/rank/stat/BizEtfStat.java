@@ -4,6 +4,7 @@ import org.springframework.util.StopWatch;
 import ttjj.dao.BizRankDao;
 import ttjj.dto.*;
 import ttjj.service.BizService;
+import ttjj.service.EtfService;
 import ttjj.service.KlineService;
 import ttjj.service.StockService;
 import utils.ContMapEtf;
@@ -406,7 +407,7 @@ public class BizEtfStat {
         List<RankBizDataDiff> bizList = new ArrayList<>();
         int maxCount = 100;//最多查询次数
         for (int i = 1; i <= maxCount; i++) {
-            List<RankBizDataDiff> curPageEtfList = BizService.listEtf(i, NUM_MAX_99);//查询列表
+            List<RankBizDataDiff> curPageEtfList = EtfService.listEtfFromHttp(i, NUM_MAX_99);//查询列表
             if (curPageEtfList.size() > 0) {
 //                System.out.println("当前页查询个数：" + curPageEtfList.size());
                 bizList.addAll(curPageEtfList);

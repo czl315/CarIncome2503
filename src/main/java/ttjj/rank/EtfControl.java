@@ -50,7 +50,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
 //        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
@@ -1244,7 +1244,7 @@ public class EtfControl {
         List<RankBizDataDiff> etfList = new ArrayList<>();
         int maxCount = 100;//最多查询次数
         for (int i = 1; i <= maxCount; i++) {
-            List<RankBizDataDiff> curPageEtfList = BizService.listEtf(i, NUM_MAX_99);//查询列表
+            List<RankBizDataDiff> curPageEtfList = EtfService.listEtfFromHttp(i, NUM_MAX_99);//查询列表
             if (curPageEtfList.size() > 0) {
 //                System.out.println("当前页查询个数：" + curPageEtfList.size());
                 etfList.addAll(curPageEtfList);
