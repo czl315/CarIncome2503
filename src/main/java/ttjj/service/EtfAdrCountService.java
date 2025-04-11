@@ -146,7 +146,7 @@ public class EtfAdrCountService {
 //        if(isShowLog){
 //            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
 //        }
-        List<EtfAdrCountVo> rs = EtfAdrCountDao.listStAdrCount(condition);
+        List<EtfAdrCountVo> rs = EtfAdrCountDao.findEtfList(condition);
         if(isShowLog){
             System.out.println(methodName  + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2,BigDecimal.ROUND_HALF_UP));
         }

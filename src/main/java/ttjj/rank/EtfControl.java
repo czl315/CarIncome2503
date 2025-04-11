@@ -57,10 +57,11 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+//
+//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
-        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 
 //        updateNetHis();
 
@@ -100,6 +101,7 @@ public class EtfControl {
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
+//        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
         condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {

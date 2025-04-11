@@ -74,11 +74,11 @@ public class EtfAdrCountDao {
      * @param condition
      * @return
      */
-    public static List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition) {
+    public static List<EtfAdrCountVo> findEtfList(CondStockAdrCount condition) {
         SqlSession session = sqlSessionFactory.openSession();
         List<EtfAdrCountVo> rs = null;
         try {
-            rs = session.selectList("ttjj.dao.mapper.EtfAdrCountMapper.listStAdrCount", condition);
+            rs = session.selectList("ttjj.dao.mapper.EtfAdrCountMapper.findEtfList", condition);
             session.commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());

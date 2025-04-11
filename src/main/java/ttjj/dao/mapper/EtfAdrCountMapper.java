@@ -294,7 +294,7 @@ public interface EtfAdrCountMapper {
             "        LIMIT #{limitCount} ",
             "       </if> ",
             "</script>"})
-    List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition);
+    List<EtfAdrCountVo> findEtfList(CondStockAdrCount condition);
 
 
     /**
