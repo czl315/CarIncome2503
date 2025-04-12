@@ -3,6 +3,7 @@ package ttjj.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ttjj.db.EtfAdrCount;
+import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 
@@ -74,7 +75,7 @@ public class EtfAdrCountDao {
      * @param condition
      * @return
      */
-    public static List<EtfAdrCountVo> findEtfList(CondStockAdrCount condition) {
+    public static List<EtfAdrCountVo> findEtfList(CondEtfAdrCount condition) {
         SqlSession session = sqlSessionFactory.openSession();
         List<EtfAdrCountVo> rs = null;
         try {

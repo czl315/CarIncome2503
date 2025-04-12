@@ -3,10 +3,7 @@ package ttjj.service;
 import com.alibaba.fastjson.JSON;
 import ttjj.dao.EtfAdrCountDao;
 import ttjj.db.EtfAdrCount;
-import ttjj.dto.CondStockAdrCount;
-import ttjj.dto.EtfAdrCountVo;
-import ttjj.dto.Kline;
-import ttjj.dto.StockAdrCountVo;
+import ttjj.dto.*;
 import utils.DateUtil;
 
 import java.math.BigDecimal;
@@ -139,7 +136,7 @@ public class EtfAdrCountService {
      * @param condition condition
      * @return rs
      */
-    public static List<EtfAdrCountVo> listStAdrCount(CondStockAdrCount condition) {
+    public static List<EtfAdrCountVo> findEtfList(CondEtfAdrCount condition) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据：查询列表";

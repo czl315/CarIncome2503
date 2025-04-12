@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import ttjj.db.EtfAdrCount;
+import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 
@@ -286,6 +287,9 @@ public interface EtfAdrCountMapper {
             "           f14 NOT LIKE CONCAT('%',#{item},'%') ",
             "       </foreach> ",
             "       </if> ",
+            "       <if test='maxAdrUpSumOrderStat != null'> ",
+            "       <![CDATA[ AND ADR_UP_SUM_ORDER_STAT <= #{maxAdrUpSumOrderStat} ]]> ",
+            "       </if> ",
 
             "       <if test='orderBy != null '> ",
             "        ORDER BY  ${orderBy} ",
@@ -294,7 +298,7 @@ public interface EtfAdrCountMapper {
             "        LIMIT #{limitCount} ",
             "       </if> ",
             "</script>"})
-    List<EtfAdrCountVo> findEtfList(CondStockAdrCount condition);
+    List<EtfAdrCountVo> findEtfList(CondEtfAdrCount condition);
 
 
     /**

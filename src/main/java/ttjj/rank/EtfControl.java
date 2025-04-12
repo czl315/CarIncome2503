@@ -58,7 +58,8 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //
-        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -78,6 +79,159 @@ public class EtfControl {
     }
 
     /**
+     * 查询每个类型涨幅排序头部的前n个
+     * @param date 日期
+     */
+    private static void findTypeTop(String date) {
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("3");//涨序排序前n个限定
+
+        int num = 0;//序号
+        // 1、查询数据
+        CondEtfAdrCount condition = new CondEtfAdrCount();
+        condition.setDate(date);
+//        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
+//        condition.setType_name(INDEX_CN_NOT_USA);
+//        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
+//        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
+        condition.setMaxAdrUpSumOrderStat(limitAdrUpSumOrderStat);
+        condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        if (stockAdrCountList == null) {
+            System.out.println("数据为null");
+            return;
+        }
+        System.out.println();
+        System.out.println("查询超过均线列表：日期：" + date);
+
+        handlerShowHead();//首行标题信息
+
+        for (EtfAdrCountVo vo : stockAdrCountList) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(StockUtil.formatStName(vo.getF14(), SIZE_22));
+            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
+            BigDecimal marketValue = null;
+            if (vo.getF20() != null) {
+                marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
+            }
+            sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
+
+            if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_40_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_20_40() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_20() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_10() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_2() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_1() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            if (vo.getLatestAdr_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getLatestAdr_2() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getLatestAdr_1() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getF3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getF3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_10));
+
+            sb.append(StockUtil.formatInt(++num, SIZE_6));
+            System.out.println(sb);
+
+
+        }
+    }
+
+    /**
      * 查询数据根据日期，按照涨幅倒序
      * 过滤1：涨序排序前n的数据
      * 过滤2：每个类型限定n个
@@ -87,23 +241,23 @@ public class EtfControl {
     private static void findByDateOrderByDescAdr(String date) {
         //过滤1：涨序排序前n的数据
         boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
-        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("5");//涨序排序前n个限定
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("10");//涨序排序前n个限定
 
         //过滤2：每个类型限定n个
         boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
-        int showTypeLimitCount = 2;//限定类型个数
+        int showTypeLimitCount = 3;//限定类型个数
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
 
         int num = 0;//序号
         // 1、查询数据
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
 //        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
         condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
             return;
@@ -281,14 +435,14 @@ public class EtfControl {
     private static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin) {
         int num = 0;//序号
         // 1、查询数据
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setUpMaKltOrList(asList);
         condition.setADR_UP_SUM_1_60(adrSum60PctMin);
         condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
             return;
@@ -474,10 +628,10 @@ public class EtfControl {
         String date = "2025-03-17";
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         // 1、查询历史数据
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setType_name(INDEX_CN_NOT_USA);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         for (EtfAdrCountVo etfAdrCountVo : stockAdrCountList) {
             String zqdm = etfAdrCountVo.getF12();
             String zqmc = etfAdrCountVo.getF14();
@@ -934,7 +1088,7 @@ public class EtfControl {
      * @param stockAdrCountList 需要更新的列表数据
      * @param stockAdrCountCond 条件
      */
-    public static void updateUpMa(String maDate, List<EtfAdrCountVo> stockAdrCountList, CondStockAdrCount stockAdrCountCond) {
+    public static void updateUpMa(String maDate, List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount stockAdrCountCond) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "更新-突破均线：";
@@ -1320,10 +1474,10 @@ public class EtfControl {
         String methodName = "更新-上涨之和排序-";
         int rs = 0;
         //查询股票列表-根据板块
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setType_name(bizName);
-        List<EtfAdrCountVo> stList = EtfAdrCountService.listStAdrCount(condition);
+        List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
 
         //排序
         if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1.equals(dbField)) {
@@ -1422,10 +1576,10 @@ public class EtfControl {
         String methodName = "更新上涨累计排序的统计数值";
         int rs = 0;
         //查询股票列表-根据板块
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setType_name(bizName);
-        List<EtfAdrCountVo> stList = EtfAdrCountService.listStAdrCount(condition);
+        List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
         for (EtfAdrCountVo etfAdrCountVo : stList) {
 //            BigDecimal adr_up_sum_order_1_3 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_3();

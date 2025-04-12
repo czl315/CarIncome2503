@@ -1,5 +1,6 @@
 package ttjj.rank.stat.schedule;
 
+import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 import ttjj.dto.RankBizDataDiff;
@@ -117,11 +118,11 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             try {
-                CondStockAdrCount condition = new CondStockAdrCount();
+                CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
                 condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-                List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+                List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
                 EtfControl.updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
             } catch (Exception e) {
                 e.printStackTrace();
@@ -133,9 +134,9 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             try {
-                CondStockAdrCount condition = new CondStockAdrCount();
+                CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
-                List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
+                List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
                 EtfControl.updateNetArea(date, stockAdrCountList);//更新-价格区间
             } catch (Exception e) {
                 e.printStackTrace();
