@@ -22,7 +22,6 @@ public class ContentEtf {
         mapEtfKeJi.put("515030", "新能源车ETF");//515030	新能源车ETF	96.78       515700	新能车ETF	57.64
 //        mapEtfKeJi.put("515000", "科技ETF");//515000	科技ETF	49.63
         mapEtfKeJi.put("515790", "光伏ETF");//515790	光伏ETF	142.07
-//        mapEtfKeJi.put("159819", "人工智能ETF");//159819	人工智能ETF	21.60
         mapEtfKeJi.put("515050", "5GETF");//159994	5GETF	32.40   515050	5GETF	143.85
 //        mapEtfKeJi.put("515880", "通信ETF");//515880	通信ETF	27.50
 

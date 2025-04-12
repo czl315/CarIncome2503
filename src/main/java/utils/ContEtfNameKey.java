@@ -141,23 +141,6 @@ public class ContEtfNameKey {
 //        showSqlNameLikeNot(INDEX_688);
 
 //        showSqlNameLikeNot(KEJI_XIN_PIAN);
-//        showSqlNameLikeNot(KEJI_RUAN_JIAN);
-//        showSqlNameLikeNot(KEJI_GONG_YE);
-//        showSqlNameLikeNot(JINRONG_ZHENGQUAN);
-//        showSqlNameLikeNot(INDEX_HK);
-//        showSqlNameLikeNot(INDEX_688);
-//        showSqlNameLikeNot(YILIAO);
-//        showSqlNameLikeNot(INDEX_300);
-//        showSqlNameLikeNot(INDEX_CN_1000);
-//        showSqlNameLikeNot(INDEX_CN_CITY);
-//        showSqlNameLikeNot(INDEX_CN_NOT);
-//        showSqlNameLikeNot(JINRONG_FANGDICHAN);
-//        showSqlNameLikeNot(KEJI_JUNGONG);
-//        showSqlNameLikeNot(ZIYUAN);
-//        showSqlNameLikeNot(KEJI_NEW_CAR);
-//        showSqlNameLikeNot(KEJI_NEW_ENERGY);
-//        showSqlNameLikeNot(INDEX_CN_BIG);
-//        showSqlNameLikeNot(JINRONG_CASH);
     }
 
     /**

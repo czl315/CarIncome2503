@@ -32,12 +32,12 @@ import static utils.Content.*;
  */
 public class EtfControl {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-09";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-11";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
-            return;
+//            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
@@ -50,7 +50,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
 //        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.listStAdrCount(condition);//查询列表-根据条件
@@ -58,7 +58,7 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //
-//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -676,7 +676,7 @@ public class EtfControl {
 
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
-            System.out.println("注意！！！非今日数据:" + date);
+            System.out.println("注意！！！非今日数据，不更新数据:" + date);
             return;
         }
 
@@ -754,9 +754,9 @@ public class EtfControl {
                 entity.setMinPct(minPct);
             }
 
-//            if(code.equals("562550")){
-//                System.out.println("特定代码："+code);
-//            }
+            if(code.equals("159216")){
+                System.out.println("特定代码："+code);
+            }
 
             //更新类型
             String type = ETF_All.get(code);
