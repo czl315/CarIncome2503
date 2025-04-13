@@ -80,6 +80,7 @@ public class EtfControl {
 
     /**
      * 查询每个类型涨幅排序头部的前n个
+     *
      * @param date 日期
      */
     private static void findTypeTop(String date) {
@@ -828,10 +829,16 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
 
+        boolean isUpdateNoToday = false;//非今日数据是否更新
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
-            System.out.println("注意！！！非今日数据，不更新数据:" + date);
-            return;
+            if (isUpdateNoToday) {
+                System.out.println("注意！！！非今日数据，也更新数据:" + date);
+//            return;
+            } else {
+                System.out.println("非今日数据，不再更新数据:" + date);
+                return;
+            }
         }
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
@@ -908,9 +915,9 @@ public class EtfControl {
                 entity.setMinPct(minPct);
             }
 
-            if(code.equals("159216")){
-                System.out.println("特定代码："+code);
-            }
+//            if (code.equals("159216")) {
+//                System.out.println("特定代码：" + code);
+//            }
 
             //更新类型
             String type = ETF_All.get(code);

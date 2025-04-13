@@ -75,7 +75,6 @@ public class ContMapEtfAll {
         ZIYUAN_COMMON.put("159761", "资源-通用             ");//新材料50ETF           市值：1.48      累涨：                                                            2
         ZIYUAN_COMMON.put("159703", "资源-通用             ");//新材料ETF             市值：0.56      累涨：                                                            3
         ZIYUAN_COMMON.put("562850", "资源-通用             ");//央企能源ETF           市值：1.42      累涨：                                                            4
-        ZIYUAN_COMMON.put("588010", "资源-通用             ");//科创新材料ETF         市值：2.60      累涨：                                                            5
         ZIYUAN_COMMON.put("561330", "资源-通用             ");//矿业ETF               市值：0.79      累涨：                                                            6
         ZIYUAN_COMMON.put("561260", "资源-通用             ");//能源ETF               市值：0.85      累涨：                                                            7
         ZIYUAN_COMMON.put("510170", "资源-通用             ");//大宗商品ETF           市值：1.68      累涨：                                                            8
@@ -89,7 +88,6 @@ public class ContMapEtfAll {
         ZIYUAN_COMMON.put("516360", "资源-通用             ");//新材料ETF             市值：0.59      累涨：                                                            16
         ZIYUAN_COMMON.put("159870", "资源-通用             ");//化工ETF               市值：17.44     累涨：                                                            17
         ZIYUAN_COMMON.put("159930", "资源-通用             ");//能源ETF               市值：3.14      累涨：                                                            18
-        ZIYUAN_COMMON.put("588160", "资源-通用             ");//科创材料ETF           市值：1.50      累涨：                                                            19
         ZIYUAN_COMMON.put("516020", "资源-通用             ");//化工ETF               市值：4.85      累涨：                                                            20
         ZIYUAN_COMMON.put("159985", "资源-通用             ");//豆粕ETF               市值：28.21     累涨：                                                            21
         ZIYUAN_COMMON.put("516120", "资源-通用             ");//化工50ETF             市值：1.98      累涨：                                                            22
