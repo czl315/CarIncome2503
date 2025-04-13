@@ -40,7 +40,7 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             try {
-                CondStockAdrCount condition = new CondStockAdrCount();
+                CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
                 EtfControl.saveOrUpdateListNetLastDay(condition, date);
                 jobSeconds++;
@@ -54,7 +54,7 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             try {
-                CondStockAdrCount condition = new CondStockAdrCount();
+                CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
                 EtfControl.updateLatestDayAdr(condition, date);
             } catch (Exception e) {

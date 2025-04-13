@@ -733,6 +733,14 @@ public class Content {
      */
     public static String ORDER_FIELD_ADR_UP_SUM_1_40 = "ADR_UP_SUM_1_40";
     /**
+     * ORDER_FIELD_ADR_UP_SUM_40_60
+     */
+    public static String ORDER_FIELD_ADR_UP_SUM_40_60 = "ADR_UP_SUM_40_60";
+    /**
+     * ORDER_FIELD_ADR_UP_SUM_20_40
+     */
+    public static String ORDER_FIELD_ADR_UP_SUM_20_40 = "ADR_UP_SUM_20_40";
+    /**
      * ORDER_FIELD_ADR_UP_SUM_1_20
      */
     public static String ORDER_FIELD_ADR_UP_SUM_1_20 = "ADR_UP_SUM_1_20";
@@ -744,6 +752,10 @@ public class Content {
      *  ADR_UP_SUM_1_5
      */
     public static String ORDER_FIELD_ADR_UP_SUM_1_5 = "ADR_UP_SUM_1_5";
+    /**
+     *
+     */
+    public static String ORDER_FIELD_ADR_UP_SUM_1_3 = "ADR_UP_SUM_1_3";
 
 
     /**
