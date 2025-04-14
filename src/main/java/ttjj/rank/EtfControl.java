@@ -8,9 +8,7 @@ import ttjj.service.EtfAdrCountService;
 import ttjj.service.EtfService;
 import ttjj.service.KlineService;
 import ttjj.service.StockService;
-import utils.Content;
-import utils.DateUtil;
-import utils.StockUtil;
+import utils.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -63,7 +61,7 @@ public class EtfControl {
         updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
-//        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
+        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -229,6 +227,15 @@ public class EtfControl {
             sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_10));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
+
+            //均线百分比
+            BigDecimal curAmt = vo.getF2();
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_102()).divide(vo.getMA_NET_60_102(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_101()).divide(vo.getMA_NET_60_101(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_60()).divide(vo.getMA_NET_60_60(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_30()).divide(vo.getMA_NET_60_30(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_15()).divide(vo.getMA_NET_60_15(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+
             System.out.println(sb);
 
 
@@ -406,8 +413,7 @@ public class EtfControl {
 
             //均线百分比
             BigDecimal curAmt = vo.getF2();
-            BigDecimal curMaAmt102 = vo.getMA_NET_60_102();
-            sb.append(StockUtil.formatDouble(curAmt.subtract(curMaAmt102).divide(curMaAmt102, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_102()).divide(vo.getMA_NET_60_102(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
             sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_101()).divide(vo.getMA_NET_60_101(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
             sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_60()).divide(vo.getMA_NET_60_60(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
             sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_30()).divide(vo.getMA_NET_60_30(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
@@ -780,7 +786,7 @@ public class EtfControl {
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         //1、查询etf列表
-        List<RankBizDataDiff> etfList = listEtfListLastDay();
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);
         for (RankBizDataDiff etf : etfList) {
             int days = 4;
             //市值过滤
@@ -842,6 +848,7 @@ public class EtfControl {
      * 保存或更新ETF涨幅次数-批量更新基础信息
      * 如果更新失败，可能是没有插入，执行一次插入操作
      * 更新类型
+     * 过滤类型：为了节省效率，不再更新类型：指数-国内城市；金融-现金
      *
      * @param condition 市值限定
      * @param date      日期
@@ -867,6 +874,8 @@ public class EtfControl {
         //1、查询etf列表
         List<RankBizDataDiff> etfList = listEtfListLastDay();
         for (RankBizDataDiff etf : etfList) {
+            String code = etf.getF12();
+
             //市值过滤
             BigDecimal marketValue = etf.getF20();
             BigDecimal mvMin = condition.getMvMin();
@@ -875,10 +884,26 @@ public class EtfControl {
                 continue;
             }
 
-            String code = etf.getF12();
             EtfAdrCount entity = new EtfAdrCount();
             entity.setDate(date);
             entity.setF12(code);
+
+            //更新类型
+            String type = ContMapEtfAll.ETF_All.get(code);
+            if (type != null) {
+                type = type.replace(" ", "");
+                entity.setType_name(type);
+            }
+
+            //过滤类型：不更新类型：指数-国内城市；金融-现金
+            if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
+                continue;
+            }
+            if (ContMapEtfAll.JINRONG_CASH.containsKey(code)) {
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
+                continue;
+            }
 
             if (etf.getF2() != null) {
                 entity.setF2(etf.getF2());
@@ -941,12 +966,6 @@ public class EtfControl {
 //                System.out.println("特定代码：" + code);
 //            }
 
-            //更新类型
-            String type = ETF_All.get(code);
-            if (type != null) {
-                type = type.replace(" ", "");
-                entity.setType_name(type);
-            }
 
             etfAdrCountList.add(entity);
         }
@@ -1465,8 +1484,20 @@ public class EtfControl {
         }
         List<RankBizDataDiff> etfListLimit = new ArrayList<>();
         for (RankBizDataDiff etf : etfList) {
-            BigDecimal marketValue = etf.getF20();
+
+            //过滤类型：不更新类型：指数-国内城市；金融-现金
+            String code = etf.getF12();
+            if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
+                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
+                continue;
+            }
+            if (ContMapEtfAll.JINRONG_CASH.containsKey(code)) {
+                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
+                continue;
+            }
+
             //市值过滤
+            BigDecimal marketValue = etf.getF20();
             if (marketValue == null) {
                 etfListLimit.add(etf);
                 continue;
