@@ -116,7 +116,7 @@ public class EtfAdrCountService {
      * @param condition condition
      * @return rs
      */
-    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondStockAdrCount condition) {
+    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondEtfAdrCount condition) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据：查询列表，模糊查询：名称列表";

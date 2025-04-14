@@ -1,5 +1,6 @@
 package utils;
 
+import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 import ttjj.rank.EtfControl;
@@ -1502,7 +1503,7 @@ public class ContMapEtfAll {
     private static void findByTypeName(String date) {
         String typeEn = "";
         String typeCn = "";
-        CondStockAdrCount condition = new CondStockAdrCount();
+        CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
 

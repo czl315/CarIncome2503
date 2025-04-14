@@ -94,7 +94,7 @@ public class EtfAdrCountDao {
      * @param condition
      * @return
      */
-    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondStockAdrCount condition) {
+    public static List<EtfAdrCountVo> listEtfAdrCountLikeName(CondEtfAdrCount condition) {
         SqlSession session = sqlSessionFactory.openSession();
         List<EtfAdrCountVo> rs = null;
         try {
