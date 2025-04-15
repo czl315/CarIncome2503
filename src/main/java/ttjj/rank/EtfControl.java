@@ -35,7 +35,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-11";
+//        String date = "2025-04-14";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -61,7 +61,7 @@ public class EtfControl {
         updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
-        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
+//        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -895,7 +895,7 @@ public class EtfControl {
                 entity.setType_name(type);
             }
 
-            //过滤类型：不更新类型：指数-国内城市；金融-现金
+            //过滤类型：不更新类型：
             if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
 //                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
                 continue;
@@ -1479,24 +1479,26 @@ public class EtfControl {
         int countMinMvLimit = 0;
         int countMaxMvLimit = 0;
         List<RankBizDataDiff> etfList = listEtfListLastDay();
-        if (minMv == null && maxMv == null) {
-            return etfList;
-        }
+
         List<RankBizDataDiff> etfListLimit = new ArrayList<>();
         for (RankBizDataDiff etf : etfList) {
 
-            //过滤类型：不更新类型：指数-国内城市；金融-现金
+            //过滤类型：不更新类型：
             String code = etf.getF12();
             if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
-                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
                 continue;
             }
             if (ContMapEtfAll.JINRONG_CASH.containsKey(code)) {
-                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
                 continue;
             }
 
             //市值过滤
+            if (minMv == null && maxMv == null) {
+                etfListLimit.add(etf);
+                continue;
+            }
             BigDecimal marketValue = etf.getF20();
             if (marketValue == null) {
                 etfListLimit.add(etf);

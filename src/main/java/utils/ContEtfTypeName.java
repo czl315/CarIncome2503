@@ -91,7 +91,7 @@ public class ContEtfTypeName {
         INDEX.add(INDEX_CN_BIG);
         INDEX.add(INDEX_CN_NOT);
         INDEX.add(INDEX_CN_NOT_USA);
-        INDEX.add(INDEX_CN_CITY);
+//        INDEX.add(INDEX_CN_CITY);
     }
 
     /**
@@ -125,7 +125,7 @@ public class ContEtfTypeName {
         JINRONG.add(JINRONG_GOLD);
         JINRONG.add(JINRONG_BANK);
         JINRONG.add(JINRONG_FANGDICHAN);
-        JINRONG.add(JINRONG_CASH);
+//        JINRONG.add(JINRONG_CASH);
     }
 
     public static List ALL = new ArrayList();
