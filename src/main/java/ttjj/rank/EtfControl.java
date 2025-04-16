@@ -260,7 +260,7 @@ public class EtfControl {
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
 
         //排序字段
-        String orderField = ORDER_FIELD_ADR_UP_SUM_1_60;//ORDER_FIELD_F3
+        String orderField = ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 
         int num = 0;//序号
         // 1、查询数据

@@ -150,6 +150,11 @@ public class ContMapEtfAll {
         XIAOFEI_COMMON.put("516560", "消费-通用             ");//养老ETF               市值：1.14      累涨：23.24     8.67      6.71      8.64      3.78      1.39      1
         XIAOFEI_COMMON.put("516530", "消费-通用             ");//物流快递ETF           市值：0.71      累涨：18.50     6.53      7.61      5.63      2.43      1.27      1
         XIAOFEI_COMMON.put("516910", "消费-通用             ");//物流ETF               市值：0.56      累涨：17.85     6.39      7.37      5.19      2.30      1.10      2
+        XIAOFEI_COMMON.put("159996", "消费-通用             ");//家电ETF               市值：16.64     累涨：34.63     10.38     15.76     10.10     6.03      2.86      1
+        XIAOFEI_COMMON.put("561120", "消费-通用             ");//家电ETF               市值：1.12      累涨：34.03     10.10     15.84     9.57      5.48      2.81      2
+        XIAOFEI_COMMON.put("159328", "消费-通用             ");//家电ETF易方达         市值：1.28      累涨：30.95     9.93      14.13     8.98      4.74      2.60      3
+        XIAOFEI_COMMON.put("560880", "消费-通用             ");//家电ETF龙头           市值：4.52      累涨：32.26     10.43     15.21     9.04      4.68      2.54      4
+        XIAOFEI_COMMON.put("159730", "消费-通用             ");//龙头家电ETF           市值：0.51      累涨：25.56     6.86      13.02     7.77      4.10      1.81      5
     }
 
     public static Map<String, String> XIAOFEI_HK = new HashMap<>();//消费-香港消费
@@ -201,11 +206,7 @@ public class ContMapEtfAll {
     public static Map<String, String> XIAOFEI_HOUSE = new HashMap<>();//消费-家电
 
     static {
-        XIAOFEI_HOUSE.put("159996", "消费-家电             ");//家电ETF               市值：16.64     累涨：34.63     10.38     15.76     10.10     6.03      2.86      1
-        XIAOFEI_HOUSE.put("561120", "消费-家电             ");//家电ETF               市值：1.12      累涨：34.03     10.10     15.84     9.57      5.48      2.81      2
-        XIAOFEI_HOUSE.put("159328", "消费-家电             ");//家电ETF易方达         市值：1.28      累涨：30.95     9.93      14.13     8.98      4.74      2.60      3
-        XIAOFEI_HOUSE.put("560880", "消费-家电             ");//家电ETF龙头           市值：4.52      累涨：32.26     10.43     15.21     9.04      4.68      2.54      4
-        XIAOFEI_HOUSE.put("159730", "消费-家电             ");//龙头家电ETF           市值：0.51      累涨：25.56     6.86      13.02     7.77      4.10      1.81      5
+
     }
 
     public static Map<String, String> XIAOFEI = new HashMap<>();
