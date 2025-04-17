@@ -92,7 +92,6 @@ public class ContMapEtfAll {
         ZIYUAN_COMMON.put("515210", "资源-通用             ");//钢铁ETF               市值：17.21     累涨：                                                            12
         ZIYUAN_COMMON.put("159981", "资源-通用             ");//能源化工ETF           市值：5.00      累涨：                                                            13
         ZIYUAN_COMMON.put("516220", "资源-通用             ");//化工龙头ETF           市值：1.21      累涨：                                                            14
-        ZIYUAN_COMMON.put("562590", "资源-通用             ");//半导体材料ETF         市值：3.47      累涨：                                                            15
         ZIYUAN_COMMON.put("516360", "资源-通用             ");//新材料ETF             市值：0.59      累涨：                                                            16
         ZIYUAN_COMMON.put("159870", "资源-通用             ");//化工ETF               市值：17.44     累涨：                                                            17
         ZIYUAN_COMMON.put("159930", "资源-通用             ");//能源ETF               市值：3.14      累涨：                                                            18
