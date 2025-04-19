@@ -8,7 +8,10 @@ import ttjj.service.EtfAdrCountService;
 import ttjj.service.EtfService;
 import ttjj.service.KlineService;
 import ttjj.service.StockService;
-import utils.*;
+import utils.ContMapEtfAll;
+import utils.Content;
+import utils.DateUtil;
+import utils.StockUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -246,6 +249,7 @@ public class EtfControl {
      * 查询数据根据日期，按照涨幅倒序
      * 过滤1：涨序排序前n的数据
      * 过滤2：每个类型限定n个
+     * 条件：特定类型
      *
      * @param date 日期
      * @param orderField 排序字段
@@ -260,6 +264,9 @@ public class EtfControl {
         int showTypeLimitCount = 2;//限定类型个数
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
 
+        //条件：特定类型
+        String typeName = null;//INDEX_HK
+
         int num = 0;//序号
         // 1、查询数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
@@ -269,6 +276,7 @@ public class EtfControl {
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
 //        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
         condition.setOrderBy(orderField + DB_DESC);
+        condition.setType_name(typeName);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
