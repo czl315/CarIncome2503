@@ -55,7 +55,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, JINRONG_GOLD);//1、查询etf列表
 //        updateUpSum(date, etfList);//更新-上涨之和
 //        updateUpSumOrder(date);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
@@ -259,9 +259,9 @@ public class EtfControl {
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("2"));//涨序排序前n的数据
-        condFiter.setShowCountTypeGroup(10);//每个类型限定n个
-        condFiter.setMaxNetAreaDay5( new BigDecimal("20"));//净值区间最高限定-5日  null    new BigDecimal("20")
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+        condFiter.setShowCountTypeGroup(5);//每个类型限定n个
+        condFiter.setMaxNetAreaDay5(new BigDecimal("25"));//净值区间最高限定-5日  null    new BigDecimal("20")
 
 
         // 查询数据
@@ -1529,21 +1529,12 @@ public class EtfControl {
     /**
      * 查询etf列表:市值过滤
      *
-     * @param minMv 最低市值
+     * @param minMv      最低市值
+     * @param maxMv      最高市值
+     * @param spTypeName 特定类型
      * @return
      */
-    public static List<RankBizDataDiff> listEtfListLastDay(BigDecimal minMv) {
-        return listEtfListLastDayByMarketValue(minMv, null);
-    }
-
-    /**
-     * 查询etf列表:市值过滤
-     *
-     * @param minMv 最低市值
-     * @param maxMv 最高市值
-     * @return
-     */
-    public static List<RankBizDataDiff> listEtfListLastDayByMarketValue(BigDecimal minMv, BigDecimal maxMv) {
+    public static List<RankBizDataDiff> listEtfListLastDayByMarketValue(BigDecimal minMv, BigDecimal maxMv, String spTypeName) {
         boolean isShowLog = false;
         int countMinMvLimit = 0;
         int countMaxMvLimit = 0;
@@ -1551,7 +1542,6 @@ public class EtfControl {
 
         List<RankBizDataDiff> etfListLimit = new ArrayList<>();
         for (RankBizDataDiff etf : etfList) {
-
             //过滤类型：不更新类型：
             String code = etf.getF12();
             if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
@@ -1564,31 +1554,47 @@ public class EtfControl {
             }
 
             //市值过滤
-            if (minMv == null && maxMv == null) {
-                etfListLimit.add(etf);
-                continue;
-            }
             BigDecimal marketValue = etf.getF20();
-            if (marketValue == null) {
-                etfListLimit.add(etf);
-                continue;
-            }
-            if (minMv != null && marketValue.compareTo(minMv) < 0) {
+            if (marketValue != null) {
+                if (minMv != null && marketValue.compareTo(minMv) < 0) {
 //                    System.out.println("市值低于限定");
-                countMinMvLimit++;
-                continue;
-            }
-            if (maxMv != null && marketValue.compareTo(maxMv) > 0) {
+                    countMinMvLimit++;
+                    continue;
+                }
+                if (maxMv != null && marketValue.compareTo(maxMv) > 0) {
 //                    System.out.println("市值高于限定");
-                countMaxMvLimit++;
+                    countMaxMvLimit++;
+                    continue;
+                }
+            }
+
+            //特定类型
+            String type = ContMapEtfAll.ETF_All.get(code);
+            if (type != null) {
+                type = type.replace(" ", "");
+            }
+            if (type != null && spTypeName != null && !type.equals(spTypeName)) {
+//                System.out.println("不匹配特定类型：限定类型：" + type + "：" + spTypeName);
                 continue;
             }
+
             etfListLimit.add(etf);
         }
         if (isShowLog) {
             System.out.println("查询etf列表,源数据个数：" + etfList.size() + "||" + "市值低于限定个数：" + countMinMvLimit + "||" + "市值高于限定个数：" + countMaxMvLimit + "||" + "市值过滤符合条件个数：" + etfListLimit.size() + ",校对：" + (countMinMvLimit + countMaxMvLimit + etfListLimit.size()) + "==" + etfList.size());
         }
         return etfListLimit;
+    }
+
+    /**
+     * 查询etf列表:市值过滤
+     *
+     * @param minMv 最低市值
+     * @param maxMv 最高市值
+     * @return
+     */
+    public static List<RankBizDataDiff> listEtfListLastDayByMarketValue(BigDecimal minMv, BigDecimal maxMv) {
+        return listEtfListLastDayByMarketValue(minMv, maxMv, null);
     }
 
     /**
