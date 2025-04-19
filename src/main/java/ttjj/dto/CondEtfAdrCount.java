@@ -150,6 +150,19 @@ public class CondEtfAdrCount extends EtfAdrCount {
      */
     private BigDecimal maxAdrUpSumOrderStat;
 
+    /**
+     * 每个类型限定n个
+     */
+    private Integer showCountTypeGroup;
+
+    public Integer getShowCountTypeGroup() {
+        return showCountTypeGroup;
+    }
+
+    public void setShowCountTypeGroup(Integer showCountTypeGroup) {
+        this.showCountTypeGroup = showCountTypeGroup;
+    }
+
     public BigDecimal getMaxAdrUpSumOrderStat() {
         return maxAdrUpSumOrderStat;
     }

@@ -255,17 +255,13 @@ public class EtfControl {
      * @param orderField 排序字段
      */
     private static void findByDateOrderByDescAdr(String date, String orderField) {
-        //过滤1：涨序排序前n的数据
-        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
-
-        //过滤2：每个类型限定n个
-        Integer showTypeLimitCount = 2;//每个类型限定n个
-
-        //过滤：净值区间最高限定-5日
-        BigDecimal areaMaxDay5 = new BigDecimal("20");
-
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
+
+        CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("2"));//涨序排序前n的数据
+        condFiter.setShowCountTypeGroup(10);//每个类型限定n个
+        condFiter.setMaxNetAreaDay5( new BigDecimal("20"));//净值区间最高限定-5日  null    new BigDecimal("20")
 
 
         // 查询数据
@@ -285,34 +281,33 @@ public class EtfControl {
 
         handlerShowHead();//首行标题信息
 
-        handlerShowEtfAdr(stockAdrCountList, limitAdrUpSumOrderStat, showTypeLimitCount, areaMaxDay5);//显示etf涨幅统计列表数据
+        handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
 
     }
 
     /**
      * 显示etf涨幅统计列表数据
      *
-     * @param stockAdrCountList      etf涨幅统计列表
-     * @param limitAdrUpSumOrderStat 涨序排序前n个限定
-     * @param showTypeLimitCount     每个类型限定n个
-     * @param areaMaxDay5
+     * @param stockAdrCountList etf涨幅统计列表
+     * @param condFiter         过滤条件
      */
-    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, BigDecimal limitAdrUpSumOrderStat, Integer showTypeLimitCount, BigDecimal areaMaxDay5) {
+    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
         int num = 0;//序号
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
         for (EtfAdrCountVo vo : stockAdrCountList) {
-            //过滤1：涨序排序前n的数据
-            if (vo.getADR_UP_SUM_ORDER_STAT() != null && limitAdrUpSumOrderStat != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(limitAdrUpSumOrderStat) > 0) {
-                continue;
-            }
-            //过滤2：每个类型限定n个
-            if (showTypeLimitCount != null && checkShowTypeLimit(vo, showTypeLimitCount, showTypeLimitCountMap)) {
-                continue;
-            }
-
-            //过滤：净值区间最高限定-5日
-            if (areaMaxDay5 != null && vo.getNET_AREA_DAY_5() != null && vo.getNET_AREA_DAY_5().compareTo(areaMaxDay5) > 0) {
-                continue;
+            if (condFiter != null) {
+                //过滤1：涨序排序前n的数据
+                if (vo.getADR_UP_SUM_ORDER_STAT() != null && condFiter.getMaxAdrUpSumOrderStat() != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(condFiter.getMaxAdrUpSumOrderStat()) > 0) {
+                    continue;
+                }
+                //过滤2：每个类型限定n个
+                if (condFiter.getShowCountTypeGroup() != null && checkShowTypeLimit(vo, condFiter.getShowCountTypeGroup(), showTypeLimitCountMap)) {
+                    continue;
+                }
+                //过滤：净值区间最高限定-5日
+                if (condFiter.getMaxNetAreaDay5() != null && vo.getNET_AREA_DAY_5() != null && vo.getNET_AREA_DAY_5().compareTo(condFiter.getMaxNetAreaDay5()) > 0) {
+                    continue;
+                }
             }
 
             StringBuffer sb = new StringBuffer();
