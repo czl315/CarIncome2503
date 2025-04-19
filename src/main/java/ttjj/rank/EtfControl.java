@@ -34,12 +34,12 @@ import static utils.Content.*;
  */
 public class EtfControl {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-14";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-18";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
-            return;
+//            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
 
@@ -51,14 +51,14 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
-        updateUpSum(date, etfList);//更新-上涨之和
-        updateUpSumOrder(date);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-        updateLatestDayAdr(condition, date);
-        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);//1、查询etf列表
+//        updateUpSum(date, etfList);//更新-上涨之和
+//        updateUpSumOrder(date);
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
+//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -252,7 +252,7 @@ public class EtfControl {
     private static void findByDateOrderByDescAdr(String date) {
         //过滤1：涨序排序前n的数据
         boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
-        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("10");//涨序排序前n个限定
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
 
         //过滤2：每个类型限定n个
         boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
@@ -845,21 +845,30 @@ public class EtfControl {
     }
 
     /**
-     * 保存或更新ETF涨幅次数-批量更新基础信息
-     * 如果更新失败，可能是没有插入，执行一次插入操作
-     * 更新类型
-     * 过滤类型：为了节省效率，不再更新类型：指数-国内城市；金融-现金
-     *
+     *保存或更新ETF涨幅次数,非今日数据默认不更新
      * @param condition 市值限定
      * @param date      日期
      * @return 结果
      */
     public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date) {
+        saveOrUpdateListNetLastDay(condition, date, false);
+    }
+
+    /**
+     * 保存或更新ETF涨幅次数-批量更新基础信息
+     * 如果更新失败，可能是没有插入，执行一次插入操作
+     * 更新类型
+     * 过滤类型：为了节省效率，不再更新类型：指数-国内城市；金融-现金
+     * @param condition       市值限定
+     * @param date            日期
+     * @param isUpdateNoToday 非今日数据是否更新
+     * @saveOrUpdateListNetLastDay
+     */
+    public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date, boolean isUpdateNoToday) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
 
-        boolean isUpdateNoToday = false;//非今日数据是否更新
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             if (isUpdateNoToday) {
@@ -896,14 +905,14 @@ public class EtfControl {
             }
 
             //过滤类型：不更新类型：
-            if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
+//            if (ContMapEtfAll.INDEX_CN_CITY.containsKey(code)) {
 //                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
-                continue;
-            }
-            if (ContMapEtfAll.JINRONG_CASH.containsKey(code)) {
+//                continue;
+//            }
+//            if (ContMapEtfAll.JINRONG_CASH.containsKey(code)) {
 //                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
-                continue;
-            }
+//                continue;
+//            }
 
             if (etf.getF2() != null) {
                 entity.setF2(etf.getF2());
