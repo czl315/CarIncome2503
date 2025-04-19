@@ -971,6 +971,7 @@ public class Content {
     }
 
     public static int SIZE_6 = 6;
+    public static int SIZE_8 = 8;
     public static int SIZE_10 = 10;
     public static int SIZE_16 = 16;
     public static int SIZE_22 = 22;

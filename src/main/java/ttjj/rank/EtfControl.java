@@ -18,7 +18,7 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static utils.ContEtfTypeName.ALL;
+import static utils.ContEtfTypeName.*;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
@@ -63,7 +63,7 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
-        findByDateOrderByDescAdr(date,ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -251,7 +251,7 @@ public class EtfControl {
      * 过滤2：每个类型限定n个
      * 条件：特定类型
      *
-     * @param date 日期
+     * @param date       日期
      * @param orderField 排序字段
      */
     private static void findByDateOrderByDescAdr(String date, String orderField) {
@@ -261,20 +261,18 @@ public class EtfControl {
 
         //过滤2：每个类型限定n个
         boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
-        int showTypeLimitCount = 2;//限定类型个数
+        int showTypeLimitCount = 20;//限定类型个数
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
 
         //条件：特定类型
-        String typeName = null;//INDEX_HK
+        String typeName = ZIYUAN_OIL;//INDEX_HK
 
-        int num = 0;//序号
+
         // 1、查询数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-//        condition.setType_name(INDEX_CN_NOT_USA);
-//        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
-//        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
+        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH,INDEX_HK));//过滤类型
         condition.setOrderBy(orderField + DB_DESC);
         condition.setType_name(typeName);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
@@ -287,6 +285,25 @@ public class EtfControl {
 
         handlerShowHead();//首行标题信息
 
+        handlerShowEtfAdr(stockAdrCountList);//显示etf涨幅统计列表数据
+
+    }
+
+    /**
+     * 显示etf涨幅统计列表数据
+     * @param stockAdrCountList etf涨幅统计列表
+     */
+    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList) {
+        //过滤1：涨序排序前n的数据
+        boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
+
+        //过滤2：每个类型限定n个
+        boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
+        int showTypeLimitCount = 20;//限定类型个数
+        Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
+
+        int num = 0;//序号
         for (EtfAdrCountVo vo : stockAdrCountList) {
             //过滤1：涨序排序前n的数据
             if (isFilterAdrUpSumOrderStat && vo.getADR_UP_SUM_ORDER_STAT() != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(limitAdrUpSumOrderStat) > 0) {
@@ -412,8 +429,8 @@ public class EtfControl {
             sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_10));
             sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_10));
             sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_6));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_6));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
 
@@ -429,9 +446,14 @@ public class EtfControl {
             sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30()), SIZE_10));
             sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15()), SIZE_10));
 
+            //净值区间
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_5(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_10(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_20(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_40(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_60(), SIZE_8));
+
             System.out.println(sb);
-
-
         }
     }
 
@@ -665,15 +687,24 @@ public class EtfControl {
         sbHead.append(StockUtil.formatStName("超周", SIZE_10));
         sbHead.append(StockUtil.formatStName("超日", SIZE_10));
         sbHead.append(StockUtil.formatStName("超60", SIZE_10));
-        sbHead.append(StockUtil.formatStName("超30", SIZE_10));
-        sbHead.append(StockUtil.formatStName("超15", SIZE_10));
+        sbHead.append(StockUtil.formatStName("超30", SIZE_6));
+        sbHead.append(StockUtil.formatStName("超15", SIZE_6));
 
         sbHead.append(StockUtil.formatStName("序号", SIZE_6));
+
         sbHead.append(StockUtil.formatStName("周线比", SIZE_10));
         sbHead.append(StockUtil.formatStName("日线比", SIZE_10));
         sbHead.append(StockUtil.formatStName("60分比", SIZE_10));
         sbHead.append(StockUtil.formatStName("30分比", SIZE_10));
         sbHead.append(StockUtil.formatStName("15分比", SIZE_10));
+
+        //净值区间
+        sbHead.append(StockUtil.formatStName("区间5", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间10", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间20", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间40", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间60", SIZE_8));
+
         System.out.println(sbHead);//首行标题信息
     }
 
