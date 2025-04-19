@@ -256,23 +256,23 @@ public class EtfControl {
      */
     private static void findByDateOrderByDescAdr(String date, String orderField) {
         //过滤1：涨序排序前n的数据
-        boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
         BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
 
         //过滤2：每个类型限定n个
-        boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
-        int showTypeLimitCount = 20;//限定类型个数
-        Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
+        Integer showTypeLimitCount = 2;//每个类型限定n个
+
+        //过滤：净值区间最高限定-5日
+        BigDecimal areaMaxDay5 = new BigDecimal("20");
 
         //条件：特定类型
-        String typeName = ZIYUAN_OIL;//INDEX_HK
+        String typeName = null;//INDEX_HK ZIYUAN_OIL
 
 
-        // 1、查询数据
+        // 查询数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH,INDEX_HK));//过滤类型
+        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH, INDEX_HK));//过滤类型
         condition.setOrderBy(orderField + DB_DESC);
         condition.setType_name(typeName);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
@@ -285,32 +285,33 @@ public class EtfControl {
 
         handlerShowHead();//首行标题信息
 
-        handlerShowEtfAdr(stockAdrCountList);//显示etf涨幅统计列表数据
+        handlerShowEtfAdr(stockAdrCountList, limitAdrUpSumOrderStat, showTypeLimitCount, areaMaxDay5);//显示etf涨幅统计列表数据
 
     }
 
     /**
      * 显示etf涨幅统计列表数据
-     * @param stockAdrCountList etf涨幅统计列表
+     *
+     * @param stockAdrCountList      etf涨幅统计列表
+     * @param limitAdrUpSumOrderStat 涨序排序前n个限定
+     * @param showTypeLimitCount     每个类型限定n个
+     * @param areaMaxDay5
      */
-    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList) {
-        //过滤1：涨序排序前n的数据
-        boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
-        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
-
-        //过滤2：每个类型限定n个
-        boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
-        int showTypeLimitCount = 20;//限定类型个数
-        Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
-
+    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, BigDecimal limitAdrUpSumOrderStat, Integer showTypeLimitCount, BigDecimal areaMaxDay5) {
         int num = 0;//序号
+        Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
         for (EtfAdrCountVo vo : stockAdrCountList) {
             //过滤1：涨序排序前n的数据
-            if (isFilterAdrUpSumOrderStat && vo.getADR_UP_SUM_ORDER_STAT() != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(limitAdrUpSumOrderStat) > 0) {
+            if (vo.getADR_UP_SUM_ORDER_STAT() != null && limitAdrUpSumOrderStat != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(limitAdrUpSumOrderStat) > 0) {
                 continue;
             }
             //过滤2：每个类型限定n个
-            if (isShowTypeLimit && checkShowTypeLimit(vo, showTypeLimitCount, showTypeLimitCountMap)) {
+            if (showTypeLimitCount != null && checkShowTypeLimit(vo, showTypeLimitCount, showTypeLimitCountMap)) {
+                continue;
+            }
+
+            //过滤：净值区间最高限定-5日
+            if (areaMaxDay5 != null && vo.getNET_AREA_DAY_5() != null && vo.getNET_AREA_DAY_5().compareTo(areaMaxDay5) > 0) {
                 continue;
             }
 
