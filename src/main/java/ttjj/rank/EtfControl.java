@@ -60,7 +60,7 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
-//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -413,16 +413,41 @@ public class EtfControl {
 
             //均线百分比
             BigDecimal curAmt = vo.getF2();
-            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_102()).divide(vo.getMA_NET_60_102(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_101()).divide(vo.getMA_NET_60_101(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_60()).divide(vo.getMA_NET_60_60(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_30()).divide(vo.getMA_NET_60_30(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(curAmt.subtract(vo.getMA_NET_60_15()).divide(vo.getMA_NET_60_15(), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+//            BigDecimal maPct = handlerMaPct(curAmt, vo.getMA_NET_60_102());
+////            if(maPct == null){
+////                System.out.println("价格null异常");
+////            }
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102()), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101()), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60()), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30()), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15()), SIZE_10));
 
             System.out.println(sb);
 
 
         }
+    }
+
+    /**
+     * 计算均线百分比
+     *
+     * @param curAmt
+     * @param maNet
+     * @return
+     */
+    private static BigDecimal handlerMaPct(BigDecimal curAmt, BigDecimal maNet) {
+        BigDecimal maPct = null;
+        if (curAmt == null) {
+//            System.out.println("当前价null");
+            return null;
+        }
+        if (maNet == null) {
+//            System.out.println("均线价null");
+            return null;
+        }
+        maPct = curAmt.subtract(maNet).divide(maNet, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+        return maPct;
     }
 
     /**
@@ -845,7 +870,8 @@ public class EtfControl {
     }
 
     /**
-     *保存或更新ETF涨幅次数,非今日数据默认不更新
+     * 保存或更新ETF涨幅次数,非今日数据默认不更新
+     *
      * @param condition 市值限定
      * @param date      日期
      * @return 结果
@@ -859,6 +885,7 @@ public class EtfControl {
      * 如果更新失败，可能是没有插入，执行一次插入操作
      * 更新类型
      * 过滤类型：为了节省效率，不再更新类型：指数-国内城市；金融-现金
+     *
      * @param condition       市值限定
      * @param date            日期
      * @param isUpdateNoToday 非今日数据是否更新
