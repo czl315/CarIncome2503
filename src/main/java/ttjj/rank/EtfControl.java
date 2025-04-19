@@ -60,7 +60,7 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
-        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findByDateOrderByDescAdr(date,ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -248,8 +248,9 @@ public class EtfControl {
      * 过滤2：每个类型限定n个
      *
      * @param date 日期
+     * @param orderField 排序字段
      */
-    private static void findByDateOrderByDescAdr(String date) {
+    private static void findByDateOrderByDescAdr(String date, String orderField) {
         //过滤1：涨序排序前n的数据
         boolean isFilterAdrUpSumOrderStat = true;///是否限定-涨序排序前n的数据
         BigDecimal limitAdrUpSumOrderStat = new BigDecimal("100");//涨序排序前n个限定
@@ -258,9 +259,6 @@ public class EtfControl {
         boolean isShowTypeLimit = true;//是否限定-每个类型限定n个
         int showTypeLimitCount = 2;//限定类型个数
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
-
-        //排序字段
-        String orderField = ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 
         int num = 0;//序号
         // 1、查询数据
