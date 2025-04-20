@@ -38,7 +38,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-10";
+        String date = "2025-04-15";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -257,7 +257,8 @@ public class EtfControl {
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
         //净值区间最高限定
-        BigDecimal maxNetAreaDay10 = new BigDecimal("30");
+        BigDecimal maxNetAreaDay10 = null;//new BigDecimal("30")
+        BigDecimal maxNetAreaDay20 = new BigDecimal("30");
 
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
         condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
@@ -271,12 +272,13 @@ public class EtfControl {
         condition.setOrderBy(orderField + DB_DESC);
         condition.setType_name(typeName);
         condition.setMaxNetAreaDay10(maxNetAreaDay10);//净值区间最高限定
+        condition.setMaxNetAreaDay20(maxNetAreaDay20);//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
             return;
         }
-        System.out.println();
+
         System.out.println("查询超过均线列表：日期：" + date);
 
         handlerShowHead();//首行标题信息
