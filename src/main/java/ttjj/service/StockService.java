@@ -308,17 +308,6 @@ public class StockService {
     }
 
     /**
-     * 查询指定日期之后交易日期列表
-     *
-     * @param date 指定日期
-     * @param days 限定返回数量
-     * @return 日期列表
-     */
-    public static List<String> findListDateAfter(String date, int days) {
-        return RankStockCommpanyDao.findListDateAfter(new DateCond(date, days));
-    }
-
-    /**
      * 查询指定日期之前交易日期列表
      * 数据库查询交易日不准确
      * 查询特定股票贵州茅台的交易日列表
@@ -337,6 +326,30 @@ public class StockService {
         String begDate = "0";
         String endDate = date;
         List<Kline> klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, begDate, endDate, DB_RANK_BIZ_TYPE_ZS);
+
+//        System.out.println("k线：" + JSON.toJSONString(klines));
+        if (klines != null && klines.size() > 0) {
+            klines = klines.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
+            for (Kline kline : klines) {
+                dateList.add(kline.getKtime());
+            }
+        }
+
+        return dateList;
+    }
+
+    /**
+     * 查询指定日期之后交易日期列表
+     *
+     * @param date 指定日期
+     * @param days 限定返回数量
+     * @return 日期列表
+     */
+    public static List<String> findListDateAfter(String date, int days) {
+        List<String> dateList = new ArrayList<>();
+        //查询K线-查询交易日列表，http查询上证指数的日k线
+        String begDate = date;
+        List<Kline> klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, true, begDate, null, DB_RANK_BIZ_TYPE_ZS);
 
 //        System.out.println("k线：" + JSON.toJSONString(klines));
         if (klines != null && klines.size() > 0) {

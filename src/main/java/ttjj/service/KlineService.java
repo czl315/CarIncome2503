@@ -332,7 +332,9 @@ public class KlineService {
             url.append("&beg=" + begDate);
 
         }
-        url.append("&end=" + endDate);
+        if(endDate!=null){
+            url.append("&end=" + endDate);
+        }
 
         url.append("&lmt=" + lmt);
 //        url.append("&smplmt=460");

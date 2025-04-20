@@ -37,8 +37,8 @@ import static utils.Content.*;
  */
 public class EtfControl {
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-15";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-18";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -54,16 +54,16 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, JINRONG_GOLD);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
-//        updateUpSumOrder(date);
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, JINRONG_GOLD);//1、查询etf列表
+        updateUpSum(date, etfList);//更新-上涨之和
+        updateUpSumOrder(date);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
+        updateLatestDayAdr(condition, date);
+        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
-        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+//        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -73,8 +73,10 @@ public class EtfControl {
 //        showStatSimpleByTypeAll();
 
 ////        //查询超过均线数据
-//        List<String> dateList = StockService.findListDateBefore(date, 1);//查询n个交易日之前的日期
+//        List<String> dateList = StockService.findListDateBefore(date, 3);//查询n个交易日之前的日期
 //        for (String day : dateList) {
+//            findByDateOrderByDescAdr(day, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+//            System.out.println(day);
 //            findBreakUpMa(day, Arrays.asList(KLT_102), null);
 ////            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
 //        }
@@ -316,37 +318,37 @@ public class EtfControl {
             if (vo.getF20() != null) {
                 marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
             }
-            sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
+            sb.append(StockUtil.formatDouble(marketValue, SIZE_8));
 
             if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
@@ -657,13 +659,13 @@ public class EtfControl {
             sbHead.append(StockUtil.formatStName("编码", SIZE_10));
         }
         sbHead.append(StockUtil.formatStName("类型", SIZE_16));
-        sbHead.append(StockUtil.formatStName("市值", SIZE_10));
-        sbHead.append(StockUtil.formatStName("40_60序", SIZE_10));
-        sbHead.append(StockUtil.formatStName("20_40序", SIZE_10));
-        sbHead.append(StockUtil.formatStName("20序", SIZE_10));
-        sbHead.append(StockUtil.formatStName("10序", SIZE_10));
-        sbHead.append(StockUtil.formatStName("5序", SIZE_10));
-        sbHead.append(StockUtil.formatStName("3序", SIZE_10));
+        sbHead.append(StockUtil.formatStName("市值", SIZE_8));
+        sbHead.append(StockUtil.formatStName("40_60序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("20_40序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("20序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("10序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("5序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("3序", SIZE_8));
         sbHead.append(StockUtil.formatStName("涨序排序", SIZE_10));
         sbHead.append(StockUtil.formatStName("1_60和", SIZE_10));
         sbHead.append(StockUtil.formatStName("40_60和", SIZE_10));
