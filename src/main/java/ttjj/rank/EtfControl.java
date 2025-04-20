@@ -38,7 +38,7 @@ import static utils.Content.*;
 public class EtfControl {
     public static void main(String[] args) {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-18";
+        String date = "2025-04-10";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -246,10 +246,8 @@ public class EtfControl {
     }
 
     /**
-     * 查询数据根据日期，按照涨幅倒序
-     * 过滤1：涨序排序前n的数据
-     * 过滤2：每个类型限定n个
-     * 条件：特定类型
+     * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
+     * 过滤条件：涨序排序前n的数据，每个类型限定n个；
      *
      * @param date       日期
      * @param orderField 排序字段
@@ -258,19 +256,21 @@ public class EtfControl {
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
+        //净值区间最高限定
+        BigDecimal maxNetAreaDay10 = new BigDecimal("30");
+
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
         condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(5);//每个类型限定n个
-        condFiter.setMaxNetAreaDay5(new BigDecimal("25"));//净值区间最高限定-5日  null    new BigDecimal("20")
 
-
-        // 查询数据
+        // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
         condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH, INDEX_HK));//过滤类型
         condition.setOrderBy(orderField + DB_DESC);
         condition.setType_name(typeName);
+        condition.setMaxNetAreaDay10(maxNetAreaDay10);//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
@@ -302,10 +302,6 @@ public class EtfControl {
                 }
                 //过滤2：每个类型限定n个
                 if (condFiter.getShowCountTypeGroup() != null && checkShowTypeLimit(vo, condFiter.getShowCountTypeGroup(), showTypeLimitCountMap)) {
-                    continue;
-                }
-                //过滤：净值区间最高限定-5日
-                if (condFiter.getMaxNetAreaDay5() != null && vo.getNET_AREA_DAY_5() != null && vo.getNET_AREA_DAY_5().compareTo(condFiter.getMaxNetAreaDay5()) > 0) {
                     continue;
                 }
             }
