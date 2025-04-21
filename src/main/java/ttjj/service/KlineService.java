@@ -140,8 +140,14 @@ public class KlineService {
      */
     public static List<Kline> kline(String zhiShu, int lmt, String klt, Boolean isHasBegDate, String begDate, String endDate, String klineType) {
         String rs = klineRsStrHttpDfcf(zhiShu, lmt, klt, isHasBegDate, begDate, endDate, klineType);//k线结果
+        if (rs == null) {
+            return null;
+        }
 //        System.out.println(rs);
         JSONObject szzzMonthJson = JSON.parseObject(rs);
+        if (szzzMonthJson == null) {
+            return null;
+        }
         JSONObject szzzMonthDataJson = JSON.parseObject(szzzMonthJson.getString("data"));
 //        String name = szzzMonthDataJson.getString("name");
 //        System.out.println("指数名称："+name);
@@ -332,7 +338,7 @@ public class KlineService {
             url.append("&beg=" + begDate);
 
         }
-        if(endDate!=null){
+        if (endDate != null) {
             url.append("&end=" + endDate);
         }
 
@@ -355,7 +361,7 @@ public class KlineService {
         /**
          * 如果返回异常，n次重试
          */
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             if (StringUtils.isBlank(rs)) {
                 rs = HttpUtil.sendGet(HttpUtil.randomHttpHead(httpHead) + url.toString(), urlParam.toString(), "");
             } else {
@@ -376,6 +382,11 @@ public class KlineService {
         // 特殊打印
         {
             JSONObject szzzMonthJson = JSON.parseObject(rs);
+            if (szzzMonthJson == null) {
+                System.out.println("请求url:" + HttpUtil.randomHttpHead(httpHead) + url.toString());
+                System.out.println("szzzMonthJson返回数据异常：" + rs);
+                return rs;
+            }
             JSONObject szzzMonthDataJson = JSON.parseObject(szzzMonthJson.getString("data"));
 //        String name = szzzMonthDataJson.getString("name");
 //        System.out.println("指数名称："+name);

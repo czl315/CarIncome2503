@@ -254,7 +254,7 @@ public class EtfControl {
      * @param date       日期
      * @param orderField 排序字段
      */
-    private static void findByDateOrderByDescAdr(String date, String orderField) {
+    public static void findByDateOrderByDescAdr(String date, String orderField) {
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
@@ -1268,6 +1268,9 @@ public class EtfControl {
                 }
                 BigDecimal curAmt = entity.getF2();
                 BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
                 BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_15(breakMa.getMaNet());
                 isMa15 = breakMa.isMaBreakUp();
@@ -1289,6 +1292,9 @@ public class EtfControl {
                 }
                 BigDecimal curAmt = entity.getF2();
                 BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
                 BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_30(breakMa.getMaNet());
                 isMa30 = breakMa.isMaBreakUp();
@@ -1310,6 +1316,9 @@ public class EtfControl {
                 }
                 BigDecimal curAmt = entity.getF2();
                 BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
                 BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_60(breakMa.getMaNet());
                 isMa60 = breakMa.isMaBreakUp();
@@ -1331,6 +1340,9 @@ public class EtfControl {
                 }
                 BigDecimal curAmt = entity.getF2();
                 BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
                 BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_101(breakMa.getMaNet());
                 isMa101 = breakMa.isMaBreakUp();
@@ -1352,6 +1364,9 @@ public class EtfControl {
                 }
                 BigDecimal curAmt = entity.getF2();
                 BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
                 BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
                 entity.setMA_NET_60_102(breakMa.getMaNet());
                 isMa102 = breakMa.isMaBreakUp();
