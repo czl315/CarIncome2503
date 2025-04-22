@@ -134,6 +134,9 @@ public class Content {
      * DAYS_1 天数-30
      */
     public static String DAYS_30 = "30";
+    public static String DAYS_60 = "60";
+    public static int DAYS_INT_60 = 60;
+    public static int DAYS_INT_61 = 61;
     /**
      * DAYS_365 年
      */

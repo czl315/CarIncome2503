@@ -5,10 +5,7 @@ import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
 import ttjj.dto.*;
 import ttjj.service.*;
-import utils.ContMapEtfAll;
-import utils.Content;
-import utils.DateUtil;
-import utils.StockUtil;
+import utils.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -36,8 +33,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-18";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-22";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -54,11 +51,17 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表
-//        updateUpSum(date, etfList);//更新-上涨之和
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+//        更新-上涨之和
+//        if (httpKlineApiType.equals(API_TYPE_SSE)) {
+//            updateAdrSumSse(date, etfList);
+//        } else {
+//            updateUpSum(date, etfList);//更新-上涨之和
+//        }
 //        updateUpSumOrder(date);
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        updateNetArea(date, stockAdrCountList);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
@@ -1413,11 +1416,11 @@ public class EtfControl {
 
         //更新-上涨之和
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList, httpKlineApiType);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
         updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList, httpKlineApiType);
         updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2, dateList, etfList, httpKlineApiType);
@@ -1479,7 +1482,7 @@ public class EtfControl {
             BigDecimal adrSum = null;
             String curTradeDay = date;//当前交易日
             if (httpKlineApiType.equals(API_TYPE_SSE)) {
-                adrSum = SseService.httpAdrSumByKline(conditionStock, dbField,curTradeDay);
+                adrSum = SseService.httpAdrSumByKline(conditionStock, dbField, curTradeDay);
             } else {
                 adrSum = KlineService.httpAdrSumByKline(conditionStock);
             }
@@ -1528,6 +1531,130 @@ public class EtfControl {
             System.out.println(methodName + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",字段：" + dbField + ",成功个数：" + rs);
         }
         return rs;
+    }
+
+    /**
+     * 更新上涨之和(上交所深交所)
+     *
+     * @param date
+     * @param etfList
+     * @return
+     */
+    private static int updateAdrSumSse(String date, List<RankBizDataDiff> etfList) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "更新上涨之和(上交所深交所)-";
+        int rs = 0;
+        List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
+        CondStockAdrCount condStockAdrCount = new CondStockAdrCount();
+        condStockAdrCount.setDate(date);
+
+        //查询每只股票的涨幅
+        for (RankBizDataDiff etfVo : etfList) {
+            String zqdm = etfVo.getF12();
+            String name = etfVo.getF14();
+
+//            if (zqdm.equals("159788")) {
+//                System.out.println("特定证券代码：" + zqdm);
+//            }
+
+            //当前交易日
+            String curTradeDay = date.replace("-", "");
+
+            List<Kline> klines60 = null;//查询最近61天k线
+            if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
+                klines60 = SseService.daykline(zqdm, DAYS_INT_61);
+            } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
+                klines60 = SseService.dayklineSz(zqdm, DAYS_INT_61);
+            }
+
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setF12(zqdm);
+            entity.setF14(name);
+            entity.setDate(date);
+
+            //如果查询k线为null，继续下一个
+            if (klines60 == null) {
+                System.out.println(methodName + "klines60 == null，" + zqdm);
+                continue;
+            }
+            int temp = 0;
+            BigDecimal adrSum = null;
+            BigDecimal adrSum21_40 = null;
+            BigDecimal adrSum41_60 = null;
+            for (Kline kline : klines60) {
+                //最近交易日不计算
+                if (curTradeDay.equals(kline.getKtime())) {
+//                    System.out.println("最近交易日不计算");
+                    continue;
+                }
+
+                temp++;
+                //计算涨幅累计:只计算正增长
+                BigDecimal adr = kline.getZhangDieFu();
+                //只计算正增长的
+                if (adr != null && adr.compareTo(new BigDecimal("0")) > 0) {
+                    if (adrSum == null) {
+                        adrSum = new BigDecimal("0");
+                    }
+                    adrSum = adrSum.add(adr);
+                }
+                if (temp == 1) {
+                    entity.setADR_UP_SUM_1_1(adrSum);
+                } else if (temp == 2) {
+                    entity.setADR_UP_SUM_1_2(adrSum);
+                } else if (temp == 3) {
+                    entity.setADR_UP_SUM_1_3(adrSum);
+                } else if (temp == 5) {
+                    entity.setADR_UP_SUM_1_5(adrSum);
+                } else if (temp == 10) {
+                    entity.setADR_UP_SUM_1_10(adrSum);
+                } else if (temp == 20) {
+                    entity.setADR_UP_SUM_1_20(adrSum);
+                } else if (temp == 60) {
+                    entity.setADR_UP_SUM_1_60(adrSum);
+                }
+
+                if (temp >= 21 && temp <= 40) {
+                    if (adr != null && adr.compareTo(new BigDecimal("0")) > 0) {
+                        if (adrSum21_40 == null) {
+                            adrSum21_40 = new BigDecimal("0");
+                        }
+                        adrSum21_40 = adrSum21_40.add(adr);
+                    }
+                }
+                if (temp == 40) {
+                    entity.setADR_UP_SUM_20_40(adrSum21_40);
+                }
+
+                if (temp >= 41 && temp <= 60) {
+                    if (adr != null && adr.compareTo(new BigDecimal("0")) > 0) {
+                        if (adrSum41_60 == null) {
+                            adrSum41_60 = new BigDecimal("0");
+                        }
+                        adrSum41_60 = adrSum41_60.add(adr);
+                    }
+                }
+                if (temp == 60) {
+                    entity.setADR_UP_SUM_40_60(adrSum41_60);
+                }
+            }
+            etfAdrCountList.add(entity);
+        }
+        //更新涨幅次数
+        for (EtfAdrCount stockAdrCount : etfAdrCountList) {
+            int updateRs = EtfAdrCountService.update(stockAdrCount);
+            if (updateRs != 1) {
+                System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(stockAdrCount));
+            } else {
+                rs++;
+            }
+        }
+        if (isShowLog) {
+            System.out.println(methodName + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",成功个数：" + rs);
+        }
+        return rs;
+
     }
 
     /**

@@ -294,11 +294,14 @@ public class SseService {
                 Kline kline = new Kline();
                 JSONArray klineString = (JSONArray) klineObj;
                 kline.setKlt(KLT_101);
-                String dd = klineString.getString(0);
+                String ktime = klineString.getString(0);
+                if (ktime.contains("-")) {
+                    ktime = ktime.replace("-", "");
+                }
                 //["2025-04-22","1.011","1.016","1.011","1.019","-0.002","-0.20",327955,33340211.00]
                 //  日期，开盘，收盘,最低，最高，涨跌额，涨跌幅，成交量，成交额
                 BigDecimal closeAmt = new BigDecimal(klineString.getString(2));
-                kline.setKtime(klineString.getString(0));
+                kline.setKtime(ktime);
                 kline.setOpenAmt(new BigDecimal(klineString.getString(1)));
                 kline.setMaxAmt(new BigDecimal(klineString.getString(4)));
                 kline.setMinAmt(new BigDecimal(klineString.getString(3)));
@@ -327,7 +330,7 @@ public class SseService {
                 }
                 temp++;
             }
-        }else{
+        } else {
             klineRetrunRs = klineRs;
         }
 
@@ -410,7 +413,7 @@ public class SseService {
             BigDecimal adr = kline.getZhangDieFu();
 
             //如果是当前交易日，不计算
-            curTradeDay = curTradeDay.replace("-","");
+            curTradeDay = curTradeDay.replace("-", "");
             if (curTradeDay.equals(kline.getKtime())) {
 //                System.out.println("如果是当前交易日，不计算:" + curTradeDay);
                 continue;
