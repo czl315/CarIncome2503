@@ -312,11 +312,12 @@ public class StockService {
      * 数据库查询交易日不准确
      * 查询特定股票贵州茅台的交易日列表
      *
-     * @param date 指定日期
-     * @param days 限定返回数量
+     * @param date             指定日期
+     * @param days             限定返回数量
+     * @param httpKlineApiType
      * @return 日期列表
      */
-    public static List<String> findListDateBefore(String date, int days) {
+    public static List<String> findListDateBefore(String date, int days, String httpKlineApiType) {
         List<String> dateList = new ArrayList<>();
 
 //        return RankStockCommpanyDao.findListDateBefore(new DateCond(date, (days + 1)));//数据库查询交易日
@@ -325,7 +326,14 @@ public class StockService {
 //        String begDate = DateUtil.getAddDays(YYYY_MM_DD, date, days);
         String begDate = "0";
         String endDate = date;
-        List<Kline> klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, begDate, endDate, DB_RANK_BIZ_TYPE_ZS);
+
+        //如果东方财富http调用失败，调用上交所
+        List<Kline> klines = null;
+        if (httpKlineApiType.equals(Content.API_TYPE_SSE)) {
+            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
+        } else {
+            klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, begDate, endDate, DB_RANK_BIZ_TYPE_ZS);
+        }
 
 //        System.out.println("k线：" + JSON.toJSONString(klines));
         if (klines != null && klines.size() > 0) {
@@ -541,7 +549,7 @@ public class StockService {
             return mapTradeDay.get(days);
         }
 
-        List<String> dateList = StockService.findListDateBefore(endDate, days);//查询n个交易日之前的日期
+        List<String> dateList = StockService.findListDateBefore(endDate, days, API_TYPE_SSE);//查询n个交易日之前的日期
         if (dateList != null && dateList.size() > days) {
 //            System.out.println("findBegDate.：" + dateList.get(days));
             return dateList.get(days);
@@ -839,7 +847,7 @@ public class StockService {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2022-09-09";
-        List<String> dateList = StockService.findListDateBefore(date, 1);//查询n个交易日之前的日期
+        List<String> dateList = StockService.findListDateBefore(date, 1, "");//查询n个交易日之前的日期
         for (String dateStr : dateList) {
             System.out.println(dateStr);
 

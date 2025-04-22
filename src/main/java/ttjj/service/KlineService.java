@@ -32,15 +32,18 @@ public class KlineService {
 
     public static void main(String[] args) {
 
+
         //查询K线-查询交易日列表，查询贵州茅台的日k线
         String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYY_MM_DD, -100);
         String endDate = DateUtil.getToday(YYYY_MM_DD);
-        String stCode = "600519";//贵州茅台 600519
+        String stCode = "000001";//贵州茅台 600519
         List<Kline> klines = KlineService.kline(stCode, 0, KLT_101, true, begDate, endDate, KLINE_TYPE_STOCK);
+//        List<Kline> klines = SseService.daykline(stCode,100);
         System.out.println("k线：" + JSON.toJSONString(klines));
+        int i=0;
         if (klines != null && klines.size() > 0) {
             for (Kline kline : klines) {
-                System.out.println(kline.getKtime());
+                System.out.println((++i) + ":" + kline.getKtime() + ",昨日收盘：" + kline.getCloseLastAmt() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());
             }
         }
 

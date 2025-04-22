@@ -976,4 +976,9 @@ public class Content {
     public static int SIZE_16 = 16;
     public static int SIZE_22 = 22;
 
+    /**
+     * 接口类型：上交所
+     */
+    public static String API_TYPE_SSE = "sse";
+
 }

@@ -52,7 +52,7 @@ public class KlineStat {
         if (CACHE_DATE_LIST.size() >= days) {
             dateList = CACHE_DATE_LIST.subList(0, 20);
         } else {
-            dateList = StockService.findListDateBefore(date, days);
+            dateList = StockService.findListDateBefore(date, days, "");
             CACHE_DATE_LIST = dateList;
         }
         for (String curDate : dateList) {
@@ -120,7 +120,7 @@ public class KlineStat {
 //        boolean isAllList = false;//是否显示全列表
         int areaDays = 2;//4:近一周;20:近一月
         int days = 0;
-        List<String> dateList = StockService.findListDateBefore(date, days);
+        List<String> dateList = StockService.findListDateBefore(date, days, "");
         for (String curDate : dateList) {
             statListAdrArea(NUM_MAX_999, curDate, areaDays, bizType, isAllList);//K线：统计区间涨幅,etf NUM_MAX_999
         }
@@ -335,7 +335,7 @@ public class KlineStat {
         if (CACHE_DATE_LIST.size() >= days) {
             dateList = CACHE_DATE_LIST.subList(0, days);
         } else {
-            dateList = StockService.findListDateBefore(date, days);
+            dateList = StockService.findListDateBefore(date, days, "");
             CACHE_DATE_LIST = dateList;
         }
         for (String curDate : dateList) {

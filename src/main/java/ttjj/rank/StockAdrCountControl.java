@@ -373,7 +373,7 @@ public class StockAdrCountControl {
     private static void updateAdrCountSumAndOrderAllBiz(String date, List<RankBizDataDiff> bizList, long board, BigDecimal mvMin, BigDecimal mvMax, boolean isUpdateSum, boolean isUpdateOrder) {
         int stBizCountTemp = 0;
         int startMapNum = 0;//map的开始，中断后使用，默认可设置为0
-        List<String> dateList = StockService.findListDateBefore(date, -60);//查询n个交易日之前的日期
+        List<String> dateList = StockService.findListDateBefore(date, -60, "");//查询n个交易日之前的日期
         for (RankBizDataDiff rankBizDataDiff : bizList) {
             String bizName = rankBizDataDiff.getF14();
             stBizCountTemp++;
@@ -808,7 +808,7 @@ public class StockAdrCountControl {
         Long board = stockAdrCountCond.getF139();
         //插入且更新价格区间、更新
         int stBizCountTemp = 0;
-        List<String> dateList = StockService.findListDateBefore(date, -90);//查询n个自然日之前的日期
+        List<String> dateList = StockService.findListDateBefore(date, -90, "");//查询n个自然日之前的日期
         long lastTime = System.currentTimeMillis();
         for (RankBizDataDiff rankBizDataDiff : bizList) {
             String bizCode = rankBizDataDiff.getF12();

@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
 import ttjj.dto.*;
-import ttjj.service.EtfAdrCountService;
-import ttjj.service.EtfService;
-import ttjj.service.KlineService;
-import ttjj.service.StockService;
+import ttjj.service.*;
 import utils.ContMapEtfAll;
 import utils.Content;
 import utils.DateUtil;
@@ -36,6 +33,8 @@ import static utils.Content.*;
  * 3、
  */
 public class EtfControl {
+    static String httpKlineApiType = Content.API_TYPE_SSE;
+
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-04-18";
@@ -55,7 +54,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, JINRONG_GOLD);//1、查询etf列表
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表
         updateUpSum(date, etfList);//更新-上涨之和
         updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
@@ -1408,19 +1407,19 @@ public class EtfControl {
      * @param etfList
      */
     public static void updateUpSum(String date, List<RankBizDataDiff> etfList) {
-        List<String> dateList = StockService.findListDateBefore(date, 61);//查询n个交易日之前的日期
+        List<String> dateList = StockService.findListDateBefore(date, 61, httpKlineApiType);//查询n个交易日之前的日期
 
         //更新-上涨之和
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2, dateList, etfList);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1, dateList, etfList);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1, dateList, etfList, httpKlineApiType);
 
     }
 
@@ -1449,9 +1448,10 @@ public class EtfControl {
      * @param date
      * @param dateList
      * @param etfList
+     * @param httpKlineApiType
      * @return
      */
-    private static int updateAdrSumByBiz(String date, String dbField, List<String> dateList, List<RankBizDataDiff> etfList) {
+    private static int updateAdrSumByBiz(String date, String dbField, List<String> dateList, List<RankBizDataDiff> etfList, String httpKlineApiType) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "更新上涨之和-";
@@ -1473,7 +1473,13 @@ public class EtfControl {
             conditionStock.setF12(code);
             conditionStock.setBegDate(begDate);
             conditionStock.setEndDate(endDate);
-            BigDecimal adrSum = KlineService.httpAdrSumByKline(conditionStock);
+
+            BigDecimal adrSum = null;
+            if (httpKlineApiType.equals(API_TYPE_SSE)) {
+                adrSum = SseService.httpAdrSumByKline(conditionStock, dbField);
+            } else {
+                adrSum = KlineService.httpAdrSumByKline(conditionStock);
+            }
 
             EtfAdrCount entity = new EtfAdrCount();
             entity.setF12(code);
