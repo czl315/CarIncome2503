@@ -53,14 +53,14 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表
-        updateUpSum(date, etfList);//更新-上涨之和
-        updateUpSumOrder(date);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-        updateLatestDayAdr(condition, date);
-        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表
+//        updateUpSum(date, etfList);//更新-上涨之和
+//        updateUpSumOrder(date);
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
+//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 
 //        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -1409,17 +1409,19 @@ public class EtfControl {
     public static void updateUpSum(String date, List<RankBizDataDiff> etfList) {
         List<String> dateList = StockService.findListDateBefore(date, 61, httpKlineApiType);//查询n个交易日之前的日期
 
+        //TODO 一次性查询60天的k线数据，减少调用次数
+
         //更新-上涨之和
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40, dateList, etfList);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2, dateList, etfList, httpKlineApiType);
-        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1, dateList, etfList, httpKlineApiType);
+//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_1, dateList, etfList, httpKlineApiType);
 
     }
 
@@ -1475,8 +1477,9 @@ public class EtfControl {
             conditionStock.setEndDate(endDate);
 
             BigDecimal adrSum = null;
+            String curTradeDay = date;//当前交易日
             if (httpKlineApiType.equals(API_TYPE_SSE)) {
-                adrSum = SseService.httpAdrSumByKline(conditionStock, dbField);
+                adrSum = SseService.httpAdrSumByKline(conditionStock, dbField,curTradeDay);
             } else {
                 adrSum = KlineService.httpAdrSumByKline(conditionStock);
             }

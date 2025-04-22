@@ -13,8 +13,10 @@ import utils.HttpUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static utils.Content.*;
 import static utils.Content.DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60;
@@ -118,7 +120,7 @@ public class SseService {
      * @return
      */
     public static String daykRsStrHttpSz(String zqdm, int lmt) {
-        boolean isShowLog = true;//是否显示日志
+        boolean isShowLog = false;//是否显示日志
         long curTime = System.currentTimeMillis();
         //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-1000&end=-1&period=day&_=1745252231208
         //http://www.szse.cn/api/market/ssjjhq/getHistoryData?random=0.40071861662541997&cycleType=32&marketId=1&code=159361
@@ -173,7 +175,7 @@ public class SseService {
      * @return
      */
     public static List<Kline> daykline(String zqdm, int lmt) {
-        String rs = SseService.daykRsStrHttp(zqdm, (lmt + 1));//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
+        String rs = SseService.daykRsStrHttp(zqdm, (lmt + 2));//需要收集前一日的收盘价，所以+2，返回数据时需要去掉第一个数据
         if (rs == null) {
             return null;
         }
@@ -190,7 +192,7 @@ public class SseService {
 
         JSONArray klines = JSON.parseArray(daykRsJson.getString("kline"));
         List<Kline> klineRs = new ArrayList<>();
-        int temp = 0;
+        List<Kline> klineRetrunRs = new ArrayList<>();//最终的返回结果，需要去掉第一个数据（第一个数据是计算上一个交易日收盘价的），去掉最后一个数据(最新交易日)
         if (klines != null) {
             BigDecimal lastCloseAmt = null;//上一期收盘价
             for (Object klineObj : klines) {
@@ -220,15 +222,36 @@ public class SseService {
 //                kline.setHuanShouLv(new BigDecimal(klineString.getString10]));
                 lastCloseAmt = kline.getCloseAmt();
                 kline.setZqdm(zqdm);
-                if (temp == 0) {
-//                    System.out.println("需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据");
-                } else {
-                    klineRs.add(kline);
+
+                klineRs.add(kline);
+
+            }
+
+            int temp = 0;
+            if (klines == null) {
+                return null;
+            } else {
+                //排序
+                klineRs = klineRs.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
+            }
+            if (klineRs.size() >= (lmt + 1)) {
+                for (Kline kline : klineRs) {
+//                    if (temp == 0) {
+//                        //最终的返回结果，需要去掉第一个数据（第一个数据是计算上一个交易日收盘价的），去掉最后一个数据(最新交易日)
+////                    System.out.println("需要收集前一日的收盘价，所以+1，返回数据时需要去掉最后一个交易日的数据");
+//                        temp++;
+//                        continue;
+//                    }
+                    klineRetrunRs.add(kline);
+                    if (temp == (lmt + 1)) {
+//                    System.out.println("，去掉最后一个数据(最新交易日)");
+                        break;
+                    }
+                    temp++;
                 }
-                temp++;
             }
         }
-        return klineRs;
+        return klineRetrunRs;
     }
 
     /**
@@ -253,7 +276,7 @@ public class SseService {
             return null;
         }
         JSONObject dayklineSzData = JSON.parseObject(dayklineSz.getString("data"));
-        if (dayklineSzData==null || !dayklineSz.containsKey("data")) {
+        if (dayklineSzData == null || !dayklineSz.containsKey("data")) {
             System.out.println(methodName + "dayklineSz-dayklineSzData：" + rs);
             return null;
         }
@@ -264,6 +287,7 @@ public class SseService {
 
         JSONArray klines = JSON.parseArray(dayklineSzData.getString("picupdata"));
         List<Kline> klineRs = new ArrayList<>();
+        List<Kline> klineRetrunRs = new ArrayList<>();
         if (klines != null) {
             BigDecimal lastCloseAmt = null;//上一期收盘价
             for (Object klineObj : klines) {
@@ -287,7 +311,27 @@ public class SseService {
                 klineRs.add(kline);
             }
         }
-        return klineRs;
+
+        int temp = 0;
+        if (klines == null) {
+            return null;
+        } else {
+            //排序
+            klineRs = klineRs.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
+        }
+        if (klineRs.size() >= (lmt + 1)) {
+            for (Kline kline : klineRs) {
+                klineRetrunRs.add(kline);
+                if (temp == (lmt + 1)) {
+                    break;
+                }
+                temp++;
+            }
+        }else{
+            klineRetrunRs = klineRs;
+        }
+
+        return klineRetrunRs;
     }
 
     /**
@@ -316,9 +360,10 @@ public class SseService {
      *
      * @param conditionStock 条件
      * @param dbField
+     * @param curTradeDay    当前交易日
      * @return 涨幅累计
      */
-    public static BigDecimal httpAdrSumByKline(CondStock conditionStock, String dbField) {
+    public static BigDecimal httpAdrSumByKline(CondStock conditionStock, String dbField, String curTradeDay) {
         BigDecimal adrSum = null;//涨幅合计
         String begDate = conditionStock.getBegDate();
         String endDate = conditionStock.getEndDate();
@@ -346,15 +391,31 @@ public class SseService {
             lmt = 60;
         }
         //查询K线-天到今天
-//        List<Kline> klines = KlineService.kline(conditionStock.getF12(), 0, KLT_101, true, begDate, endDate, KLINE_TYPE_STOCK);
-        List<Kline> klines = daykline(zqdm, lmt);
+        List<Kline> klines = null;
+        if (zqdm.startsWith("5")) {
+            klines = daykline(zqdm, lmt);
+//        }else if (zqdm.startsWith("1")) {
+        } else {
+            klines = dayklineSz(zqdm, lmt);
+        }
         //如果查询k线为null，继续下一个
         if (klines == null) {
             System.out.println("计算涨幅累计-查询k线为null：" + JSON.toJSONString(conditionStock));
             return null;
+        } else {
+            //排序
+            klines = klines.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
         }
         for (Kline kline : klines) {
             BigDecimal adr = kline.getZhangDieFu();
+
+            //如果是当前交易日，不计算
+            curTradeDay = curTradeDay.replace("-","");
+            if (curTradeDay.equals(kline.getKtime())) {
+//                System.out.println("如果是当前交易日，不计算:" + curTradeDay);
+                continue;
+            }
+
             //只计算正增长的
             if (adr != null && adr.compareTo(new BigDecimal("0")) > 0) {
                 if (adrSum == null) {

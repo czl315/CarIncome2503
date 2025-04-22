@@ -980,5 +980,9 @@ public class Content {
      * 接口类型：上交所
      */
     public static String API_TYPE_SSE = "sse";
+    /**
+     * 接口类型：东方财富
+     */
+    public static String API_TYPE_DACF = "dfcf";
 
 }
