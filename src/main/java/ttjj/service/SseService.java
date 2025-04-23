@@ -5,8 +5,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import ttjj.db.RankStockCommpanyDb;
+import ttjj.dto.BreakMaDto;
 import ttjj.dto.CondStock;
 import ttjj.dto.Kline;
+import ttjj.dto.KlineDto;
+import utils.ContExchange;
 import utils.DateUtil;
 import utils.HttpUtil;
 
@@ -18,6 +22,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static utils.ContExchange.CYCLE_TYPE_DAY;
+import static utils.ContExchange.CYCLE_TYPE_WEEK;
 import static utils.Content.*;
 import static utils.Content.DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60;
 import static utils.DateUtil.YYYY_MM_DD;
@@ -32,20 +38,48 @@ public class SseService {
     public static void main(String[] args) {
 
         //查询K线-查询交易日列表，查询贵州茅台的日k线
+        int count = 60;
         String endDate = DateUtil.getToday(YYYY_MM_DD);
 //        String stCode = "517400";
-        String stCode = "159212";
+        String zqdm = "159509";
 //        String klineRs = SseService.daykRsStrHttp(stCode, 2);
-        String klineRs = SseService.daykRsStrHttpSz(stCode, 2);
-        System.out.println("k线：" + klineRs);
+//        String klineRs = SseService.daykRsStrHttpSz(stCode, 2, CYCLE_TYPE_WEEK);
+//        System.out.println("k线：" + klineRs);
 //        List<Kline> klineList = daykline(stCode, 5);
-        List<Kline> klineList = dayklineSz(stCode, 2);
+//        List<Kline> klineList = dayklineSz(stCode, 61, CYCLE_TYPE_WEEK);
+        List<Kline> klineList = klineExchange(zqdm, count, CYCLE_TYPE_WEEK);
         int i = 1;
         for (Kline kline : klineList) {
-            System.out.println((i++) + ":" + kline.getCloseLastAmt() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());
+            System.out.println((i++) + ":" + kline.getZqdm() + ":" + kline.getKtime() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());
         }
+    }
 
-
+    /**
+     * 查询k线：根据证券代码识别交易所，查询个数，周期
+     *
+     * @param zqdm      证券代码
+     * @param count     个数
+     * @param cycleType 周期
+     * @return k线列表
+     */
+    private static List<Kline> klineExchange(String zqdm, int count, String cycleType) {
+        List<Kline> rs = null;//k线
+        if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
+            if (cycleType.equals(CYCLE_TYPE_DAY)) {
+                rs = SseService.daykline(zqdm, count);
+            } else {
+                System.out.println("暂不支持上交所非日线查询！");
+            }
+        } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
+            if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK)) {
+                rs = SseService.dayklineSz(zqdm, count, cycleType);
+            } else {
+                System.out.println("暂不支持深交所交所非(日线、周线)查询！");
+            }
+        } else {
+            System.out.println("根据证券代码识别交易所-异常：" + zqdm);
+        }
+        return rs;
     }
 
     /**
@@ -117,9 +151,10 @@ public class SseService {
      *
      * @param zqdm
      * @param lmt
+     * @param cycleType
      * @return
      */
-    public static String daykRsStrHttpSz(String zqdm, int lmt) {
+    public static String daykRsStrHttpSz(String zqdm, int lmt, String cycleType) {
         boolean isShowLog = false;//是否显示日志
         long curTime = System.currentTimeMillis();
         //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-1000&end=-1&period=day&_=1745252231208
@@ -127,7 +162,7 @@ public class SseService {
         StringBuffer url = new StringBuffer();
         url.append("http://www.szse.cn/api/market/ssjjhq/getHistoryData");
         url.append("?random=" + new Random().nextDouble());
-        url.append("&cycleType=32");//32代表日线
+        url.append("&cycleType=" + cycleType);//32代表日线；33=周线
         url.append("&marketId=1");
         url.append("&code=" + zqdm);
 
@@ -261,11 +296,11 @@ public class SseService {
      * @param lmt  数量
      * @return
      */
-    public static List<Kline> dayklineSz(String zqdm, int lmt) {
+    public static List<Kline> dayklineSz(String zqdm, int lmt, String cycleType) {
         boolean isShowLog = true;
         String methodName = "查询日k线(深交所)：";
 
-        String rs = SseService.daykRsStrHttpSz(zqdm, (lmt + 1));//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
+        String rs = SseService.daykRsStrHttpSz(zqdm, (lmt + 1), cycleType);//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
         if (rs == null) {
             System.out.println(methodName + "：返回null");
             return null;
@@ -322,10 +357,11 @@ public class SseService {
             //排序
             klineRs = klineRs.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
         }
-        if (klineRs.size() >= (lmt + 1)) {
+        if (klineRs.size() >= lmt) {
             for (Kline kline : klineRs) {
                 klineRetrunRs.add(kline);
-                if (temp == (lmt + 1)) {
+//                if (temp == (lmt + 1)) {
+                if (temp == lmt) {
                     break;
                 }
                 temp++;
@@ -399,7 +435,7 @@ public class SseService {
             klines = daykline(zqdm, lmt);
 //        }else if (zqdm.startsWith("1")) {
         } else {
-            klines = dayklineSz(zqdm, lmt);
+            klines = dayklineSz(zqdm, lmt, CYCLE_TYPE_DAY);
         }
         //如果查询k线为null，继续下一个
         if (klines == null) {
@@ -428,6 +464,106 @@ public class SseService {
             }
         }
         return adrSum;
+    }
+
+    /**
+     * 突破均线-向上:是否突破、均线净值、连续突破次数、突破百分比、最低净值跌破均线后突破均线向上
+     *
+     * @param stock     股票
+     * @param count     个数
+     * @param cycleType 均线周期类型
+     * @param date      日期
+     * @return
+     */
+    public static BreakMaDto breakMaUp(RankStockCommpanyDb stock, String cycleType, Integer count, String date) {
+        BreakMaDto rs = new BreakMaDto();
+        String zqdm = stock.getF12();
+
+        BigDecimal curAmt = null;
+        BigDecimal yesterdayCloseAmt = null;
+        List<Kline> klineList = klineExchange(zqdm, count, cycleType);
+        if (klineList == null || klineList.size() == 0) {
+            return rs;
+        }
+        if (klineList.size() > 0) {
+            curAmt = klineList.get(0).getCloseAmt();
+        }
+        if (klineList.size() > 1) {
+            yesterdayCloseAmt = klineList.get(1).getCloseAmt();
+        }
+
+        BigDecimal curMaAmt = new BigDecimal("0");//均值
+        BigDecimal rsNetCloseSum = new BigDecimal("0");//和值
+        BigDecimal rsNetClose = new BigDecimal("0");//收盘价
+        if (klineList == null) {
+            System.out.println("klineList为空！");
+            return rs;
+        }
+        for (Kline kline : klineList) {
+            BigDecimal dwjzLong = kline.getCloseAmt();
+            rsNetCloseSum = rsNetCloseSum.add(dwjzLong);
+            rsNetClose = dwjzLong;
+        }
+        //计算均值
+        int size = klineList.size();//个数
+        if (size > 0) {
+            curMaAmt = rsNetCloseSum.divide(new BigDecimal(size), 3, BigDecimal.ROUND_HALF_UP);
+        }
+
+        //计算连续突破百分比
+        rs.setBreakPctUp(curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP));
+        rs.setMaNet(curMaAmt);
+
+        if (zqdm.equals("159388")) {
+            System.out.println("特定代码：" + zqdm);
+        }
+
+        //涨破均线，买出信号
+        if (yesterdayCloseAmt != null && yesterdayCloseAmt.compareTo(curMaAmt) < 0 && curAmt.compareTo(curMaAmt) >= 0) {
+            rs.setMaBreakUp(true);
+//            计算连续突破次数
+//            int breakCountUp = handlerBreakCount(maKline, true);
+//            rs.setBreakCountUp(breakCountUp);
+        }
+//        //最低净值跌破均线后突破均线向上
+//        BigDecimal minAmt = todayKline.getMinAmt();
+//        if (minAmt.compareTo(curMaAmt) <= 0 && curAmt.compareTo(curMaAmt) > 0) {
+//            rs.setMaBreakUpMin(true);
+//            //计算连续突破次数
+//            int breakCount = handlerBreakCountUpMin(maKline);
+//            rs.setBreakCountUpMin(breakCount);
+//        }
+        return rs;
+    }
+
+    /**
+     * 计算连续突破次数
+     *
+     * @param maKline  均线k线
+     * @param upOrDown 向上还是向下
+     * @return 连续突破次数
+     */
+    private static int handlerBreakCount(KlineDto maKline, boolean upOrDown) {
+        int count = 0;
+        BigDecimal netMa = maKline.getNetMa();
+        List<Kline> klineList = maKline.getKlineList().stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
+        for (Kline kline : klineList) {
+            BigDecimal closeAmt = kline.getCloseAmt();
+            if (upOrDown) {
+                if (closeAmt.compareTo(netMa) >= 0) {
+                    count++;
+                } else {
+                    break;
+                }
+            } else {
+                if (closeAmt.compareTo(netMa) < 0) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+        }
+        return count;
     }
 
 

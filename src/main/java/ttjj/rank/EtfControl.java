@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static utils.ContEtfTypeName.*;
+import static utils.ContExchange.CYCLE_TYPE_DAY;
+import static utils.ContExchange.CYCLE_TYPE_WEEK;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
 
@@ -33,8 +35,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-22";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-22";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -48,12 +50,14 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+//        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_101));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-//        更新-上涨之和
+
 //        if (httpKlineApiType.equals(API_TYPE_SSE)) {
+//            更新-上涨之和
 //            updateAdrSumSse(date, etfList);
 //        } else {
 //            updateUpSum(date, etfList);//更新-上涨之和
@@ -61,9 +65,10 @@ public class EtfControl {
 //        updateUpSumOrder(date);
 
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateNetArea(date, stockAdrCountList);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateLatestDayAdr(condition, date);
 
 //        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -84,6 +89,222 @@ public class EtfControl {
 //        }
 
 
+    }
+
+    /**
+     * @param date
+     * @param etfAdrCountVos
+     * @param stockAdrCountCond
+     * @param httpKlineApiType
+     */
+    private static void updateUpMaExchange(String date, List<EtfAdrCountVo> etfAdrCountVos, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "更新-突破均线（交易所）：";
+        int updateRs = 0;//更新成功个数
+        int count = MA_60;
+        if (etfAdrCountVos == null) {
+            System.out.println(methodName + "etfAdrCountVos==null");
+            return;
+        }
+        for (EtfAdrCountVo stockAdrCount : etfAdrCountVos) {
+            EtfAdrCountVo entity = new EtfAdrCountVo();
+            String code = stockAdrCount.getF12();
+            entity.setF12(code);
+            entity.setF2(stockAdrCount.getF2());
+            entity.setDate(stockAdrCount.getDate());
+
+            boolean isUp = true;//检查上涨
+            List<Integer> maList = new ArrayList<>();
+            maList.add(MA_60);
+
+            //判断是否超过均线列表：15,30,60
+            RankStockCommpanyDb stock = new RankStockCommpanyDb();
+            stock.setF12(stockAdrCount.getF12());
+            stock.setF14(stockAdrCount.getF14());
+            List<String> maKltList = stockAdrCountCond.getMaKltList();
+            //显示信息-上涨均线
+            boolean isMa5 = false;
+            boolean isMa15 = false;
+            boolean isMa30 = false;
+            boolean isMa60 = false;
+            boolean isMa101 = false;
+            boolean isMa102 = false;
+//            if (code.equals("561570")) {
+//                System.out.println("特定代码：" + code);
+//            }
+            if (maKltList.contains(KLT_5)) {
+//                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_5, MA_60, date);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_5(breakMa.getMaNet());
+                isMa5 = breakMa.isMaBreakUp();
+                if (isMa5) {
+                    entity.setUP_MA_5(breakPctUp.toString());
+                } else if (!isMa5 && stockAdrCount.getUP_MA_5() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_5(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_15("");
+                }
+            }
+            if (maKltList.contains(KLT_15)) {
+//                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, date);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_15(breakMa.getMaNet());
+                isMa15 = breakMa.isMaBreakUp();
+                if (isMa15) {
+//                    entity.setUP_MA_15(KLT_15 + "(" + MA_60 + ")");
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else if (!isMa15 && stockAdrCount.getUP_MA_15() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_15("");
+                }
+            }
+            if (maKltList.contains(KLT_30)) {
+//                isMa30 = KlineService.showUpMa(stock, KLT_30, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_30, MA_60, date);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_30(breakMa.getMaNet());
+                isMa30 = breakMa.isMaBreakUp();
+                if (isMa30) {
+//                    entity.setUP_MA_30(KLT_30 + "(" + MA_60 + ")");
+                    entity.setUP_MA_30(breakPctUp.toString());
+                } else if (!isMa30 && stockAdrCount.getUP_MA_30() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_30(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_30("");
+                }
+            }
+            if (maKltList.contains(KLT_60)) {
+//                isMa60 = KlineService.showUpMa(stock, KLT_60, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_60, MA_60, date);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_60(breakMa.getMaNet());
+                isMa60 = breakMa.isMaBreakUp();
+                if (isMa60) {
+//                    entity.setUP_MA_60(KLT_60 + "(" + MA_60 + ")");
+                    entity.setUP_MA_60(breakPctUp.toString());
+                } else if (!isMa60 && stockAdrCount.getUP_MA_60() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_60(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_60("");
+                }
+            }
+            if (maKltList.contains(KLT_101)) {
+                String kltType = KLT_101;
+                BreakMaDto breakMa = null;
+                if (httpKlineApiType.equals(API_TYPE_DACF)) {
+                    breakMa = KlineService.breakMaUp(stock, kltType, count, date);
+                } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
+                    breakMa = SseService.breakMaUp(stock, CYCLE_TYPE_DAY, count, date);
+                } else {
+                    System.out.println("未知接口：" + httpKlineApiType);
+                }
+                if (breakMa == null || breakMa.getMaNet() == null) {
+                    System.out.println("breakMa==mull");
+                    continue;
+                }
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = breakMa.getBreakPctUp();
+                entity.setMA_NET_60_102(breakMa.getMaNet());
+                isMa101 = breakMa.isMaBreakUp();
+                if (isMa102) {
+                    entity.setUP_MA_101(breakPctUp.toString());
+                } else if (!isMa101 && stockAdrCount.getUP_MA_101() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_101(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_101("");
+                }
+            }
+            if (maKltList.contains(KLT_102)) {
+                BreakMaDto breakMa = null;
+                if (httpKlineApiType.equals(API_TYPE_DACF)) {
+                    breakMa = KlineService.breakMaUp(stock, KLT_102, count, date);
+                } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
+                    breakMa = SseService.breakMaUp(stock, CYCLE_TYPE_WEEK, count, date);
+                } else {
+                    System.out.println("未知接口：" + httpKlineApiType);
+                }
+                if (breakMa == null || breakMa.getMaNet() == null) {
+                    System.out.println("breakMa==mull");
+                    continue;
+                }
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = breakMa.getBreakPctUp();
+                entity.setMA_NET_60_102(breakMa.getMaNet());
+                isMa102 = breakMa.isMaBreakUp();
+                if (isMa102) {
+//                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
+                    entity.setUP_MA_102(breakPctUp.toString());
+                } else if (!isMa102 && stockAdrCount.getUP_MA_102() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_102(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_102("");
+                }
+            }
+
+            boolean isHasMa = isMa15 || isMa30 || isMa60 || isMa101 || isMa102;
+//            boolean isHasMa = isMa102;
+            if (isHasMa) {
+                //更新
+                int rs = EtfAdrCountService.update(entity);
+                updateRs += rs;
+                System.out.print(new StringBuffer(methodName).append(stockAdrCount.getF12()).append(",").append(StockUtil.formatStName(stockAdrCount.getF14(), 22)).append(",是否成功：").append(rs).append(",f3:").append(StockUtil.formatDouble(stockAdrCount.getF3(), 6)));
+                System.out.print(new StringBuffer(StockUtil.formatStName(entity.getUP_MA_102(), 8)).append(StockUtil.formatStName(entity.getUP_MA_101(), 8)).append(StockUtil.formatStName(entity.getUP_MA_60(), 8)).append(StockUtil.formatStName(entity.getUP_MA_30(), 8)).append(StockUtil.formatStName(entity.getUP_MA_15(), 8)));
+                System.out.println(new StringBuffer("5日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_5(), 6)).append("10日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_10(), 6)).append("20日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_20(), 6)).append("40日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_40(), 6)).append("60日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_60(), 6)));
+            } else {
+                int rs = EtfAdrCountService.update(entity);
+                updateRs += rs;
+//                System.out.println("更新-超过均线信息:" + stockAdrCount.getF14() + ",未超过任何均线：" + rs + ",f3:" + stockAdrCount.getF3());
+//                System.out.println("更新-超过均线信息:" + stockAdrCount.getF14() + "未超过任何均线，不做处理");
+            }
+        }
+        if (isShowLog) {
+            System.out.println(methodName + "个数:" + etfAdrCountVos.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
     }
 
     /**
@@ -1404,6 +1625,211 @@ public class EtfControl {
         }
     }
 
+
+    /**
+     * 更新-突破均线:突破均线百分比、均线净值。
+     *
+     * @param maDate
+     * @param stockAdrCountList
+     * @param stockAdrCountCond
+     */
+    public static void updateBreakMaUp(String maDate, List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "更新-突破均线（根据接口类型）：";
+        int updateRs = 0;//更新成功个数
+        if (stockAdrCountList == null) {
+            System.out.println(methodName + "stockAdrCountList==null");
+            return;
+        }
+        for (EtfAdrCountVo stockAdrCount : stockAdrCountList) {
+            EtfAdrCountVo entity = new EtfAdrCountVo();
+            String code = stockAdrCount.getF12();
+            entity.setF12(code);
+            entity.setF2(stockAdrCount.getF2());
+            entity.setDate(stockAdrCount.getDate());
+
+            boolean isUp = true;//检查上涨
+            List<Integer> maList = new ArrayList<>();
+            maList.add(MA_60);
+
+            //判断是否超过均线列表：15,30,60
+            RankStockCommpanyDb stock = new RankStockCommpanyDb();
+            stock.setF12(stockAdrCount.getF12());
+            stock.setF14(stockAdrCount.getF14());
+            List<String> maKltList = stockAdrCountCond.getMaKltList();
+            //显示信息-上涨均线
+            boolean isMa5 = false;
+            boolean isMa15 = false;
+            boolean isMa30 = false;
+            boolean isMa60 = false;
+            boolean isMa101 = false;
+            boolean isMa102 = false;
+//            if (code.equals("561570")) {
+//                System.out.println("特定代码：" + code);
+//            }
+            if (maKltList.contains(KLT_5)) {
+//                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_5, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_5(breakMa.getMaNet());
+                isMa5 = breakMa.isMaBreakUp();
+                if (isMa5) {
+                    entity.setUP_MA_5(breakPctUp.toString());
+                } else if (!isMa5 && stockAdrCount.getUP_MA_5() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_5(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_15("");
+                }
+            }
+            if (maKltList.contains(KLT_15)) {
+//                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_15(breakMa.getMaNet());
+                isMa15 = breakMa.isMaBreakUp();
+                if (isMa15) {
+//                    entity.setUP_MA_15(KLT_15 + "(" + MA_60 + ")");
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else if (!isMa15 && stockAdrCount.getUP_MA_15() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_15(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_15("");
+                }
+            }
+            if (maKltList.contains(KLT_30)) {
+//                isMa30 = KlineService.showUpMa(stock, KLT_30, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_30, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_30(breakMa.getMaNet());
+                isMa30 = breakMa.isMaBreakUp();
+                if (isMa30) {
+//                    entity.setUP_MA_30(KLT_30 + "(" + MA_60 + ")");
+                    entity.setUP_MA_30(breakPctUp.toString());
+                } else if (!isMa30 && stockAdrCount.getUP_MA_30() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_30(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_30("");
+                }
+            }
+            if (maKltList.contains(KLT_60)) {
+//                isMa60 = KlineService.showUpMa(stock, KLT_60, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_60, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_60(breakMa.getMaNet());
+                isMa60 = breakMa.isMaBreakUp();
+                if (isMa60) {
+//                    entity.setUP_MA_60(KLT_60 + "(" + MA_60 + ")");
+                    entity.setUP_MA_60(breakPctUp.toString());
+                } else if (!isMa60 && stockAdrCount.getUP_MA_60() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_60(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_60("");
+                }
+            }
+            if (maKltList.contains(KLT_101)) {
+//                isMa101 = KlineService.showUpMa(stock, KLT_101, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_101, MA_60, maDate);
+                if (breakMa == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_101(breakMa.getMaNet());
+                isMa101 = breakMa.isMaBreakUp();
+                if (isMa101) {
+//                    entity.setUP_MA_101(KLT_101 + "(" + MA_60 + ")");
+                    entity.setUP_MA_101(breakPctUp.toString());
+                } else if (!isMa101 && stockAdrCount.getUP_MA_101() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_101(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_101("");
+                }
+            }
+            if (maKltList.contains(KLT_102)) {
+//                isMa102 = KlineService.showUpMa(stock, KLT_102, maList, maDate, isUp);//显示信息-上涨均线
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_102, MA_60, maDate);
+                if (breakMa == null || breakMa.getMaNet() == null) {
+                    continue;
+                }
+                BigDecimal curAmt = entity.getF2();
+                BigDecimal curMaAmt = breakMa.getMaNet();
+                if (curMaAmt == null) {
+                    continue;
+                }
+                BigDecimal breakPctUp = curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+                entity.setMA_NET_60_102(breakMa.getMaNet());
+                isMa102 = breakMa.isMaBreakUp();
+                if (isMa102) {
+//                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
+                    entity.setUP_MA_102(breakPctUp.toString());
+                } else if (!isMa102 && stockAdrCount.getUP_MA_102() != null) {
+                    //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
+                    entity.setUP_MA_102(breakPctUp.toString());
+                } else {
+//                    entity.setUP_MA_102("");
+                }
+            }
+
+            boolean isHasMa = isMa15 || isMa30 || isMa60 || isMa101 || isMa102;
+//            boolean isHasMa = isMa102;
+            if (isHasMa) {
+                //更新
+                int rs = EtfAdrCountService.update(entity);
+                updateRs += rs;
+                System.out.print(new StringBuffer(methodName).append(stockAdrCount.getF12()).append(",").append(StockUtil.formatStName(stockAdrCount.getF14(), 22)).append(",是否成功：").append(rs).append(",f3:").append(StockUtil.formatDouble(stockAdrCount.getF3(), 6)));
+                System.out.print(new StringBuffer(StockUtil.formatStName(entity.getUP_MA_102(), 8)).append(StockUtil.formatStName(entity.getUP_MA_101(), 8)).append(StockUtil.formatStName(entity.getUP_MA_60(), 8)).append(StockUtil.formatStName(entity.getUP_MA_30(), 8)).append(StockUtil.formatStName(entity.getUP_MA_15(), 8)));
+                System.out.println(new StringBuffer("5日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_5(), 6)).append("10日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_10(), 6)).append("20日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_20(), 6)).append("40日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_40(), 6)).append("60日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_60(), 6)));
+            } else {
+                int rs = EtfAdrCountService.update(entity);
+                updateRs += rs;
+//                System.out.println("更新-超过均线信息:" + stockAdrCount.getF14() + ",未超过任何均线：" + rs + ",f3:" + stockAdrCount.getF3());
+//                System.out.println("更新-超过均线信息:" + stockAdrCount.getF14() + "未超过任何均线，不做处理");
+            }
+        }
+        if (isShowLog) {
+            System.out.println(methodName + "个数:" + stockAdrCountList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
+    }
+
     /**
      * 更新-上涨之和
      *
@@ -1565,7 +1991,7 @@ public class EtfControl {
             if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
                 klines60 = SseService.daykline(zqdm, DAYS_INT_61);
             } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
-                klines60 = SseService.dayklineSz(zqdm, DAYS_INT_61);
+                klines60 = SseService.dayklineSz(zqdm, DAYS_INT_61, CYCLE_TYPE_DAY);
             }
 
             EtfAdrCount entity = new EtfAdrCount();
