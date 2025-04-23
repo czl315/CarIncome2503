@@ -5,21 +5,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import ttjj.db.EtfAdrCount;
 import ttjj.db.RankStockCommpanyDb;
 import ttjj.dto.BreakMaDto;
 import ttjj.dto.CondStock;
 import ttjj.dto.Kline;
 import ttjj.dto.KlineDto;
 import utils.ContExchange;
+import utils.Content;
 import utils.DateUtil;
 import utils.HttpUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static utils.ContExchange.CYCLE_TYPE_DAY;
@@ -566,5 +565,59 @@ public class SseService {
         return count;
     }
 
+    /**
+     * 查询价格区间百分比
+     */
+    public static void handlerPriceAreaRate(String zqdm, EtfAdrCount entity) {
+        BigDecimal curPriceArea = null;
+        List<Kline> klines = klineExchange(zqdm, MA_60, CYCLE_TYPE_DAY);
+        Map<String, BigDecimal> rs = new HashMap<>();
+        BigDecimal rsMax = new BigDecimal("0.0");
+        BigDecimal rsMin = new BigDecimal("0.0");
+        if (klines == null || klines.size() == 0) {
+            System.out.println("k线为空！" + zqdm);
+            return;
+        }
+
+        int temp = 1;
+        BigDecimal closeAmt = klines.get(0).getCloseAmt();//收盘价
+        for (Kline kline : klines) {
+            BigDecimal netMinCur = kline.getMinAmt();
+            BigDecimal netMaxCur = kline.getMaxAmt();
+            if (netMaxCur.compareTo(rsMax) > 0) {
+                rsMax = netMaxCur;
+            }
+            if (netMinCur.compareTo(rsMin) <= 0 || rsMin.compareTo(new BigDecimal("0.0")) == 0) {
+                rsMin = netMinCur;
+            }
+
+            if (closeAmt == null || rsMin == null || rsMax == null || rsMax.compareTo(new BigDecimal("0")) == 0) {
+                continue;
+            }
+
+//            if (zqdm.equals("159530")) {
+//                System.out.println("特定代码：" + zqdm);
+//            }
+
+            if (temp == 5) {
+                curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+                entity.setNET_AREA_DAY_5(curPriceArea);
+            } else if (temp == 10) {
+                curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+                entity.setNET_AREA_DAY_10(curPriceArea);
+            } else if (temp == 20) {
+                curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+                entity.setNET_AREA_DAY_20(curPriceArea);
+            } else if (temp == 40) {
+                curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+                entity.setNET_AREA_DAY_40(curPriceArea);
+            } else if (temp == 60) {
+                curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
+                entity.setNET_AREA_DAY_60(curPriceArea);
+            }
+            temp++;
+        }
+        return;
+    }
 
 }

@@ -1,11 +1,11 @@
 package ttjj.rank.stat.schedule;
 
 import ttjj.dto.CondEtfAdrCount;
-import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 import ttjj.dto.RankBizDataDiff;
 import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
+import utils.Content;
 import utils.DateUtil;
 
 import java.math.BigDecimal;
@@ -23,6 +23,7 @@ public class EtfAdrJob {
     public static int jobCountUpdateUpSum = 0;//定时次数
     static int jobSeconds = 300;//定时间隔时间
     static volatile int jobSecondsUpdateUpSum = 180;//定时间隔时间
+    static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
         statShowEtfAdrCountSchedule();
@@ -137,7 +138,7 @@ public class EtfAdrJob {
                 CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
                 List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-                EtfControl.updateNetArea(date, stockAdrCountList);//更新-价格区间
+                EtfControl.updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
             } catch (Exception e) {
                 e.printStackTrace();
             }

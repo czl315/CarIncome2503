@@ -48,7 +48,7 @@ public class EtfControl {
         condition.setDate(date);
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setType_name(INDEX_CN_NOT_USA);
+//        condition.setType_name(KEJI_HK);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_101));//价格区间周期列表
@@ -66,8 +66,8 @@ public class EtfControl {
 
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
-        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
-//        updateNetArea(date, stockAdrCountList);//更新-价格区间
+//        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date);
 
 //        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
@@ -1387,8 +1387,9 @@ public class EtfControl {
      *
      * @param date              日期
      * @param stockAdrCountList 更新列表
+     * @param httpKlineApiType
      */
-    public static void updateNetArea(String date, List<EtfAdrCountVo> stockAdrCountList) {
+    public static void updateNetArea(String date, List<EtfAdrCountVo> stockAdrCountList, String httpKlineApiType) {
         boolean isShowLog = true;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据：更新-价格区间";
@@ -1406,13 +1407,20 @@ public class EtfControl {
             entity.setUPDATE_TIME(new Date());
 
             //处理价格区间
-            entity.setNET_AREA_DAY_5(KlineService.handlerPriceAreaRate(zqdm, MA_5, KLT_101, false, "", date, KLINE_TYPE_STOCK));
-            entity.setNET_AREA_DAY_10(KlineService.handlerPriceAreaRate(zqdm, MA_10, KLT_101, false, "", date, KLINE_TYPE_STOCK));
-            entity.setNET_AREA_DAY_20(KlineService.handlerPriceAreaRate(zqdm, MA_20, KLT_101, false, "", date, KLINE_TYPE_STOCK));
-            entity.setNET_AREA_DAY_40(KlineService.handlerPriceAreaRate(zqdm, MA_40, KLT_101, false, "", date, KLINE_TYPE_STOCK));
-            entity.setNET_AREA_DAY_60(KlineService.handlerPriceAreaRate(zqdm, MA_60, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+            if (httpKlineApiType.equals(API_TYPE_DACF)) {
+                entity.setNET_AREA_DAY_5(KlineService.handlerPriceAreaRate(zqdm, MA_5, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+                entity.setNET_AREA_DAY_10(KlineService.handlerPriceAreaRate(zqdm, MA_10, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+                entity.setNET_AREA_DAY_20(KlineService.handlerPriceAreaRate(zqdm, MA_20, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+                entity.setNET_AREA_DAY_40(KlineService.handlerPriceAreaRate(zqdm, MA_40, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+                entity.setNET_AREA_DAY_60(KlineService.handlerPriceAreaRate(zqdm, MA_60, KLT_101, false, "", date, KLINE_TYPE_STOCK));
 //            stockAdrCount.setNET_AREA_DAY_120(KlineService.handlerPriceAreaRate(zqdm, MA_120, KLT_101, false, "", date, KLINE_TYPE_STOCK));
 //            stockAdrCount.setNET_AREA_DAY_250(KlineService.handlerPriceAreaRate(zqdm, MA_250, KLT_101, false, "", date, KLINE_TYPE_STOCK));
+            } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
+                SseService.handlerPriceAreaRate(zqdm, entity);
+            } else {
+                System.out.println("未知接口：" + httpKlineApiType);
+            }
+
             //更新
             updateRs += EtfAdrCountService.update(entity);
 //            System.out.println("更新-净值区间:" + stockAdrCount.getF14() + StockAdrCountService.update(entity));
