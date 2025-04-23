@@ -514,9 +514,9 @@ public class SseService {
         rs.setBreakPctUp(curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP));
         rs.setMaNet(curMaAmt);
 
-        if (zqdm.equals("159388")) {
-            System.out.println("特定代码：" + zqdm);
-        }
+//        if (zqdm.equals("159388")) {
+//            System.out.println("特定代码：" + zqdm);
+//        }
 
         //涨破均线，买出信号
         if (yesterdayCloseAmt != null && yesterdayCloseAmt.compareTo(curMaAmt) < 0 && curAmt.compareTo(curMaAmt) >= 0) {

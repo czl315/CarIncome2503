@@ -51,7 +51,7 @@ public class EtfControl {
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_101));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
@@ -244,9 +244,9 @@ public class EtfControl {
                     continue;
                 }
                 BigDecimal breakPctUp = breakMa.getBreakPctUp();
-                entity.setMA_NET_60_102(breakMa.getMaNet());
+                entity.setMA_NET_60_101(breakMa.getMaNet());
                 isMa101 = breakMa.isMaBreakUp();
-                if (isMa102) {
+                if (isMa101) {
                     entity.setUP_MA_101(breakPctUp.toString());
                 } else if (!isMa101 && stockAdrCount.getUP_MA_101() != null) {
                     //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
