@@ -51,7 +51,7 @@ public class EtfControl {
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_101));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
@@ -226,12 +226,13 @@ public class EtfControl {
                 }
             }
             if (maKltList.contains(KLT_101)) {
-                String kltType = KLT_101;
+                String kltTypeDfcf = KLT_101;
+                String kltTypeExchange = CYCLE_TYPE_DAY;
                 BreakMaDto breakMa = null;
                 if (httpKlineApiType.equals(API_TYPE_DACF)) {
-                    breakMa = KlineService.breakMaUp(stock, kltType, count, date);
+                    breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date);
                 } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
-                    breakMa = SseService.breakMaUp(stock, CYCLE_TYPE_DAY, count, date);
+                    breakMa = SseService.breakMaUp(stock, kltTypeExchange, count, date);
                 } else {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
@@ -256,11 +257,13 @@ public class EtfControl {
                 }
             }
             if (maKltList.contains(KLT_102)) {
+                String kltTypeDfcf = KLT_102;
+                String kltTypeExchange = CYCLE_TYPE_WEEK;
                 BreakMaDto breakMa = null;
                 if (httpKlineApiType.equals(API_TYPE_DACF)) {
-                    breakMa = KlineService.breakMaUp(stock, KLT_102, count, date);
+                    breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date);
                 } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
-                    breakMa = SseService.breakMaUp(stock, CYCLE_TYPE_WEEK, count, date);
+                    breakMa = SseService.breakMaUp(stock, kltTypeExchange, count, date);
                 } else {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
@@ -278,7 +281,7 @@ public class EtfControl {
                 if (isMa102) {
 //                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
                     entity.setUP_MA_102(breakPctUp.toString());
-                } else if (!isMa102 && stockAdrCount.getUP_MA_102() != null) {
+                } else if (stockAdrCount.getUP_MA_102() != null) {
                     //如果均线未突破，但是数据库中的均线突破，则更新突破百分比
                     entity.setUP_MA_102(breakPctUp.toString());
                 } else {
