@@ -67,8 +67,8 @@ public class EtfControl {
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
-        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
-//        updateLatestDayAdr(condition, date);
+//        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
+        updateLatestDayAdr(condition, date, httpKlineApiType);
 
 //        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -1058,11 +1058,12 @@ public class EtfControl {
     }
 
     /**
-     * ETF涨幅统计：更新最近交易日的涨幅，最近3日
+     * ETF涨幅统计：更新最近交易日的涨幅，最近3日，增加交易所接口
      *
-     * @param condition 条件
+     * @param condition        条件
+     * @param httpKlineApiType
      */
-    public static void updateLatestDayAdr(CondEtfAdrCount condition, String date) {
+    public static void updateLatestDayAdr(CondEtfAdrCount condition, String date, String httpKlineApiType) {
         String methodName = "更新最近交易日的涨幅";
         boolean isShowLog = true;
         long begTime = System.currentTimeMillis();
@@ -1086,28 +1087,45 @@ public class EtfControl {
             entity.setF12(etf.getF12());
 
             //显示指定日期最近3个K线交易日的涨跌
-            StringBuffer sbDaysAdr = new StringBuffer();
             String zqdm = etf.getF12();
-            List<Kline> klineListDays = KlineService.kline(zqdm, days, KLT_101, false, null, date, klineType);
-            if (klineListDays != null) {
+            if (httpKlineApiType.equals(API_TYPE_DACF)) {
+                List<Kline> klineListDays = KlineService.kline(zqdm, days, KLT_101, false, null, date, klineType);
+                if (klineListDays != null) {
+                    for (Kline klineListDay : klineListDays) {
+                        if (days == 4) {
+                            entity.setLatestAdr_3(klineListDay.getZhangDieFu());
+                        }
+                        if (days == 3) {
+                            entity.setLatestAdr_2(klineListDay.getZhangDieFu());
+                        }
+                        if (days == 2) {
+                            entity.setLatestAdr_1(klineListDay.getZhangDieFu());
+                        }
+                        if (days == 1) {
+                            break;
+                        }
+                        days--;
+                    }
+                }
+            } else if (httpKlineApiType.equals(API_TYPE_SSE)) {
+                List<Kline> klineListDays = SseService.klineExchange(zqdm, 3, CYCLE_TYPE_DAY);
+                if (klineListDays == null) {
+                    continue;
+                }
                 for (Kline klineListDay : klineListDays) {
-                    if (days == 4) {
-                        entity.setLatestAdr_3(klineListDay.getZhangDieFu());
-                    }
                     if (days == 3) {
-                        entity.setLatestAdr_2(klineListDay.getZhangDieFu());
-                    }
-                    if (days == 2) {
                         entity.setLatestAdr_1(klineListDay.getZhangDieFu());
-                    }
-                    if (days == 1) {
-                        break;
+                    } else if (days == 2) {
+                        entity.setLatestAdr_2(klineListDay.getZhangDieFu());
+                    } else if (days == 1) {
+                        entity.setLatestAdr_3(klineListDay.getZhangDieFu());
                     }
                     days--;
                 }
+            } else {
+                System.out.println("未知接口：" + httpKlineApiType);
             }
             entity.setUPDATE_TIME(new Date());
-
             etfAdrCountList.add(entity);
         }
 

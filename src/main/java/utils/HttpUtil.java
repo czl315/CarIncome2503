@@ -106,9 +106,9 @@ public class HttpUtil {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("/**发送GET请求出现异常！");
+            System.out.println("发送GET请求出现异常！" + e);
+            e.printStackTrace();
 //            System.out.println(urlNameString);
-//            e.printStackTrace();
 //            System.out.println(e);
 //            throw new RuntimeException();
         }

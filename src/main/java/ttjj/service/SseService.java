@@ -61,7 +61,7 @@ public class SseService {
      * @param cycleType 周期
      * @return k线列表
      */
-    private static List<Kline> klineExchange(String zqdm, int count, String cycleType) {
+    public static List<Kline> klineExchange(String zqdm, int count, String cycleType) {
         List<Kline> rs = null;//k线
         if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
             if (cycleType.equals(CYCLE_TYPE_DAY)) {

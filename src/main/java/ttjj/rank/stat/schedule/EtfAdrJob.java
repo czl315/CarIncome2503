@@ -57,7 +57,7 @@ public class EtfAdrJob {
             try {
                 CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
-                EtfControl.updateLatestDayAdr(condition, date);
+                EtfControl.updateLatestDayAdr(condition, date, httpKlineApiType);
             } catch (Exception e) {
                 e.printStackTrace();
             }
