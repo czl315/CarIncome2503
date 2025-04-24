@@ -566,7 +566,7 @@ public class SseService {
     }
 
     /**
-     * 查询价格区间百分比
+     * 计算价格区间百分比
      */
     public static void handlerPriceAreaRate(String zqdm, EtfAdrCount entity) {
         BigDecimal curPriceArea = null;

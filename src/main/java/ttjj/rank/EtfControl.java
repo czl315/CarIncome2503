@@ -51,13 +51,11 @@ public class EtfControl {
 //        condition.setType_name(KEJI_HK);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_101));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_101,KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-
 //        if (httpKlineApiType.equals(API_TYPE_SSE)) {
-//            更新-上涨之和
 //            updateAdrSumSse(date, etfList);
 //        } else {
 //            updateUpSum(date, etfList);//更新-上涨之和
@@ -70,7 +68,7 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
-//        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -92,6 +90,8 @@ public class EtfControl {
     }
 
     /**
+     * TODO 备选接口：https://q.stock.sohu.com/hisHq?code=cn_159915&start=20240301&end=20250424&stat=1&order=D&period=w&callback=historySearchHandler&rt=jsonp
+     * TODO 备选接口：https://hq.stock.sohu.com/mkline/cn/050/cn_510050-11_2.html?_=1745468377604
      * @param date
      * @param etfAdrCountVos
      * @param stockAdrCountCond
@@ -266,6 +266,10 @@ public class EtfControl {
                     breakMa = SseService.breakMaUp(stock, kltTypeExchange, count, date);
                 } else {
                     System.out.println("未知接口：" + httpKlineApiType);
+                }
+                if (breakMa == null || breakMa.getMaNet() == null) {
+                    System.out.println("breakMa==mull,临时使用东方财富的接口");
+                    breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa==mull");
@@ -489,14 +493,14 @@ public class EtfControl {
         BigDecimal maxNetAreaDay20 = new BigDecimal("30");
 
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(5);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH ));//过滤类型 INDEX_HK
+        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
         condition.setOrderBy(orderField + DB_DESC);
         condition.setType_name(typeName);
         condition.setMaxNetAreaDay10(maxNetAreaDay10);//净值区间最高限定
@@ -1442,9 +1446,14 @@ public class EtfControl {
             //更新
             updateRs += EtfAdrCountService.update(entity);
 //            System.out.println("更新-净值区间:" + stockAdrCount.getF14() + StockAdrCountService.update(entity));
+
+
+            if (isShowLog && (updateRs % 100 == 0)) {
+                System.out.println(methodName + "-正在处理位置:" + updateRs + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            }
         }
         if (isShowLog) {
-            System.out.println(methodName + "-需要更新个数:" + stockAdrCountList.size() + ",更新成功个数：" + updateRs + "end,用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            System.out.println(methodName + "-需要更新个数:" + stockAdrCountList.size() + ",更新成功个数：" + updateRs + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
     }
 
