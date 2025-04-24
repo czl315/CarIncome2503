@@ -12,4 +12,6 @@ public class ContExchange {
     public static String CYCLE_TYPE_DAY = "32";//k线类型：32=日线；33=周线
     public static String CYCLE_TYPE_WEEK = "33";//k线类型：32=日线；33=周线
 
+    public static String KLINE_TYPE_WEEK_SOHU = "w";//k线类型：w=周线
+
 }

@@ -25,6 +25,7 @@ import static utils.ContExchange.CYCLE_TYPE_DAY;
 import static utils.ContExchange.CYCLE_TYPE_WEEK;
 import static utils.Content.*;
 import static utils.Content.DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60;
+import static utils.DateUtil.YYYYMMDD;
 import static utils.DateUtil.YYYY_MM_DD;
 
 /**
@@ -66,8 +67,15 @@ public class SseService {
         if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
             if (cycleType.equals(CYCLE_TYPE_DAY)) {
                 rs = SseService.daykline(zqdm, count);
-            } else {
-                System.out.println("暂不支持上交所非日线查询！");
+            } else if (cycleType.equals(CYCLE_TYPE_WEEK)) {
+                int week60Days = -420;
+                int limit = 60;
+                String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYYMMDD, week60Days);
+                String endDate = DateUtil.getToday(YYYYMMDD);
+                rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_WEEK_SOHU, begDate, endDate, count);
+//                System.out.println("上交所周线查询使用接口(SohuService)！");
+            }else{
+                System.out.println("暂不支持上交所非(日线、周线)查询！");
             }
         } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
             if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK)) {
