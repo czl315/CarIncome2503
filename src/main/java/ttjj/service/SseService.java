@@ -91,7 +91,7 @@ public class SseService {
     public static String daykRsStrHttp(String zqdm, int lmt) {
         boolean isShowLog = false;//是否显示日志
         long curTime = System.currentTimeMillis();
-        //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-1000&end=-1&period=day&_=1745252231208
+        //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-60&end=-1&period=day&_=1745252231208
         //http://www.szse.cn/api/market/ssjjhq/getHistoryData?random=0.40071861662541997&cycleType=32&marketId=1&code=159361
         StringBuffer url = new StringBuffer();
         url.append("http://yunhq.sse.com.cn:32041/v1/sh1/dayk/");
