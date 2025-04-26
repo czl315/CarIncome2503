@@ -137,6 +137,7 @@ public class Content {
     public static String DAYS_60 = "60";
     public static int DAYS_INT_60 = 60;
     public static int DAYS_INT_61 = 61;
+    public static int DAYS_INT_80 = 80;
     /**
      * DAYS_365 年
      */

@@ -89,7 +89,7 @@ public class SseService {
     }
 
     /**
-     * 日K线-上交所
+     * http查询日K线-上交所
      *
      * @param zqdm
      * @param lmt
@@ -97,6 +97,7 @@ public class SseService {
      */
     public static String daykRsStrHttp(String zqdm, int lmt) {
         boolean isShowLog = false;//是否显示日志
+        String methodName = "http查询日K线-上交所-";
         long curTime = System.currentTimeMillis();
         //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-60&end=-1&period=day&_=1745252231208
         //http://www.szse.cn/api/market/ssjjhq/getHistoryData?random=0.40071861662541997&cycleType=32&marketId=1&code=159361
@@ -115,6 +116,10 @@ public class SseService {
         url.append("&_=" + curTime);
 
         StringBuffer urlParam = new StringBuffer();
+
+//        if (isShowLog && zqdm.equals("512240")) {
+//            System.out.println(methodName + "特定代码：" + zqdm);
+//        }
 
         if (isShowLog) {
             System.out.println("请求url:" + url.toString());
@@ -240,7 +245,6 @@ public class SseService {
                 Kline kline = new Kline();
                 JSONArray klineString = (JSONArray) klineObj;
                 kline.setKlt(KLT_101);
-                String dd = klineString.getString(0);
                 //  日期，开盘，收盘,最高，最低，成交量，成交额，振幅，涨跌幅，涨跌额，换手率
                 //"2020-09-30,3389.74,3218.05,3425.63,3202.34,4906229054,6193724911616.00,6.58,-5.23,-177.63,13.40"
                 //[20250421,1.1060,1.2090,1.1060,1.2090,30672300,35281915]
@@ -290,6 +294,8 @@ public class SseService {
                     }
                     temp++;
                 }
+            }else{
+                klineRetrunRs = klineRs;
             }
         }
         return klineRetrunRs;
@@ -575,20 +581,47 @@ public class SseService {
     /**
      * 计算价格区间百分比
      */
-    public static void handlerPriceAreaRate(String zqdm, EtfAdrCount entity) {
+    public static void handlerPriceAreaRate(String zqdm, EtfAdrCount entity, String date) {
+        boolean isShowLog = false;
+        long begTime = System.currentTimeMillis();
+        String methodName = "计算价格区间百分比-";
+
+//        if (isShowLog && zqdm.equals("512240")) {
+//            System.out.println(methodName + "特定代码：" + zqdm);
+//        }
+
+        int days = DAYS_INT_61;//DAYS_INT_80
         BigDecimal curPriceArea = null;
-        List<Kline> klines = klineExchange(zqdm, MA_60, CYCLE_TYPE_DAY);
+        List<Kline> klines = klineExchange(zqdm, days, CYCLE_TYPE_DAY);
         Map<String, BigDecimal> rs = new HashMap<>();
         BigDecimal rsMax = new BigDecimal("0.0");
         BigDecimal rsMin = new BigDecimal("0.0");
         if (klines == null || klines.size() == 0) {
-            System.out.println("k线为空！" + zqdm);
+            System.out.println(methodName + "k线为空！" + zqdm);
             return;
         }
 
         int temp = 1;
-        BigDecimal closeAmt = klines.get(0).getCloseAmt();//收盘价
+        BigDecimal closeAmt = null;//收盘价
+
         for (Kline kline : klines) {
+            //查询的k线日期必须要小于特定日期
+            String klineDate = kline.getKtime();
+            if (klineDate.length() == 10) {
+                klineDate = klineDate.replace("-", "");
+            }
+            if (date.length() == 10) {
+                date = date.replace("-", "");
+            }
+            if (Integer.valueOf(klineDate) > Integer.valueOf(date)) {
+//                System.out.println("查询的k线日期【" + klineDate + "】>【" + date + "】大于特定日期，不做处理，下一个。");
+                continue;
+            }
+
+            if (closeAmt == null) {
+                closeAmt = kline.getCloseAmt();//收盘价
+            }
+
             BigDecimal netMinCur = kline.getMinAmt();
             BigDecimal netMaxCur = kline.getMaxAmt();
             if (netMaxCur.compareTo(rsMax) > 0) {
@@ -602,9 +635,6 @@ public class SseService {
                 continue;
             }
 
-//            if (zqdm.equals("159530")) {
-//                System.out.println("特定代码：" + zqdm);
-//            }
 
             if (temp == 5) {
                 curPriceArea = closeAmt.subtract(rsMin).divide(rsMax.subtract(rsMin), 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);
