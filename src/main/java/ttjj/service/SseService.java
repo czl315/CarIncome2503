@@ -21,8 +21,7 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static utils.ContExchange.CYCLE_TYPE_DAY;
-import static utils.ContExchange.CYCLE_TYPE_WEEK;
+import static utils.ContExchange.*;
 import static utils.Content.*;
 import static utils.Content.DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60;
 import static utils.DateUtil.YYYYMMDD;
@@ -74,14 +73,14 @@ public class SseService {
                 String endDate = DateUtil.getToday(YYYYMMDD);
                 rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_WEEK_SOHU, begDate, endDate, count);
 //                System.out.println("上交所周线查询使用接口(SohuService)！");
-            }else{
-                System.out.println("暂不支持上交所非(日线、周线)查询！");
+            } else {
+                System.out.println("暂不支持【上交所】特殊k线【" + cycleType + "】查询！");
             }
         } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
-            if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK)) {
+            if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK) || cycleType.equals(CYCLE_TYPE_MINU60) || cycleType.equals(CYCLE_TYPE_MINU30) || cycleType.equals(CYCLE_TYPE_MINU15)) {
                 rs = SseService.dayklineSz(zqdm, count, cycleType);
             } else {
-                System.out.println("暂不支持深交所交所非(日线、周线)查询！");
+                System.out.println("暂不支持【深交所】特殊k线【" + cycleType + "】查询！");
             }
         } else {
             System.out.println("根据证券代码识别交易所-异常：" + zqdm);
@@ -488,7 +487,7 @@ public class SseService {
 
         BigDecimal curAmt = null;
         BigDecimal yesterdayCloseAmt = null;
-        List<Kline> klineList = klineExchange(zqdm, count, cycleType);
+        List<Kline> klineList = klineExchange(zqdm, count, cycleType);// 查询k线
         if (klineList == null || klineList.size() == 0) {
             return rs;
         }

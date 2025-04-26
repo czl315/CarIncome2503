@@ -13,6 +13,7 @@ public class EtfStat {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-04-18";
         EtfControl.findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+//        EtfControl.findTypeTop(date);//查询每个类型涨幅排序头部的前n个
     }
 
 }
