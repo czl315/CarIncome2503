@@ -34,8 +34,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-21";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-25";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -53,7 +53,7 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
@@ -64,7 +64,7 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
-        findByDateOrderByDescAdr(date, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -86,8 +86,8 @@ public class EtfControl {
     }
 
     /**
-     * TODO 备选接口：https://q.stock.sohu.com/hisHq?code=cn_159915&start=20240301&end=20250424&stat=1&order=D&period=w&callback=historySearchHandler&rt=jsonp
-     * TODO 备选接口：https://hq.stock.sohu.com/mkline/cn/050/cn_510050-11_2.html?_=1745468377604
+     * https://q.stock.sohu.com/hisHq?code=cn_159915&start=20240301&end=20250424&stat=1&order=D&period=w&callback=historySearchHandler&rt=jsonp
+     * https://hq.stock.sohu.com/mkline/cn/050/cn_510050-11_2.html?_=1745468377604
      *
      * @param date
      * @param etfAdrCountVos
@@ -532,27 +532,26 @@ public class EtfControl {
      * 过滤条件：涨序排序前n的数据，每个类型限定n个；
      *
      * @param date       日期
-     * @param orderField 排序字段
      */
-    public static void findByDateOrderByDescAdr(String date, String orderField) {
+    public static void findByDateOrderByDescAdr(String date) {
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
         //净值区间最高限定
         BigDecimal maxNetAreaDay10 = null;//new BigDecimal("30")
-        BigDecimal maxNetAreaDay20 = new BigDecimal("30");
+        BigDecimal maxNetAreaDay20 = new BigDecimal("35");
 
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
-        condFiter.setShowCountTypeGroup(5);//每个类型限定n个
+//        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
+//        condFiter.setShowCountTypeGroup(5);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
         condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
-        condition.setOrderBy(orderField + DB_DESC);
-        condition.setType_name(typeName);
+        condition.setOrderBy(ORDER_FIELD_NET_AREA_DAY_20);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20    DB_DESC
+//        condition.setType_name(typeName);
         condition.setMaxNetAreaDay10(maxNetAreaDay10);//净值区间最高限定
         condition.setMaxNetAreaDay20(maxNetAreaDay20);//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
