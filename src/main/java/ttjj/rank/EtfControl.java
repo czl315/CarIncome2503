@@ -50,19 +50,18 @@ public class EtfControl {
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(KEJI_HK);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-//        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+//        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
 
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        updateUpMa(date, stockAdrCountList, condition);//更新-超过均线信息
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
-//        updateLatestDayAdr(condition, date, httpKlineApiType);
+        updateLatestDayAdr(condition, date, httpKlineApiType);
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -94,7 +93,7 @@ public class EtfControl {
      * @param stockAdrCountCond
      * @param httpKlineApiType
      */
-    private static void updateUpMaExchange(String date, List<EtfAdrCountVo> etfAdrCountVos, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
+    public static void updateUpMaExchange(String date, List<EtfAdrCountVo> etfAdrCountVos, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "更新-突破均线（交易所）：";
@@ -531,7 +530,7 @@ public class EtfControl {
      * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
      * 过滤条件：涨序排序前n的数据，每个类型限定n个；
      *
-     * @param date       日期
+     * @param date 日期
      */
     public static void findByDateOrderByDescAdr(String date) {
         //条件：特定类型
@@ -1122,7 +1121,6 @@ public class EtfControl {
         long begTime = System.currentTimeMillis();
         String klineType = DB_RANK_BIZ_TYPE_ETF;
         int curPosition = 0;
-        int days = 3;
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         //1、查询etf列表
@@ -1142,6 +1140,7 @@ public class EtfControl {
 
             //显示指定日期最近3个K线交易日的涨跌
             String zqdm = etf.getF12();
+            int days = 3;
             if (httpKlineApiType.equals(API_TYPE_DACF)) {
                 List<Kline> klineListDays = KlineService.kline(zqdm, days, KLT_101, false, null, date, klineType);
                 if (klineListDays != null) {
@@ -1167,6 +1166,13 @@ public class EtfControl {
                     continue;
                 }
                 for (Kline klineListDay : klineListDays) {
+                    if (days <= 0) {
+                        break;
+                    }
+                    //判断是否是今天，如果是今天，继续下一个
+                    if (klineListDay.getKtime().equals(date.replace("-", ""))) {
+                        continue;
+                    }
                     if (days == 3) {
                         entity.setLatestAdr_1(klineListDay.getZhangDieFu());
                     } else if (days == 2) {
@@ -2061,6 +2067,7 @@ public class EtfControl {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "更新上涨之和(上交所深交所)-";
+        int curPosition = 0;
         int rs = 0;
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         CondStockAdrCount condStockAdrCount = new CondStockAdrCount();
@@ -2157,6 +2164,10 @@ public class EtfControl {
                 }
             }
             etfAdrCountList.add(entity);
+
+            if (isShowLog && (++curPosition % 100 == 0)) {
+                System.out.println(methodName + "-正在处理位置:" + curPosition + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            }
         }
         //更新涨幅次数
         for (EtfAdrCount stockAdrCount : etfAdrCountList) {

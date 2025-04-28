@@ -123,7 +123,7 @@ public class SohuService {
         urlParam.append("code=cn_" + zqdm);//证券代码
         urlParam.append("&start=" + start);
         urlParam.append("&end=" + end);
-        urlParam.append("&stat=1");
+        urlParam.append("&stat=0");//是否统计
         urlParam.append("&order=D");
         urlParam.append("&period=" + cycleType);
         urlParam.append("&callback=historySearchHandler");
