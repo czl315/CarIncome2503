@@ -1557,12 +1557,12 @@ public class ContMapEtfAll {
     /**
      * ETF涨幅数据：查询数据根据名称列表模糊查询
      */
-    private static void findByTypeName(String date) {
-        String typeEn = "";
-        String typeCn = "";
+    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn) {
+//        String typeEn = "";
+//        String typeCn = "";
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_10 + DB_DESC);
+        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + DB_DESC);
 
         // 科技
         {
@@ -1594,9 +1594,9 @@ public class ContMapEtfAll {
 //        typeEn = "KEJI_NEW_ENERGY";
 //        typeCn = ContEtfTypeName.KEJI_NEW_ENERGY;
 
-        condition.setLikeNameList(ContEtfNameKey.KEJI_HK);
-        typeEn = "KEJI_HK";
-        typeCn = ContEtfTypeName.KEJI_HK;
+//        condition.setLikeNameList(ContEtfNameKey.KEJI_HK);
+//        typeEn = "KEJI_HK";
+//        typeCn = ContEtfTypeName.KEJI_HK;
         }
         // 消费
         {
@@ -1693,32 +1693,44 @@ public class ContMapEtfAll {
 //        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
         }
 
+        /**
+         * 资源
+         */
+        {
+
+        condition.setLikeNameList(nameLikeList);
+        condition.setNotLikeNameList(nameNoLikeList);
+//        typeEn = "ZIYUAN_COMMON";
+//        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
+        }
+
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-        EtfControl.saveOrUpdateListNetLastDay(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
+//        EtfControl.saveOrUpdateListNetLastDay(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
 
         if (etfListLikeName == null) {
             System.out.println("数据为null");
         }
-        int size6 = 6;
-        int SIZE_10 = 10;
-        int SIZE_22 = 22;
         int num = 0;//序号
         for (EtfAdrCountVo vo : etfListLikeName) {
             StringBuffer sb = new StringBuffer();
+            BigDecimal day60 = vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal day5 = vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal day5Cheng12 = day5.multiply(new BigDecimal("12"));
+            BigDecimal day60and5Cheng12 = day60.add(day5Cheng12);
 
-            sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), size6)).append("\"");
+            sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), SIZE_6)).append("\"");
             sb.append(", \"" + StockUtil.formatStName(typeCn, SIZE_22) + "\");");
 //            sb.append(", \"" + StockUtil.formatStName(vo.getF14(), SIZE_22) + "\");");
             sb.append("//");
             sb.append(StockUtil.formatStName(vo.getF14(), SIZE_22));
-            sb.append(StockUtil.formatStName("市值：", size6));
+            sb.append(StockUtil.formatStName("市值：", SIZE_6));
             BigDecimal marketValue = null;
             if (vo.getF20() != null) {
                 marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
             }
             sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
-            sb.append(StockUtil.formatStName("累涨：", size6));
+            sb.append(StockUtil.formatStName("累涨：", SIZE_6));
             if (vo.getADR_UP_SUM_1_60() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
             } else {
@@ -1744,13 +1756,16 @@ public class ContMapEtfAll {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
+            sb.append(StockUtil.formatStName("5日：", SIZE_6));
             if (vo.getADR_UP_SUM_1_5() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
+            sb.append(StockUtil.formatStName("60+5*12：", SIZE_10));
+            sb.append(StockUtil.formatDouble(day60and5Cheng12, SIZE_10));
 
-            sb.append(StockUtil.formatInt(++num, size6));
+            sb.append(StockUtil.formatInt(++num, SIZE_6));
             System.out.println(sb);
         }
 
@@ -1758,8 +1773,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-18";
-        findByTypeName(date);//查询数据根据类型名称模糊查询
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-18";
+        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_COMMON",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
     }
 }
