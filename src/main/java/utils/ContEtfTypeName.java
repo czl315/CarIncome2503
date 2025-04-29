@@ -24,7 +24,7 @@ public class ContEtfTypeName {
     /**
      * 科技
      */
-    public static String KEJI_GONG_YE = "科技-工业";
+    public static String KEJI_GONG_YE = "科技-通用";
     public static String KEJI_NEW_CAR = "科技-汽车";
     public static String KEJI_NEW_ENERGY = "科技-新能源";
 //    public static String KEJI_ELECTRICITY = "科技-电力";
