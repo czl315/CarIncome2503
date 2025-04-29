@@ -3,14 +3,13 @@ package utils;
 import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
+import ttjj.dto.Kline;
 import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static utils.Content.*;
 
@@ -22,7 +21,7 @@ public class ContMapEtfAll {
     /**
      * 资源
      */
-    public static Map<String, String> ZIYUAN_OIL = new HashMap<>();
+    public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
 
     static {
         ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：5.03      累涨：64.70     21.04     37.51     9.22      5.14      5.14      1
@@ -1680,7 +1679,6 @@ public class ContMapEtfAll {
 //        typeEn = "INDEX_CN_CITY";
 //        typeCn = ContEtfTypeName.INDEX_CN_CITY;
 
-//        condition.setLikeNameList(ZIYUAN_OIL);
 //        condition.setLikeNameList(ZIYUAN_NONGYE);
 //        condition.setLikeNameList(ZIYUAN_CAILIAO);
 //        condition.setLikeNameList(ContEtfNameKey.ZIYUAN_XIYOU);
@@ -1693,9 +1691,7 @@ public class ContMapEtfAll {
 //        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
         }
 
-        /**
-         * 资源
-         */
+        //资源
         {
 
         condition.setLikeNameList(nameLikeList);
@@ -1712,12 +1708,19 @@ public class ContMapEtfAll {
             System.out.println("数据为null");
         }
         int num = 0;//序号
+        //计算涨幅合计修正值：最近60日+最近5日乘12
         for (EtfAdrCountVo vo : etfListLikeName) {
-            StringBuffer sb = new StringBuffer();
             BigDecimal day60 = vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP);
             BigDecimal day5 = vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP);
             BigDecimal day5Cheng12 = day5.multiply(new BigDecimal("12"));
             BigDecimal day60and5Cheng12 = day60.add(day5Cheng12);
+            vo.setAdrUpSum_60_and_5c12(day60and5Cheng12);
+        }
+        //排序
+        etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getAdrUpSum_60_and_5c12, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+
+        for (EtfAdrCountVo vo : etfListLikeName) {
+            StringBuffer sb = new StringBuffer();
 
             sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), SIZE_6)).append("\"");
             sb.append(", \"" + StockUtil.formatStName(typeCn, SIZE_22) + "\");");
@@ -1762,8 +1765,8 @@ public class ContMapEtfAll {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
-            sb.append(StockUtil.formatStName("60+5*12：", SIZE_10));
-            sb.append(StockUtil.formatDouble(day60and5Cheng12, SIZE_10));
+            sb.append(StockUtil.formatStName("累涨修正：", SIZE_10));
+            sb.append(StockUtil.formatDouble(vo.getAdrUpSum_60_and_5c12(), SIZE_10));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
             System.out.println(sb);
@@ -1775,6 +1778,6 @@ public class ContMapEtfAll {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-04-18";
-        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_COMMON",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
+        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
     }
 }

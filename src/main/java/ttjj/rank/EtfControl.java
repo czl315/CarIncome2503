@@ -58,9 +58,9 @@ public class EtfControl {
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
-        updateLatestDayAdr(condition, date, httpKlineApiType);
+//        updateLatestDayAdr(condition, date, httpKlineApiType);
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
