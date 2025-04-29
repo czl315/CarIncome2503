@@ -34,8 +34,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-29";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-29";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);

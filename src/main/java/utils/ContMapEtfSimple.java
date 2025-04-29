@@ -1772,8 +1772,8 @@ public class ContMapEtfSimple {
     }
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-29";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-29";
 //        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//资源-石油
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU);
