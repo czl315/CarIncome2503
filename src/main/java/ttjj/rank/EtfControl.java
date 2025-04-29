@@ -35,7 +35,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-25";
+//        String date = "2025-04-28";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -57,7 +57,6 @@ public class EtfControl {
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
-
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
@@ -65,6 +64,8 @@ public class EtfControl {
 
 //        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
+
+        //TODO 查询我的持仓etf数据
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -142,7 +143,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -169,7 +170,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -196,7 +197,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -223,7 +224,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -250,7 +251,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -281,11 +282,7 @@ public class EtfControl {
                     System.out.println("未知接口：" + httpKlineApiType);
                 }
                 if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
-//                    breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date);
-                }
-                if (breakMa == null || breakMa.getMaNet() == null) {
-                    System.out.println("breakMa==mull");
+                    System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
                 }
                 BigDecimal curMaAmt = breakMa.getMaNet();
@@ -537,22 +534,19 @@ public class EtfControl {
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
         //净值区间最高限定
-        BigDecimal maxNetAreaDay10 = null;//new BigDecimal("30")
-        BigDecimal maxNetAreaDay20 = new BigDecimal("35");
-
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-//        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
-//        condFiter.setShowCountTypeGroup(5);//每个类型限定n个
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
+        condFiter.setShowCountTypeGroup(2);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
         condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
-        condition.setOrderBy(ORDER_FIELD_NET_AREA_DAY_20);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20    DB_DESC
+        condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
 //        condition.setType_name(typeName);
-        condition.setMaxNetAreaDay10(maxNetAreaDay10);//净值区间最高限定
-        condition.setMaxNetAreaDay20(maxNetAreaDay20);//净值区间最高限定
+        condition.setMaxNetAreaDay10(null);//净值区间最高限定
+        condition.setMaxNetAreaDay20( new BigDecimal("30"));//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
@@ -1121,6 +1115,7 @@ public class EtfControl {
         long begTime = System.currentTimeMillis();
         String klineType = DB_RANK_BIZ_TYPE_ETF;
         int curPosition = 0;
+        int updateCount = 0;//更新成功个数
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         //1、查询etf列表
@@ -1186,6 +1181,14 @@ public class EtfControl {
                 System.out.println("未知接口：" + httpKlineApiType);
             }
             entity.setUPDATE_TIME(new Date());
+
+            int updateRs = EtfAdrCountService.update(entity);
+            if (updateRs != 1) {
+                System.out.println(methodName + "更新-失败：" + updateRs + "" + JSON.toJSONString(entity));
+            } else {
+                updateCount++;
+            }
+
             etfAdrCountList.add(entity);
 
             if (isShowLog && (++curPosition % 100 == 0)) {
@@ -1193,18 +1196,18 @@ public class EtfControl {
             }
         }
 
-        int updateCount = 0;
-        for (EtfAdrCount etfAdrCount : etfAdrCountList) {
-//            if(etfAdrCount.getF14().equals("上证50ETF")){
-//                System.out.println(funcName + "更新-特定：" + JSON.toJSONString(etfAdrCount));
+
+//        for (EtfAdrCount etfAdrCount : etfAdrCountList) {
+////            if(etfAdrCount.getF14().equals("上证50ETF")){
+////                System.out.println(funcName + "更新-特定：" + JSON.toJSONString(etfAdrCount));
+////            }
+//            int updateRs = EtfAdrCountService.update(etfAdrCount);
+//            if (updateRs != 1) {
+//                System.out.println(methodName + "更新-失败：" + updateRs + "" + JSON.toJSONString(etfAdrCount));
+//            } else {
+//                updateCount++;
 //            }
-            int updateRs = EtfAdrCountService.update(etfAdrCount);
-            if (updateRs != 1) {
-                System.out.println(methodName + "更新-失败：" + updateRs + "" + JSON.toJSONString(etfAdrCount));
-            } else {
-                updateCount++;
-            }
-        }
+//        }
         if (isShowLog) {
             System.out.println(methodName + "-需要更新个数:" + etfAdrCountList.size() + ",更新成功个数：" + updateCount + "end,用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
@@ -1935,15 +1938,13 @@ public class EtfControl {
     public static void updateUpSum(String date, List<RankBizDataDiff> etfList) {
         List<String> dateList = StockService.findListDateBefore(date, 61, httpKlineApiType);//查询n个交易日之前的日期
 
-        //TODO 一次性查询60天的k线数据，减少调用次数
-
         //更新-上涨之和
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40, dateList, etfList);
-//        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
+        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10, dateList, etfList, httpKlineApiType);
         updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5, dateList, etfList, httpKlineApiType);
         updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_3, dateList, etfList, httpKlineApiType);
 //        updateAdrSumByBiz(date, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_2, dateList, etfList, httpKlineApiType);

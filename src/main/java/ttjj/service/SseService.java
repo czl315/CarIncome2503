@@ -68,7 +68,6 @@ public class SseService {
                 rs = SseService.daykline(zqdm, count);
             } else if (cycleType.equals(CYCLE_TYPE_WEEK)) {
                 int week60Days = -420;
-                int limit = 60;
                 String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYYMMDD, week60Days);
                 String endDate = DateUtil.getToday(YYYYMMDD);
                 rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_WEEK_SOHU, begDate, endDate, count);
@@ -156,7 +155,7 @@ public class SseService {
     }
 
     /**
-     * 日K线-深交所
+     * 查询日k线(深交所)
      * http://www.szse.cn/www/market/product/list/etfList/
      * http://www.szse.cn/market/trend/index.html?code=159212
      *
@@ -167,6 +166,7 @@ public class SseService {
      */
     public static String daykRsStrHttpSz(String zqdm, int lmt, String cycleType) {
         boolean isShowLog = false;//是否显示日志
+        String methodName = "查询日k线(深交所)(daykRsStrHttpSz)：";
         long curTime = System.currentTimeMillis();
         //http://yunhq.sse.com.cn:32041/v1/sh1/dayk/518800?callback=jQuery37107157350927951702_1745252231180&begin=-1000&end=-1&period=day&_=1745252231208
         //http://www.szse.cn/api/market/ssjjhq/getHistoryData?random=0.40071861662541997&cycleType=32&marketId=1&code=159361
@@ -207,7 +207,7 @@ public class SseService {
             rs = rs.replace("})", "}");
         }
         if (isShowLog) {
-            System.out.println("rs:" + rs);
+            System.out.println(methodName + "rs:" + rs);
         }
 
         return rs;
@@ -294,7 +294,7 @@ public class SseService {
                     }
                     temp++;
                 }
-            }else{
+            } else {
                 klineRetrunRs = klineRs;
             }
         }
@@ -309,12 +309,13 @@ public class SseService {
      * @return
      */
     public static List<Kline> dayklineSz(String zqdm, int lmt, String cycleType) {
-        boolean isShowLog = true;
+        boolean isShowLog = true;//是否显示日志
         String methodName = "查询日k线(深交所)：";
+        long curTime = System.currentTimeMillis();
 
         String rs = SseService.daykRsStrHttpSz(zqdm, (lmt + 1), cycleType);//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
-        if (rs == null) {
-            System.out.println(methodName + "：返回null");
+        if (StringUtils.isBlank(rs)) {
+            System.out.println(methodName + "：返回空：" + rs);
             return null;
         }
         //{"code":"0","data":{"code":"159212","name":"深100ETF南方","picupdata":[["2025-04-09","0.953","0.981","0.951","0.988","0.000","0.00",1616757,156734534.00],["2025-04-10","0.990","1.003","0.990","1.015","0.022","2.24",4186498,421500970.00],["2025-04-11","1.001","1.011","0.990","1.018","0.008","0.80",1119175,113126651.00],["2025-04-14","1.021","1.013","1.011","1.022","0.002","0.20",860112,87389886.00],["2025-04-15","1.011","1.011","1.006","1.012","-0.002","-0.20",321698,32450510.00],["2025-04-16","1.005","1.002","0.993","1.009","-0.009","-0.89",376157,37594915.00],["2025-04-17","1.000","1.004","0.999","1.010","0.002","0.20",351228,35355869.00],["2025-04-18","1.004","1.007","1.000","1.009","0.003","0.30",559163,56116392.00],["2025-04-21","1.004","1.018","1.002","1.018","0.011","1.09",447312,45291108.00],["2025-04-22","1.011","1.016","1.011","1.019","-0.002","-0.20",327955,33340211.00]],"picdowndata":[["2025-04-09",1616757,"plus"],["2025-04-10",4186498,"plus"],["2025-04-11",1119175,"plus"],["2025-04-14",860112,"minus"],["2025-04-15",321698,"minus"],["2025-04-16",376157,"minus"],["2025-04-17",351228,"plus"],["2025-04-18",559163,"plus"],["2025-04-21",447312,"plus"],["2025-04-22",327955,"plus"]]},"message":"成功"}
@@ -506,7 +507,6 @@ public class SseService {
 
         BigDecimal curMaAmt = new BigDecimal("0");//均值
         BigDecimal rsNetCloseSum = new BigDecimal("0");//和值
-        BigDecimal rsNetClose = new BigDecimal("0");//收盘价
         if (klineList == null) {
             System.out.println("klineList为空！");
             return rs;
@@ -514,7 +514,6 @@ public class SseService {
         for (Kline kline : klineList) {
             BigDecimal dwjzLong = kline.getCloseAmt();
             rsNetCloseSum = rsNetCloseSum.add(dwjzLong);
-            rsNetClose = dwjzLong;
         }
         //计算均值
         int size = klineList.size();//个数
