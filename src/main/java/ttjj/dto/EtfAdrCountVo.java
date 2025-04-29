@@ -326,16 +326,16 @@ public class EtfAdrCountVo extends EtfAdrCount {
     private Integer countDownMa101Type60LastDay5;
 
     /**
-     * 涨幅合计修正值：最近60日+最近5日乘12
+     * 涨幅合计修正值：最近60日+最近10日乘6
      */
-    private BigDecimal adrUpSum_60_and_5c12;
+    private BigDecimal adrUpSum_60_and_10c6;
 
-    public BigDecimal getAdrUpSum_60_and_5c12() {
-        return adrUpSum_60_and_5c12;
+    public BigDecimal getAdrUpSum_60_and_10c6() {
+        return adrUpSum_60_and_10c6;
     }
 
-    public void setAdrUpSum_60_and_5c12(BigDecimal adrUpSum_60_and_5c12) {
-        this.adrUpSum_60_and_5c12 = adrUpSum_60_and_5c12;
+    public void setAdrUpSum_60_and_10c6(BigDecimal adrUpSum_60_and_10c6) {
+        this.adrUpSum_60_and_10c6 = adrUpSum_60_and_10c6;
     }
 
     public BigDecimal getCount() {

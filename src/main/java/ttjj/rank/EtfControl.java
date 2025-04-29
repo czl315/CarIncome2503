@@ -34,8 +34,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-28";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-29";
         String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         if (!date.equals(today)) {
             System.out.println("注意！！！非今日数据:" + date);
@@ -46,6 +46,7 @@ public class EtfControl {
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setF12("512240");
+        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(KEJI_HK);
@@ -58,7 +59,10 @@ public class EtfControl {
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+        for (EtfAdrCountVo vo : stockAdrCountList) {
+            System.out.println(vo.getF12() + ":" + vo.getF14());
+        }
+//        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
@@ -546,7 +550,7 @@ public class EtfControl {
         condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
 //        condition.setType_name(typeName);
         condition.setMaxNetAreaDay10(null);//净值区间最高限定
-        condition.setMaxNetAreaDay20( new BigDecimal("30"));//净值区间最高限定
+        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");
@@ -2077,7 +2081,6 @@ public class EtfControl {
         //查询每只股票的涨幅
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
-            String name = etfVo.getF14();
 
 //            if (zqdm.equals("159788")) {
 //                System.out.println("特定证券代码：" + zqdm);
@@ -2095,7 +2098,6 @@ public class EtfControl {
 
             EtfAdrCount entity = new EtfAdrCount();
             entity.setF12(zqdm);
-            entity.setF14(name);
             entity.setDate(date);
 
             //如果查询k线为null，继续下一个

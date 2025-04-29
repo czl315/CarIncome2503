@@ -1,110 +1,111 @@
 package utils;
 
 import ttjj.dto.CondEtfAdrCount;
-import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
-import ttjj.dto.Kline;
-import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static utils.Content.*;
 
 /**
- * 常量-ETF全部数据，来源东方财富
- * 2025-03-05：1065
+ * 常量-ETF精简数据
  */
-public class ContMapEtfAll {
+public class ContMapEtfSimple {
     /**
      * 资源
      */
     public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
 
     static {
-        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：5.03      累涨：64.70     21.04     37.51     9.22      5.14      5.14      1
-        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.33      累涨：16.29     3.30      8.59      4.40      2.93      1.46      2
-        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：0.75      累涨：15.56     5.48      6.16      3.92      2.79      2.37      3
-        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.08      累涨：16.11     4.84      7.03      4.24      2.75      1.79      4
-        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.28      累涨：15.64     5.90      5.95      4.01      2.56      2.11      5
-        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.25      累涨：16.23     6.31      5.82      4.10      2.55      1.88      6
-        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：0.64      累涨：13.92     5.63      4.98      3.31      2.54      1.87      7
-        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：0.62      累涨：16.37     6.10      6.69      3.58      2.39      1.84      8
-        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：0.93      累涨：16.70     5.50      7.01      4.19      2.39      1.59      9
-        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：9.85      累涨：50.63     22.16     26.67     3.94      2.20      1.46      10
+        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.19      累涨：56.42     21.75     10.41     24.26     10.51     5日： 4.20      累涨修正：106.82    1
+//        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：9.58      累涨：44.53     10.63     9.51      24.39     10.61     5日： 4.15      累涨修正：94.33     2
+        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.11      累涨：17.35     4.60      5.95      6.80      3.07      5日： 2.19      累涨修正：43.63     3
+//        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.27      累涨：19.36     3.30      7.46      8.60      2.63      5日： 1.71      累涨修正：39.88     4
+//        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：1.07      累涨：18.88     4.63      5.80      8.45      2.16      5日： 1.64      累涨修正：38.56     5
+//        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.24      累涨：20.43     3.49      7.20      9.74      2.17      5日： 1.48      累涨修正：38.19     6
+//        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.31      累涨：18.74     6.20      5.11      7.43      2.19      5日： 1.40      累涨修正：35.54     7
+//        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：0.78      累涨：19.02     3.54      6.20      9.28      1.70      5日： 1.06      累涨修正：31.74     8
+//        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：0.61      累涨：17.70     2.69      6.61      8.40      1.34      5日： 1.12      累涨修正：31.14     9
+//        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：0.60      累涨：17.58     3.07      7.54      6.97      1.99      5日： 1.10      累涨修正：30.78     10
     }
 
     public static Map<String, String> ZIYUAN_NONGYE = new HashMap<>();
 
     static {
-        ZIYUAN_NONGYE.put("516760", "资源-农业             ");//养殖ETF               市值：1.52      累涨：20.10     4.49      7.82      7.79      6.09      4.04      1
-        ZIYUAN_NONGYE.put("159616", "资源-农业             ");//农牧ETF               市值：0.68      累涨：24.58     5.04      10.24     9.30      6.08      3.59      2
-        ZIYUAN_NONGYE.put("159825", "资源-农业             ");//农业ETF               市值：18.79     累涨：23.18     5.05      9.11      9.32      5.79      3.02      3
-        ZIYUAN_NONGYE.put("159867", "资源-农业             ");//畜牧ETF               市值：6.40      累涨：21.80     4.73      8.73      8.34      5.66      3.16      4
-        ZIYUAN_NONGYE.put("516670", "资源-农业             ");//畜牧养殖ETF           市值：6.81      累涨：22.20     5.35      8.28      8.57      5.57      3.58      5
-        ZIYUAN_NONGYE.put("516810", "资源-农业             ");//农业50ETF             市值：1.66      累涨：23.61     5.73      9.60      8.43      5.41      2.99      6
-        ZIYUAN_NONGYE.put("159865", "资源-农业             ");//养殖ETF               市值：33.11     累涨：21.27     4.82      8.32      8.13      5.40      3.04      7
-        ZIYUAN_NONGYE.put("516550", "资源-农业             ");//农业ETF               市值：2.14      累涨：20.02     4.20      7.73      8.09      5.32      3.37      8
-        ZIYUAN_NONGYE.put("159827", "资源-农业             ");//农业50ETF             市值：1.12      累涨：23.98     5.30      9.68      9.43      5.28      2.69      9
-        ZIYUAN_NONGYE.put("562900", "资源-农业             ");//农业ETF易方达         市值：0.82      累涨：21.51     5.21      8.44      8.57      5.00      2.70      10
-        ZIYUAN_NONGYE.put("159587", "资源-农业             ");//粮食50ETF             市值：0.31      累涨：22.89     5.77      9.19      8.11      4.53      2.62      11
-        ZIYUAN_NONGYE.put("159698", "资源-农业             ");//粮食ETF               市值：1.99      累涨：24.17     6.33      10.28     7.79      4.09      2.33      12
+        ZIYUAN_NONGYE.put("516760", "资源-农业             ");//养殖ETF               市值：1.40      累涨：32.38     5.66      9.56      17.16     3.18      5日： 2.23      2         累涨修正：59.14     1
+//        ZIYUAN_NONGYE.put("159616", "资源-农业             ");//农牧ETF               市值：0.70      累涨：31.58     8.51      9.47      13.60     3.10      5日： 2.25      1         累涨修正：58.58     2
+//        ZIYUAN_NONGYE.put("516670", "资源-农业             ");//畜牧养殖ETF           市值：6.45      累涨：32.55     7.18      8.94      16.43     2.63      5日： 2.01      4         累涨修正：56.67     3
+//        ZIYUAN_NONGYE.put("159865", "资源-农业             ");//养殖ETF               市值：32.05     累涨：30.49     6.75      9.10      14.64     2.37      5日： 2.03      5         累涨修正：54.85     4
+//        ZIYUAN_NONGYE.put("159867", "资源-农业             ");//畜牧ETF               市值：5.86      累涨：31.79     7.17      9.12      15.50     2.16      5日： 1.83      6         累涨修正：53.75     5
+//        ZIYUAN_NONGYE.put("159827", "资源-农业             ");//农业50ETF             市值：1.05      累涨：31.62     8.36      9.18      14.08     2.03      5日： 1.62      3         累涨修正：51.06     6
+//        ZIYUAN_NONGYE.put("159825", "资源-农业             ");//农业ETF               市值：21.66     累涨：30.38     7.73      9.08      13.57     2.04      5日： 1.60      7         累涨修正：49.58     7
+//        ZIYUAN_NONGYE.put("159587", "资源-农业             ");//粮食50ETF             市值：0.78      累涨：31.29     7.82      6.05      17.42     1.75      5日： 1.40      8         累涨修正：48.09     8
+//        ZIYUAN_NONGYE.put("516810", "资源-农业             ");//农业50ETF             市值：1.89      累涨：28.64     7.30      8.79      12.55     2.29      5日： 1.57      9         累涨修正：47.48     9
+//        ZIYUAN_NONGYE.put("159698", "资源-农业             ");//粮食ETF               市值：4.60      累涨：30.43     7.67      5.26      17.50     1.69      5日： 1.24      10        累涨修正：45.31     10
+//        ZIYUAN_NONGYE.put("562900", "资源-农业             ");//农业ETF易方达         市值：0.87      累涨：28.36     7.18      8.38      12.80     1.76      5日： 1.35      11        累涨修正：44.56     11
+//        ZIYUAN_NONGYE.put("516550", "资源-农业             ");//农业ETF               市值：2.36      累涨：24.39     6.86      7.70      9.83      1.70      5日： 0.93      12        累涨修正：35.55     12
     }
 
     public static Map<String, String> ZIYUAN_XIYOU = new HashMap<>();
 
     static {
-        ZIYUAN_XIYOU.put("512400", "资源-稀有             ");//有色金属ETF           市值：61.56     累涨：31.19     9.83      10.25     13.48     8.53      3.20      1
-        ZIYUAN_XIYOU.put("159871", "资源-稀有             ");//有色金属ETF           市值：1.12      累涨：29.20     9.02      9.30      12.70     8.48      3.30      2
-        ZIYUAN_XIYOU.put("159652", "资源-稀有             ");//有色50ETF             市值：3.19      累涨：29.28     8.83      9.51      12.98     8.31      3.48      3
-        ZIYUAN_XIYOU.put("159876", "资源-稀有             ");//有色龙头ETF           市值：0.79      累涨：28.79     9.26      9.23      12.73     8.24      3.04      4
-        ZIYUAN_XIYOU.put("516650", "资源-稀有             ");//有色金属ETF基金       市值：1.16      累涨：29.38     9.57      9.55      12.27     8.13      3.18      5
-        ZIYUAN_XIYOU.put("159881", "资源-稀有             ");//有色60ETF             市值：0.60      累涨：29.22     9.66      9.12      12.55     8.11      2.89      6
-        ZIYUAN_XIYOU.put("159880", "资源-稀有             ");//有色ETF基金           市值：1.13      累涨：28.77     8.80      9.56      12.14     7.95      3.17      7
-        ZIYUAN_XIYOU.put("560860", "资源-稀有             ");//工业有色ETF           市值：5.48      累涨：30.47     10.48     9.53      12.90     7.86      1.71      8
-        ZIYUAN_XIYOU.put("561800", "资源-稀有             ");//稀有金属ETF基金       市值：0.95      累涨：35.80     11.75     12.27     16.35     7.07      1.57      9
-        ZIYUAN_XIYOU.put("516150", "资源-稀有             ");//稀土ETF基金           市值：19.05     累涨：40.41     13.14     18.27     16.39     6.93      2.00      10
-        ZIYUAN_XIYOU.put("159671", "资源-稀有             ");//稀有金属ETF基金       市值：5.92      累涨：33.48     11.30     12.50     14.08     6.80      1.74      11
-        ZIYUAN_XIYOU.put("159713", "资源-稀有             ");//稀土ETF               市值：3.31      累涨：37.79     13.10     16.02     15.69     6.76      1.94      12
-        ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：8.28      累涨：40.02     13.08     17.72     16.31     6.74      2.07      13
-        ZIYUAN_XIYOU.put("159608", "资源-稀有             ");//稀有金属ETF           市值：2.46      累涨：32.84     11.22     11.83     13.71     6.61      1.46      14
-        ZIYUAN_XIYOU.put("159715", "资源-稀有             ");//稀土ETF易方达         市值：2.03      累涨：39.12     13.38     17.53     15.33     6.47      1.60      15
-        ZIYUAN_XIYOU.put("562800", "资源-稀有             ");//稀有金属ETF           市值：11.58     累涨：34.13     11.35     13.09     13.76     6.43      1.49      16
-        ZIYUAN_XIYOU.put("159980", "资源-稀有             ");//有色ETF               市值：12.13     累涨：15.84     3.48      5.78      6.58      4.79      2.96      17
+        ZIYUAN_XIYOU.put("516150", "资源-稀有             ");//稀土ETF基金           市值：16.15     累涨：40.46     16.97     12.56     10.93     3.88      5日： 2.32      1         累涨修正：63.74     1
+//        ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：8.67      累涨：38.10     16.97     11.76     9.37      3.92      5日： 2.31      4         累涨修正：61.62     2
+//        ZIYUAN_XIYOU.put("159715", "资源-稀有             ");//稀土ETF易方达         市值：1.90      累涨：38.12     16.17     11.56     10.39     3.86      5日： 2.22      6         累涨修正：61.28     3
+        ZIYUAN_XIYOU.put("159652", "资源-稀有             ");//有色50ETF             市值：2.62      累涨：35.54     7.13      14.34     14.07     4.03      5日：           2         累涨修正：59.72     4
+//        ZIYUAN_XIYOU.put("512400", "资源-稀有             ");//有色金属ETF           市值：45.33     累涨：35.16     7.58      13.64     13.94     3.99      5日： 0.19      3         累涨修正：59.10     5
+//        ZIYUAN_XIYOU.put("159876", "资源-稀有             ");//有色龙头ETF           市值：0.67      累涨：33.33     6.52      13.33     13.48     4.06      5日： 0.27      5         累涨修正：57.69     6
+//        ZIYUAN_XIYOU.put("159881", "资源-稀有             ");//有色60ETF             市值：0.50      累涨：31.78     6.40      13.39     11.99     4.17      5日： 0.20      8         累涨修正：56.80     7
+//        ZIYUAN_XIYOU.put("516650", "资源-稀有             ");//有色金属ETF基金       市值：1.07      累涨：32.68     6.43      13.95     12.30     3.96      5日： 0.20      7         累涨修正：56.44     8
+//        ZIYUAN_XIYOU.put("159713", "资源-稀有             ");//稀土ETF               市值：3.07      累涨：34.80     14.99     11.77     8.04      3.51      5日： 2.02      11        累涨修正：55.86     9
+//        ZIYUAN_XIYOU.put("159871", "资源-稀有             ");//有色金属ETF           市值：0.90      累涨：32.95     6.89      13.51     12.55     3.70      5日：           9         累涨修正：55.15     10
+//        ZIYUAN_XIYOU.put("159880", "资源-稀有             ");//有色ETF基金           市值：0.94      累涨：31.73     6.28      13.34     12.11     3.65      5日：           14        累涨修正：53.63     11
+//        ZIYUAN_XIYOU.put("560860", "资源-稀有             ");//工业有色ETF           市值：3.85      累涨：31.08     7.34      12.89     10.85     3.67      5日： 1.38      10        累涨修正：53.10     12
+//        ZIYUAN_XIYOU.put("159671", "资源-稀有             ");//稀有金属ETF基金       市值：4.91      累涨：32.80     10.38     12.16     10.26     2.54      5日： 0.74      12        累涨修正：48.04     13
+//        ZIYUAN_XIYOU.put("561800", "资源-稀有             ");//稀有金属ETF基金       市值：0.88      累涨：34.32     11.41     13.12     9.79      2.14      5日： 0.58      13        累涨修正：47.16     14
+//        ZIYUAN_XIYOU.put("562800", "资源-稀有             ");//稀有金属ETF           市值：8.88      累涨：31.67     11.19     11.52     8.96      2.49      5日： 0.61      15        累涨修正：46.61     15
+//        ZIYUAN_XIYOU.put("159608", "资源-稀有             ");//稀有金属ETF           市值：2.15      累涨：30.97     10.69     11.74     8.54      2.17      5日： 0.54      16        累涨修正：43.99     16
+//        ZIYUAN_XIYOU.put("159980", "资源-稀有             ");//有色ETF               市值：9.24      累涨：21.94     5.16      7.51      9.27      3.40      5日： 1.02      17        累涨修正：42.34     17
     }
 
     public static Map<String, String> ZIYUAN_COMMON = new HashMap<>();
 
     static {
-        ZIYUAN_COMMON.put("516890", "资源-通用             ");//新材料ETF指数基金     市值：0.25      累涨：                                                            1
-        ZIYUAN_COMMON.put("159761", "资源-通用             ");//新材料50ETF           市值：1.48      累涨：                                                            2
-        ZIYUAN_COMMON.put("159703", "资源-通用             ");//新材料ETF             市值：0.56      累涨：                                                            3
-        ZIYUAN_COMMON.put("562850", "资源-通用             ");//央企能源ETF           市值：1.42      累涨：                                                            4
-        ZIYUAN_COMMON.put("561330", "资源-通用             ");//矿业ETF               市值：0.79      累涨：                                                            6
-        ZIYUAN_COMMON.put("561260", "资源-通用             ");//能源ETF               市值：0.85      累涨：                                                            7
-        ZIYUAN_COMMON.put("510170", "资源-通用             ");//大宗商品ETF           市值：1.68      累涨：                                                            8
-        ZIYUAN_COMMON.put("159690", "资源-通用             ");//矿业ETF               市值：0.14      累涨：                                                            9
-        ZIYUAN_COMMON.put("561790", "资源-通用             ");//央企现代能源ETF       市值：0.51      累涨：                                                            10
-        ZIYUAN_COMMON.put("515220", "资源-通用             ");//煤炭ETF               市值：41.55     累涨：                                                            11
-        ZIYUAN_COMMON.put("515210", "资源-通用             ");//钢铁ETF               市值：17.21     累涨：                                                            12
-        ZIYUAN_COMMON.put("159981", "资源-通用             ");//能源化工ETF           市值：5.00      累涨：                                                            13
-        ZIYUAN_COMMON.put("516220", "资源-通用             ");//化工龙头ETF           市值：1.21      累涨：                                                            14
-        ZIYUAN_COMMON.put("516360", "资源-通用             ");//新材料ETF             市值：0.59      累涨：                                                            16
-        ZIYUAN_COMMON.put("159870", "资源-通用             ");//化工ETF               市值：17.44     累涨：                                                            17
-        ZIYUAN_COMMON.put("159930", "资源-通用             ");//能源ETF               市值：3.14      累涨：                                                            18
-        ZIYUAN_COMMON.put("516020", "资源-通用             ");//化工ETF               市值：4.85      累涨：                                                            20
-        ZIYUAN_COMMON.put("159985", "资源-通用             ");//豆粕ETF               市值：28.21     累涨：                                                            21
-        ZIYUAN_COMMON.put("516120", "资源-通用             ");//化工50ETF             市值：1.98      累涨：                                                            22
-        ZIYUAN_COMMON.put("516710", "资源-通用             ");//新材料50ETF           市值：0.45      累涨：                                                            23
-        ZIYUAN_COMMON.put("562010", "资源-通用             ");//绿色能源ETF           市值：0.16      累涨：                                                            24
-        ZIYUAN_COMMON.put("159763", "资源-通用             ");//新材料ETF基金         市值：0.58      累涨：                                                            25
-        ZIYUAN_COMMON.put("516570", "资源-通用             ");//化工行业ETF           市值：0.60      累涨：                                                            26
-        ZIYUAN_COMMON.put("159945", "资源-通用             ");//能源ETF基金           市值：0.35      累涨：                                                            27
-        ZIYUAN_COMMON.put("516480", "资源-通用             ");//新材料ETF基金         市值：0.13      累涨：                                                            28
-        ZIYUAN_COMMON.put("510410", "资源-通用             ");//资源ETF               市值：4.07      累涨：                                                            29
-        ZIYUAN_COMMON.put("159944", "资源-通用             ");//材料ETF               市值：0.23      累涨：                                                            30
+        ZIYUAN_COMMON.put("159690", "资源-通用             ");//矿业ETF               市值：0.16      累涨：35.79     7.24      13.72     14.83     5.76      5日：           3         累涨修正：70.35     1
+        ZIYUAN_COMMON.put("515210", "资源-通用             ");//钢铁ETF               市值：17.01     累涨：35.64     16.41     7.66      11.57     4.46      5日： 2.67      1         累涨修正：62.40     2
+//        ZIYUAN_COMMON.put("561330", "资源-通用             ");//矿业ETF               市值：0.73      累涨：33.58     6.69      13.24     13.65     4.34      5日：           5         累涨修正：59.62     3
+//        ZIYUAN_COMMON.put("588160", "资源-通用             ");//科创材料ETF           市值：1.43      累涨：40.87     19.10     6.35      15.42     2.88      5日： 0.17      23        累涨修正：58.15     4
+//        ZIYUAN_COMMON.put("588010", "资源-通用             ");//科创新材料ETF         市值：2.60      累涨：40.43     18.50     6.44      15.49     2.41      5日：           43        累涨修正：54.89     5
+//        ZIYUAN_COMMON.put("562010", "资源-通用             ");//绿色能源ETF           市值：0.14      累涨：28.93     13.39     7.32      8.22      3.68      5日： 1.89      4         累涨修正：51.01     6
+//        ZIYUAN_COMMON.put("516480", "资源-通用             ");//新材料ETF基金         市值：0.13      累涨：30.23     10.71     9.23      10.29     2.79      5日： 1.21      2         累涨修正：46.97     7
+//        ZIYUAN_COMMON.put("159763", "资源-通用             ");//新材料ETF基金         市值：0.53      累涨：29.74     13.84     6.88      9.02      2.67      5日： 0.44      11        累涨修正：45.76     8
+//        ZIYUAN_COMMON.put("159981", "资源-通用             ");//能源化工ETF           市值：4.42      累涨：19.83     4.32      5.03      10.48     4.29      5日： 3.33      8         累涨修正：45.57     9
+//        ZIYUAN_COMMON.put("516020", "资源-通用             ");//化工ETF               市值：4.42      累涨：25.34     9.17      6.70      9.47      3.12      5日： 1.90      6         累涨修正：44.06     10
+//        ZIYUAN_COMMON.put("510410", "资源-通用             ");//资源ETF               市值：3.54      累涨：27.69     3.78      10.31     13.60     2.52      5日： 0.50      9         累涨修正：42.81     11
+//        ZIYUAN_COMMON.put("516710", "资源-通用             ");//新材料50ETF           市值：0.40      累涨：28.19     13.16     7.13      7.90      2.40      5日： 0.65      18        累涨修正：42.59     12
+//        ZIYUAN_COMMON.put("516120", "资源-通用             ");//化工50ETF             市值：1.81      累涨：24.99     9.23      6.45      9.31      2.90      5日： 1.87      7         累涨修正：42.39     13
+//        ZIYUAN_COMMON.put("159870", "资源-通用             ");//化工ETF               市值：14.20     累涨：24.25     9.16      6.21      8.88      2.93      5日： 1.82      12        累涨修正：41.83     14
+//        ZIYUAN_COMMON.put("516890", "资源-通用             ");//新材料ETF指数基金     市值：0.24      累涨：27.60     13.33     6.97      7.30      2.27      5日： 1.02      15        累涨修正：41.22     15
+//        ZIYUAN_COMMON.put("159944", "资源-通用             ");//材料ETF               市值：0.22      累涨：25.26     6.83      8.82      9.61      2.64      5日： 0.33      13        累涨修正：41.10     16
+//        ZIYUAN_COMMON.put("159761", "资源-通用             ");//新材料50ETF           市值：1.37      累涨：28.44     13.62     6.65      8.17      2.07      5日： 0.82      17        累涨修正：40.86     17
+//        ZIYUAN_COMMON.put("159985", "资源-通用             ");//豆粕ETF               市值：26.40     累涨：30.09     11.05     7.61      11.43     1.78      5日： 0.65      10        累涨修正：40.77     18
+//        ZIYUAN_COMMON.put("159703", "资源-通用             ");//新材料ETF             市值：0.54      累涨：28.29     12.80     6.82      8.67      1.95      5日： 0.70      19        累涨修正：39.99     19
+//        ZIYUAN_COMMON.put("516220", "资源-通用             ");//化工龙头ETF           市值：1.14      累涨：23.30     8.46      6.41      8.43      2.67      5日： 1.66      14        累涨修正：39.32     20
+//        ZIYUAN_COMMON.put("510170", "资源-通用             ");//大宗商品ETF           市值：1.55      累涨：27.18     5.11      9.70      12.37     1.86      5日： 0.23      16        累涨修正：38.34     21
+//        ZIYUAN_COMMON.put("516360", "资源-通用             ");//新材料ETF             市值：0.54      累涨：26.26     12.80     6.54      6.92      1.70      5日： 0.46      25        累涨修正：36.46     22
+//        ZIYUAN_COMMON.put("516570", "资源-通用             ");//化工行业ETF           市值：0.61      累涨：19.41     5.75      5.81      7.85      2.15      5日： 1.57      20        累涨修正：32.31     23
+//        ZIYUAN_COMMON.put("159945", "资源-通用             ");//能源ETF基金           市值：0.27      累涨：20.72     3.28      7.49      9.95      1.48      5日： 0.40      23        累涨修正：29.60     24
+//        ZIYUAN_COMMON.put("159930", "资源-通用             ");//能源ETF               市值：2.56      累涨：20.64     3.30      7.59      9.75      1.37      5日： 0.40      21        累涨修正：28.86     25
+//        ZIYUAN_COMMON.put("561790", "资源-通用             ");//央企现代能源ETF       市值：0.48      累涨：17.53     3.39      4.74      9.40      1.83      5日： 1.06      24        累涨修正：28.51     26
+//        ZIYUAN_COMMON.put("515220", "资源-通用             ");//煤炭ETF               市值：34.47     累涨：24.29     4.75      10.82     8.72      0.30      5日： 0.20      22        累涨修正：26.09     27
+//        ZIYUAN_COMMON.put("561260", "资源-通用             ");//能源ETF               市值：0.62      累涨：15.00     3.40      5.33      6.27      1.74      5日： 1.06      26        累涨修正：25.44     28
+//        ZIYUAN_COMMON.put("562850", "资源-通用             ");//央企能源ETF           市值：1.28      累涨：16.11     3.29      4.75      8.07      1.43      5日： 0.86      27        累涨修正：24.69     29
     }
 
     public static Map<String, String> ZIYUAN = new HashMap<>();
@@ -1694,8 +1695,8 @@ public class ContMapEtfAll {
         //资源
         {
 
-        condition.setLikeNameList(nameLikeList);
-        condition.setNotLikeNameList(nameNoLikeList);
+            condition.setLikeNameList(nameLikeList);
+            condition.setNotLikeNameList(nameNoLikeList);
 //        typeEn = "ZIYUAN_COMMON";
 //        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
         }
@@ -1710,15 +1711,23 @@ public class ContMapEtfAll {
         int num = 0;//序号
         //计算涨幅合计修正值：最近60日+最近5日乘12
         for (EtfAdrCountVo vo : etfListLikeName) {
-            BigDecimal day60 = vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP);
-            BigDecimal day5 = vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP);
-            BigDecimal day5Cheng12 = day5.multiply(new BigDecimal("12"));
-            BigDecimal day60and5Cheng12 = day60.add(day5Cheng12);
-            vo.setAdrUpSum_60_and_10c6(day60and5Cheng12);
+            BigDecimal adr_up_sum_1_10 = vo.getADR_UP_SUM_1_10();
+            BigDecimal adr_up_sum_1_60 = vo.getADR_UP_SUM_1_60();
+            BigDecimal day10 = new BigDecimal("0");
+            BigDecimal day60 = new BigDecimal("0");
+            if (adr_up_sum_1_10 != null) {
+                day10 = adr_up_sum_1_10.setScale(2, BigDecimal.ROUND_HALF_UP);
+            }
+            if (adr_up_sum_1_60 != null) {
+                day60 = adr_up_sum_1_60.setScale(2, BigDecimal.ROUND_HALF_UP);
+            }
+            BigDecimal day60and10Cheng6 = day60.add(day10.multiply(new BigDecimal("6")));
+            vo.setAdrUpSum_60_and_10c6(day60and10Cheng6);
         }
         //排序
         etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getAdrUpSum_60_and_10c6, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
 
+        System.out.println("    static {");
         for (EtfAdrCountVo vo : etfListLikeName) {
             StringBuffer sb = new StringBuffer();
 
@@ -1765,19 +1774,26 @@ public class ContMapEtfAll {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
             sb.append(StockUtil.formatStName("累涨修正：", SIZE_10));
             sb.append(StockUtil.formatDouble(vo.getAdrUpSum_60_and_10c6(), SIZE_10));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
+
+
             System.out.println(sb);
         }
+        System.out.println("    }");
 
 
     }
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-18";
-        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-29";
+//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//资源-石油
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE);
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU);
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON);
     }
 }

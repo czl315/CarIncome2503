@@ -12,7 +12,7 @@ public class ContEtfNameKey {
      * 资源
      */
     public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源","新材料", "材料");
-    public static List ZIYUAN_COMMON_NOLIKE = Arrays.asList("油气", "新能源");
+    public static List ZIYUAN_COMMON_NOLIKE = Arrays.asList("油气", "新能源","半导体");
     public static List ZIYUAN_OIL = Arrays.asList("石油", "石化", "油气");//资源-石油
     public static List ZIYUAN_XIYOU = Arrays.asList("稀有金属", "稀土", "有色");
     public static List ZIYUAN_NONGYE = Arrays.asList("农", "畜牧", "养殖", "粮食");
