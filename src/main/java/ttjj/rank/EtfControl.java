@@ -34,10 +34,9 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-29";
-        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        if (!date.equals(today)) {
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-30";
+        if (!DateUtil.isTodayBySpDate(date,DateUtil.YYYYMMDD)) {
             System.out.println("注意！！！非今日数据:" + date);
 //            return;
         }
@@ -46,7 +45,7 @@ public class EtfControl {
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setF12("512240");
-        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
+//        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(KEJI_HK);
@@ -58,15 +57,12 @@ public class EtfControl {
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        for (EtfAdrCountVo vo : stockAdrCountList) {
-            System.out.println(vo.getF12() + ":" + vo.getF14());
-        }
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
-//        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
         //TODO 查询我的持仓etf数据
@@ -539,18 +535,18 @@ public class EtfControl {
 
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("20"));//涨序排序前n的数据
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(2);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
-        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
+//        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
+//        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
         condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
 //        condition.setType_name(typeName);
-        condition.setMaxNetAreaDay10(null);//净值区间最高限定
-        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
+//        condition.setMaxNetAreaDay10(null);//净值区间最高限定
+//        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
         if (stockAdrCountList == null) {
             System.out.println("数据为null");

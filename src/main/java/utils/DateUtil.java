@@ -32,7 +32,10 @@ public class DateUtil {
 //        System.out.println(getWeek(new Date()));
 //        System.out.println(getWeekByYyyyMmDd("2021-08-29",DateUtil.YYYY_MM_DD));
 //        System.out.println(getYearWeek("2021-08-29", DateUtil.YYYY_MM_DD));
-        System.out.println(getAddDays(YYYY_MM_DD, "2022-05-01", -1));
+//        System.out.println(getAddDays(YYYY_MM_DD, "2022-05-01", -1));
+
+        //检查是否是今天
+        isTodayBySpDate("20250501",YYYYMMDD);
 
 //        //获取格式化日期
 //        String date = getDateStrAddDaysByFormat(YYYY_MM_DD, 2021, 2, 28, -1);
@@ -165,20 +168,20 @@ public class DateUtil {
     }
 
     /**
-     *
      * @return
      */
     public static String getCurDateTime() {
         return DateUtil.getCurDateStrAddDaysByFormat(DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0), 0);
     }
+
     /**
-     *
      * @param format
      * @return
      */
     public static String getCurDateTime(String format) {
         return DateUtil.getCurDateStrAddDaysByFormat(format, 0);
     }
+
     /**
      * 获取当前日期增加或减少天数的日期格式
      *
@@ -424,4 +427,25 @@ public class DateUtil {
         }
         return StockService.findBegDate(date, days);
     }
+
+    /**
+     * 检查是否是今天
+     *
+     * @param spDate
+     * @return
+     */
+    public static boolean isTodayBySpDate(String spDate,String format) {
+        boolean rs = false;
+        //如果非今天，退出比较
+        String today = DateUtil.getToday(format);
+        if (spDate.equals(today)) {
+            System.out.println("特定日期等于今日：【" + spDate + "】：【" + today + "】");
+            rs = true;
+        } else {
+            System.out.println("特定日期不不不不不等于今日：【" + spDate + "】：【" + today + "】");
+        }
+        return rs;
+    }
+
+
 }
