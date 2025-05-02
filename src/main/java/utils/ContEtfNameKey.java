@@ -87,7 +87,7 @@ public class ContEtfNameKey {
     public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济");//科技-软件
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
-    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技龙头", "新经济");//科技-香港
+    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技","科技ETF沪港深", "科技龙头", "新经济");//科技-香港
     public static List KEJI_JUNGONG = Arrays.asList("国防", "军工");//科技-军工
     public static List KEJI = new ArrayList();//科技
 
