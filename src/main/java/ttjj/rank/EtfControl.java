@@ -37,7 +37,6 @@ public class EtfControl {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         String date = "2025-04-30";
         if (!DateUtil.isTodayBySpDate(date,DateUtil.YYYYMMDD)) {
-            System.out.println("注意！！！非今日数据:" + date);
 //            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
@@ -530,12 +529,15 @@ public class EtfControl {
      * @param date 日期
      */
     public static void findByDateOrderByDescAdr(String date) {
+        boolean isShowLog = false;
+        long begTime = System.currentTimeMillis();
+        String methodName = "查询etf涨幅数据：";
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("100"));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(2);//每个类型限定n个
 
         // 查询条件
@@ -552,8 +554,6 @@ public class EtfControl {
             System.out.println("数据为null");
             return;
         }
-
-        System.out.println("查询超过均线列表：日期：" + date);
 
         handlerShowHead();//首行标题信息
 
@@ -1356,6 +1356,68 @@ public class EtfControl {
 //            if(etfAdrCount.getF14().equals("上证50ETF")){
 //                System.out.println(funcName + "更新-特定：" + JSON.toJSONString(etfAdrCount));
 //            }
+            int updateRs = EtfAdrCountService.update(etfAdrCount);
+            if (updateRs != 1) {
+                rsCountInsert = rsCountInsert + EtfAdrCountService.insert(etfAdrCount);
+//                System.out.println(methodName + "更新-失败：" + JSON.toJSONString(etfAdrCount));
+//                System.out.println(methodName + "如果更新失败，可能是没有插入，执行一次插入操作：" + rsCountInsert);
+            } else {
+                rsCountUpdate++;
+            }
+        }
+        if (isShowLog) {
+            System.out.println(methodName + "，用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",更新成功：" + rsCountUpdate + ",插入成功：：" + rsCountInsert);
+        }
+
+    }
+
+
+    /**
+     * 更新类型
+     * @param condition 条件
+     * @param date 日期
+     * @param isUpdateNoToday   是否今日更新
+     */
+    public static void updateTypeName(CondEtfAdrCount condition, String date, boolean isUpdateNoToday) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "更新类型：";
+
+        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        if (!date.equals(today)) {
+            if (isUpdateNoToday) {
+                System.out.println("注意！！！非今日数据，也更新数据:" + date);
+            } else {
+                System.out.println("非今日数据，不再更新数据:" + date);
+                return;
+            }
+        }
+
+        List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
+        //1、查询etf列表
+        List<RankBizDataDiff> etfList = listEtfListLastDay();
+        for (RankBizDataDiff etf : etfList) {
+            String code = etf.getF12();
+
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setDate(date);
+            entity.setF12(code);
+
+            //更新类型
+            String type = ContMapEtfAll.ETF_All.get(code);
+            if (type != null) {
+                type = type.replace(" ", "");
+                entity.setType_name(type);
+            }
+
+            entity.setUPDATE_TIME(new Date());
+
+            etfAdrCountList.add(entity);
+        }
+
+        int rsCountUpdate = 0;
+        int rsCountInsert = 0;
+        for (EtfAdrCount etfAdrCount : etfAdrCountList) {
             int updateRs = EtfAdrCountService.update(etfAdrCount);
             if (updateRs != 1) {
                 rsCountInsert = rsCountInsert + EtfAdrCountService.insert(etfAdrCount);

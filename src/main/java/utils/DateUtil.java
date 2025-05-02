@@ -35,7 +35,7 @@ public class DateUtil {
 //        System.out.println(getAddDays(YYYY_MM_DD, "2022-05-01", -1));
 
         //检查是否是今天
-        isTodayBySpDate("20250501",YYYYMMDD);
+        isTodayBySpDate("20250501", YYYYMMDD);
 
 //        //获取格式化日期
 //        String date = getDateStrAddDaysByFormat(YYYY_MM_DD, 2021, 2, 28, -1);
@@ -434,8 +434,11 @@ public class DateUtil {
      * @param spDate
      * @return
      */
-    public static boolean isTodayBySpDate(String spDate,String format) {
+    public static boolean isTodayBySpDate(String spDate, String format) {
         boolean rs = false;
+        if (spDate.contains("-")) {
+            spDate = spDate.replace("-", "");
+        }
         //如果非今天，退出比较
         String today = DateUtil.getToday(format);
         if (spDate.equals(today)) {

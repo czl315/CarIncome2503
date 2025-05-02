@@ -387,70 +387,71 @@ public class ContMapEtfAll {
     public static Map<String, String> KEJI_RUAN_JIAN = new HashMap<>();//科技-软件
 
     static {
-        KEJI_RUAN_JIAN.put("588790", "科技-软件             ");//科创AIETF             市值：26.83     累涨：70.14     30.51     24.94     14.69     10.08     7.11      1
-        KEJI_RUAN_JIAN.put("588730", "科技-软件             ");//科创人工智能ETF       市值：4.77      累涨：54.28     16.47     23.68     14.13     9.87      7.26      2
-        KEJI_RUAN_JIAN.put("588930", "科技-软件             ");//科创板人工智能ETF     市值：7.32      累涨：66.32     28.29     23.72     14.31     9.85      7.34      3
-        KEJI_RUAN_JIAN.put("589520", "科技-软件             ");//科创人工智能ETF华宝   市值：2.58      累涨：14.24                         14.24     9.70      7.41      4
-        KEJI_RUAN_JIAN.put("588760", "科技-软件             ");//人工智能ETF科创       市值：13.44     累涨：57.17     17.58     25.44     14.15     9.60      7.34      5
-        KEJI_RUAN_JIAN.put("159363", "科技-软件             ");//创业板人工智能ETF华宝 市值：14.50     累涨：68.96     31.95     24.08     12.93     8.91      7.88      6
-        KEJI_RUAN_JIAN.put("159388", "科技-软件             ");//创业板人工智能ETF国泰 市值：2.53      累涨：8.89                          8.89      8.89      8.89      7
-        KEJI_RUAN_JIAN.put("588260", "科技-软件             ");//科创信息ETF           市值：1.39      累涨：51.13     19.15     20.34     11.64     8.45      7.12      8
-        KEJI_RUAN_JIAN.put("159851", "科技-软件             ");//金融科技ETF           市值：41.59     累涨：66.54     32.23     20.81     13.50     8.36      6.76      9
-        KEJI_RUAN_JIAN.put("516100", "科技-软件             ");//金融科技ETF华夏       市值：2.63      累涨：65.00     31.73     20.85     12.42     8.11      6.74      10
-        KEJI_RUAN_JIAN.put("516860", "科技-软件             ");//金融科技ETF           市值：8.65      累涨：66.29     32.34     21.07     12.88     8.01      6.70      11
-        KEJI_RUAN_JIAN.put("588100", "科技-软件             ");//科创信息技术ETF       市值：2.83      累涨：51.18     19.72     20.14     11.32     7.86      6.24      12
-        KEJI_RUAN_JIAN.put("588770", "科技-软件             ");//科创信息技术ETF摩根   市值：3.72      累涨：8.55                          8.55      7.85      6.53      13
-        KEJI_RUAN_JIAN.put("159381", "科技-软件             ");//创业板人工智能ETF华夏 市值：2.24      累涨：7.79                          7.79      7.79      7.14      14
-        KEJI_RUAN_JIAN.put("159539", "科技-软件             ");//信创50ETF             市值：0.71      累涨：55.73     24.48     20.82     10.43     7.52      7.44      15
-        KEJI_RUAN_JIAN.put("560660", "科技-软件             ");//云50ETF               市值：0.76      累涨：71.73     35.31     26.01     10.41     7.48      6.17      16
-        KEJI_RUAN_JIAN.put("159540", "科技-软件             ");//信创ETF易方达         市值：1.70      累涨：57.75     25.94     21.87     9.94      7.37      6.73      17
-        KEJI_RUAN_JIAN.put("562920", "科技-软件             ");//信息安全ETF           市值：0.60      累涨：58.83     28.79     20.81     9.23      7.22      6.69      18
-        KEJI_RUAN_JIAN.put("159530", "科技-软件             ");//机器人ETF易方达       市值：7.12      累涨：59.98     25.11     23.85     11.02     7.01      6.25      19
-        KEJI_RUAN_JIAN.put("159538", "科技-软件             ");//信创ETF富国           市值：0.55      累涨：55.96     24.21     22.40     9.35      6.99      5.93      20
-        KEJI_RUAN_JIAN.put("159939", "科技-软件             ");//信息技术ETF           市值：15.16     累涨：50.05     23.83     16.04     10.18     6.95      6.34      21
-        KEJI_RUAN_JIAN.put("159551", "科技-软件             ");//机器人产业ETF         市值：3.22      累涨：62.65     26.75     24.38     11.52     6.89      5.76      22
-        KEJI_RUAN_JIAN.put("159526", "科技-软件             ");//机器人指数ETF         市值：5.45      累涨：66.19     29.22     25.57     11.40     6.89      5.90      23
-        KEJI_RUAN_JIAN.put("517800", "科技-软件             ");//人工智能50ETF         市值：2.87      累涨：56.58     24.18     22.95     9.45      6.89      5.60      24
-        KEJI_RUAN_JIAN.put("562500", "科技-软件             ");//机器人ETF             市值：118.81    累涨：63.89     27.53     24.54     11.82     6.88      5.76      25
-        KEJI_RUAN_JIAN.put("512330", "科技-软件             ");//信息科技ETF           市值：5.39      累涨：53.98     25.21     17.24     11.53     6.87      6.00      26
-        KEJI_RUAN_JIAN.put("159738", "科技-软件             ");//云计算ETF华泰柏瑞     市值：5.83      累涨：72.08     34.39     27.97     9.72      6.83      5.59      27
-        KEJI_RUAN_JIAN.put("560630", "科技-软件             ");//机器人产业ETF         市值：5.04      累涨：6.79                          6.79      6.79      5.76      28
-        KEJI_RUAN_JIAN.put("159613", "科技-软件             ");//信息安全ETF           市值：0.70      累涨：59.65     29.06     21.67     8.92      6.78      6.45      29
-        KEJI_RUAN_JIAN.put("560800", "科技-软件             ");//数字经济ETF           市值：7.53      累涨：51.20     21.91     19.76     9.53      6.76      6.12      30
-        KEJI_RUAN_JIAN.put("159770", "科技-软件             ");//机器人ETF             市值：46.82     累涨：63.25     27.09     24.63     11.53     6.65      5.68      31
-        KEJI_RUAN_JIAN.put("512930", "科技-软件             ");//AI人工智能ETF         市值：18.64     累涨：56.55     24.60     22.08     9.87      6.63      5.82      32
-        KEJI_RUAN_JIAN.put("516000", "科技-软件             ");//数据ETF               市值：4.17      累涨：69.64     33.59     27.52     8.53      6.57      5.75      33
-        KEJI_RUAN_JIAN.put("516510", "科技-软件             ");//云计算ETF             市值：31.20     累涨：67.48     33.11     25.47     8.90      6.42      5.40      34
-        KEJI_RUAN_JIAN.put("562360", "科技-软件             ");//机器人ETF基金         市值：4.12      累涨：62.97     27.13     24.80     11.04     6.39      5.15      35
-        KEJI_RUAN_JIAN.put("516630", "科技-软件             ");//云计算50ETF           市值：6.02      累涨：66.49     32.74     24.87     8.88      6.33      5.45      36
-        KEJI_RUAN_JIAN.put("560850", "科技-软件             ");//信创50ETF             市值：2.66      累涨：68.19     35.00     25.12     8.07      6.33      6.04      37
-        KEJI_RUAN_JIAN.put("159890", "科技-软件             ");//云计算ETF             市值：4.90      累涨：68.36     33.78     25.68     8.90      6.28      5.52      38
-        KEJI_RUAN_JIAN.put("515070", "科技-软件             ");//人工智能AIETF         市值：48.22     累涨：55.05     24.47     21.16     9.42      6.25      5.68      39
-        KEJI_RUAN_JIAN.put("159527", "科技-软件             ");//云计算50ETF           市值：1.22      累涨：64.83     31.74     24.49     8.60      6.22      5.55      40
-        KEJI_RUAN_JIAN.put("159739", "科技-软件             ");//大数据ETF             市值：5.30      累涨：68.05     33.80     25.38     8.87      6.20      5.75      41
-        KEJI_RUAN_JIAN.put("517390", "科技-软件             ");//云计算沪港深ETF       市值：2.85      累涨：76.59     37.31     29.94     9.34      6.11      5.93      42
-        KEJI_RUAN_JIAN.put("562560", "科技-软件             ");//信息技术ETF           市值：0.33      累涨：46.10     22.44     15.10     8.56      6.11      5.89      43
-        KEJI_RUAN_JIAN.put("159559", "科技-软件             ");//机器人50ETF           市值：4.20      累涨：59.15     24.91     24.35     9.89      6.10      5.43      44
-        KEJI_RUAN_JIAN.put("515400", "科技-软件             ");//大数据ETF             市值：18.08     累涨：68.97     33.18     27.60     8.19      6.09      5.32      45
-        KEJI_RUAN_JIAN.put("159819", "科技-软件             ");//人工智能ETF           市值：146.98    累涨：56.47     24.92     22.26     9.29      6.04      5.41      46
-        KEJI_RUAN_JIAN.put("589010", "科技-软件             ");//科创人工智能ETF华夏   市值：2.29      累涨：5.98                          5.98      5.98      5.98      47
-        KEJI_RUAN_JIAN.put("515980", "科技-软件             ");//人工智能ETF           市值：30.13     累涨：56.42     25.70     21.92     8.80      5.96      5.56      48
-        KEJI_RUAN_JIAN.put("516700", "科技-软件             ");//大数据产业ETF         市值：1.15      累涨：67.31     32.58     26.78     7.95      5.95      5.53      49
-        KEJI_RUAN_JIAN.put("159658", "科技-软件             ");//数字经济ETF           市值：2.12      累涨：49.62     21.42     19.22     8.98      5.91      5.26      50
-        KEJI_RUAN_JIAN.put("562030", "科技-软件             ");//信创ETF基金           市值：0.59      累涨：66.90     34.54     24.90     7.46      5.84      5.54      51
-        KEJI_RUAN_JIAN.put("159586", "科技-软件             ");//计算机ETF南方         市值：2.40      累涨：67.42     37.08     22.49     7.85      5.82      5.58      52
-        KEJI_RUAN_JIAN.put("159590", "科技-软件             ");//软件50ETF             市值：2.62      累涨：64.51     34.89     21.30     8.32      5.76      5.01      53
-        KEJI_RUAN_JIAN.put("561010", "科技-软件             ");//软件ETF基金           市值：1.01      累涨：65.72     35.37     22.30     8.05      5.74      5.18      54
-        KEJI_RUAN_JIAN.put("159998", "科技-软件             ");//计算机ETF             市值：27.19     累涨：60.48     30.45     22.01     8.02      5.63      4.97      55
-        KEJI_RUAN_JIAN.put("512720", "科技-软件             ");//计算机ETF             市值：10.51     累涨：61.79     31.11     22.49     8.19      5.43      4.88      56
-        KEJI_RUAN_JIAN.put("562930", "科技-软件             ");//软件ETF易方达         市值：1.30      累涨：65.17     36.24     21.64     7.29      5.42      5.06      57
-        KEJI_RUAN_JIAN.put("159537", "科技-软件             ");//信创ETF               市值：0.89      累涨：55.09     25.83     21.43     7.83      5.36      4.37      58
-        KEJI_RUAN_JIAN.put("562570", "科技-软件             ");//信创ETF               市值：4.40      累涨：69.11     35.77     26.51     6.83      5.32      4.87      59
-        KEJI_RUAN_JIAN.put("560360", "科技-软件             ");//软件指数ETF           市值：1.59      累涨：66.55     37.10     22.36     7.09      5.30      4.67      60
-        KEJI_RUAN_JIAN.put("515230", "科技-软件             ");//软件ETF               市值：13.01     累涨：64.92     35.02     22.57     7.33      5.14      4.54      61
-        KEJI_RUAN_JIAN.put("159852", "科技-软件             ");//软件ETF               市值：27.17     累涨：65.54     36.38     21.86     7.30      5.08      4.47      62
-        KEJI_RUAN_JIAN.put("159899", "科技-软件             ");//软件龙头ETF           市值：2.96      累涨：61.41     34.97     19.07     7.37      5.05      4.44      63
-        KEJI_RUAN_JIAN.put("513360", "科技-软件             ");//教育ETF               市值：6.54      累涨：62.84     37.79     16.38     9.52      3.41      1.94      64
+        KEJI_RUAN_JIAN.put("159559", "科技-软件             ");//机器人50ETF           市值：4.85      累涨：57.59     27.23     11.52     18.84     9.44      5日： 6.14      累涨修正：131.27    1
+        KEJI_RUAN_JIAN.put("159530", "科技-软件             ");//机器人ETF易方达       市值：10.32     累涨：57.96     26.20     11.77     19.99     9.59      5日： 6.02      累涨修正：130.20    2
+        KEJI_RUAN_JIAN.put("159363", "科技-软件             ");//创业板人工智能ETF华宝 市值：14.11     累涨：60.96     28.18     13.17     19.61     8.44      5日： 4.94      累涨修正：120.24    3
+        KEJI_RUAN_JIAN.put("159526", "科技-软件             ");//机器人指数ETF         市值：6.00      累涨：60.93     31.90     11.98     17.05     7.86      5日： 4.94      累涨修正：120.21    4
+        KEJI_RUAN_JIAN.put("562500", "科技-软件             ");//机器人ETF             市值：137.51    累涨：58.06     28.72     12.55     16.79     7.78      5日： 5.15      累涨修正：119.86    5
+        KEJI_RUAN_JIAN.put("159738", "科技-软件             ");//云计算ETF华泰柏瑞     市值：5.89      累涨：67.77     37.77     14.29     15.71     8.15      5日： 4.26      累涨修正：118.89    6
+        KEJI_RUAN_JIAN.put("513360", "科技-软件             ");//教育ETF               市值：6.49      累涨：66.06     38.71     16.09     11.26     7.42      5日： 4.30      累涨修正：117.66    7
+        KEJI_RUAN_JIAN.put("562360", "科技-软件             ");//机器人ETF基金         市值：4.39      累涨：57.35     29.32     11.96     16.07     7.61      5日： 4.96      累涨修正：116.87    8
+        KEJI_RUAN_JIAN.put("159770", "科技-软件             ");//机器人ETF             市值：56.04     累涨：57.97     29.02     12.23     16.72     7.90      5日： 4.87      累涨修正：116.41    9
+        KEJI_RUAN_JIAN.put("560660", "科技-软件             ");//云50ETF               市值：0.78      累涨：64.85     34.86     13.24     16.75     8.02      5日： 4.28      累涨修正：116.21    10
+        KEJI_RUAN_JIAN.put("159551", "科技-软件             ");//机器人产业ETF         市值：3.62      累涨：56.81     28.26     12.06     16.49     7.57      5日： 4.75      累涨修正：113.81    11
+        KEJI_RUAN_JIAN.put("517390", "科技-软件             ");//云计算沪港深ETF       市值：2.90      累涨：70.73     42.72     13.56     14.45     6.67      5日： 3.46      累涨修正：112.25    12
+        KEJI_RUAN_JIAN.put("159527", "科技-软件             ");//云计算50ETF           市值：1.23      累涨：62.74     36.67     11.42     14.65     6.62      5日： 3.49      累涨修正：104.62    13
+        KEJI_RUAN_JIAN.put("516510", "科技-软件             ");//云计算ETF             市值：35.03     累涨：61.96     36.05     11.25     14.66     6.74      5日： 3.32      累涨修正：101.80    14
+        KEJI_RUAN_JIAN.put("159739", "科技-软件             ");//大数据ETF             市值：5.24      累涨：61.19     35.82     11.29     14.08     6.06      5日： 3.08      累涨修正：98.15     15
+        KEJI_RUAN_JIAN.put("588790", "科技-软件             ");//科创AIETF             市值：25.88     累涨：64.70     31.17     16.73     16.80     5.68      5日： 2.65      累涨修正：96.50     16
+        KEJI_RUAN_JIAN.put("159890", "科技-软件             ");//云计算ETF             市值：4.96      累涨：61.61     36.70     10.89     14.02     6.18      5日： 2.90      累涨修正：96.41     17
+        KEJI_RUAN_JIAN.put("588930", "科技-软件             ");//科创板人工智能ETF     市值：7.34      累涨：62.83     29.59     16.22     17.02     5.69      5日： 2.61      累涨修正：94.15     18
+        KEJI_RUAN_JIAN.put("516630", "科技-软件             ");//云计算50ETF           市值：5.90      累涨：59.70     35.06     11.53     13.11     5.80      5日： 2.85      累涨修正：93.90     19
+        KEJI_RUAN_JIAN.put("588730", "科技-软件             ");//科创人工智能ETF       市值：5.09      累涨：61.80     28.96     15.75     17.09     5.74      5日： 2.62      累涨修正：93.24     20
+        KEJI_RUAN_JIAN.put("516000", "科技-软件             ");//数据ETF               市值：4.09      累涨：63.36     39.23     11.00     13.13     5.33      5日： 2.45      累涨修正：92.76     21
+        KEJI_RUAN_JIAN.put("159852", "科技-软件             ");//软件ETF               市值：29.31     累涨：59.44     36.09     10.82     12.53     6.13      5日： 2.74      累涨修正：92.32     22
+        KEJI_RUAN_JIAN.put("516700", "科技-软件             ");//大数据产业ETF         市值：1.15      累涨：62.02     37.95     11.05     13.02     5.59      5日： 2.52      累涨修正：92.26     23
+        KEJI_RUAN_JIAN.put("515980", "科技-软件             ");//人工智能ETF           市值：34.25     累涨：52.80     28.22     10.14     14.44     5.98      5日： 3.20      累涨修正：91.20     24
+        KEJI_RUAN_JIAN.put("515400", "科技-软件             ");//大数据ETF             市值：18.25     累涨：63.31     39.10     11.41     12.80     5.39      5日： 2.28      累涨修正：90.67     25
+        KEJI_RUAN_JIAN.put("562930", "科技-软件             ");//软件ETF易方达         市值：1.34      累涨：58.05     35.55     10.28     12.22     5.64      5日： 2.70      累涨修正：90.45     26
+        KEJI_RUAN_JIAN.put("562030", "科技-软件             ");//信创ETF基金           市值：0.59      累涨：63.36     37.71     11.34     14.31     6.04      5日： 2.12      累涨修正：88.80     27
+        KEJI_RUAN_JIAN.put("562570", "科技-软件             ");//信创ETF               市值：4.32      累涨：65.12     39.89     12.29     12.94     5.35      5日： 1.95      累涨修正：88.52     28
+        KEJI_RUAN_JIAN.put("560850", "科技-软件             ");//信创50ETF             市值：2.87      累涨：63.62     37.78     12.27     13.57     5.33      5日： 2.07      累涨修正：88.46     29
+        KEJI_RUAN_JIAN.put("560360", "科技-软件             ");//软件指数ETF           市值：1.52      累涨：59.20     37.35     10.23     11.62     5.48      5日： 2.41      累涨修正：88.12     30
+        KEJI_RUAN_JIAN.put("588760", "科技-软件             ");//人工智能ETF科创       市值：13.21     累涨：58.33     25.19     16.12     17.02     5.63      5日： 2.43      累涨修正：87.49     31
+        KEJI_RUAN_JIAN.put("159586", "科技-软件             ");//计算机ETF南方         市值：2.86      累涨：60.12     34.96     11.68     13.48     5.66      5日： 2.25      累涨修正：87.12     32
+        KEJI_RUAN_JIAN.put("159819", "科技-软件             ");//人工智能ETF           市值：156.54    累涨：53.02     28.36     10.72     13.94     5.44      5日： 2.71      累涨修正：85.54     33
+        KEJI_RUAN_JIAN.put("512930", "科技-软件             ");//AI人工智能ETF         市值：18.87     累涨：52.85     27.85     11.31     13.69     5.07      5日： 2.44      累涨修正：82.13     34
+        KEJI_RUAN_JIAN.put("515070", "科技-软件             ");//人工智能AIETF         市值：50.30     累涨：51.73     27.52     10.50     13.71     4.98      5日： 2.48      累涨修正：81.49     35
+        KEJI_RUAN_JIAN.put("159899", "科技-软件             ");//软件龙头ETF           市值：3.08      累涨：54.35     30.25     11.27     12.83     6.10      5日： 2.20      累涨修正：80.75     36
+        KEJI_RUAN_JIAN.put("517800", "科技-软件             ");//人工智能50ETF         市值：2.83      累涨：51.16     25.99     12.72     12.45     4.49      5日： 2.38      累涨修正：79.72     37
+        KEJI_RUAN_JIAN.put("515230", "科技-软件             ");//软件ETF               市值：13.17     累涨：56.62     33.32     11.48     11.82     5.40      5日： 1.92      累涨修正：79.66     38
+        KEJI_RUAN_JIAN.put("159998", "科技-软件             ");//计算机ETF             市值：29.10     累涨：54.26     32.00     10.90     11.36     4.56      5日： 2.11      累涨修正：79.58     39
+        KEJI_RUAN_JIAN.put("512720", "科技-软件             ");//计算机ETF             市值：10.89     累涨：54.84     31.95     11.49     11.40     4.70      5日： 2.06      累涨修正：79.56     40
+        KEJI_RUAN_JIAN.put("561010", "科技-软件             ");//软件ETF基金           市值：1.04      累涨：57.16     33.17     11.57     12.42     4.95      5日： 1.81      累涨修正：78.88     41
+        KEJI_RUAN_JIAN.put("159590", "科技-软件             ");//软件50ETF             市值：2.57      累涨：56.62     31.91     11.93     12.78     5.61      5日： 1.79      累涨修正：78.10     42
+        KEJI_RUAN_JIAN.put("159538", "科技-软件             ");//信创ETF富国           市值：0.56      累涨：52.41     29.23     10.81     12.37     3.39      5日： 1.79      累涨修正：73.89     43
+        KEJI_RUAN_JIAN.put("159539", "科技-软件             ");//信创50ETF             市值：0.76      累涨：54.39     31.13     10.28     12.98     3.12      5日： 1.57      累涨修正：73.23     44
+        KEJI_RUAN_JIAN.put("159381", "科技-软件             ");//创业板人工智能ETF华夏 市值：2.37      累涨：                              19.79     9.54      5日： 5.96      累涨修正：71.52     45
+        KEJI_RUAN_JIAN.put("512330", "科技-软件             ");//信息科技ETF           市值：5.48      累涨：50.05     24.72     11.40     13.93     4.03      5日： 1.76      累涨修正：71.17     46
+        KEJI_RUAN_JIAN.put("159388", "科技-软件             ");//创业板人工智能ETF国泰 市值：2.35      累涨：                                        9.31      5日： 5.92      累涨修正：71.04     47
+        KEJI_RUAN_JIAN.put("516860", "科技-软件             ");//金融科技ETF           市值：8.65      累涨：58.33     30.55     13.15     14.63     5.54      5日： 1.02      累涨修正：70.57     48
+        KEJI_RUAN_JIAN.put("159851", "科技-软件             ");//金融科技ETF           市值：42.27     累涨：59.05     29.97     14.06     15.02     5.41      5日： 0.87      累涨修正：69.49     49
+        KEJI_RUAN_JIAN.put("516100", "科技-软件             ");//金融科技ETF华夏       市值：2.58      累涨：57.57     30.51     12.22     14.84     5.51      5日： 0.97      累涨修正：69.21     50
+        KEJI_RUAN_JIAN.put("159540", "科技-软件             ");//信创ETF易方达         市值：1.71      累涨：53.61     30.32     10.35     12.94     3.43      5日： 1.18      累涨修正：67.77     51
+        KEJI_RUAN_JIAN.put("159613", "科技-软件             ");//信息安全ETF           市值：0.73      累涨：53.56     31.09     10.79     11.68     3.60      5日： 1.07      累涨修正：66.40     52
+        KEJI_RUAN_JIAN.put("159537", "科技-软件             ");//信创ETF               市值：0.91      累涨：50.30     29.86     10.57     9.87      2.75      5日： 1.21      累涨修正：64.82     53
+        KEJI_RUAN_JIAN.put("562920", "科技-软件             ");//信息安全ETF           市值：0.58      累涨：52.26     29.66     10.55     12.05     3.17      5日： 1.02      累涨修正：64.50     54
+        KEJI_RUAN_JIAN.put("562560", "科技-软件             ");//信息技术ETF           市值：0.33      累涨：42.03     21.15     7.98      12.90     3.72      5日： 1.82      累涨修正：63.87     55
+        KEJI_RUAN_JIAN.put("159939", "科技-软件             ");//信息技术ETF           市值：15.21     累涨：44.85     22.97     9.23      12.65     3.14      5日： 1.49      累涨修正：62.73     56
+        KEJI_RUAN_JIAN.put("159658", "科技-软件             ");//数字经济ETF           市值：2.08      累涨：45.86     25.33     9.70      10.83     2.78      5日： 1.18      累涨修正：60.02     57
+        KEJI_RUAN_JIAN.put("560800", "科技-软件             ");//数字经济ETF           市值：7.55      累涨：47.35     26.19     9.61      11.55     2.90      5日： 1.05      累涨修正：59.95     58
+        KEJI_RUAN_JIAN.put("588260", "科技-软件             ");//科创信息ETF           市值：1.34      累涨：49.92     25.34     10.62     13.96     2.80      5日： 0.38      累涨修正：54.48     59
+        KEJI_RUAN_JIAN.put("588100", "科技-软件             ");//科创信息技术ETF       市值：2.65      累涨：49.58     25.30     11.55     12.73     2.79      5日： 0.39      累涨修正：54.26     60
+        KEJI_RUAN_JIAN.put("560630", "科技-软件             ");//机器人产业ETF         市值：5.06      累涨：                              15.89     6.81      5日： 4.16      累涨修正：49.92     61
+        KEJI_RUAN_JIAN.put("589520", "科技-软件             ");//科创人工智能ETF华宝   市值：2.51      累涨：                              17.05     5.54      5日： 2.71      累涨修正：32.52     62
+        KEJI_RUAN_JIAN.put("589010", "科技-软件             ");//科创人工智能ETF华夏   市值：1.48      累涨：                                        5.12      5日： 2.40      累涨修正：28.80     63
+        KEJI_RUAN_JIAN.put("588770", "科技-软件             ");//科创信息技术ETF摩根   市值：3.50      累涨：                              12.45     2.17      5日： 0.20      累涨修正：2.40      64
+        KEJI_RUAN_JIAN.put("159213", "科技-软件             ");//机器人ETF基金         市值：2.33      累涨：                                                  5日：           累涨修正：0         65
     }
 
     public static Map<String, String> KEJI_XIN_PIAN = new HashMap<>();//科技-芯片
@@ -1562,11 +1563,6 @@ public class ContMapEtfAll {
 
         // 科技
         {
-            //        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_CN_HK);//港股指数
-//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_KEJI_XIN_PIAN);//科技-芯片
-//        condition.setLikeNameList(ContEtfNameKey.ETF_NAME_NAME_LIST_LIKE_XIAO_FEI_HK);//
-//        condition.setLikeNameList(ContEtfNameKey.INDEX_CN_NOT_NSDK);
-//        condition.setLikeNameList(ContEtfNameKey.KEJI_ELECTRICITY);
 
 //            condition.setLikeNameList(ContEtfNameKey.KEJI_RUAN_JIAN);//科技-软件
 //            typeEn = "KEJI_RUAN_JIAN";
@@ -1691,15 +1687,15 @@ public class ContMapEtfAll {
         //资源
         {
 
-        condition.setLikeNameList(nameLikeList);
-        condition.setNotLikeNameList(nameNoLikeList);
+            condition.setLikeNameList(nameLikeList);
+            condition.setNotLikeNameList(nameNoLikeList);
 //        typeEn = "ZIYUAN_COMMON";
 //        typeCn = ContEtfTypeName.ZIYUAN_COMMON;
         }
 
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-//        EtfControl.saveOrUpdateListNetLastDay(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
+        EtfControl.updateTypeName(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
 
         if (etfListLikeName == null) {
             System.out.println("数据为null");
@@ -1707,8 +1703,16 @@ public class ContMapEtfAll {
         int num = 0;//序号
         //计算涨幅合计修正值：最近60日+最近5日乘12
         for (EtfAdrCountVo vo : etfListLikeName) {
-            BigDecimal day60 = vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP);
-            BigDecimal day5 = vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal day60 = new BigDecimal("0");
+            BigDecimal day5 = new BigDecimal("0");
+            BigDecimal adr_up_sum_1_60 = vo.getADR_UP_SUM_1_60();
+            BigDecimal adr_up_sum_1_5 = vo.getADR_UP_SUM_1_5();
+            if (adr_up_sum_1_60 != null) {
+                day60 = adr_up_sum_1_60.setScale(2, BigDecimal.ROUND_HALF_UP);
+            }
+            if (adr_up_sum_1_5 != null) {
+                day5 = adr_up_sum_1_5.setScale(2, BigDecimal.ROUND_HALF_UP);
+            }
             BigDecimal day5Cheng12 = day5.multiply(new BigDecimal("12"));
             BigDecimal day60and5Cheng12 = day60.add(day5Cheng12);
             vo.setAdrUpSum_60_and_10c6(day60and5Cheng12);
@@ -1716,9 +1720,12 @@ public class ContMapEtfAll {
         //排序
         etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getAdrUpSum_60_and_10c6, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
 
+        System.out.println("    static {");
         for (EtfAdrCountVo vo : etfListLikeName) {
             StringBuffer sb = new StringBuffer();
 
+            sb.append("    ");
+            sb.append("    ");
             sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(vo.getF12(), SIZE_6)).append("\"");
             sb.append(", \"" + StockUtil.formatStName(typeCn, SIZE_22) + "\");");
 //            sb.append(", \"" + StockUtil.formatStName(vo.getF14(), SIZE_22) + "\");");
@@ -1768,13 +1775,22 @@ public class ContMapEtfAll {
             sb.append(StockUtil.formatInt(++num, SIZE_6));
             System.out.println(sb);
         }
-
+        System.out.println("    }");
 
     }
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-18";
-        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-04-30";
+//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
+
+        //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG);
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE);
+        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK);
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY);
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR);
     }
 }
