@@ -47,7 +47,7 @@ public class EtfControl {
 //        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setType_name(KEJI_HK);
+//        condition.setType_name(KEJI_JUNGONG);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
@@ -533,6 +533,8 @@ public class EtfControl {
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_20, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_20_40, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_40_60, 1);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_60, 1);
     }
 
