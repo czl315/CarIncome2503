@@ -36,7 +36,7 @@ public class EtfControl {
     public static void main(String[] args) {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         String date = "2025-04-30";
-        if (!DateUtil.isTodayBySpDate(date,DateUtil.YYYYMMDD)) {
+        if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
 //        insertList(date);//保存：查询etf列表，批量插入。250228：1054
@@ -61,7 +61,7 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
-        findByDateOrderByDescAdr(date);//查询数据根据日期，按照涨幅倒序
+        findByDateOrder(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
         //TODO 查询我的持仓etf数据
@@ -523,12 +523,27 @@ public class EtfControl {
     }
 
     /**
-     * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
-     * 过滤条件：涨序排序前n的数据，每个类型限定n个；
+     * 查询etf涨幅数据：可指定多个周期
      *
      * @param date 日期
      */
-    public static void findByDateOrderByDescAdr(String date) {
+    public static void findByDateOrder(String date) {
+        findByDateOrderByField(date,ORDER_FIELD_F3,2);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_20, 1);
+        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_60, 1);
+    }
+
+    /**
+     * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
+     * 过滤条件：涨序排序前n的数据，每个类型限定n个；
+     *
+     * @param date
+     * @param orderField 排序字段
+     */
+    public static void findByDateOrderByField(String date, String orderField, int showCountTypeGroup) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "查询etf涨幅数据：";
@@ -538,14 +553,14 @@ public class EtfControl {
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
         condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("100"));//涨序排序前n的数据
-        condFiter.setShowCountTypeGroup(2);//每个类型限定n个
+        condFiter.setShowCountTypeGroup(showCountTypeGroup);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
 //        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
-        condition.setOrderBy(ORDER_FIELD_F3 + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
+        condition.setOrderBy(orderField + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
 //        condition.setType_name(typeName);
 //        condition.setMaxNetAreaDay10(null);//净值区间最高限定
 //        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
@@ -555,6 +570,7 @@ public class EtfControl {
             return;
         }
 
+        System.out.println(methodName + ",排序字段：" + orderField);
         handlerShowHead();//首行标题信息
 
         handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
@@ -1374,9 +1390,10 @@ public class EtfControl {
 
     /**
      * 更新类型
-     * @param condition 条件
-     * @param date 日期
-     * @param isUpdateNoToday   是否今日更新
+     *
+     * @param condition       条件
+     * @param date            日期
+     * @param isUpdateNoToday 是否今日更新
      */
     public static void updateTypeName(CondEtfAdrCount condition, String date, boolean isUpdateNoToday) {
         long begTime = System.currentTimeMillis();
