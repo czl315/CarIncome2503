@@ -32,7 +32,7 @@ public class SohuService {
         String endDate = DateUtil.getToday(YYYYMMDD);
 //        String stCode = "517400";
         String zqdm = "159509";
-//        String klineRs = SohuService.httpKlineRsStr(zqdm, KLINE_TYPE_WEEK, begDate, endDate);
+//        String klineRs = SohuService.httpKlineRsStrHis(zqdm, KLINE_TYPE_WEEK, begDate, endDate);
 //        System.out.println("k线：" + klineRs);
         List<Kline> klineList = findKline(zqdm, KLINE_TYPE_WEEK_SOHU, begDate, endDate, limit);
         int i = 1;
@@ -52,7 +52,7 @@ public class SohuService {
     public static List<Kline> findKline(String zqdm, String cycleType, String startDay, String endDay, int limit) {
         boolean isShowLog = true;
         String methodName = "查询k线(sohu)：";
-        String rs = SohuService.httpKlineRsStr(zqdm, cycleType, startDay, endDay);//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
+        String rs = SohuService.httpKlineRsStrHis(zqdm, cycleType, startDay, endDay);//需要收集前一日的收盘价，所以+1，返回数据时需要去掉第一个数据
         if (rs == null) {
             System.out.println(methodName + "：返回null");
             return null;
@@ -101,7 +101,7 @@ public class SohuService {
     }
 
     /**
-     * http查询k线，不含今日数据
+     * http查询k线(历史查询)，不含今日数据
      * https://hq.stock.sohu.com/mkline/cn/050/cn_510050-11_2.html?_=1745468377604
      * https://q.stock.sohu.com/hisHq?code=cn_159915&start=20240301&end=20250424&stat=1&order=D&period=w&callback=historySearchHandler&rt=jsonp
      *
@@ -111,7 +111,7 @@ public class SohuService {
      * @param end
      * @return
      */
-    public static String httpKlineRsStr(String zqdm, String cycleType, String start, String end) {
+    public static String httpKlineRsStrHis(String zqdm, String cycleType, String start, String end) {
         boolean isShowLog = false;//是否显示日志
         long curTime = System.currentTimeMillis();
         //https://hq.stock.sohu.com/mkline/cn/050/cn_510050-11_2.html?_=1745468377604
