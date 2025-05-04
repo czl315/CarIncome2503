@@ -56,12 +56,12 @@ public class EtfControl {
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
-        findByDateOrder(date);//查询数据根据日期，按照涨幅倒序
+//        findByDateOrder(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
         //TODO 查询我的持仓etf数据

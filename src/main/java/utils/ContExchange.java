@@ -5,7 +5,7 @@ package utils;
  */
 public class ContExchange {
     /**
-     *上交所证券代码开头
+     * 上交所证券代码开头
      */
     public static String SHANGHAI_EXCH_START = "5";
     public static String SHENZHEN_EXCH_START = "1";//深交所证券代码开头
@@ -20,11 +20,35 @@ public class ContExchange {
     public static String KLINE_TYPE_WEEK_SOHU = "w";//k线类型：w=周线
     public static String KLINE_TYPE_MINUTE_60 = "w";//k线类型：w=周线
 
-    public static String KLINE_TYPE_SOHU_MKLINE_WEEK = "11_1";//搜狐k线mkline：11=周线
     public static String KLINE_TYPE_SOHU_MKLINE_DAY = "10_1";//搜狐k线mkline：11=周线；10=日线
+    public static String KLINE_TYPE_SOHU_MKLINE_WEEK = "11_1";//搜狐k线mkline：11=周线
     public static String KLINE_TYPE_SOHU_MKLINE_MONTH = "12_1";//搜狐k线mkline：11=周线；10=日线
     public static String KLINE_TYPE_SOHU_MKLINE_MINITE_5 = "9_5m";//搜狐k线mkline：11=周线；10=日线
     public static String KLINE_TYPE_SOHU_MKLINE_MINITE_15 = "9_15m";
     public static String KLINE_TYPE_SOHU_MKLINE_MINITE_30 = "9_30m";
     public static String KLINE_TYPE_SOHU_MKLINE_MINITE_60 = "9_60m";
+
+    public static String getKlineTypeWeekSohu(String inStr) {
+        String rs = "";
+        if (inStr.equals(CYCLE_TYPE_MINU60)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_MINITE_60;
+        } else if (inStr.equals(CYCLE_TYPE_MINU30)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_MINITE_30;
+        } else if (inStr.equals(CYCLE_TYPE_MINU15)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_MINITE_15;
+        } else if (inStr.equals(CYCLE_TYPE_MINU5)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_MINITE_5;
+        }else if (inStr.equals(CYCLE_TYPE_DAY)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_DAY;
+        }else if (inStr.equals(CYCLE_TYPE_WEEK)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_WEEK;
+        }else if (inStr.equals(CYCLE_TYPE_MONTH)) {
+            rs = KLINE_TYPE_SOHU_MKLINE_MONTH;
+        } else {
+            rs = "";
+        }
+        return rs;
+    }
+
+
 }

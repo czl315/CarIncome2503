@@ -70,8 +70,12 @@ public class SseService {
                 int week60Days = -420;
                 String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYYMMDD, week60Days);
                 String endDate = DateUtil.getToday(YYYYMMDD);
-                rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_WEEK_SOHU, begDate, endDate, count);
+                rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_SOHU_MKLINE_WEEK, begDate, endDate, count);
 //                System.out.println("上交所周线查询使用接口(SohuService)！");
+            } else if (cycleType.equals(CYCLE_TYPE_MINU60) || cycleType.equals(CYCLE_TYPE_MINU30) || cycleType.equals(CYCLE_TYPE_MINU15) || cycleType.equals(CYCLE_TYPE_MINU5)) {
+                String begDate = null;
+                String endDate = null;
+                rs = SohuService.findKline(zqdm, ContExchange.getKlineTypeWeekSohu(cycleType), begDate, endDate, count);
             } else {
                 System.out.println("暂不支持【上交所】特殊k线【" + cycleType + "】查询！");
             }

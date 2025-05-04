@@ -255,6 +255,10 @@ public class SohuService {
         if (rs.endsWith("])")) {
             rs = rs.replace("])", "]");
         }
+        if (rs.endsWith("]})")) {
+            rs = rs.replace("]})", "]}");
+        }
+
         if (isShowLog) {
             System.out.println("rs:" + rs);
         }

@@ -34,7 +34,7 @@ public class KlineService {
 
 
         //查询K线-查询交易日列表，查询贵州茅台的日k线
-        String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYY_MM_DD, -100);
+        String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYY_MM_DD, -10);
         String endDate = DateUtil.getToday(YYYY_MM_DD);
         String stCode = "000001";//贵州茅台 600519
         List<Kline> klines = KlineService.kline(stCode, 0, KLT_101, true, begDate, endDate, KLINE_TYPE_STOCK);
