@@ -329,11 +329,11 @@ public class StockService {
 
         //如果东方财富http调用失败，调用上交所
         List<Kline> klines = null;
-        if (httpKlineApiType.equals(Content.API_TYPE_SSE)) {
-            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
-        } else {
+//        if (httpKlineApiType.equals(Content.API_TYPE_SSE)) {
+//            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
+//        } else {
             klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, begDate, endDate, DB_RANK_BIZ_TYPE_ZS);
-        }
+//        }
 
 //        System.out.println("k线：" + JSON.toJSONString(klines));
         if (klines != null && klines.size() > 0) {

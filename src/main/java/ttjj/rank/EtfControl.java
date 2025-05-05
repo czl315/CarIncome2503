@@ -78,8 +78,8 @@ public class EtfControl {
         for (String day : dateList) {
 //            findByDateOrder(day);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //            System.out.println(day);
-            findBreakUpMa(day, Arrays.asList(KLT_102), null);
-//            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
+//            findBreakUpMa(day, Arrays.asList(KLT_102), null);
+            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
         }
 
 
@@ -934,10 +934,51 @@ public class EtfControl {
             sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_10));
             sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_10));
             sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_6));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_6));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
+
+            //均线百分比
+            BigDecimal curAmt = vo.getF2();
+            BigDecimal maxAmt = vo.getMA_NET_60_102();
+            if (curAmt != null && maxAmt != null) {
+                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStr("", SIZE_10));
+            }
+            maxAmt = vo.getMA_NET_60_101();
+            if (curAmt != null && maxAmt != null) {
+                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStr("", SIZE_10));
+            }
+            maxAmt = vo.getMA_NET_60_60();
+            if (curAmt != null && maxAmt != null) {
+                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStr("", SIZE_10));
+            }
+            maxAmt = vo.getMA_NET_60_30();
+            if (curAmt != null && maxAmt != null) {
+                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStr("", SIZE_10));
+            }
+            maxAmt = vo.getMA_NET_60_15();
+            if (curAmt != null && maxAmt != null) {
+                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStr("", SIZE_10));
+            }
+
+            //净值区间
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_5(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_10(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_20(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_40(), SIZE_8));
+            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_60(), SIZE_8));
+
             System.out.println(sb);
         }
     }
