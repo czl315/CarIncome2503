@@ -16,6 +16,7 @@ import static utils.ContEtfTypeName.*;
 import static utils.ContExchange.*;
 import static utils.ContMapEtfAll.ETF_All;
 import static utils.Content.*;
+import static utils.DateUtil.YYYY_MM_DD;
 
 /**
  * ETF涨幅统计
@@ -56,8 +57,8 @@ public class EtfControl {
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 
@@ -73,13 +74,13 @@ public class EtfControl {
 //        showStatSimpleByTypeAll();
 
 ////        //查询超过均线数据
-//        List<String> dateList = StockService.findListDateBefore(date, 3);//查询n个交易日之前的日期
-//        for (String day : dateList) {
-//            findByDateOrderByDescAdr(day, ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
+        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
+        for (String day : dateList) {
+//            findByDateOrder(day);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
 //            System.out.println(day);
-//            findBreakUpMa(day, Arrays.asList(KLT_102), null);
-////            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
-//        }
+            findBreakUpMa(day, Arrays.asList(KLT_102), null);
+//            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
+        }
 
 
     }
@@ -528,7 +529,7 @@ public class EtfControl {
      * @param date 日期
      */
     public static void findByDateOrder(String date) {
-        findByDateOrderByField(date,ORDER_FIELD_F3,2);
+        findByDateOrderByField(date, ORDER_FIELD_F3, 2);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
         findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -796,6 +797,9 @@ public class EtfControl {
      */
     private static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin) {
         int num = 0;//序号
+        if (date.length() == 8) {
+            date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
+        }
         // 1、查询数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
@@ -826,39 +830,39 @@ public class EtfControl {
             sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
 
             if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_60() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
@@ -1258,7 +1262,7 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
 
-        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String today = DateUtil.getToday(YYYY_MM_DD);
         if (!date.equals(today)) {
             if (isUpdateNoToday) {
                 System.out.println("注意！！！非今日数据，也更新数据:" + date);
@@ -1402,7 +1406,7 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "更新类型：";
 
-        String today = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String today = DateUtil.getToday(YYYY_MM_DD);
         if (!date.equals(today)) {
             if (isUpdateNoToday) {
                 System.out.println("注意！！！非今日数据，也更新数据:" + date);

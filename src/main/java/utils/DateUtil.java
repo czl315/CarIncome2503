@@ -32,10 +32,10 @@ public class DateUtil {
 //        System.out.println(getWeek(new Date()));
 //        System.out.println(getWeekByYyyyMmDd("2021-08-29",DateUtil.YYYY_MM_DD));
 //        System.out.println(getYearWeek("2021-08-29", DateUtil.YYYY_MM_DD));
-//        System.out.println(getAddDays(YYYY_MM_DD, "2022-05-01", -1));
+        System.out.println(getAddDays(YYYY_MM_DD, "2022-05-01", -1));
 
         //检查是否是今天
-        isTodayBySpDate("20250501", YYYYMMDD);
+//        isTodayBySpDate("20250501", YYYYMMDD);
 
 //        //获取格式化日期
 //        String date = getDateStrAddDaysByFormat(YYYY_MM_DD, 2021, 2, 28, -1);
