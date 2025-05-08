@@ -43,8 +43,19 @@ public class FupanControl {
 
 //        listMyPosition(date, KLT_101);//查询我的仓位 KLT_102;//检查周期类型
 
-        queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
-
+        List<String> zqdmList = queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
+        StringBuffer rs = new StringBuffer();
+        rs.append("(");
+        for (String zqdm : zqdmList) {
+            String codes = "";
+            codes = codes + "'" + zqdm + "',";
+            rs.append(codes);
+        }
+        if (rs.toString().endsWith(",")) {
+            rs = new StringBuffer(rs.toString().substring(0, rs.length() - 1));
+        }
+        rs.append(")");
+        System.out.println(rs.toString());
     }
 
     /**
@@ -552,8 +563,9 @@ public class FupanControl {
      * @param date
      * @return
      */
-    private static String queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
-        StringBuffer rs = new StringBuffer();
+    private static List<String> queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
+
+        List<String> zqdmList = new ArrayList<>();
         String url = "https://jywg.18.cn/Com/queryAssetAndPositionV1?validatekey=734d22f9-364d-4460-bac6-e6df18953822&moneyType=RMB";
 
         StringBuffer urlParam = new StringBuffer();
@@ -569,21 +581,11 @@ public class FupanControl {
             Asset asset = JSON.parseObject(assetPositionDataArray.getString(i), Asset.class);
             List<AssetPosition> assetPositionList = asset.getPositions();
             List<AssetPosition> assetPositionListSortDrykbl = assetPositionList.stream().filter(e -> e != null).sorted(Comparator.comparing(AssetPosition::getDrykbl, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
-            rs.append("(");
-            String codes = "";
             for (AssetPosition assetPosition : assetPositionListSortDrykbl) {
-                codes = codes + "'" + assetPosition.getZqdm() + "',";
+                zqdmList.add(assetPosition.getZqdm());
             }
-            if (codes.toString().endsWith(",")) {
-                codes = codes.substring(0, codes.length() - 1);
-            }
-            rs.append(codes);
-            rs.append(")");
         }
-        System.out.println(rs);
-
-        return rs.toString();
-
+        return zqdmList;
     }
 
     /**

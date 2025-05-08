@@ -442,7 +442,7 @@ public class DateUtil {
         //如果非今天，退出比较
         String today = DateUtil.getToday(format);
         if (spDate.equals(today)) {
-            System.out.println("特定日期等于今日：【" + spDate + "】：【" + today + "】");
+//            System.out.println("特定日期等于今日：【" + spDate + "】：【" + today + "】");
             rs = true;
         } else {
             System.out.println("特定日期不不不不不等于今日：【" + spDate + "】：【" + today + "】");

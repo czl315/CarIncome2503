@@ -127,7 +127,7 @@ public class EtfAdrJob {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 5, 300, TimeUnit.SECONDS);
+        }, 1, 8, TimeUnit.MINUTES);
 
         /**
          * 更新-价格区间
