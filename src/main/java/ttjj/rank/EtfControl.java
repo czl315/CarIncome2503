@@ -62,12 +62,12 @@ public class EtfControl {
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
-//        findByDateOrder(date);//查询数据根据日期，按照涨幅倒序
-//        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
         //查询我的持仓
-        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
-        findByDateOrder(date, zqdmList, null);//查询数据根据日期，按照涨幅倒序
+//        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
+
+//        findByDateOrder(date, zqdmList, 2);
+//        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -76,12 +76,12 @@ public class EtfControl {
 //        showStatSimpleByTypeAll();
 
 ////        //查询超过均线数据
-//        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
-//        for (String day : dateList) {
-////            findByDateOrder(day);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60
-////            findBreakUpMa(day, Arrays.asList(KLT_102), null);
+        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
+        for (String day : dateList) {
+//            findByDateOrder(day, null, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+            findBreakUpMa(day, Arrays.asList(KLT_102), null);
 //            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
-//        }
+        }
 
 
     }
@@ -98,7 +98,7 @@ public class EtfControl {
     public static void updateUpMaExchange(String date, List<EtfAdrCountVo> etfAdrCountVos, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "更新-突破均线（交易所）：";
+        String methodName = "更新-突破均线（ETF）：";
         int updateRs = 0;//更新成功个数
         int count = MA_60;
         int curPosition = 0;
@@ -532,8 +532,8 @@ public class EtfControl {
      * @param date     日期
      * @param zqdmList
      */
-    public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup) {
-        findByDateOrderByField(date, ORDER_FIELD_F3, showCountTypeGroup, zqdmList);
+    public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup,String orderField) {
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -554,7 +554,7 @@ public class EtfControl {
     public static void findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
-        String methodName = "查询etf涨幅数据：";
+        String methodName = "ETF涨幅数据-查询-：";
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
@@ -579,7 +579,7 @@ public class EtfControl {
             return;
         }
 
-        System.out.println(methodName + ",排序字段：" + orderField);
+        System.out.println(methodName + ",日期：" + date + ",排序字段：" + orderField);
         handlerShowHead();//首行标题信息
 
         handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
