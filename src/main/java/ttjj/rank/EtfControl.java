@@ -48,7 +48,7 @@ public class EtfControl {
 //        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setType_name(KEJI_JUNGONG);
+//        condition.setType_name(JINRONG_GOLD);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
@@ -64,6 +64,7 @@ public class EtfControl {
 
 
         //查询我的持仓
+        List<String> zqdmList = null;//代码列表
 //        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
 
 //        findByDateOrder(date, zqdmList, 2);
@@ -73,13 +74,11 @@ public class EtfControl {
 
 //        updateNetHis();
 
-//        showStatSimpleByTypeAll();
-
-////        //查询超过均线数据
+////        //查询多日数据
         List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
         for (String day : dateList) {
-//            findByDateOrder(day, null, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-            findBreakUpMa(day, Arrays.asList(KLT_102), null);
+//            findByDateOrder(day, zqdmList, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
 //            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
         }
 
@@ -801,7 +800,7 @@ public class EtfControl {
      * @param asList         超过均线类型列表
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
-    private static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin) {
+    private static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin,int maxAdrUpSumOrderStat) {
         int num = 0;//序号
         if (date.length() == 8) {
             date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
@@ -812,6 +811,7 @@ public class EtfControl {
         condition.setUpMaKltOrList(asList);
         condition.setADR_UP_SUM_1_60(adrSum60PctMin);
         condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
+        condition.setMaxAdrUpSumOrderStat(BigDecimal.valueOf(maxAdrUpSumOrderStat));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
         List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
@@ -2204,7 +2204,7 @@ public class EtfControl {
         //查询每只股票的涨幅
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
-//            if (zqdm.equals("159788")) {
+//            if (zqdm.equals("159315")) {
 //                System.out.println("特定证券代码：" + zqdm);
 //            }
 
@@ -2231,16 +2231,12 @@ public class EtfControl {
             BigDecimal adrSum = null;
             BigDecimal adrSum21_40 = null;
             BigDecimal adrSum41_60 = null;
-            BigDecimal adrSumAll = null;//所有涨幅
             for (Kline kline : klines60) {
-
-
                 //最近交易日不计算
                 if (curTradeDay.equals(kline.getKtime())) {
 //                    System.out.println("最近交易日不计算");
                     continue;
                 }
-
                 temp++;
                 //计算涨幅累计:只计算正增长
                 BigDecimal adr = kline.getZhangDieFu();
@@ -2300,20 +2296,16 @@ public class EtfControl {
                 System.out.println(methodName + "所有涨幅全部为空，则不执行更新:" + JSON.toJSONString(entity));
             } else {
                 etfAdrCountList.add(entity);
+                int updateRs = EtfAdrCountService.update(entity);//更新涨幅次数
+                if (updateRs != 1) {
+                    System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(entity));
+                } else {
+                    rs++;
+                }
             }
 
             if (isShowLog && (++curPosition % 100 == 0)) {
                 System.out.println(methodName + "-正在处理位置:" + curPosition + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
-                //更新涨幅次数
-                for (EtfAdrCount stockAdrCount : etfAdrCountList) {
-                    int updateRs = EtfAdrCountService.update(stockAdrCount);
-                    if (updateRs != 1) {
-                        System.out.println(methodName + "-失败：" + rs + "" + JSON.toJSONString(stockAdrCount));
-                    } else {
-                        rs++;
-                    }
-                }
-                etfAdrCountList = new ArrayList<>();
             }
         }
 
