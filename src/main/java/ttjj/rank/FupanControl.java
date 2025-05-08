@@ -563,7 +563,7 @@ public class FupanControl {
      * @param date
      * @return
      */
-    private static List<String> queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
+     public static List<String> queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
 
         List<String> zqdmList = new ArrayList<>();
         String url = "https://jywg.18.cn/Com/queryAssetAndPositionV1?validatekey=734d22f9-364d-4460-bac6-e6df18953822&moneyType=RMB";
@@ -573,7 +573,7 @@ public class FupanControl {
 
 //        System.out.println("请求url:"+url+ JSON.toJSONString(urlParam));
         String assetPositionRs = HttpUtil.sendPost(url, urlParam.toString(), cookie);
-        System.out.println("queryAssetPositionRs:" + assetPositionRs);
+//        System.out.println("queryAssetPositionRs:" + assetPositionRs);
 
         JSONObject assetPositionRsJsonObject = JSON.parseObject(assetPositionRs);
         JSONArray assetPositionDataArray = JSON.parseArray(assetPositionRsJsonObject.getString("Data"));

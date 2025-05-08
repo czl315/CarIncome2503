@@ -65,7 +65,9 @@ public class EtfControl {
 //        findByDateOrder(date);//查询数据根据日期，按照涨幅倒序
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
-        //TODO 查询我的持仓etf数据
+        //查询我的持仓
+        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
+        findByDateOrder(date, zqdmList, null);//查询数据根据日期，按照涨幅倒序
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
 
@@ -527,10 +529,11 @@ public class EtfControl {
     /**
      * 查询etf涨幅数据：可指定多个周期
      *
-     * @param date 日期
+     * @param date     日期
+     * @param zqdmList
      */
-    public static void findByDateOrder(String date) {
-        findByDateOrderByField(date, ORDER_FIELD_F3, 2);
+    public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup) {
+        findByDateOrderByField(date, ORDER_FIELD_F3, showCountTypeGroup, zqdmList);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -546,8 +549,9 @@ public class EtfControl {
      *
      * @param date
      * @param orderField 排序字段
+     * @param zqdmList
      */
-    public static void findByDateOrderByField(String date, String orderField, int showCountTypeGroup) {
+    public static void findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "查询etf涨幅数据：";
@@ -562,9 +566,10 @@ public class EtfControl {
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
-        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
+//        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
         condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
         condition.setOrderBy(orderField + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
+        condition.setStCodeList(zqdmList);
 //        condition.setType_name(typeName);
 //        condition.setMaxNetAreaDay10(null);//净值区间最高限定
 //        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
