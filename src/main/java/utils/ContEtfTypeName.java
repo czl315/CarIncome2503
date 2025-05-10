@@ -53,7 +53,7 @@ public class ContEtfTypeName {
     public static String XIAOFEI_HK = "消费-香港消费";
     public static String XIAOFEI_MEDIA = "消费-文娱传媒";
     public static String XIAOFEI_WINE = "消费-吃喝玩乐";
-    public static String XIAOFEI_HOUSE = "消费-家电";
+//    public static String XIAOFEI_HOUSE = "消费-家电";
 //    public static String XIAOFEI_FILM = "消费-影视";
 //    public static String XIAOFEI_GAME = "消费-游戏";
 //    public static String XIAOFEI_OLD = "消费-养老";
@@ -65,7 +65,7 @@ public class ContEtfTypeName {
         XIAOFEI.add(XIAOFEI_HK);
         XIAOFEI.add(XIAOFEI_MEDIA);
         XIAOFEI.add(XIAOFEI_WINE);
-        XIAOFEI.add(XIAOFEI_HOUSE);
+//        XIAOFEI.add(XIAOFEI_HOUSE);
 //        XIAOFEI.add(XIAOFEI_TRAVEL);
 //        XIAOFEI.add(XIAOFEI_FILM);
 //        XIAOFEI.add(XIAOFEI_GAME);

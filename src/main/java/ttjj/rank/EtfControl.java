@@ -75,12 +75,12 @@ public class EtfControl {
 //        updateNetHis();
 
 ////        //查询多日数据
-        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
-        for (String day : dateList) {
-//            findByDateOrder(day, zqdmList, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
-//            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
-        }
+//        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
+//        for (String day : dateList) {
+////            findByDateOrder(day, zqdmList, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+//            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
+////            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
+//        }
 
 
     }
@@ -97,7 +97,7 @@ public class EtfControl {
     public static void updateUpMaExchange(String date, List<EtfAdrCountVo> etfAdrCountVos, CondEtfAdrCount stockAdrCountCond, String httpKlineApiType) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "更新-突破均线（ETF）：";
+        String methodName = "ETF涨幅数据-更新-突破均线：";
         int updateRs = 0;//更新成功个数
         int count = MA_60;
         int curPosition = 0;
@@ -291,8 +291,8 @@ public class EtfControl {
                 if (curMaAmt == null) {
                     continue;
                 }
+                entity.setMA_NET_60_102(curMaAmt);
                 BigDecimal breakPctUp = breakMa.getBreakPctUp();
-                entity.setMA_NET_60_102(breakMa.getMaNet());
                 isMa102 = breakMa.isMaBreakUp();
                 if (isMa102) {
 //                    entity.setUP_MA_102(KLT_102 + "(" + MA_60 + ")");
@@ -313,7 +313,8 @@ public class EtfControl {
                 updateRs += rs;
                 System.out.print(new StringBuffer(methodName).append(stockAdrCount.getF12()).append(",").append(StockUtil.formatStName(stockAdrCount.getF14(), 22)).append(",是否成功：").append(rs).append(",f3:").append(StockUtil.formatDouble(stockAdrCount.getF3(), 6)));
                 System.out.print(new StringBuffer(StockUtil.formatStName(entity.getUP_MA_102(), 8)).append(StockUtil.formatStName(entity.getUP_MA_101(), 8)).append(StockUtil.formatStName(entity.getUP_MA_60(), 8)).append(StockUtil.formatStName(entity.getUP_MA_30(), 8)).append(StockUtil.formatStName(entity.getUP_MA_15(), 8)));
-                System.out.println(new StringBuffer("5日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_5(), 6)).append("10日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_10(), 6)).append("20日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_20(), 6)).append("40日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_40(), 6)).append("60日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_60(), 6)));
+//                System.out.println(new StringBuffer("5日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_5(), 6)).append("10日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_10(), 6)).append("20日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_20(), 6)).append("40日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_40(), 6)).append("60日:" + StockUtil.formatDouble(stockAdrCount.getNET_AREA_DAY_60(), 6)));
+                System.out.println();
             } else {
                 int rs = EtfAdrCountService.update(entity);
                 updateRs += rs;
@@ -800,7 +801,7 @@ public class EtfControl {
      * @param asList         超过均线类型列表
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
-    private static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin,int maxAdrUpSumOrderStat) {
+    public static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin,int maxAdrUpSumOrderStat) {
         int num = 0;//序号
         if (date.length() == 8) {
             date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);

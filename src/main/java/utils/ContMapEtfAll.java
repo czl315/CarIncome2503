@@ -189,17 +189,15 @@ public class ContMapEtfAll {
     public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
 
     static {
-        XIAOFEI_WINE.put("159378", "消费-吃喝玩乐         ");//通用航空ETF           市值：5.37      累涨：42.65     20.38     7.34      14.93     4.76      5日： 1.86      累涨修正：64.97     1
-        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.57      累涨：34.88     8.00      8.52      18.36     3.53      5日： 0.58      累涨修正：41.84     2
-        XIAOFEI_WINE.put("159766", "消费-吃喝玩乐         ");//旅游ETF               市值：31.29     累涨：34.85     8.22      8.44      18.19     3.56      5日： 0.44      累涨修正：40.13     3
-        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：109.80    累涨：33.31     13.17     12.05     8.09      1.48      5日： 0.17      累涨修正：35.35     4
-        XIAOFEI_WINE.put("516900", "消费-吃喝玩乐         ");//食品饮料ETF基金       市值：0.89      累涨：34.05     12.03     12.65     9.37      1.58      5日：           累涨修正：34.05     5
-        XIAOFEI_WINE.put("159862", "消费-吃喝玩乐         ");//食品ETF               市值：0.42      累涨：32.12     10.83     10.79     10.50     1.28      5日：           累涨修正：32.12     6
-        XIAOFEI_WINE.put("159843", "消费-吃喝玩乐         ");//食品饮料ETF           市值：2.94      累涨：30.28     10.56     10.87     8.85      1.03      5日：           累涨修正：30.28     7
-        XIAOFEI_WINE.put("515710", "消费-吃喝玩乐         ");//食品ETF               市值：8.92      累涨：30.28     9.62      11.29     9.37      1.42      5日：           累涨修正：30.28     8
-        XIAOFEI_WINE.put("515170", "消费-吃喝玩乐         ");//食品饮料ETF           市值：33.55     累涨：29.88     10.20     11.47     8.21      1.17      5日：           累涨修正：29.88     9
-        XIAOFEI_WINE.put("159736", "消费-吃喝玩乐         ");//饮食ETF               市值：48.57     累涨：29.59     9.83      10.24     9.52      0.95      5日：           累涨修正：29.59     10
-        XIAOFEI_WINE.put("159231", "消费-吃喝玩乐         ");//通用航空ETF华宝       市值：1.88      累涨：                                                  5日：           累涨修正：0         11
+        XIAOFEI_WINE.put("516900", "消费-吃喝玩乐         ");//食品饮料ETF基金       市值：0.84      累涨：33.79     12.64     12.25     8.90      1.61      5日： 1.45      累涨修正：51.19     1
+        XIAOFEI_WINE.put("159766", "消费-吃喝玩乐         ");//旅游ETF               市值：29.79     累涨：34.98     8.35      9.77      16.86     1.79      5日： 1.35      累涨修正：51.18     2
+        XIAOFEI_WINE.put("159862", "消费-吃喝玩乐         ");//食品ETF               市值：0.41      累涨：31.68     11.33     10.30     10.05     1.87      5日： 1.58      累涨修正：50.64     3
+        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.46      累涨：34.71     7.99      9.82      16.90     1.77      5日： 1.19      累涨修正：48.99     4
+        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：114.50    累涨：32.53     14.56     10.16     7.81      1.35      5日： 1.18      累涨修正：46.69     5
+        XIAOFEI_WINE.put("515170", "消费-吃喝玩乐         ");//食品饮料ETF           市值：33.70     累涨：29.24     10.82     10.38     8.04      1.53      5日： 1.36      累涨修正：45.56     6
+        XIAOFEI_WINE.put("515710", "消费-吃喝玩乐         ");//食品ETF               市值：8.92      累涨：29.67     10.36     10.26     9.05      1.60      5日： 1.28      累涨修正：45.03     7
+        XIAOFEI_WINE.put("159736", "消费-吃喝玩乐         ");//饮食ETF               市值：48.69     累涨：29.21     10.19     9.77      9.25      1.26      5日： 1.26      累涨修正：44.33     8
+        XIAOFEI_WINE.put("159843", "消费-吃喝玩乐         ");//食品饮料ETF           市值：2.95      累涨：29.58     11.58     10.34     7.66      0.90      5日： 0.90      累涨修正：40.38     9
     }
 
     public static Map<String, String> XIAOFEI_HOUSE = new HashMap<>();//消费-家电
@@ -316,12 +314,14 @@ public class ContMapEtfAll {
     public static Map<String, String> KEJI_JUNGONG = new HashMap<>();//科技-军工
 
     static {
-        KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：32.52     累涨：40.87     9.22      15.14     16.51     10.53     8.19      1
-        KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：68.16     累涨：38.12     9.60      14.85     13.67     8.71      7.53      2
-        KEJI_JUNGONG.put("512660", "科技-军工             ");//军工ETF               市值：116.81    累涨：38.59     9.36      15.61     13.62     8.02      6.56      3
-        KEJI_JUNGONG.put("512560", "科技-军工             ");//军工ETF易方达         市值：8.42      累涨：38.34     9.48      15.59     13.27     7.63      6.51      4
-        KEJI_JUNGONG.put("512810", "科技-军工             ");//国防军工ETF           市值：6.80      累涨：37.57     9.36      15.72     12.49     7.63      6.11      5
-        KEJI_JUNGONG.put("512680", "科技-军工             ");//军工ETF龙头           市值：36.49     累涨：37.94     9.40      15.51     13.03     7.56      6.32      6
+        KEJI_JUNGONG.put("159378", "科技-军工             ");//通用航空ETF           市值：5.67      累涨：44.71     17.58     4.11      23.02     11.26     5日： 9.40      累涨修正：157.51    1
+        KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：78.00     累涨：42.14     13.69     7.26      21.19     9.57      5日： 9.23      累涨修正：152.90    2
+        KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：37.63     累涨：44.51     16.97     7.20      20.34     8.82      5日： 8.67      累涨修正：148.55    3
+        KEJI_JUNGONG.put("512660", "科技-军工             ");//军工ETF               市值：140.27    累涨：38.76     14.04     4.61      20.11     8.26      5日： 7.96      累涨修正：134.28    4
+        KEJI_JUNGONG.put("512810", "科技-军工             ");//国防军工ETF           市值：6.43      累涨：37.16     13.10     4.58      19.48     8.16      5日： 7.81      累涨修正：130.88    5
+        KEJI_JUNGONG.put("512560", "科技-军工             ");//军工ETF易方达         市值：8.05      累涨：37.69     13.61     4.48      19.60     8.05      5日： 7.72      累涨修正：130.33    6
+        KEJI_JUNGONG.put("512680", "科技-军工             ");//军工ETF龙头           市值：37.91     累涨：37.21     13.80     4.13      19.28     8.05      5日： 7.76      累涨修正：130.33    7
+        KEJI_JUNGONG.put("159231", "科技-军工             ");//通用航空ETF华宝       市值：0.85      累涨：                                                  5日： 9.24      累涨修正：110.88    8
     }
 
     /**
@@ -1707,7 +1707,7 @@ public class ContMapEtfAll {
 
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
-        EtfControl.updateTypeName(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
+        EtfControl.updateTypeName(condition, date, false);//保存或更新ETF涨幅次数-批量更新基础信息
 
         if (etfListLikeName == null) {
             System.out.println("数据为null");
@@ -1792,8 +1792,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-04-30";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-04-30";
 //        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
 
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG);
@@ -1813,12 +1813,12 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE);
+        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE);
 
 //        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON);
 
 //        findByTypeName(date, ContEtfNameKey.JINRONG_CASH, null, "JINRONG_CASH", ContEtfTypeName.JINRONG_CASH);
 
-        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG);
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG);
     }
 }

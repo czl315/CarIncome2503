@@ -88,7 +88,7 @@ public class ContEtfNameKey {
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
     public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技","科技ETF沪港深", "科技龙头", "新经济");//科技-香港
-    public static List KEJI_JUNGONG = Arrays.asList("国防", "军工");//科技-军工
+    public static List KEJI_JUNGONG = Arrays.asList("国防", "军工","航空");//科技-军工
     public static List KEJI = new ArrayList();//科技
 
     static {
@@ -103,7 +103,7 @@ public class ContEtfNameKey {
     public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普", "香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//消费-通用
     public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//消费-香港消费
     public static List XIAOFEI_MEDIA = Arrays.asList("游戏", "影视", "传媒");//消费-文娱传媒
-    public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食","航空", "旅游");//消费-酒
+    public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食", "旅游");//消费-酒
 //    public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
     public static List XIAOFEI = new ArrayList();//消费-
 
