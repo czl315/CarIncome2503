@@ -337,7 +337,11 @@ public class EtfControl {
      * @param date 日期
      */
     public static void findTypeTop(String date) {
+        //净值区间最高限定
+        CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
         BigDecimal limitAdrUpSumOrderStat = new BigDecimal("2");//涨序排序前n个限定
+        condFiter.setShowCountTypeGroup(limitAdrUpSumOrderStat.intValue());//每个类型限定n个
 
         int num = 0;//序号
         // 1、查询数据
@@ -357,173 +361,11 @@ public class EtfControl {
         System.out.println();
         System.out.println("查询超过均线列表：日期：" + date);
 
+
+
         handlerShowHead();//首行标题信息
 
-        for (EtfAdrCountVo vo : stockAdrCountList) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(StockUtil.formatStName(vo.getF14(), SIZE_22));
-            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
-            BigDecimal marketValue = null;
-            if (vo.getF20() != null) {
-                marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
-            }
-            sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
-
-            if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_1_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_2() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_1() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-
-            if (vo.getLatestAdr_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getLatestAdr_2() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getLatestAdr_1() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getF3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getF3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-
-            sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_10));
-
-            sb.append(StockUtil.formatInt(++num, SIZE_6));
-
-            //均线百分比
-            BigDecimal curAmt = vo.getF2();
-            BigDecimal maxAmt = vo.getMA_NET_60_102();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_101();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_60();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_30();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_15();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-
-            //净值区间
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_5(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_10(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_20(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_40(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_60(), SIZE_8));
-
-            System.out.println(sb);
-
-
-        }
+        handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
     }
 
     /**
@@ -804,7 +646,12 @@ public class EtfControl {
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
     public static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin,int maxAdrUpSumOrderStat) {
-        int num = 0;//序号
+        //净值区间最高限定
+        CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("2");//涨序排序前n个限定
+        condFiter.setShowCountTypeGroup(limitAdrUpSumOrderStat.intValue());//每个类型限定n个
+
         if (date.length() == 8) {
             date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
         }
@@ -827,169 +674,7 @@ public class EtfControl {
 
         handlerShowHead();//首行标题信息
 
-        for (EtfAdrCountVo vo : stockAdrCountList) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(StockUtil.formatStName(vo.getF14(), SIZE_22));
-            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
-            BigDecimal marketValue = null;
-            if (vo.getF20() != null) {
-                marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
-            }
-            sb.append(StockUtil.formatDouble(marketValue, SIZE_10));
-
-            if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_8));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
-            }
-            if (vo.getADR_UP_SUM_1_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_2() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getADR_UP_SUM_1_1() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-
-            if (vo.getLatestAdr_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getLatestAdr_2() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getLatestAdr_1() != null) {
-                sb.append(StockUtil.formatDouble(vo.getLatestAdr_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-            if (vo.getF3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getF3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
-            }
-
-            sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_10));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_6));
-            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_6));
-
-            sb.append(StockUtil.formatInt(++num, SIZE_6));
-
-            //均线百分比
-            BigDecimal curAmt = vo.getF2();
-            BigDecimal maxAmt = vo.getMA_NET_60_102();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_101();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_60();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_30();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-            maxAmt = vo.getMA_NET_60_15();
-            if (curAmt != null && maxAmt != null) {
-                sb.append(StockUtil.formatDouble(curAmt.subtract(maxAmt).divide(maxAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP), SIZE_10));
-            } else {
-                sb.append(StockUtil.formatStr("", SIZE_10));
-            }
-
-            //净值区间
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_5(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_10(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_20(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_40(), SIZE_8));
-            sb.append(StockUtil.formatDouble(vo.getNET_AREA_DAY_60(), SIZE_8));
-
-            System.out.println(sb);
-        }
+        handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
     }
 
     /**
