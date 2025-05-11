@@ -74,15 +74,20 @@ public class EtfControl {
 
 //        updateNetHis();
 
-////        //查询多日数据
+        //查询多日数据
         List<String> dateList = StockService.findListDateBefore(date, 3, httpKlineApiType);//查询n个交易日之前的日期
         for (String day : dateList) {
 //            findByDateOrder(day, zqdmList, 1,ORDER_FIELD_ADR_UP_SUM_1_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
+            List<EtfAdrCountVo> rs =  findBreakUpMa(day, Arrays.asList(KLT_102), null, 10);
 //            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
+
+            CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+            condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+            BigDecimal limitAdrUpSumOrderStat = new BigDecimal("2");//涨序排序前n个限定
+            condFiter.setShowCountTypeGroup(limitAdrUpSumOrderStat.intValue());//每个类型限定n个
+            handlerShowHead();//首行标题信息
+            handlerShowEtfAdr(rs, condFiter);//显示etf涨幅统计列表数据
         }
-
-
     }
 
     /**
@@ -362,7 +367,6 @@ public class EtfControl {
         System.out.println("查询超过均线列表：日期：" + date);
 
 
-
         handlerShowHead();//首行标题信息
 
         handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
@@ -374,7 +378,7 @@ public class EtfControl {
      * @param date     日期
      * @param zqdmList
      */
-    public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup,String orderField) {
+    public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField) {
         findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
@@ -645,7 +649,8 @@ public class EtfControl {
      * @param asList         超过均线类型列表
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
-    public static void findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin,int maxAdrUpSumOrderStat) {
+    public static List<EtfAdrCountVo> findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin, int maxAdrUpSumOrderStat) {
+        List<EtfAdrCountVo> rs = null;
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
         condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
@@ -664,17 +669,17 @@ public class EtfControl {
         condition.setMaxAdrUpSumOrderStat(BigDecimal.valueOf(maxAdrUpSumOrderStat));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        if (stockAdrCountList == null) {
+        rs = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        if (rs == null) {
             System.out.println("数据为null");
-            return;
+            return null;
         }
         System.out.println();
-        System.out.println("查询超过均线列表：日期：" + date);
+        System.out.println("查询超过均线列表：日期：" + date + ",结果个数：" + rs.size());
 
-        handlerShowHead();//首行标题信息
 
-        handlerShowEtfAdr(stockAdrCountList, condFiter);//显示etf涨幅统计列表数据
+
+        return rs;
     }
 
     /**
