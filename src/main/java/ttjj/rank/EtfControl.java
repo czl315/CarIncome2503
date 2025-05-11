@@ -77,11 +77,12 @@ public class EtfControl {
         //查询多日数据
         int maxAdrUpSumOrderStat = 10;
         int days = 10;
+        //TODO 涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
         Set<String> zqdmSet = new HashSet<>();
         List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
         for (String day : dateList) {
 //            findByDateOrder(day, zqdmList, 1,ORDER_FIELD_ADR_UP_SUM_1_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-            List<EtfAdrCountVo> rs =  findBreakUpMa(day, Arrays.asList(KLT_102), new BigDecimal("1"), maxAdrUpSumOrderStat);
+            List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102), new BigDecimal("1"), maxAdrUpSumOrderStat);
 //            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
 
             CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
@@ -98,7 +99,7 @@ public class EtfControl {
         }
 
         zqdmList.addAll(zqdmSet);
-        findByDateOrder(dateList.get(0), zqdmList, 100,ORDER_FIELD_NET_AREA_DAY_20,maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+        findByDateOrder(dateList.get(0), zqdmList, 100, ORDER_FIELD_NET_AREA_DAY_20, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
     }
 
     /**
@@ -385,12 +386,13 @@ public class EtfControl {
 
     /**
      * 查询etf涨幅数据：可指定多个周期
-     *  @param date     日期
+     *
+     * @param date                 日期
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
     public static void findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, int maxAdrUpSumOrderStat) {
-        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList,maxAdrUpSumOrderStat);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -403,8 +405,9 @@ public class EtfControl {
     /**
      * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
      * 过滤条件：涨序排序前n的数据，每个类型限定n个；
-     *  @param date
-     * @param orderField 排序字段
+     *
+     * @param date
+     * @param orderField           排序字段
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
