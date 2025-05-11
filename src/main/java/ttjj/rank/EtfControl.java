@@ -35,8 +35,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-30";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-05-09";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
@@ -75,12 +75,12 @@ public class EtfControl {
 //        updateNetHis();
 
 ////        //查询多日数据
-//        List<String> dateList = StockService.findListDateBefore(date, 1, httpKlineApiType);//查询n个交易日之前的日期
-//        for (String day : dateList) {
-////            findByDateOrder(day, zqdmList, 2,ORDER_FIELD_NET_AREA_DAY_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-//            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
-////            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
-//        }
+        List<String> dateList = StockService.findListDateBefore(date, 3, httpKlineApiType);//查询n个交易日之前的日期
+        for (String day : dateList) {
+//            findByDateOrder(day, zqdmList, 1,ORDER_FIELD_ADR_UP_SUM_1_60);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+            findBreakUpMa(day, Arrays.asList(KLT_102), null,10);
+//            findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101), null);
+        }
 
 
     }
@@ -558,16 +558,18 @@ public class EtfControl {
         //条件：特定类型
         String typeName = null;//INDEX_HK ZIYUAN_OIL
 
+        List<String> typeNameListNotIn = Arrays.asList(INDEX_CN_CITY, JINRONG_CASH);//过滤类型 INDEX_HK
+
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("100"));//涨序排序前n的数据
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(showCountTypeGroup);//每个类型限定n个
 
         // 查询条件
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
-//        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-        condition.setTypeNameListNotIn(Arrays.asList(INDEX_CN_CITY, JINRONG_CASH));//过滤类型 INDEX_HK
+        condition.setADR_UP_SUM_1_60(new BigDecimal("1"));
+        condition.setTypeNameListNotIn(typeNameListNotIn);//
         condition.setOrderBy(orderField + DB_DESC);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
         condition.setStCodeList(zqdmList);
 //        condition.setType_name(typeName);
