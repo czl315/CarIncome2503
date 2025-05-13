@@ -41,6 +41,7 @@ public class EtfControl {
 //            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
+        int maxAdrUpSumOrderStat = 100;
 
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
@@ -63,8 +64,9 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 
-        //查询我的持仓
-//        zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
+        //查询我的ETF持仓
+        EtfAdrCountService.findMyPosition(date, null, ORDER_FIELD_NET_AREA_DAY_20, null);
+
 
 //        findByDateOrder(date, zqdmList, 2);
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
@@ -75,7 +77,6 @@ public class EtfControl {
 
         //查询多日数据
 //        {
-//            int maxAdrUpSumOrderStat = 1;
 //            int days = 5;
 //            //TODO 涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
 //            Set<String> zqdmSet = new HashSet<>();
@@ -97,7 +98,7 @@ public class EtfControl {
 //            }
 //
 //            zqdmList.addAll(zqdmSet);
-//            findByDateOrder(dateList.get(0), zqdmList, 100, ORDER_FIELD_NET_AREA_DAY_20, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+//        findByDateOrder(dateList.get(0), zqdmList, 100, ORDER_FIELD_NET_AREA_DAY_20, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
 //        }
 
     }

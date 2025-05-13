@@ -4,9 +4,13 @@ import com.alibaba.fastjson.JSON;
 import ttjj.dao.EtfAdrCountDao;
 import ttjj.db.EtfAdrCount;
 import ttjj.dto.*;
+import ttjj.rank.EtfControl;
+import ttjj.rank.FupanControl;
+import utils.ContentCookie;
 import utils.DateUtil;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import static utils.Content.*;
@@ -228,5 +232,14 @@ public class EtfAdrCountService {
                 }
             }
         }
+    }
+
+    /**
+     * 查询我的ETF持仓
+     * @param date
+     */
+    public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat) {
+        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
+        EtfControl.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat);
     }
 }

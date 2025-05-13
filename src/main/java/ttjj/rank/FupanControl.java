@@ -43,7 +43,7 @@ public class FupanControl {
 
 //        listMyPosition(date, KLT_101);//查询我的仓位 KLT_102;//检查周期类型
 
-        List<String> zqdmList = queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF, DAYS_1, date);//查询-我的股票-资产持仓-证券代码
+        List<String> zqdmList = queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
         StringBuffer rs = new StringBuffer();
         rs.append("(");
         for (String zqdm : zqdmList) {
@@ -559,11 +559,9 @@ public class FupanControl {
      * 查询-我的股票-资产持仓-证券代码:从东财http
      *
      * @param cookie
-     * @param dateType
-     * @param date
      * @return
      */
-     public static List<String> queryMyStockAssetPositionZqdm(String cookie, String dateType, String date) {
+     public static List<String> queryMyStockAssetPositionZqdm(String cookie) {
 
         List<String> zqdmList = new ArrayList<>();
         String url = "https://jywg.18.cn/Com/queryAssetAndPositionV1?validatekey=734d22f9-364d-4460-bac6-e6df18953822&moneyType=RMB";
