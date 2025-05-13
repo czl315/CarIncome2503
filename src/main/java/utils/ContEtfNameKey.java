@@ -79,7 +79,7 @@ public class ContEtfNameKey {
         JINRONG.addAll(JINRONG_GOLD);
     }
 
-    public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "高端", "核心",
+    public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "核心",
             "科技", "VR", "漂亮", "国货", "ESG", "可持续", "卫星", "产业升级", "创新100", "G60创新");//科技-工业
     public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指", "标普", "港股", "香港", "恒生", "中概", "东南亚", "生物", "金融", "货币", "沪港深科技", "科技ETF沪港深");//科技-工业
     public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
@@ -88,7 +88,7 @@ public class ContEtfNameKey {
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
     public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技","科技ETF沪港深", "科技龙头", "新经济");//科技-香港
-    public static List KEJI_JUNGONG = Arrays.asList("国防", "军工","航空");//科技-军工
+    public static List KEJI_JUNGONG = Arrays.asList("国防", "军工","航空","高端");//科技-军工
     public static List KEJI = new ArrayList();//科技
 
     static {
