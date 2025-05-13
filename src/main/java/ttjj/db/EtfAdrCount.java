@@ -184,6 +184,14 @@ public class EtfAdrCount {
      */
     private BigDecimal ADR_UP_SUM_1_60;
     /**
+     * 涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
+     */
+    private BigDecimal ADR_UP_SUM_TOTAL;
+    /**
+     * 涨幅合计排名
+     */
+    private BigDecimal ADR_UP_SUM_TOTAL_RANK;
+    /**
      * 上涨排序统计
      */
     private BigDecimal ADR_UP_SUM_ORDER_STAT;
@@ -348,6 +356,22 @@ public class EtfAdrCount {
      * 最低下跌百分比
      */
     private BigDecimal minPct;
+
+    public BigDecimal getADR_UP_SUM_TOTAL() {
+        return ADR_UP_SUM_TOTAL;
+    }
+
+    public void setADR_UP_SUM_TOTAL(BigDecimal ADR_UP_SUM_TOTAL) {
+        this.ADR_UP_SUM_TOTAL = ADR_UP_SUM_TOTAL;
+    }
+
+    public BigDecimal getADR_UP_SUM_TOTAL_RANK() {
+        return ADR_UP_SUM_TOTAL_RANK;
+    }
+
+    public void setADR_UP_SUM_TOTAL_RANK(BigDecimal ADR_UP_SUM_TOTAL_RANK) {
+        this.ADR_UP_SUM_TOTAL_RANK = ADR_UP_SUM_TOTAL_RANK;
+    }
 
     public BigDecimal getADR_UP_SUM_ORDER_STAT() {
         return ADR_UP_SUM_ORDER_STAT;

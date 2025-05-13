@@ -135,6 +135,8 @@ public interface EtfAdrCountMapper {
             "    <if test='minRise != null'>minRise=#{minRise},</if>",
             "    <if test='maxPct != null'>maxPct=#{maxPct},</if>",
             "    <if test='minPct != null'>minPct=#{minPct},</if>",
+            "    <if test='ADR_UP_SUM_TOTAL != null'>ADR_UP_SUM_TOTAL=#{ADR_UP_SUM_TOTAL},</if>",
+            "    <if test='ADR_UP_SUM_TOTAL_RANK != null'>ADR_UP_SUM_TOTAL_RANK=#{ADR_UP_SUM_TOTAL_RANK},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",
             " LIMIT 1; ",
@@ -459,6 +461,7 @@ public interface EtfAdrCountMapper {
     /**
      * SQL变更记录；
      * 20250302：增加字段：最近交易日的涨幅，latestAdr_1，latestAdr_2，latestAdr_3
+     * 20250514：增加字段：ADR_UP_SUM_TOTAL '涨合计',ADR_UP_SUM_TOTAL_RANK '涨合计排'
      */
 
 }

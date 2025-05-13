@@ -36,12 +36,12 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-05-09";
+//        String date = "2025-05-13";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
-        int maxAdrUpSumOrderStat = 100;
+        int maxAdrUpSumOrderStat = 10;
 
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
@@ -57,18 +57,13 @@ public class EtfControl {
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
-//        updateUpSumOrder(date);
+        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
-
-        //查询我的ETF持仓
-        EtfAdrCountService.findMyPosition(date, null, ORDER_FIELD_NET_AREA_DAY_20, null);
-
-
-//        findByDateOrder(date, zqdmList, 2);
+//        findByDateOrder(date, zqdmList, 2, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -78,7 +73,7 @@ public class EtfControl {
         //查询多日数据
 //        {
 //            int days = 5;
-//            //TODO 涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
+//
 //            Set<String> zqdmSet = new HashSet<>();
 //            List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
 //            for (String day : dateList) {
@@ -96,10 +91,12 @@ public class EtfControl {
 //                    zqdmSet.add(etf.getF12());
 //                }
 //            }
-//
 //            zqdmList.addAll(zqdmSet);
 //        findByDateOrder(dateList.get(0), zqdmList, 100, ORDER_FIELD_NET_AREA_DAY_20, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
 //        }
+
+        //查询我的ETF持仓
+//        EtfAdrCountService.findMyPosition(date, null, ORDER_FIELD_NET_AREA_DAY_20, null);
 
     }
 
@@ -1823,6 +1820,7 @@ public class EtfControl {
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
             updateAdrSumOrderStatByBiz(date, type);
+
         }
     }
 
@@ -2284,11 +2282,24 @@ public class EtfControl {
             adr_up_sum_order_stat = adr_up_sum_order_stat.add(adr_up_sum_order_1_60 != null ? adr_up_sum_order_1_60 : new BigDecimal("0"));
             etfAdrCountVo.setADR_UP_SUM_ORDER_STAT(adr_up_sum_order_stat);
             adr_up_sum_order_stat = new BigDecimal("0");
+
+            //涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
+            BigDecimal adrUpSum1To60 = etfAdrCountVo.getADR_UP_SUM_1_60()!= null ? etfAdrCountVo.getADR_UP_SUM_1_60() : new BigDecimal("0");
+            BigDecimal adrUpSum1To20 = etfAdrCountVo.getADR_UP_SUM_1_20()!= null ? etfAdrCountVo.getADR_UP_SUM_1_20() : new BigDecimal("0");
+            adrUpSum1To20 = adrUpSum1To20.multiply(new BigDecimal("3"));
+            BigDecimal adrUpSum1To10 = etfAdrCountVo.getADR_UP_SUM_1_10()!= null ? etfAdrCountVo.getADR_UP_SUM_1_10() : new BigDecimal("0");
+            adrUpSum1To10 = adrUpSum1To10.multiply(new BigDecimal("6"));
+            BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5()!= null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
+            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("12"));
+            BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3()!= null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
+            adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("20"));
+
+            BigDecimal adrUpSum1Total = adrUpSum1To60.add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5).add(adrUpSum1To3);
+            etfAdrCountVo.setADR_UP_SUM_TOTAL(adrUpSum1Total);
         }
 
         //排序
         stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_ORDER_STAT, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
-
         int order = 0;
         //查询每只股票的涨幅次数
         for (EtfAdrCountVo etf : stList) {
@@ -2296,6 +2307,7 @@ public class EtfControl {
             entity.setF12(etf.getF12());
             entity.setDate(date);
             entity.setADR_UP_SUM_ORDER_STAT(new BigDecimal(++order));
+            entity.setADR_UP_SUM_TOTAL(etf.getADR_UP_SUM_TOTAL());
 
             //更新
             int updateRs = EtfAdrCountService.update(entity);
@@ -2305,6 +2317,26 @@ public class EtfControl {
                 rs++;
             }
         }
+
+        //排序-涨幅合计排名
+        stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_TOTAL, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        int orderUP_SUM_TOTAL_RANK = 0;
+        //更新-涨幅合计排名
+        for (EtfAdrCountVo etf : stList) {
+            EtfAdrCount entity = new EtfAdrCount();
+            entity.setF12(etf.getF12());
+            entity.setDate(date);
+            entity.setADR_UP_SUM_TOTAL_RANK((new BigDecimal(++orderUP_SUM_TOTAL_RANK)));
+
+            //更新
+            int updateRs = EtfAdrCountService.update(entity);
+            if (updateRs != 1) {
+                System.out.println(methodName + "(" + bizName + ")" + "-失败：" + rs + "" + JSON.toJSONString(entity));
+            } else {
+                rs++;
+            }
+        }
+
         System.out.println(methodName + "(" + bizName + ")" + "-成功：" + rs);
         return rs;
     }
