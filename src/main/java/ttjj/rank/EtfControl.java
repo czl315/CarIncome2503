@@ -57,13 +57,13 @@ public class EtfControl {
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
-        updateUpSumOrder(date);
+//        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, httpKlineApiType);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
-//        findByDateOrder(date, zqdmList, 2, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+        findByDateOrder(date, zqdmList, 2, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -514,6 +514,16 @@ public class EtfControl {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
+            if (vo.getADR_UP_SUM_TOTAL() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_TOTAL_RANK() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL_RANK(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
             if (vo.getADR_UP_SUM_1_60() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
             } else {
@@ -595,11 +605,11 @@ public class EtfControl {
 ////            if(maPct == null){
 ////                System.out.println("价格null异常");
 ////            }
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102()).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101()).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60()).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30()).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15()).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102() != null ? vo.getMA_NET_60_102() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101() != null ? vo.getMA_NET_60_101() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60() != null ? vo.getMA_NET_60_60() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30() != null ? vo.getMA_NET_60_30() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15() != null ? vo.getMA_NET_60_15() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
 
             //净值区间
             BigDecimal curArea = vo.getNET_AREA_DAY_5();
@@ -733,6 +743,8 @@ public class EtfControl {
         sbHead.append(StockUtil.formatStName("5序", SIZE_8));
         sbHead.append(StockUtil.formatStName("3序", SIZE_8));
         sbHead.append(StockUtil.formatStName("涨序排序", SIZE_10));
+        sbHead.append(StockUtil.formatStName("涨和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("涨和排序", SIZE_8));
         sbHead.append(StockUtil.formatStName("1_60和", SIZE_10));
         sbHead.append(StockUtil.formatStName("40_60和", SIZE_10));
         sbHead.append(StockUtil.formatStName("20_40和", SIZE_10));
@@ -2284,14 +2296,14 @@ public class EtfControl {
             adr_up_sum_order_stat = new BigDecimal("0");
 
             //涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
-            BigDecimal adrUpSum1To60 = etfAdrCountVo.getADR_UP_SUM_1_60()!= null ? etfAdrCountVo.getADR_UP_SUM_1_60() : new BigDecimal("0");
-            BigDecimal adrUpSum1To20 = etfAdrCountVo.getADR_UP_SUM_1_20()!= null ? etfAdrCountVo.getADR_UP_SUM_1_20() : new BigDecimal("0");
+            BigDecimal adrUpSum1To60 = etfAdrCountVo.getADR_UP_SUM_1_60() != null ? etfAdrCountVo.getADR_UP_SUM_1_60() : new BigDecimal("0");
+            BigDecimal adrUpSum1To20 = etfAdrCountVo.getADR_UP_SUM_1_20() != null ? etfAdrCountVo.getADR_UP_SUM_1_20() : new BigDecimal("0");
             adrUpSum1To20 = adrUpSum1To20.multiply(new BigDecimal("3"));
-            BigDecimal adrUpSum1To10 = etfAdrCountVo.getADR_UP_SUM_1_10()!= null ? etfAdrCountVo.getADR_UP_SUM_1_10() : new BigDecimal("0");
+            BigDecimal adrUpSum1To10 = etfAdrCountVo.getADR_UP_SUM_1_10() != null ? etfAdrCountVo.getADR_UP_SUM_1_10() : new BigDecimal("0");
             adrUpSum1To10 = adrUpSum1To10.multiply(new BigDecimal("6"));
-            BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5()!= null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
+            BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5() != null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
             adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("12"));
-            BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3()!= null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
+            BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3() != null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
             adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("20"));
 
             BigDecimal adrUpSum1Total = adrUpSum1To60.add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5).add(adrUpSum1To3);
