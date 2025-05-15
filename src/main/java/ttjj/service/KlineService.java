@@ -42,7 +42,7 @@ public class KlineService {
         List<Kline> klines = KlineService.kline(stCode, 60, KLT_60, false, begDate, endDate, null);
 //        List<Kline> klines = SseService.daykline(stCode,100);
         System.out.println("k线：" + JSON.toJSONString(klines));
-        int i=0;
+        int i = 0;
         if (klines != null && klines.size() > 0) {
             for (Kline kline : klines) {
                 System.out.println((++i) + ":" + kline.getKtime() + ",昨日收盘：" + kline.getCloseLastAmt() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());
@@ -960,21 +960,26 @@ public class KlineService {
      * @param klt    周期
      * @param maType 均线周期类型
      * @param date   日期
+     * @param curAmt
+     * @param f18
      * @return
      */
-    public static BreakMaDto breakMaUp(RankStockCommpanyDb stock, String klt, Integer maType, String date) {
+    public static BreakMaDto breakMaUp(RankStockCommpanyDb stock, String klt, Integer maType, String date, BigDecimal curAmt, BigDecimal f18) {
         BreakMaDto rs = new BreakMaDto();
         String zqdm = stock.getF12();
-        ;
-        // 查询今日价格
-        List<Kline> klineListDay = KlineService.kline(zqdm, 1, KLT_101, true, date, date, "");
-        if (klineListDay == null || klineListDay.size() == 0) {
+        BigDecimal yesterdayCloseAmt = f18;
+        if (curAmt == null) {
+            // 查询今日价格
+            List<Kline> klineListDay = KlineService.kline(zqdm, 1, KLT_101, true, date, date, "");
+            if (klineListDay == null || klineListDay.size() == 0) {
 //            System.out.println(new StringBuffer().append(zqdm).append("，").append(zqmc).append(":k线null！"));
-            return null;
+                return null;
+            }
+            Kline todayKline = klineListDay.get(0);
+            curAmt = todayKline.getCloseAmt();
+            yesterdayCloseAmt = todayKline.getCloseLastAmt();
         }
-        Kline todayKline = klineListDay.get(0);
-        BigDecimal curAmt = todayKline.getCloseAmt();
-        BigDecimal yesterdayCloseAmt = todayKline.getCloseLastAmt();
+
 
 //        Map<String, BigDecimal> netMap = KlineService.findNetMinMaxAvg(zqdm, maType, klt, false, "", date, "");
 //        BigDecimal curMaAmt = netMap.get(Content.keyRsNetCloseAvg);
@@ -986,22 +991,22 @@ public class KlineService {
         curAmt = maKline.getNetCur();
 
         //计算连续突破百分比
-        rs.setBreakPctUp(curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")));
+        rs.setBreakPctUp(curAmt.subtract(curMaAmt).divide(curMaAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP));
         //涨破均线，买出信号
         if (yesterdayCloseAmt.compareTo(curMaAmt) < 0 && curAmt.compareTo(curMaAmt) >= 0) {
             rs.setMaBreakUp(true);
             //计算连续突破次数
-            int breakCountUp = handlerBreakCount(maKline, true);
-            rs.setBreakCountUp(breakCountUp);
+//            int breakCountUp = handlerBreakCount(maKline, true);
+//            rs.setBreakCountUp(breakCountUp);
         }
         //最低净值跌破均线后突破均线向上
-        BigDecimal minAmt = todayKline.getMinAmt();
-        if (minAmt.compareTo(curMaAmt) <= 0 && curAmt.compareTo(curMaAmt) > 0) {
-            rs.setMaBreakUpMin(true);
-            //计算连续突破次数
-            int breakCount = handlerBreakCountUpMin(maKline);
-            rs.setBreakCountUpMin(breakCount);
-        }
+//        BigDecimal minAmt = todayKline.getMinAmt();
+//        if (minAmt.compareTo(curMaAmt) <= 0 && curAmt.compareTo(curMaAmt) > 0) {
+//            rs.setMaBreakUpMin(true);
+//            计算连续突破次数
+//            int breakCount = handlerBreakCountUpMin(maKline);
+//            rs.setBreakCountUpMin(breakCount);
+//        }
 
         rs.setMaNet(curMaAmt);
 
@@ -1298,7 +1303,7 @@ public class KlineService {
      * @param stockAdrCountVo 结果
      */
     private static void handlerMaBreakUp(String date, RankStockCommpanyDb stock, String klt, int curMaType, StockAdrCountVo stockAdrCountVo) {
-        BreakMaDto breakMa = KlineService.breakMaUp(stock, klt, curMaType, date);
+        BreakMaDto breakMa = KlineService.breakMaUp(stock, klt, curMaType, date, stockAdrCountVo.getF2(), stockAdrCountVo.getF18());
         if (breakMa == null) {
             return;
         }

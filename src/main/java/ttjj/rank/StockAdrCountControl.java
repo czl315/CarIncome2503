@@ -1378,7 +1378,7 @@ public class StockAdrCountControl {
             boolean isMa102 = false;
             if (maKltList.contains(KLT_15)) {
 //                isMa15 = KlineService.showUpMa(stock, KLT_15, maList, maDate, isUp);//显示信息-上涨均线
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, maDate);
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_15, MA_60, maDate, stockAdrCount.getF2(), stockAdrCount.getF18());
                 if (breakMa == null) {
                     continue;
                 }
@@ -1392,7 +1392,7 @@ public class StockAdrCountControl {
             }
             if (maKltList.contains(KLT_30)) {
 //                isMa30 = KlineService.showUpMa(stock, KLT_30, maList, maDate, isUp);//显示信息-上涨均线
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_30, MA_60, maDate);
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_30, MA_60, maDate, stockAdrCount.getF2(), stockAdrCount.getF18());
                 if (breakMa == null) {
                     continue;
                 }
@@ -1406,7 +1406,7 @@ public class StockAdrCountControl {
             }
             if (maKltList.contains(KLT_60)) {
 //                isMa60 = KlineService.showUpMa(stock, KLT_60, maList, maDate, isUp);//显示信息-上涨均线
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_60, MA_60, maDate);
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_60, MA_60, maDate, stockAdrCount.getF2(), stockAdrCount.getF18());
                 if (breakMa == null) {
                     continue;
                 }
@@ -1420,7 +1420,7 @@ public class StockAdrCountControl {
             }
             if (maKltList.contains(KLT_101)) {
 //                isMa101 = KlineService.showUpMa(stock, KLT_101, maList, maDate, isUp);//显示信息-上涨均线
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_101, MA_60, maDate);
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_101, MA_60, maDate, stockAdrCount.getF2(), stockAdrCount.getF18());
                 if (breakMa == null) {
                     continue;
                 }
@@ -1434,7 +1434,7 @@ public class StockAdrCountControl {
             }
             if (maKltList.contains(KLT_102)) {
 //                isMa102 = KlineService.showUpMa(stock, KLT_102, maList, maDate, isUp);//显示信息-上涨均线
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_102, MA_60, maDate);
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, KLT_102, MA_60, maDate, stockAdrCount.getF2(), stockAdrCount.getF18());
                 if (breakMa == null) {
                     continue;
                 }

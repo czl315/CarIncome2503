@@ -295,6 +295,9 @@ public interface EtfAdrCountMapper {
             "       <if test='maxAdrUpSumOrderStat != null'> ",
             "       <![CDATA[ AND ADR_UP_SUM_ORDER_STAT <= #{maxAdrUpSumOrderStat} ]]> ",
             "       </if> ",
+            "       <if test='maxAdrUpSumTotalRank != null'> ",
+            "       <![CDATA[ AND ADR_UP_SUM_TOTAL_RANK <= #{maxAdrUpSumTotalRank} ]]> ",
+            "       </if> ",
 
             "       <if test='orderBy != null '> ",
             "        ORDER BY  ${orderBy} ",
