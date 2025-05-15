@@ -149,11 +149,23 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * 最高-上涨排序统计
      */
     private BigDecimal maxAdrUpSumOrderStat;
+    /**
+     * 最高-上涨累计排名
+     */
+    private BigDecimal maxAdrUpSumTotalRank;
 
     /**
      * 每个类型限定n个
      */
     private Integer showCountTypeGroup;
+
+    public BigDecimal getMaxAdrUpSumTotalRank() {
+        return maxAdrUpSumTotalRank;
+    }
+
+    public void setMaxAdrUpSumTotalRank(BigDecimal maxAdrUpSumTotalRank) {
+        this.maxAdrUpSumTotalRank = maxAdrUpSumTotalRank;
+    }
 
     public Integer getShowCountTypeGroup() {
         return showCountTypeGroup;

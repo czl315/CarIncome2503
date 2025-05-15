@@ -1540,7 +1540,7 @@ public class ContMapEtfSimple {
     /**
      * ETF涨幅数据：查询数据根据名称列表模糊查询
      */
-    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn) {
+    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn, Map<String, String> typeMap) {
 //        String typeEn = "";
 //        String typeCn = "";
         CondEtfAdrCount condition = new CondEtfAdrCount();
@@ -1790,6 +1790,6 @@ public class ContMapEtfSimple {
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK);
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY);
-        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR);
+        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfSimple.KEJI_NEW_CAR);
     }
 }

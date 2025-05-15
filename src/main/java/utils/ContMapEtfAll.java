@@ -1567,7 +1567,7 @@ public class ContMapEtfAll {
     /**
      * ETF涨幅数据：查询数据根据名称列表模糊查询
      */
-    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn, Map<String, String> kejiGongYe) {
+    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn, Map<String, String> typeMap) {
 //        String typeEn = "";
 //        String typeCn = "";
         CondEtfAdrCount condition = new CondEtfAdrCount();
@@ -1798,7 +1798,7 @@ public class ContMapEtfAll {
 //        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
 
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG);
-        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, KEJI_GONG_YE);
+        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
 //        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN);
@@ -1820,6 +1820,6 @@ public class ContMapEtfAll {
 
 //        findByTypeName(date, ContEtfNameKey.JINRONG_CASH, null, "JINRONG_CASH", ContEtfTypeName.JINRONG_CASH);
 
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG);
+        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
     }
 }
