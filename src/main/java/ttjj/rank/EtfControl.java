@@ -35,8 +35,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-05-15";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-05-16";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
@@ -60,12 +60,11 @@ public class EtfControl {
 //        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-//        TODO 更新超过均线-每个类型涨幅前n个
-        updateUpMaTypeTopN(date, 2);//更新超过均线-每个类型涨幅前n个
+//        updateUpMaTypeTopN(date, 1);//更新超过均线-每个类型涨幅前n个
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_DACF);//更新-超过均线信息（交易所）
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
-//        findByDateOrder(date, zqdmList, 2, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+        findByDateOrder(date, zqdmList, 2, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
 //        findTypeTop(date);//查询每个类型涨幅排序头部的前n个
 
 //        findByTypeName(date);//查询数据根据类型名称模糊查询
@@ -79,10 +78,11 @@ public class EtfControl {
 //            List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
 //            for (String day : dateList) {
 ////            List<EtfAdrCountVo> rs = findByDateOrder(day, zqdmList, 1, ORDER_FIELD_F3, maxAdrUpSumOrderStat);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-//                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102), new BigDecimal("1"), maxAdrUpSumOrderStat);//   ,KLT_101
+//                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60
 //                CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
 //                condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("5"));//涨序排序前n的数据
 //                condFiter.setShowCountTypeGroup(new BigDecimal("2").intValue());//每个类型限定n个
+//                if (rs == null) break;
 //                //证券代码集合
 //                for (EtfAdrCountVo etf : rs) {
 //                    zqdmSet.add(etf.getF12());
@@ -103,7 +103,7 @@ public class EtfControl {
      * @param date                 日期
      * @param maxAdrUpSumTotalRank 最高涨幅累计排名
      */
-    private static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank) {
+    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-每个类型涨幅前n个：";
@@ -113,7 +113,7 @@ public class EtfControl {
         condition.setMaxAdrUpSumTotalRank(new BigDecimal(maxAdrUpSumTotalRank));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_5,KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
+        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         List<EtfAdrCountVo> etfAdrCountVos = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 
         int updateRs = 0;//更新成功个数
@@ -154,7 +154,7 @@ public class EtfControl {
 //            }
             if (maKltList.contains(KLT_5)) {
                 String kltTypeDfcf = KLT_5;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -169,7 +169,7 @@ public class EtfControl {
             }
             if (maKltList.contains(KLT_15)) {
                 String kltTypeDfcf = KLT_15;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -188,7 +188,7 @@ public class EtfControl {
             }
             if (maKltList.contains(KLT_30)) {
                 String kltTypeDfcf = KLT_30;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -207,7 +207,7 @@ public class EtfControl {
             }
             if (maKltList.contains(KLT_60)) {
                 String kltTypeDfcf = KLT_60;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -226,7 +226,7 @@ public class EtfControl {
             }
             if (maKltList.contains(KLT_101)) {
                 String kltTypeDfcf = KLT_101;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -249,7 +249,7 @@ public class EtfControl {
             }
             if (maKltList.contains(KLT_102)) {
                 String kltTypeDfcf = KLT_102;
-                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date,curAmt,etfAdrCountVo.getF18());
+                BreakMaDto breakMa = KlineService.breakMaUp(stock, kltTypeDfcf, count, date, curAmt, etfAdrCountVo.getF18());
                 if (breakMa == null || breakMa.getMaNet() == null) {
                     System.out.println("breakMa == null || breakMa.getMaNet() == null：" + JSON.toJSONString(breakMa) + ":" + stock.getF12() + ",周期：" + kltTypeDfcf);
                     continue;
@@ -803,11 +803,36 @@ public class EtfControl {
 ////            if(maPct == null){
 ////                System.out.println("价格null异常");
 ////            }
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102() != null ? vo.getMA_NET_60_102() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101() != null ? vo.getMA_NET_60_101() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60() != null ? vo.getMA_NET_60_60() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30() != null ? vo.getMA_NET_60_30() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
-            sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15() != null ? vo.getMA_NET_60_15() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            BigDecimal maNet = vo.getMA_NET_60_102();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102() != null ? vo.getMA_NET_60_102() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_101();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101() != null ? vo.getMA_NET_60_101() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_60();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60() != null ? vo.getMA_NET_60_60() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_30();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30() != null ? vo.getMA_NET_60_30() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_15();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15() != null ? vo.getMA_NET_60_15() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
 
             //净值区间
             BigDecimal curArea = vo.getNET_AREA_DAY_5();

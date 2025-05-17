@@ -29,6 +29,15 @@ import static utils.Content.*;
  */
 public class StockService {
 
+    public static void main(String[] args) {
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2022-09-09";
+        List<String> dateList = StockService.findListDateBefore(date, 5, "");//查询n个交易日之前的日期
+        for (String dateStr : dateList) {
+            System.out.println(dateStr);
+        }
+    }
+
     /**
      * 检查股票:状态、是否主板股票、市值限定
      *
@@ -310,31 +319,24 @@ public class StockService {
     /**
      * 查询指定日期之前交易日期列表
      * 数据库查询交易日不准确
-     * 查询特定股票贵州茅台的交易日列表
+     * 查询上证指数的交易日列表
      *
      * @param date             指定日期
      * @param days             限定返回数量
-     * @param httpKlineApiType
+     * @param httpKlineApiType http接口类型
      * @return 日期列表
      */
     public static List<String> findListDateBefore(String date, int days, String httpKlineApiType) {
+        boolean isShowLog = false;//是否显示日志
+        String methodName = "K线-查询上证指数的交易日列表：";
+        long curTime = System.currentTimeMillis();
         List<String> dateList = new ArrayList<>();
-
-//        return RankStockCommpanyDao.findListDateBefore(new DateCond(date, (days + 1)));//数据库查询交易日
-
         //查询K线-查询交易日列表，http查询上证指数的日k线
-//        String begDate = DateUtil.getAddDays(YYYY_MM_DD, date, days);
-        String begDate = "0";
-        String endDate = date;
-
+        List<Kline> klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, "0", date, DB_RANK_BIZ_TYPE_ZS);
         //如果东方财富http调用失败，调用上交所
-        List<Kline> klines = null;
-//        if (httpKlineApiType.equals(Content.API_TYPE_SSE)) {
-//            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
-//        } else {
-            klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, begDate, endDate, DB_RANK_BIZ_TYPE_ZS);
-//        }
-
+        if (klines == null) {
+            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
+        }
 //        System.out.println("k线：" + JSON.toJSONString(klines));
         if (klines != null && klines.size() > 0) {
             klines = klines.stream().filter(e -> e != null).sorted(Comparator.comparing(Kline::getKtime, Comparator.nullsFirst(String::compareTo)).reversed()).collect(Collectors.toList());
@@ -844,13 +846,5 @@ public class StockService {
         return RankStockCommpanyDao.count(condition); //  查询-股票涨跌次数
     }
 
-    public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2022-09-09";
-        List<String> dateList = StockService.findListDateBefore(date, 1, "");//查询n个交易日之前的日期
-        for (String dateStr : dateList) {
-            System.out.println(dateStr);
 
-        }
-    }
 }

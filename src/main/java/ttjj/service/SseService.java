@@ -285,6 +285,10 @@ public class SseService {
             }
             if (klineRs.size() >= (lmt + 1)) {
                 for (Kline kline : klineRs) {
+                    if (temp >= lmt) {
+//                    System.out.println("，去掉最后一个数据(最新交易日)");
+                        break;
+                    }
 //                    if (temp == 0) {
 //                        //最终的返回结果，需要去掉第一个数据（第一个数据是计算上一个交易日收盘价的），去掉最后一个数据(最新交易日)
 ////                    System.out.println("需要收集前一日的收盘价，所以+1，返回数据时需要去掉最后一个交易日的数据");
@@ -292,10 +296,6 @@ public class SseService {
 //                        continue;
 //                    }
                     klineRetrunRs.add(kline);
-                    if (temp == (lmt + 1)) {
-//                    System.out.println("，去掉最后一个数据(最新交易日)");
-                        break;
-                    }
                     temp++;
                 }
             } else {
