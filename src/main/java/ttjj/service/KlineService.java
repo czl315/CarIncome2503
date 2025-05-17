@@ -202,7 +202,7 @@ public class KlineService {
     }
 
     /**
-     * k线结果字符串类型
+     * http查询dfcf的k线结果
      * 北交所k线查询
      *
      * @param zqdm
@@ -215,6 +215,7 @@ public class KlineService {
      */
     public static String klineRsStrHttpDfcf(String zqdm, int lmt, String klt, Boolean isHasBegDate, String begDate, String endDate, String klineType) {
         boolean isShowLog = false;//是否显示日志
+        String methodName = "K线-http查询k线结果(dfcf)：";
         begDate = begDate != null ? begDate.replace("-", "") : null;
         endDate = endDate != null ? endDate.replace("-", "") : null;
         long curTime = System.currentTimeMillis();
@@ -389,7 +390,7 @@ public class KlineService {
             JSONObject szzzMonthJson = JSON.parseObject(rs);
             if (szzzMonthJson == null) {
                 System.out.println("请求url:" + HttpUtil.randomHttpHead(httpHead) + url.toString());
-                System.out.println("szzzMonthJson返回数据异常：" + rs);
+                System.out.println(methodName + "返回数据异常：" + rs + ",zqdm：" + zqdm);
                 return rs;
             }
             JSONObject szzzMonthDataJson = JSON.parseObject(szzzMonthJson.getString("data"));
