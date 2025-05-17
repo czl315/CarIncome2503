@@ -332,10 +332,10 @@ public class StockService {
         long curTime = System.currentTimeMillis();
         List<String> dateList = new ArrayList<>();
         //查询K线-查询交易日列表，http查询上证指数的日k线
-        List<Kline> klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, "0", date, DB_RANK_BIZ_TYPE_ZS);
-        //如果东方财富http调用失败，调用上交所
+        List<Kline> klines = SseService.daykline(ContIndex.SHANG_HAI, days);
+        //如果调用上交所失败，东方财富http调用
         if (klines == null) {
-            klines = SseService.daykline(ContIndex.SHANG_HAI, days);
+            klines = KlineService.kline(ContIndex.SHANG_HAI, days, KLT_101, false, "0", date, DB_RANK_BIZ_TYPE_ZS);
         }
 //        System.out.println("k线：" + JSON.toJSONString(klines));
         if (klines != null && klines.size() > 0) {
