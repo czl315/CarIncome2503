@@ -747,7 +747,7 @@ public class Content {
     /**
      * ORDER_FIELD_ADR_UP_SUM_1_20
      */
-    public static String ORDER_FIELD_ADR_UP_SUM_1_20 = "ADR_UP_SUM_1_20";
+    public static String ADR_UP_SUM_1_20_DESC = "ADR_UP_SUM_1_20 DESC";
     /**
      *  ORDER_FIELD_ADR_UP_SUM_1_10
      */
@@ -760,12 +760,20 @@ public class Content {
      *
      */
     public static String ORDER_FIELD_ADR_UP_SUM_1_3 = "ADR_UP_SUM_1_3";
-
-
     /**
-     * ORDER_FIELD_F3
+     * 排序字段
      */
-    public static String ORDER_FIELD_F3 = "F3";
+    public static String ADR_UP_SUM_TOTAL_RANK_ASC = "ADR_UP_SUM_TOTAL_RANK ";
+    /**
+     * 排序字段
+     */
+    public static String ADR_UP_SUM_TOTAL_DESC = "ADR_UP_SUM_TOTAL DESC";
+    /**
+     * 排序字段
+     */
+    public static String F3_DESC = "F3 DESC";
+
+
     /**
      * 最高回撤
      */
@@ -978,6 +986,7 @@ public class Content {
     public static int SIZE_8 = 8;
     public static int SIZE_10 = 10;
     public static int SIZE_16 = 16;
+    public static int SIZE_20 = 20;
     public static int SIZE_22 = 22;
 
     /**

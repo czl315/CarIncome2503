@@ -23,6 +23,39 @@ public class EtfAdrCountService {
     private final static Logger logger = Logger.getLogger(EtfAdrCountService.class.getName());
 
     /**
+     * 废弃：可用查询限定字段的方法替代
+     * 查询每个类型涨幅排序头部的前n个
+     *
+     * @param date 日期
+     */
+    @Deprecated
+    public static void findTypeTop(String date) {
+        //净值区间最高限定
+        CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("10"));//涨序排序前n的数据
+        BigDecimal limitAdrUpSumOrderStat = new BigDecimal("2");//涨序排序前n个限定
+        condFiter.setShowCountTypeGroup(limitAdrUpSumOrderStat.intValue());//每个类型限定n个
+
+        int num = 0;//序号
+        // 1、查询数据
+        CondEtfAdrCount condition = new CondEtfAdrCount();
+        condition.setDate(date);
+//        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
+//        condition.setType_name(INDEX_CN_NOT_USA);
+//        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
+//        condition.setTypeNameListNotIn(Arrays.asList("资源-石油","指数-外盘-美股","科技-汽车","金融-黄金","指数-外盘","科技-香港","医疗-通用","指数-港股","",""));//过滤类型
+        condition.setMaxAdrUpSumOrderStat(limitAdrUpSumOrderStat);
+        condition.setOrderBy(F3_DESC);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        if (stockAdrCountList == null) {
+            System.out.println("数据为null");
+            return;
+        }
+        System.out.println();
+        System.out.println("查询超过均线列表：日期：" + date);
+    }
+
+    /**
      * 批量插入
      *
      * @param stockAdrCount
@@ -240,6 +273,6 @@ public class EtfAdrCountService {
      */
     public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
-        EtfControl.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat);
+        EtfControl.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat,null);
     }
 }

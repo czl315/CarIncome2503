@@ -1599,7 +1599,7 @@ public class KlineService {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_40, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_ADR_UP_SUM_1_20.equals(orderField)) {
+        if (ADR_UP_SUM_1_20_DESC.equals(orderField)) {
             if (isOrderDesc) {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_20, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
@@ -1641,7 +1641,7 @@ public class KlineService {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_60, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_F3.equals(orderField)) {
+        if (F3_DESC.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getF3, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {

@@ -227,7 +227,7 @@ public class StockAdrStat {
         if (orderField.equals(ORDER_FIELD_ADR_UP_SUM_1_40)) {
             return " ADR_UP_SUM_1_40  DESC ";//排序
         }
-        if (orderField.equals(ORDER_FIELD_ADR_UP_SUM_1_20)) {
+        if (orderField.equals(ADR_UP_SUM_1_20_DESC)) {
             return " ADR_UP_SUM_1_20  DESC ";//排序
         }
         return null;
