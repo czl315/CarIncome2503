@@ -8,19 +8,25 @@ import ttjj.rank.EtfControl;
 import ttjj.rank.FupanControl;
 import utils.ContentCookie;
 import utils.DateUtil;
+import utils.StockUtil;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.RoundingMode;
+import java.util.*;
 import java.util.logging.Logger;
+
+import static utils.ContEtfTypeName.INDEX_CN_CITY;
+import static utils.ContEtfTypeName.JINRONG_CASH;
 import static utils.Content.*;
 
 /**
  * ETF涨幅统计
+ *
  * @date 2025-02-27 创建
  */
 public class EtfAdrCountService {
     private final static Logger logger = Logger.getLogger(EtfAdrCountService.class.getName());
+
 
     /**
      * 废弃：可用查询限定字段的方法替代
@@ -161,8 +167,8 @@ public class EtfAdrCountService {
 //            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
 //        }
         List<EtfAdrCountVo> rs = EtfAdrCountDao.listEtfAdrCountLikeName(condition);
-        if(isShowLog){
-            System.out.println(methodName   + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        if (isShowLog) {
+            System.out.println(methodName + "，用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
         return rs;
     }
@@ -181,8 +187,8 @@ public class EtfAdrCountService {
 //            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
 //        }
         List<EtfAdrCountVo> rs = EtfAdrCountDao.findEtfList(condition);
-        if(isShowLog){
-            System.out.println(methodName  + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2,BigDecimal.ROUND_HALF_UP));
+        if (isShowLog) {
+            System.out.println(methodName + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2, BigDecimal.ROUND_HALF_UP));
         }
         return rs;
     }
@@ -202,7 +208,7 @@ public class EtfAdrCountService {
      *
      * @param stockAdrCountList 涨幅列表
      * @param date              日期
-     * @param days           日类型
+     * @param days              日类型
      * @param compMaType        比较均线类型
      * @param condFind
      */
@@ -235,7 +241,7 @@ public class EtfAdrCountService {
                 compMaNet = stockAdrCountVo.getMA_NET_60_101();
             }
             for (Kline kline : klines) {
-                if (kline.getCloseAmt() == null || compMaNet==null) {
+                if (kline.getCloseAmt() == null || compMaNet == null) {
                     continue;
                 }
                 if (kline.getCloseAmt().compareTo(compMaNet) >= 0) {
@@ -269,10 +275,403 @@ public class EtfAdrCountService {
 
     /**
      * 查询我的ETF持仓
+     *
      * @param date
      */
     public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
-        EtfControl.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat,null);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, null);
     }
+
+    /**
+     * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
+     * 过滤条件：涨序排序前n的数据，每个类型限定n个；
+     *
+     * @param date
+     * @param orderField           排序字段
+     * @param zqdmList
+     * @param maxAdrUpSumOrderStat
+     */
+    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, int maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
+        boolean isShowLog = false;
+        long begTime = System.currentTimeMillis();
+        String methodName = "ETF涨幅数据-查询-：";
+        List<EtfAdrCountVo> rs = null;
+
+        if (date.length() == 8) {
+            date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
+        }
+
+        List<String> typeNameListNotIn = Arrays.asList(INDEX_CN_CITY, JINRONG_CASH);//过滤类型 INDEX_HK
+
+        //净值区间最高限定
+        CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal(maxAdrUpSumOrderStat));//涨序排序前n的数据
+        condFiter.setShowCountTypeGroup(showCountTypeGroup);//每个类型限定n个
+
+        // 查询条件
+        CondEtfAdrCount condition = new CondEtfAdrCount();
+        condition.setDate(date);
+//        condition.setADR_UP_SUM_1_60(new BigDecimal("1"));
+        condition.setTypeNameListNotIn(typeNameListNotIn);//
+        condition.setMaxAdrUpSumTotalRank(maxAdrUpSumTotalRank == null ? null : new BigDecimal(maxAdrUpSumTotalRank));
+        condition.setOrderBy(orderField);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
+        if (zqdmList != null && zqdmList.size() > 0) {
+            condition.setStCodeList(zqdmList);
+        }
+        condition.setType_name(typeName);
+//        condition.setMaxNetAreaDay10(null);//净值区间最高限定
+//        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
+        rs = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        if (rs == null) {
+            System.out.println("数据为null");
+            return null;
+        }
+
+        System.out.println(methodName + ",日期：" + date + ",排序字段：" + orderField);
+        handlerShowHead();//首行标题信息
+        handlerShowEtfAdr(rs, condFiter);//显示etf涨幅统计列表数据
+        return rs;
+    }
+
+    /**
+     * 首行标题信息
+     */
+    private static void handlerShowHead() {
+        StringBuffer sbHead = new StringBuffer();//首行标题信息
+        boolean isShowCode = true;
+        sbHead.append(StockUtil.formatStName("名称", SIZE_20));
+        if (isShowCode) {
+            sbHead.append(StockUtil.formatStName("编码", SIZE_10));
+        }
+        sbHead.append(StockUtil.formatStName("类型", SIZE_16));
+        sbHead.append(StockUtil.formatStName("市值", SIZE_8));
+        sbHead.append(StockUtil.formatStName("40_60序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("20_40序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("20序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("10序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("5序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("3序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("涨序排序", SIZE_10));
+        sbHead.append(StockUtil.formatStName("涨和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("涨和排序", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_60和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("40_60和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("20_40和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_20和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_10和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_5和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_3和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_2和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_1和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("上3涨", SIZE_10));
+        sbHead.append(StockUtil.formatStName("上2涨", SIZE_10));
+        sbHead.append(StockUtil.formatStName("上1涨", SIZE_10));
+        sbHead.append(StockUtil.formatStName("今涨", SIZE_10));
+        sbHead.append(StockUtil.formatStName("超周", SIZE_8));
+        sbHead.append(StockUtil.formatStName("超日", SIZE_8));
+        sbHead.append(StockUtil.formatStName("超60", SIZE_8));
+        sbHead.append(StockUtil.formatStName("超30", SIZE_8));
+        sbHead.append(StockUtil.formatStName("超15", SIZE_8));
+        sbHead.append(StockUtil.formatStName("超5", SIZE_8));
+
+        sbHead.append(StockUtil.formatStName("序号", SIZE_6));
+
+        sbHead.append(StockUtil.formatStName("周线比", SIZE_10));
+        sbHead.append(StockUtil.formatStName("日线比", SIZE_10));
+        sbHead.append(StockUtil.formatStName("60分比", SIZE_10));
+        sbHead.append(StockUtil.formatStName("30分比", SIZE_10));
+        sbHead.append(StockUtil.formatStName("15分比", SIZE_10));
+
+        //净值区间
+        sbHead.append(StockUtil.formatStName("区间5", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间10", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间20", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间40", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间60", SIZE_8));
+
+        System.out.println(sbHead);//首行标题信息
+    }
+
+
+    /**
+     * 显示etf涨幅统计列表数据
+     *
+     * @param stockAdrCountList etf涨幅统计列表
+     * @param condFiter         过滤条件
+     */
+    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
+        int num = 0;//序号
+        Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
+        for (EtfAdrCountVo vo : stockAdrCountList) {
+            if (condFiter != null) {
+                //过滤1：涨序排序前n的数据
+                if (vo.getADR_UP_SUM_ORDER_STAT() != null && condFiter.getMaxAdrUpSumOrderStat() != null && vo.getADR_UP_SUM_ORDER_STAT().compareTo(condFiter.getMaxAdrUpSumOrderStat()) > 0) {
+                    continue;
+                }
+                //过滤2：每个类型限定n个
+                if (condFiter.getShowCountTypeGroup() != null && checkShowTypeLimit(vo, condFiter.getShowCountTypeGroup(), showTypeLimitCountMap)) {
+                    continue;
+                }
+            }
+
+            StringBuffer sb = new StringBuffer();
+            String zqmc = vo.getF14();
+            if (zqmc != null && zqmc.length() > 10) {
+                zqmc = zqmc.substring(0, 10);
+            }
+            sb.append(StockUtil.formatStName(zqmc, SIZE_20));//名称
+            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
+            BigDecimal marketValue = null;
+            if (vo.getF20() != null) {
+                marketValue = vo.getF20().divide(NUM_YI_1, 2, BigDecimal.ROUND_HALF_UP);
+            }
+            sb.append(StockUtil.formatDouble(marketValue, SIZE_8));
+
+            if (vo.getADR_UP_SUM_ORDER_40_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_40_60(), SIZE_8));//40_60序
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_20_40() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_20_40(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_20() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_20(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_10() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_10(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_5(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_ORDER_STAT() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_TOTAL() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_TOTAL_RANK() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL_RANK(), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            if (vo.getADR_UP_SUM_1_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_40_60() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_20_40() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_20() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_10() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_5() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_2() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getADR_UP_SUM_1_1() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            if (vo.getLatestAdr_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getLatestAdr_2() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getLatestAdr_1() != null) {
+                sb.append(StockUtil.formatDouble(vo.getLatestAdr_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            if (vo.getF3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getF3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_8));//超周
+            sb.append(StockUtil.formatStName(vo.getUP_MA_101() != null ? vo.getUP_MA_101() : "", SIZE_8));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_60() != null ? vo.getUP_MA_60() : "", SIZE_8));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_30() != null ? vo.getUP_MA_30() : "", SIZE_8));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_15() != null ? vo.getUP_MA_15() : "", SIZE_8));
+            sb.append(StockUtil.formatStName(vo.getUP_MA_5() != null ? vo.getUP_MA_5() : "", SIZE_8));
+
+            sb.append(StockUtil.formatInt(++num, SIZE_6));
+
+            //均线百分比
+            BigDecimal curAmt = vo.getF2() != null ? vo.getF2() : new BigDecimal("0");
+//            BigDecimal maPct = handlerMaPct(curAmt, vo.getMA_NET_60_102());
+////            if(maPct == null){
+////                System.out.println("价格null异常");
+////            }
+            BigDecimal maNet = vo.getMA_NET_60_102();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_102() != null ? vo.getMA_NET_60_102() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_101();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_101() != null ? vo.getMA_NET_60_101() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_60();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_60() != null ? vo.getMA_NET_60_60() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_30();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_30() != null ? vo.getMA_NET_60_30() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            maNet = vo.getMA_NET_60_15();
+            if (maNet != null) {
+                sb.append(StockUtil.formatDouble(handlerMaPct(curAmt, vo.getMA_NET_60_15() != null ? vo.getMA_NET_60_15() : null).setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            //净值区间
+            BigDecimal curArea = vo.getNET_AREA_DAY_5();
+            if (curArea != null) {
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            curArea = vo.getNET_AREA_DAY_10();
+            if (curArea != null) {
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            curArea = vo.getNET_AREA_DAY_20();
+            if (curArea != null) {
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            curArea = vo.getNET_AREA_DAY_40();
+            if (curArea != null) {
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            curArea = vo.getNET_AREA_DAY_60();
+            if (curArea != null) {
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
+            System.out.println(sb);
+        }
+    }
+
+    /**
+     * 检查限定类型个数显示
+     *
+     * @param vo                    检查对象
+     * @param showTypeLimitCount    限定个数
+     * @param showTypeLimitCountMap 限定个数已有键值对
+     */
+    private static boolean checkShowTypeLimit(EtfAdrCountVo vo, int showTypeLimitCount, Map<String, Integer> showTypeLimitCountMap) {
+        String typeName = vo.getType_name();
+        Integer typeCount = showTypeLimitCountMap.get(typeName);
+        if (typeCount == null) {
+            showTypeLimitCountMap.put(typeName, 1);
+        } else {
+            showTypeLimitCountMap.put(typeName, ++typeCount);
+            if (typeCount > showTypeLimitCount) {
+//                        System.out.println(typeName + ",个数：" + typeCount + ",超过限定个数" + showTypeLimitCount + "，则不显示");
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * 计算均线百分比
+     *
+     * @param curAmt
+     * @param maNet
+     * @return
+     */
+    private static BigDecimal handlerMaPct(BigDecimal curAmt, BigDecimal maNet) {
+        BigDecimal maPct = null;
+        if (curAmt == null) {
+//            System.out.println("当前价null");
+            return null;
+        }
+        if (maNet == null) {
+//            System.out.println("均线价null");
+            return null;
+        }
+        maPct = curAmt.subtract(maNet).divide(maNet, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP);
+        return maPct;
+    }
+
+    public static void main(String[] args) {
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
+        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList, 100, null, null);
+//        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
+    }
+
 }
