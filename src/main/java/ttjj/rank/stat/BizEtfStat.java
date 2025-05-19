@@ -33,7 +33,7 @@ public class BizEtfStat {
         String spDate = null;//
 //        String spDate = DateUtil.getAddDays(YYYY_MM_DD, date, 1);//是否显示特定日期涨跌   "2022-05-18"
         CondMa condMa = new CondMa();
-        condMa.setOrderField(ORDER_FIELD_NET_AREA_DAY_20);//ORDER_FIELD_NET_AREA_DAY_5 ORDER_FIELD_F3 ORDER_FIELD_MAXDOWN    ORDER_FIELD_MINRISE
+        condMa.setOrderField(NET_AREA_DAY_20);//ORDER_FIELD_NET_AREA_DAY_5 ORDER_FIELD_F3 ORDER_FIELD_MAXDOWN    ORDER_FIELD_MINRISE
 //        condMa.setOrderDesc(true);//是否倒序
         condMa.setOrderDesc(false);//是否倒序
         condMa.setDate(date);

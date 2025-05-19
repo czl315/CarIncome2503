@@ -62,7 +62,7 @@ public class StockAdrStat {
         //编码限定-概念
         findStCodeLikeConception(condFind, date, board, null);
 
-        String orderFieldDb = ORDER_FIELD_ADR_UP_SUM_1_60;//排序-数据库字段  ORDER_FIELD_ADR_UP_SUM_1_60   ORDER_FIELD_NET_AREA_DAY_10 ADR_UP_COUNT_5 DESC    ADR_UP_COUNT_SUM_60    ADR_UP_SUM_1_60
+        String orderFieldDb = ADR_UP_SUM_1_60_DESC;//排序-数据库字段  ORDER_FIELD_ADR_UP_SUM_1_60   ORDER_FIELD_NET_AREA_DAY_10 ADR_UP_COUNT_5 DESC    ADR_UP_COUNT_SUM_60    ADR_UP_SUM_1_60
 //        String orderField = ORDER_FIELD_ADR_UP_SUM_1_60;//排序-查询后  ORDER_FIELD_ADR_UP_SUM_1_60   ORDER_FIELD_MAXDOWN   ORDER_FIELD_NET_AREA_DAY_10 ADR_UP_COUNT_5 DESC    ADR_UP_COUNT_SUM_60    ADR_UP_SUM_1_60
         String orderField = ORDER_FIELD_MAXDOWN;//最高回撤
 
@@ -93,7 +93,7 @@ public class StockAdrStat {
 
         condFind.setDate(date);
         condFind.setF139(board);
-        condFind.setOrderBy(getOrderBy(orderFieldDb));
+        condFind.setOrderBy(orderFieldDb);
         condFind.setLimitCount(limitCount);
 
         //查询大票
@@ -210,29 +210,6 @@ public class StockAdrStat {
             }
         }
     }
-
-    /**
-     * 返回排序字段
-     *
-     * @param orderField 排序条件
-     * @return rs
-     */
-    private static String getOrderBy(String orderField) {
-        if (orderField == null) {
-            return null;
-        }
-        if (orderField.equals(ORDER_FIELD_ADR_UP_SUM_1_60)) {
-            return " ADR_UP_SUM_1_60  DESC ";
-        }
-        if (orderField.equals(ORDER_FIELD_ADR_UP_SUM_1_40)) {
-            return " ADR_UP_SUM_1_40  DESC ";//排序
-        }
-        if (orderField.equals(ADR_UP_SUM_1_20_DESC)) {
-            return " ADR_UP_SUM_1_20  DESC ";//排序
-        }
-        return null;
-    }
-
 
     /**
      * 获取特定业务列表

@@ -35,8 +35,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-05-16";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-05-16";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
@@ -71,12 +71,12 @@ public class EtfControl {
 
         //查询多日数据
         {
-            int maxAdrUpSumOrderStat = 100;
+            int maxAdrUpSumOrderStat = 5;
             int days = 1;
             Set<String> zqdmSet = new HashSet<>();
             List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
             for (String day : dateList) {
-                List<EtfAdrCountVo> rs = findByDateOrder(day, zqdmList, 1, ADR_UP_SUM_1_20_DESC, maxAdrUpSumOrderStat, null);//查询数据根据日期，按照涨幅倒序    F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_20_DESC ORDER_FIELD_NET_AREA_DAY_5
+                List<EtfAdrCountVo> rs = findByDateOrder(day, zqdmList, 1, ADR_UP_SUM_1_60_DESC, maxAdrUpSumOrderStat, null);//查询数据根据日期，按照涨幅倒序    F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_20_DESC ORDER_FIELD_NET_AREA_DAY_5
 //                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60
                 CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
                 condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("5"));//涨序排序前n的数据

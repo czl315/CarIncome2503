@@ -1585,14 +1585,14 @@ public class KlineService {
         if (rs == null) {
             return null;
         }
-        if (ORDER_FIELD_ADR_UP_SUM_1_60.equals(orderField)) {
+        if (ADR_UP_SUM_1_60_DESC.equals(orderField)) {
             if (isOrderDesc) {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_60, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_60, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_ADR_UP_SUM_1_40.equals(orderField)) {
+        if (ADR_UP_SUM_1_40_DESC.equals(orderField)) {
             if (isOrderDesc) {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
@@ -1606,35 +1606,35 @@ public class KlineService {
                 return rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getADR_UP_SUM_1_20, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_NET_AREA_DAY_5.equals(orderField)) {
+        if (NET_AREA_DAY_5.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_5, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_5, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_NET_AREA_DAY_10.equals(orderField)) {
+        if (NET_AREA_DAY_10.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_10, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_10, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_NET_AREA_DAY_20.equals(orderField)) {
+        if (NET_AREA_DAY_20.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_20, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_20, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_NET_AREA_DAY_40.equals(orderField)) {
+        if (NET_AREA_DAY_40.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_40, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
             }
         }
-        if (ORDER_FIELD_NET_AREA_DAY_60.equals(orderField)) {
+        if (NET_AREA_DAY_60.equals(orderField)) {
             if (isOrderDesc) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(StockAdrCountVo::getNET_AREA_DAY_60, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
             } else {

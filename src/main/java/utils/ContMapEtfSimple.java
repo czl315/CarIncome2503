@@ -1545,7 +1545,7 @@ public class ContMapEtfSimple {
 //        String typeCn = "";
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
-        condition.setOrderBy(ORDER_FIELD_ADR_UP_SUM_1_60 + DB_DESC);
+        condition.setOrderBy(ADR_UP_SUM_1_60_DESC);
 
         // 科技
         {
