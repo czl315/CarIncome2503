@@ -1692,23 +1692,25 @@ public class ContMapEtfSimple {
             System.out.println("数据为null");
         }
         int num = 0;//序号
-        //计算涨幅合计修正值：最近60日+最近5日乘12
-        for (EtfAdrCountVo vo : etfListLikeName) {
-            BigDecimal adr_up_sum_1_10 = vo.getADR_UP_SUM_1_10();
-            BigDecimal adr_up_sum_1_60 = vo.getADR_UP_SUM_1_60();
-            BigDecimal day10 = new BigDecimal("0");
-            BigDecimal day60 = new BigDecimal("0");
-            if (adr_up_sum_1_10 != null) {
-                day10 = adr_up_sum_1_10.setScale(2, BigDecimal.ROUND_HALF_UP);
-            }
-            if (adr_up_sum_1_60 != null) {
-                day60 = adr_up_sum_1_60.setScale(2, BigDecimal.ROUND_HALF_UP);
-            }
-            BigDecimal day60and10Cheng6 = day60.add(day10.multiply(new BigDecimal("6")));
-            vo.setAdrUpSum_60_and_10c6(day60and10Cheng6);
-        }
-        //排序
-        etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getAdrUpSum_60_and_10c6, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+//        //计算涨幅合计修正值：最近60日+最近5日乘12
+//        for (EtfAdrCountVo vo : etfListLikeName) {
+//            BigDecimal adr_up_sum_1_10 = vo.getADR_UP_SUM_1_10();
+//            BigDecimal adr_up_sum_1_60 = vo.getADR_UP_SUM_1_60();
+//            BigDecimal day10 = new BigDecimal("0");
+//            BigDecimal day60 = new BigDecimal("0");
+//            if (adr_up_sum_1_10 != null) {
+//                day10 = adr_up_sum_1_10.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            }
+//            if (adr_up_sum_1_60 != null) {
+//                day60 = adr_up_sum_1_60.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            }
+//            BigDecimal day60and10Cheng6 = day60.add(day10.multiply(new BigDecimal("6")));
+//            vo.setAdrUpSum_60_and_10c6(day60and10Cheng6);
+//        }
+//        //排序
+//        etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getAdrUpSum_60_and_10c6, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+
+        etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_TOTAL, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
 
         System.out.println("    static {");
         for (EtfAdrCountVo vo : etfListLikeName) {
@@ -1759,7 +1761,8 @@ public class ContMapEtfSimple {
             }
             sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
             sb.append(StockUtil.formatStName("累涨修正：", SIZE_10));
-            sb.append(StockUtil.formatDouble(vo.getAdrUpSum_60_and_10c6(), SIZE_10));
+//            sb.append(StockUtil.formatDouble(vo.getAdrUpSum_60_and_10c6(), SIZE_10));
+            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL(), SIZE_10));
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
 
@@ -1774,7 +1777,7 @@ public class ContMapEtfSimple {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-04-29";
-//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//资源-石油
+        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfSimple.KEJI_NEW_CAR);//资源-石油
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON);
@@ -1790,6 +1793,6 @@ public class ContMapEtfSimple {
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK);
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY);
-        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfSimple.KEJI_NEW_CAR);
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfSimple.KEJI_NEW_CAR);
     }
 }

@@ -2,19 +2,14 @@ package ttjj.rank.stat.schedule;
 
 import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.EtfAdrCountVo;
-import ttjj.dto.RankBizDataDiff;
 import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 import utils.Content;
 import utils.DateUtil;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static utils.Content.*;
 
 /**
  * 定时任务-etf涨幅统计
