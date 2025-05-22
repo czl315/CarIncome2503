@@ -871,16 +871,16 @@ public class ContMapEtfSimple {
     public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
 
     static {
-        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.19      累涨：56.42     21.75     10.41     24.26     10.51     5日： 4.20      累涨修正：106.82    1
-//        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：9.58      累涨：44.53     10.63     9.51      24.39     10.61     5日： 4.15      累涨修正：94.33     2
-        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.11      累涨：17.35     4.60      5.95      6.80      3.07      5日： 2.19      累涨修正：43.63     3
-//        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.27      累涨：19.36     3.30      7.46      8.60      2.63      5日： 1.71      累涨修正：39.88     4
-//        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：1.07      累涨：18.88     4.63      5.80      8.45      2.16      5日： 1.64      累涨修正：38.56     5
-//        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.24      累涨：20.43     3.49      7.20      9.74      2.17      5日： 1.48      累涨修正：38.19     6
-//        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.31      累涨：18.74     6.20      5.11      7.43      2.19      5日： 1.40      累涨修正：35.54     7
-//        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：0.78      累涨：19.02     3.54      6.20      9.28      1.70      5日： 1.06      累涨修正：31.74     8
-//        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：0.61      累涨：17.70     2.69      6.61      8.40      1.34      5日： 1.12      累涨修正：31.14     9
-//        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：0.60      累涨：17.58     3.07      7.54      6.97      1.99      5日： 1.10      累涨修正：30.78     10
+        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.25      累涨：48.48     11.02     21.18     16.28     10日：11.25     0.55      1         累涨修正：73.18     1
+//        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.39      累涨：45.80     8.02      21.73     16.05     10日：11.03     0.57      2         累涨修正：70.14     2
+//        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：0.55      累涨：21.80     6.76      7.62      7.42      10日：4.33      1.29      3         累涨修正：44.65     3
+//        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：0.74      累涨：22.16     6.04      9.51      6.61      10日：3.65      1.36      4         累涨修正：44.42     4
+//        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：1.01      累涨：21.82     6.54      7.56      7.72      10日：3.61      1.20      7         累涨修正：42.24     5
+//        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.23      累涨：23.76     7.04      9.86      6.86      10日：3.56      0.99      5         累涨修正：41.77     6
+//        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.12      累涨：19.72     5.07      6.65      8.00      10日：3.85      1.28      6         累涨修正：41.5      7
+//        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.24      累涨：22.58     7.62      7.74      7.22      10日：3.35      1.11      8         累涨修正：41.49     8
+//        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：0.59      累涨：21.01     5.90      8.65      6.46      10日：3.43      1.21      9         累涨修正：41.18     9
+//        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.31      累涨：18.89     4.83      7.15      6.91      10日：3.18      0.75      10        累涨修正：33.5      10
     }
 
     public static Map<String, String> ZIYUAN_NONGYE = new HashMap<>();
@@ -1777,10 +1777,12 @@ public class ContMapEtfSimple {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-04-29";
-        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfSimple.KEJI_NEW_CAR);//资源-石油
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON);
+        //  TODO etf集合简单头部数据
+        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfSimple.ZIYUAN_OIL);//资源-石油
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE, ContMapEtfSimple.ZIYUAN_NONGYE);
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfSimple.ZIYUAN_XIYOU);
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfSimple.ZIYUAN_COMMON);
+
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA);
