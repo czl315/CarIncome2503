@@ -1,5 +1,6 @@
 package ttjj.rank.stat;
 
+import ttjj.dto.EtfAdrCountVo;
 import ttjj.rank.EtfControl;
 import ttjj.service.StockService;
 import utils.Content;
@@ -23,7 +24,10 @@ public class EtfStat {
         List<String> dateList = StockService.findListDateBefore(date, 1,  Content.API_TYPE_SSE);//查询n个交易日之前的日期
         for (String day : dateList) {
 //            EtfControl.findByDateOrder(day, zqdmList, 2,ORDER_FIELD_F3);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+        List<EtfAdrCountVo> rs = EtfControl.findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_60_DESC, null, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_20_DESC ORDER_FIELD_NET_AREA_DAY_5
             EtfControl.findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), null,5);
         }
+
+
     }
 }

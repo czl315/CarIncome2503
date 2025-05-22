@@ -292,7 +292,7 @@ public class EtfAdrCountService {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, int maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
+    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据-查询-：";
@@ -306,7 +306,7 @@ public class EtfAdrCountService {
 
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-        condFiter.setMaxAdrUpSumOrderStat(new BigDecimal(maxAdrUpSumOrderStat));//涨序排序前n的数据
+        condFiter.setMaxAdrUpSumOrderStat(maxAdrUpSumOrderStat == null ? null : new BigDecimal(maxAdrUpSumOrderStat));//涨序排序前n的数据
         condFiter.setShowCountTypeGroup(showCountTypeGroup);//每个类型限定n个
 
         // 查询条件

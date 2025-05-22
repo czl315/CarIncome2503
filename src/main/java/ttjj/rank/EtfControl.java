@@ -57,11 +57,11 @@ public class EtfControl {
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
-        updateLatestDayAdr(condition, date, httpKlineApiType);
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateLatestDayAdr(condition, date, httpKlineApiType);
+        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 1);//更新超过均线-每个类型涨幅前n个
-//        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_DACF);//更新-超过均线信息（交易所）
-//        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
+        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -70,26 +70,32 @@ public class EtfControl {
 //        updateNetHis();
 
         //查询多日数据
-//        {
-//            int maxAdrUpSumOrderStat = 5;
-//            int days = 1;
-//            Set<String> zqdmSet = new HashSet<>();
-//            List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
-//            for (String day : dateList) {
-//                List<EtfAdrCountVo> rs = findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_60_DESC, maxAdrUpSumOrderStat, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_20_DESC ORDER_FIELD_NET_AREA_DAY_5
-////                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60
-//                CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-//                condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("5"));//涨序排序前n的数据
-//                condFiter.setShowCountTypeGroup(new BigDecimal("2").intValue());//每个类型限定n个
-//                if (rs == null) break;
-//                //证券代码集合
-//                for (EtfAdrCountVo etf : rs) {
-//                    zqdmSet.add(etf.getF12());
-//                }
-//            }
-////            zqdmList.addAll(zqdmSet);
-////            findByDateOrder(dateList.get(0), zqdmList, 10, ADR_UP_SUM_1_20_DESC, maxAdrUpSumOrderStat,null,null);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
-//        }
+        {
+            int maxAdrUpSumOrderStat = 5;
+            int days = 1;
+            Set<String> zqdmSet = new HashSet<>();
+            List<String> dateList = StockService.findListDateBefore(date, days, httpKlineApiType);//查询n个交易日之前的日期
+            for (String day : dateList) {
+                List<EtfAdrCountVo> rs = findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_3_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_5_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_10_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_20_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_60_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                findByDateOrder(day, zqdmList, 10, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60
+                CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
+                condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("5"));//涨序排序前n的数据
+                condFiter.setShowCountTypeGroup(new BigDecimal("2").intValue());//每个类型限定n个
+                if (rs == null) break;
+                //证券代码集合
+                for (EtfAdrCountVo etf : rs) {
+                    zqdmSet.add(etf.getF12());
+                }
+            }
+//            zqdmList.addAll(zqdmSet);
+//            findByDateOrder(dateList.get(0), zqdmList, 10, ADR_UP_SUM_1_20_DESC, maxAdrUpSumOrderStat,null,null);//查询数据根据日期，按照涨幅倒序    ORDER_FIELD_F3;//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_20 ORDER_FIELD_NET_AREA_DAY_5
+        }
 
         //查询我的ETF持仓
 //        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
@@ -551,8 +557,8 @@ public class EtfControl {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, int maxAdrUpSumOrderStat, String typeName,Integer maxAdrUpSumTotalRank) {
-        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, typeName,maxAdrUpSumTotalRank);
+    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
+        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, typeName, maxAdrUpSumTotalRank);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -2120,6 +2126,16 @@ public class EtfControl {
             adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("4"));
             BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3() != null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
             adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("7"));
+
+            //如果涨和超过100，可能是复权错误，不累加
+            if (adrUpSum140To60.compareTo(new BigDecimal(100)) > 0) {
+                adrUpSum140To60 = new BigDecimal("0");
+                System.out.println("涨和超过100%：" + etfAdrCountVo.getF14());
+            }
+            if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
+                adrUpSum120To40 = new BigDecimal("0");
+                System.out.println("涨和超过100%：" + etfAdrCountVo.getF14());
+            }
 
             BigDecimal adrUpSum1Total = adrUpSum140To60.add(adrUpSum120To40).add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5).add(adrUpSum1To3);
             etfAdrCountVo.setADR_UP_SUM_TOTAL(adrUpSum1Total);
