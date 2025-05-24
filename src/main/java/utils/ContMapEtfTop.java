@@ -13,7 +13,7 @@ import static utils.Content.*;
 /**
  * 常量-ETF精简数据
  */
-public class ContMapEtfSimple {
+public class ContMapEtfTop {
     /**
      * 指数-科创板
      */
@@ -898,26 +898,6 @@ public class ContMapEtfSimple {
     public static Map<String, String> ZIYUAN_XIYOU = new HashMap<>();
 
     static {
-        ZIYUAN_XIYOU.put("516150", "资源-稀有             ");//稀土ETF基金           市值：16.15     累涨：40.46     16.97     12.56     10.93     3.88      5日： 2.32      1         累涨修正：63.74     1
-//        ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：8.67      累涨：38.10     16.97     11.76     9.37      3.92      5日： 2.31      4         累涨修正：61.62     2
-//        ZIYUAN_XIYOU.put("159715", "资源-稀有             ");//稀土ETF易方达         市值：1.90      累涨：38.12     16.17     11.56     10.39     3.86      5日： 2.22      6         累涨修正：61.28     3
-        ZIYUAN_XIYOU.put("159652", "资源-稀有             ");//有色50ETF             市值：2.62      累涨：35.54     7.13      14.34     14.07     4.03      5日：           2         累涨修正：59.72     4
-//        ZIYUAN_XIYOU.put("512400", "资源-稀有             ");//有色金属ETF           市值：45.33     累涨：35.16     7.58      13.64     13.94     3.99      5日： 0.19      3         累涨修正：59.10     5
-//        ZIYUAN_XIYOU.put("159876", "资源-稀有             ");//有色龙头ETF           市值：0.67      累涨：33.33     6.52      13.33     13.48     4.06      5日： 0.27      5         累涨修正：57.69     6
-//        ZIYUAN_XIYOU.put("159881", "资源-稀有             ");//有色60ETF             市值：0.50      累涨：31.78     6.40      13.39     11.99     4.17      5日： 0.20      8         累涨修正：56.80     7
-//        ZIYUAN_XIYOU.put("516650", "资源-稀有             ");//有色金属ETF基金       市值：1.07      累涨：32.68     6.43      13.95     12.30     3.96      5日： 0.20      7         累涨修正：56.44     8
-//        ZIYUAN_XIYOU.put("159713", "资源-稀有             ");//稀土ETF               市值：3.07      累涨：34.80     14.99     11.77     8.04      3.51      5日： 2.02      11        累涨修正：55.86     9
-//        ZIYUAN_XIYOU.put("159871", "资源-稀有             ");//有色金属ETF           市值：0.90      累涨：32.95     6.89      13.51     12.55     3.70      5日：           9         累涨修正：55.15     10
-//        ZIYUAN_XIYOU.put("159880", "资源-稀有             ");//有色ETF基金           市值：0.94      累涨：31.73     6.28      13.34     12.11     3.65      5日：           14        累涨修正：53.63     11
-//        ZIYUAN_XIYOU.put("560860", "资源-稀有             ");//工业有色ETF           市值：3.85      累涨：31.08     7.34      12.89     10.85     3.67      5日： 1.38      10        累涨修正：53.10     12
-//        ZIYUAN_XIYOU.put("159671", "资源-稀有             ");//稀有金属ETF基金       市值：4.91      累涨：32.80     10.38     12.16     10.26     2.54      5日： 0.74      12        累涨修正：48.04     13
-//        ZIYUAN_XIYOU.put("561800", "资源-稀有             ");//稀有金属ETF基金       市值：0.88      累涨：34.32     11.41     13.12     9.79      2.14      5日： 0.58      13        累涨修正：47.16     14
-//        ZIYUAN_XIYOU.put("562800", "资源-稀有             ");//稀有金属ETF           市值：8.88      累涨：31.67     11.19     11.52     8.96      2.49      5日： 0.61      15        累涨修正：46.61     15
-//        ZIYUAN_XIYOU.put("159608", "资源-稀有             ");//稀有金属ETF           市值：2.15      累涨：30.97     10.69     11.74     8.54      2.17      5日： 0.54      16        累涨修正：43.99     16
-//        ZIYUAN_XIYOU.put("159980", "资源-稀有             ");//有色ETF               市值：9.24      累涨：21.94     5.16      7.51      9.27      3.40      5日： 1.02      17        累涨修正：42.34     17
-    }
-
-    static {
         ZIYUAN_XIYOU.put("159652", "资源-稀有             ");//有色50ETF             市值：2.57      累涨：36.79     12.28     12.78     11.73     10日：4.92      2.95      1         累涨修正：79.08     1
 //        ZIYUAN_XIYOU.put("159880", "资源-稀有             ");//有色ETF基金           市值：0.91      累涨：32.91     11.16     10.83     10.92     10日：4.98      3.01      3         累涨修正：75.98     2
 //        ZIYUAN_XIYOU.put("512400", "资源-稀有             ");//有色金属ETF           市值：45.12     累涨：35.42     12.11     12.07     11.24     10日：4.55      2.56      2         累涨修正：72.68     3
@@ -1800,45 +1780,45 @@ public class ContMapEtfSimple {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-05-22";
-//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfSimple.ZIYUAN_OIL);//资源-石油
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE, ContMapEtfSimple.ZIYUAN_NONGYE);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfSimple.ZIYUAN_XIYOU);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfSimple.ZIYUAN_COMMON);
+//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfTop.ZIYUAN_OIL);//资源-石油
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE, ContMapEtfTop.ZIYUAN_NONGYE);
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfTop.ZIYUAN_XIYOU);
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfTop.ZIYUAN_COMMON);
 
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfSimple.XIAOFEI_COMMON);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK, ContMapEtfSimple.XIAOFEI_HK);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfSimple.XIAOFEI_MEDIA);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfSimple.XIAOFEI_WINE);
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfTop.XIAOFEI_COMMON);
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK, ContMapEtfTop.XIAOFEI_HK);
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfTop.XIAOFEI_MEDIA);
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfTop.XIAOFEI_WINE);
 
-//        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON, ContMapEtfSimple.YILIAO_COMMON);
+//        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON, ContMapEtfTop.YILIAO_COMMON);
 
-//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfSimple.KEJI_JUNGONG);
-//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfSimple.KEJI_GONG_YE);
-//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfSimple.KEJI_RUAN_JIAN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfSimple.KEJI_XIN_PIAN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfSimple.KEJI_TONG_XIN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK, ContMapEtfSimple.KEJI_HK);
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfSimple.KEJI_NEW_ENERGY);
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfSimple.KEJI_NEW_CAR);
+//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfTop.KEJI_JUNGONG);
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfTop.KEJI_GONG_YE);
+//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfTop.KEJI_RUAN_JIAN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfTop.KEJI_XIN_PIAN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfTop.KEJI_TONG_XIN);
+//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK, ContMapEtfTop.KEJI_HK);
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfTop.KEJI_NEW_ENERGY);
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfTop.KEJI_NEW_CAR);
 
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfSimple.INDEX_CN_NOT);
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA, null, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfSimple.INDEX_CN_NOT_USA);
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, null, "INDEX_CN_1000", ContEtfTypeName.INDEX_CN_1000, ContMapEtfSimple.INDEX_CN_1000);
-//        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfSimple.INDEX_300);
-//        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfSimple.INDEX_688);
-//        findByTypeName(date, ContEtfNameKey.INDEX_HK,  ContEtfNameKey.INDEX_HK_NOLIKE, "INDEX_HK", ContEtfTypeName.INDEX_HK, ContMapEtfSimple.INDEX_HK);
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG,  ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfSimple.INDEX_CN_BIG);
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfTop.INDEX_CN_NOT);
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA, null, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfTop.INDEX_CN_NOT_USA);
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, null, "INDEX_CN_1000", ContEtfTypeName.INDEX_CN_1000, ContMapEtfTop.INDEX_CN_1000);
+//        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfTop.INDEX_300);
+//        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfTop.INDEX_688);
+//        findByTypeName(date, ContEtfNameKey.INDEX_HK,  ContEtfNameKey.INDEX_HK_NOLIKE, "INDEX_HK", ContEtfTypeName.INDEX_HK, ContMapEtfTop.INDEX_HK);
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG,  ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfTop.INDEX_CN_BIG);
 //        public static String INDEX_CN_CITY = "指数-国内城市";
-//        findByTypeName(date, ContEtfNameKey.JINRONG_GOLD,  ContEtfNameKey.JINRONG_GOLD_NOLIKE, "JINRONG_GOLD", ContEtfTypeName.JINRONG_GOLD, ContMapEtfSimple.JINRONG_GOLD);
-//        findByTypeName(date, ContEtfNameKey.JINRONG_BANK,  null, "JINRONG_BANK", ContEtfTypeName.JINRONG_BANK, ContMapEtfSimple.JINRONG_BANK);
-//        findByTypeName(date, ContEtfNameKey.JINRONG_ZHENGQUAN,  ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE, "JINRONG_ZHENGQUAN", ContEtfTypeName.JINRONG_ZHENGQUAN, ContMapEtfSimple.JINRONG_ZHENGQUAN);
-//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN,  null, "JINRONG_FANGDICHAN", ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfSimple.JINRONG_FANGDICHAN);
+//        findByTypeName(date, ContEtfNameKey.JINRONG_GOLD,  ContEtfNameKey.JINRONG_GOLD_NOLIKE, "JINRONG_GOLD", ContEtfTypeName.JINRONG_GOLD, ContMapEtfTop.JINRONG_GOLD);
+//        findByTypeName(date, ContEtfNameKey.JINRONG_BANK,  null, "JINRONG_BANK", ContEtfTypeName.JINRONG_BANK, ContMapEtfTop.JINRONG_BANK);
+//        findByTypeName(date, ContEtfNameKey.JINRONG_ZHENGQUAN,  ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE, "JINRONG_ZHENGQUAN", ContEtfTypeName.JINRONG_ZHENGQUAN, ContMapEtfTop.JINRONG_ZHENGQUAN);
+//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN,  null, "JINRONG_FANGDICHAN", ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfTop.JINRONG_FANGDICHAN);
 
-        //  TODO etf集合简单头部数据
-        List<String> zqdmList = new ArrayList<>(ContMapEtfSimple.BIZ_ALL.keySet());
+        //etf头部数据
+        List<String> zqdmList = new ArrayList<>(ContMapEtfTop.ETF_All.keySet());
         int count = 0;
         for (String zqdm : zqdmList) {
-            System.out.println(++count + ":" + zqdm);
+            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
         }
 
     }

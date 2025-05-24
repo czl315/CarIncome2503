@@ -45,7 +45,7 @@ public class EtfControl {
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
 //        condition.setF12("512240");
-//        condition.setStCodeList(new ArrayList<>(ContMapEtfSimple.ZIYUAN.keySet()));
+//        condition.setStCodeList(new ArrayList<>(ContMapEtfTop.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
 //        condition.setType_name(INDEX_CN_NOT_USA);

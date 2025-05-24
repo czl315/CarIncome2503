@@ -114,7 +114,7 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             try {
-                EtfControl.updateUpMaTypeTopN(date, 2);//更新超过均线-每个类型涨幅前n个
+                EtfControl.updateUpMaTypeTopN(date, 4);//更新超过均线-每个类型涨幅前n个
             } catch (Exception e) {
                 e.printStackTrace();
             }

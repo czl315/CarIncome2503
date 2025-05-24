@@ -4,19 +4,29 @@ import ttjj.dto.CondEtfAdrCount;
 import ttjj.dto.EtfAdrCountVo;
 import ttjj.rank.EtfControl;
 import ttjj.service.StockService;
-import utils.ContMapEtfSimple;
+import utils.ContMapEtfTop;
 import utils.Content;
 import utils.DateUtil;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static utils.ContMapEtfSimple.ETF_All;
-import static utils.ContMapEtfSimple.ZIYUAN_OIL;
+import static utils.ContMapEtfTop.ETF_All;
+import static utils.ContMapEtfTop.ZIYUAN_OIL;
 import static utils.Content.*;
 
 /**
- * etf
+ * etf数据统计
+ * 1、涨幅倒序
+ * 2、涨幅合计排名
+ * 3、头部etf
+ * 4、最近20日价格区间
+ * 5、最近3个交易日涨幅累计
+ * 6、最近5个交易日涨幅累计
+ * 7、最近10个交易日涨幅累计
+ * 8、最近20个交易日涨幅累计
+ * 9、最近60个交易日涨幅累计
+ * 10、突破均线
  */
 public class EtfStat {
     public static void main(String[] args) {
@@ -28,20 +38,21 @@ public class EtfStat {
         Integer maxAdrUpSumTotalRank = null;
         int days = 1;
         Set<String> zqdmSet = new HashSet<>();
-        List<String> zqdmList = new ArrayList<>(ContMapEtfSimple.BIZ_ALL.keySet());
+        List<String> zqdmList = null;
+//        zqdmList = new ArrayList<>(ContMapEtfTop.ETF_All.keySet());
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
+        List<EtfAdrCountVo> rs = null;
         for (String day : dateList) {
-            List<EtfAdrCountVo> rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
-//                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_3_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计排名
+//            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//头部etf
+//            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, null);//最近20日价格区间
 //                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_5_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
 //                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_10_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
 //                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_20_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
 //                findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_60_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
-//            EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
-//                List<EtfAdrCountVo> rs = findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60
-            CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-            condFiter.setMaxAdrUpSumOrderStat(new BigDecimal("5"));//涨序排序前n的数据
-            condFiter.setShowCountTypeGroup(new BigDecimal("2").intValue());//每个类型限定n个
+//            EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, null);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
+//                EtfControl.findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60), new BigDecimal("1"), maxAdrUpSumOrderStat);//  KLT_102,KLT_101,KLT_60,KLT_30,KLT_15
             if (rs == null) break;
             //证券代码集合
             for (EtfAdrCountVo etf : rs) {
