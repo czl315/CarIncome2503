@@ -81,15 +81,15 @@ public class ContEtfNameKey {
         JINRONG.addAll(JINRONG_GOLD);
     }
 
-    public static List KEJI_GONG_YE = Arrays.asList("物联网", "工业母机", "机床", "专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "核心",
-            "科技", "VR", "漂亮", "国货", "ESG", "可持续", "卫星", "产业升级", "创新100", "G60创新");//科技-工业
+    public static List KEJI_GONG_YE = Arrays.asList("物联网", "机床",  "工业母机", "工业互联","专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "核心",
+            "科技", "VR", "漂亮", "国货", "ESG", "可持续", "卫星", "产业升级", "创新100", "G60创新","科技龙头");//科技-工业
     public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指", "标普", "港股", "香港", "恒生", "中概", "东南亚", "生物", "金融", "货币", "沪港深科技", "科技ETF沪港深");//科技-工业
     public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
     public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "绿电", "电力");//科技-新能源
     public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济");//科技-软件
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
-    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技","科技ETF沪港深", "科技龙头", "新经济");//科技-香港
+    public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技","科技ETF沪港深", "新经济","香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//科技-香港
     public static List KEJI_JUNGONG = Arrays.asList("国防", "军工","航空","高端");//科技-军工
     public static List KEJI = new ArrayList();//科技
 
@@ -103,7 +103,6 @@ public class ContEtfNameKey {
      */
     public static List XIAOFEI_COMMON = Arrays.asList("线上消费", "在线消费", "品牌消费", "消费30", "消费龙头", "消费50", "消费ETF", "主要消费", "必选消费", "消费服务", "物流", "养老","家电");//消费-通用
     public static List XIAOFEI_COMMON_NOLIKE = Arrays.asList("标普", "香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//消费-通用
-    public static List XIAOFEI_HK = Arrays.asList("香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//消费-香港消费
     public static List XIAOFEI_MEDIA = Arrays.asList("游戏", "影视", "传媒");//消费-文娱传媒
     public static List XIAOFEI_WINE = Arrays.asList("酒", "食品", "饮食", "旅游");//消费-酒
 //    public static List XIAOFEI_HOUSE = Arrays.asList("家电");//消费-家电
@@ -111,10 +110,10 @@ public class ContEtfNameKey {
 
     static {
         XIAOFEI.addAll(XIAOFEI_COMMON);
-        XIAOFEI.addAll(XIAOFEI_HK);
         XIAOFEI.addAll(XIAOFEI_MEDIA);
         XIAOFEI.addAll(XIAOFEI_WINE);
         XIAOFEI.addAll(XIAOFEI_WINE);
+//        XIAOFEI.addAll(XIAOFEI_HK);
 //        XIAOFEI.addAll(XIAOFEI_HOUSE);
 //        XIAOFEI.addAll(XIAOFEI_TRAVEL);
     }
