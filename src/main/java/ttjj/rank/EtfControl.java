@@ -36,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-05-16";
+//        String date = "2025-05-27";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
@@ -53,15 +53,15 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
-        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
-        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
-        updateUpMaTypeTopN(date, 3);//更新超过均线-每个类型涨幅前n个
-        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
+//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+//        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
+//        updateUpMaTypeTopN(date, 2);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+//        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -108,27 +108,59 @@ public class EtfControl {
      * @param date                 日期
      * @param maxAdrUpSumTotalRank 最高涨幅累计排名
      */
-    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank) {
+    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-每个类型涨幅前n个：";
 
+        //查询ETF列表
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setMaxAdrUpSumTotalRank(new BigDecimal(maxAdrUpSumTotalRank));
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
-        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
-        List<EtfAdrCountVo> etfAdrCountVos = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
+
+        //更新超过均线
+        updateUpMa( date,  etfAdrCountVoList, maKltList);
+    }
+
+    /**
+     * 更新超过均线（常用ETF）
+     * @param date
+     * @param maKltList
+     */
+    public static void updateUpMaByContMapEtfTop(String date, List<String> maKltList) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "ETF涨幅数据-更新超过均线（常用ETF）：";
+
+        //查询ETF列表
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, null, null, null);
+
+        //更新超过均线
+        updateUpMa( date,  etfAdrCountVoList, maKltList);
+    }
+
+    /**
+     * 更新超过均线
+     * @param date 日期
+     * @param etfAdrCountVoList etf列表
+     * @param maKltList 均线列表
+     */
+    public static void updateUpMa(String date, List<EtfAdrCountVo> etfAdrCountVoList, List<String> maKltList) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "ETF涨幅数据-更新超过均线-：";
 
         int updateRs = 0;//更新成功个数
         int count = MA_60;
         int curPosition = 0;
-        if (etfAdrCountVos == null) {
-            System.out.println(methodName + "etfAdrCountVos==null");
+        if (etfAdrCountVoList == null) {
+            System.out.println(methodName + "etfAdrCountVoList==null");
             return;
         }
-        for (EtfAdrCountVo etfAdrCountVo : etfAdrCountVos) {
+        for (EtfAdrCountVo etfAdrCountVo : etfAdrCountVoList) {
             String zqdm = etfAdrCountVo.getF12();
             BigDecimal curAmt = etfAdrCountVo.getF2();
             if (checkFiterType(zqdm)) continue;//检查过滤类型
@@ -138,7 +170,6 @@ public class EtfControl {
             entity.setF2(curAmt);
             entity.setDate(etfAdrCountVo.getDate());
 
-            boolean isUp = true;//检查上涨
             List<Integer> maList = new ArrayList<>();
             maList.add(MA_60);
 
@@ -146,7 +177,6 @@ public class EtfControl {
             RankStockCommpanyDb stock = new RankStockCommpanyDb();
             stock.setF12(etfAdrCountVo.getF12());
             stock.setF14(etfAdrCountVo.getF14());
-            List<String> maKltList = condition.getMaKltList();
             //显示信息-上涨均线
             boolean isMa5 = false;
             boolean isMa15 = false;
@@ -299,7 +329,7 @@ public class EtfControl {
             }
         }
         if (isShowLog) {
-            System.out.println(methodName + "个数:" + etfAdrCountVos.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+            System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
     }
 
@@ -968,6 +998,7 @@ public class EtfControl {
         }
 
         int rsCountUpdate = 0;
+        int rsCountUpdateFail = 0;
         int rsCountInsert = 0;
         for (EtfAdrCount etfAdrCount : etfAdrCountList) {
 //            if(etfAdrCount.getF14().equals("上证50ETF")){
@@ -975,6 +1006,7 @@ public class EtfControl {
 //            }
             int updateRs = EtfAdrCountService.update(etfAdrCount);
             if (updateRs != 1) {
+                rsCountUpdateFail++;
                 System.out.println(methodName + "更新-失败：" + JSON.toJSONString(etfAdrCount));
                 rsCountInsert = rsCountInsert + EtfAdrCountService.insert(etfAdrCount);
 //                System.out.println(methodName + "如果更新失败，可能是没有插入，执行一次插入操作：" + rsCountInsert);
@@ -985,7 +1017,7 @@ public class EtfControl {
             }
         }
         if (isShowLog) {
-            System.out.println(methodName + "，用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",更新成功：" + rsCountUpdate + ",插入成功：：" + rsCountInsert);
+            System.out.println(methodName + "，用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",更新成功：" + rsCountUpdate + ",更新失败：" + rsCountUpdateFail + ",插入成功：：" + rsCountInsert);
         }
 
     }

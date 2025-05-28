@@ -1214,9 +1214,9 @@ public class ContMapEtfTop {
 //        KEJI_RUAN_JIAN.put("588930", "科技-软件             ");//科创板人工智能ETF     市值：8.14      累涨：51.68     21.72     16.52     13.44     10日：3.23      1.32      5         累涨修正：72.66     3
 //        KEJI_RUAN_JIAN.put("588730", "科技-软件             ");//科创人工智能ETF       市值：7.68      累涨：50.61     21.07     16.57     12.97     10日：2.91      1.04      12        累涨修正：67.87     4
         KEJI_RUAN_JIAN.put("513360", "科技-软件             ");//教育ETF               市值：5.89      累涨：40.95     19.53     6.75      14.67     10日：4.89      1.54      13        累涨修正：66.34     5
-//        KEJI_RUAN_JIAN.put("159738", "科技-软件             ");//云计算ETF华泰柏瑞     市值：5.95      累涨：51.58     23.02     9.87      18.69     10日：4.64      0.43      4         累涨修正：65.59     6
+        KEJI_RUAN_JIAN.put("159738", "科技-软件             ");//云计算ETF华泰柏瑞     市值：5.95      累涨：51.58     23.02     9.87      18.69     10日：4.64      0.43      4         累涨修正：65.59     6
 //        KEJI_RUAN_JIAN.put("517390", "科技-软件             ");//云计算ETF沪港深       市值：3.03      累涨：51.70     24.96     9.40      17.34     10日：4.28      0.45      9         累涨修正：65.21     7
-//        KEJI_RUAN_JIAN.put("159559", "科技-软件             ");//机器人50ETF           市值：5.53      累涨：48.02     16.41     9.97      21.64     10日：6.10      0.76      10        累涨修正：64.45     8
+        KEJI_RUAN_JIAN.put("159559", "科技-软件             ");//机器人50ETF           市值：5.53      累涨：48.02     16.41     9.97      21.64     10日：6.10      0.76      10        累涨修正：64.45     8
 //        KEJI_RUAN_JIAN.put("560660", "科技-软件             ");//云50ETF               市值：0.74      累涨：48.56     20.11     10.66     17.79     10日：4.18      0.64      3         累涨修正：63.96     9
         KEJI_RUAN_JIAN.put("159851", "科技-软件             ");//金融科技ETF           市值：44.70     累涨：47.75     18.53     11.31     17.91     10日：7.22      0.07      11        累涨修正：62.96     10
 //        KEJI_RUAN_JIAN.put("159530", "科技-软件             ");//机器人ETF易方达       市值：14.28     累涨：49.18     16.59     11.07     21.52     10日：5.65      0.61      6         累涨修正：62.92     11
@@ -1652,15 +1652,15 @@ public class ContMapEtfTop {
     }
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-05-23";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-05-23";
 //        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL, ContMapEtfTop.ZIYUAN_OIL);//资源-石油
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE, ContMapEtfTop.ZIYUAN_NONGYE);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfTop.ZIYUAN_XIYOU);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfTop.ZIYUAN_COMMON);
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN, ContEtfNameKey.ZIYUAN_NOLIKE, "ZIYUAN", ContEtfTypeName.ZIYUAN_STR, ContMapEtfTop.ZIYUAN);
 
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfTop.XIAOFEI_COMMON);
+        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfTop.XIAOFEI_COMMON);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK, ContMapEtfTop.XIAOFEI_HK);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfTop.XIAOFEI_MEDIA);
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfTop.XIAOFEI_WINE);
@@ -1668,7 +1668,7 @@ public class ContMapEtfTop {
 //        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON, ContMapEtfTop.YILIAO_COMMON);
 
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfTop.KEJI_JUNGONG);
-        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfTop.KEJI_GONG_YE);
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfTop.KEJI_GONG_YE);
 //        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfTop.KEJI_RUAN_JIAN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfTop.KEJI_XIN_PIAN);
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfTop.KEJI_TONG_XIN);

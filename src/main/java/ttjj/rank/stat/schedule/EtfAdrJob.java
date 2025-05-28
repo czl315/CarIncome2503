@@ -7,15 +7,20 @@ import ttjj.service.EtfAdrCountService;
 import utils.Content;
 import utils.DateUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import static utils.Content.*;
+import static utils.Content.KLT_102;
 
 /**
  * 定时任务-etf涨幅统计
  */
 public class EtfAdrJob {
     public static int jobCountUpdateUpSum = 0;//定时次数
+    public static int jobCountUpdateUpMa = 0;//定时次数(超过均线)
     static int jobSeconds = 300;//定时间隔时间
     static volatile int jobSecondsUpdateUpSum = 180;//定时间隔时间
     static String httpKlineApiType = Content.API_TYPE_SSE;
@@ -30,7 +35,7 @@ public class EtfAdrJob {
      */
     private static void statShowEtfAdrCountSchedule() {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//            String date = "2025-03-03";
+//            String date = "2025-05-28";
         /**
          * 更新基础信息
          */
@@ -110,15 +115,21 @@ public class EtfAdrJob {
 //        }, 300, 600, TimeUnit.SECONDS);
 
         /**
-         * 更新-超过均线信息
+         * 更新超过均线
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
+            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
             try {
-                EtfControl.updateUpMaTypeTopN(date, 4);//更新超过均线-每个类型涨幅前n个
+                if (jobCountUpdateUpMa % 2 == 0) {
+                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线-每个类型涨幅前n个
+                } else if (jobCountUpdateUpMa % 2 == 1) {
+                    EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-每个类型涨幅前n个
+                }
+                jobCountUpdateUpMa++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 1, 8, TimeUnit.MINUTES);
+        }, 1, 120, TimeUnit.SECONDS);
 
         /**
          * 更新-价格区间
