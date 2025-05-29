@@ -60,7 +60,7 @@ public class EtfControl {
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
-//        updateUpMaTypeTopN(date, 2);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20

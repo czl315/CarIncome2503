@@ -121,7 +121,7 @@ public class EtfAdrJob {
             List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
             try {
                 if (jobCountUpdateUpMa % 2 == 0) {
-                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线-每个类型涨幅前n个
+                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线（常用ETF）
                 } else if (jobCountUpdateUpMa % 2 == 1) {
                     EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-每个类型涨幅前n个
                 }
@@ -129,7 +129,7 @@ public class EtfAdrJob {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 1, 120, TimeUnit.SECONDS);
+        }, 1, 180, TimeUnit.SECONDS);
 
         /**
          * 更新-价格区间

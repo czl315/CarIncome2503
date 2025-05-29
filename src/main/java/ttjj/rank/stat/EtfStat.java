@@ -39,14 +39,14 @@ public class EtfStat {
         int days = 1;
         Set<String> zqdmSet = new HashSet<>();
         List<String> zqdmList = null;
-//        zqdmList = new ArrayList<>(ContMapEtfTop.ETF_All.keySet());
+        zqdmList = new ArrayList<>(ContMapEtfTop.ETF_All.keySet());
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
         List<EtfAdrCountVo> rs = null;
         for (String day : dateList) {
 //            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
-            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计分类型排名前n个
-//            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//头部etf
-//            rs = EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, null);//最近20日价格区间
+//            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计分类型排名前n个
+//            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//常用etf
+            rs = EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, null);//最近20日价格区间
 //            EtfControl.findByDateOrder(day, zqdmList, null, ADR_UP_SUM_1_3_DESC, maxAdrUpSumOrderStat, null, null);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
 //            EtfControl.findByDateOrder(day, zqdmList, null, ADR_UP_SUM_1_5_DESC, maxAdrUpSumOrderStat, null, null);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
 //                EtfControl.findByDateOrder(day, zqdmList, 10, ADR_UP_SUM_1_10_DESC, maxAdrUpSumOrderStat, null, 1);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC

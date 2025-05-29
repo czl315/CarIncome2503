@@ -72,16 +72,19 @@ public class MyPositionService {
             e.printStackTrace();
         }
 
-        JSONArray rsArray = rsJson.getJSONArray("ResultObj");
+//        JSONArray rsArray = rsJson.getJSONArray("ResultObj");
+        JSONArray rsArray = rsJson.getJSONArray("Data");
         for (int i = 0; i < rsArray.size(); i++) {
             JSONObject myStock = (JSONObject) (rsArray.get(i));
 //            System.out.println("ResultObj:"+JSON.toJSONString(myStock));
-            fundMktVal = myStock.getString("FundMktVal");//总市值 "FundMktVal": "302225.10",
-            fundAvl = myStock.getString("FundAvl");//可用资金   "FundAvl": "45506.39",
-            BigDecimal fundAll = new BigDecimal(myStock.getString("FundAll"));//总资产   "FundAll": "398732.090",    BigDecimal totalAmtBig = new BigDecimal(fundMktVal).add(new BigDecimal(fundAvl));
-            BigDecimal otcAsset = new BigDecimal(myStock.getString("OtcAsset"));//      "OtcAsset": "0.00", 场外资产
-            totalAmt = fundAll.add(otcAsset).toString();//总资产 = 场内资产+场外资产
-            dayProfit = myStock.getString("DayProfit");//      "DayProfit": "2037.00", 当日参考盈亏    2037.00
+//            fundMktVal = myStock.getString("FundMktVal");//总市值 "FundMktVal": "302225.10",
+            fundMktVal = myStock.getString("Zzc");//总市值 "FundMktVal": "302225.10",
+//            fundAvl = myStock.getString("FundAvl");//可用资金   "FundAvl": "45506.39",
+            fundAvl = myStock.getString("Kyzj");//可用资金   "FundAvl": "45506.39",
+            BigDecimal fundAll = new BigDecimal(myStock.getString("Zzc"));//总资产   "FundAll": "398732.090",    BigDecimal totalAmtBig = new BigDecimal(fundMktVal).add(new BigDecimal(fundAvl));
+//            BigDecimal otcAsset = new BigDecimal(myStock.getString("OtcAsset"));//      "OtcAsset": "0.00", 场外资产
+//            totalAmt = fundAll.add(otcAsset).toString();//总资产 = 场内资产+场外资产
+            dayProfit = myStock.getString("Dryk");//      "DayProfit": "2037.00", 当日参考盈亏    2037.00
             if (fundMktVal == null || new BigDecimal(fundMktVal).compareTo(new BigDecimal("0")) == 0 || dayProfit == null) {
                 dayProfitRt = "0";
             } else {
