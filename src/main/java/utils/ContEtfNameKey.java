@@ -31,6 +31,7 @@ public class ContEtfNameKey {
 
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘
+    public static List INDEX_CN_1000_NOLIKE = Arrays.asList("标普");
     public static List INDEX_CN_BIG = Arrays.asList("沪深300", "深证", "上证50", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "300", "上证综指",
             "央视", "深价值", "A50", "红利", "深100", "国企", "380", "MSCI", "质量", "上证综合", "上证中盘", "基本面", "价值", "上证指数", "高股息", "一带一路", "50ETF基金");//指数-大盘
     public static List INDEX_CN_BIG_NOLIKE = Arrays.asList("恒生", "港股", "双创", "科创");
@@ -54,6 +55,7 @@ public class ContEtfNameKey {
 
     public static List YILIAO = new ArrayList();//医疗
     public static List YILIAO_COMMON = Arrays.asList("医药", "创新药", "医疗", "生物", "疫苗", "中药");//医疗-通用
+//    public static List YILIAO_COMMON_NOLIKE = Arrays.asList("标普", "货币基金ETF");//医疗（过滤）
 //    public static List YILIAO_CN_MEDICINE = Arrays.asList("中药");//医疗-中药，涨幅累计太少
 
     static {

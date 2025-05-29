@@ -53,7 +53,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
@@ -2153,11 +2153,11 @@ public class EtfControl {
             BigDecimal adrUpSum120To40 = etfAdrCountVo.getADR_UP_SUM_20_40() != null ? etfAdrCountVo.getADR_UP_SUM_20_40() : new BigDecimal("0");
             BigDecimal adrUpSum1To20 = etfAdrCountVo.getADR_UP_SUM_1_20() != null ? etfAdrCountVo.getADR_UP_SUM_1_20() : new BigDecimal("0");
             BigDecimal adrUpSum1To10 = etfAdrCountVo.getADR_UP_SUM_1_10() != null ? etfAdrCountVo.getADR_UP_SUM_1_10() : new BigDecimal("0");
-            adrUpSum1To10 = adrUpSum1To10.multiply(new BigDecimal("2"));
+//            adrUpSum1To10 = adrUpSum1To10.multiply(new BigDecimal("2"));
             BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5() != null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
-            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("4"));
+            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("2"));
             BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3() != null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
-            adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("7"));
+            adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("4"));
 
             //如果涨和超过100，可能是复权错误，不累加
             if (adrUpSum140To60.compareTo(new BigDecimal(100)) > 0) {
