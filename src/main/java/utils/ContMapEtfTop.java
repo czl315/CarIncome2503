@@ -667,7 +667,7 @@ public class ContMapEtfTop {
         INDEX.putAll(INDEX_CN_NOT);
         INDEX.putAll(INDEX_CN_NOT_USA);
         INDEX.putAll(INDEX_CN_BIG);
-        INDEX.putAll(INDEX_HK);
+//        INDEX.putAll(INDEX_HK);
         INDEX.putAll(INDEX_CN_1000);
         INDEX.putAll(INDEX_688);
         INDEX.putAll(INDEX_300);
@@ -1621,7 +1621,7 @@ public class ContMapEtfTop {
 
     public static void main(String[] args) throws Exception {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-05-29";
+//        String date = "2025-05-30";
 
 //        System.out.println("    public static Map<String, String> INDEX_CN_NOT = new HashMap<>();//指数-外盘");
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfTop.INDEX_CN_NOT);

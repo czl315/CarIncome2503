@@ -40,7 +40,7 @@ public class ContEtfNameKey {
     public static List INDEX_688 = Arrays.asList("科创", "双创");//指数-科创板
     public static List INDEX_688_NOLIKE = Arrays.asList("芯片", "医药", "人工智能");//指数-创业板（不匹配）
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股", "沪港深");//指数-港股
-    public static List INDEX_HK_NOLIKE = Arrays.asList("创新药", "医", "生物", "汽车");
+    public static List INDEX_HK_NOLIKE = Arrays.asList("创新药", "医", "生物", "汽车", "消费");
     public static List INDEX = new ArrayList();
 
     static {

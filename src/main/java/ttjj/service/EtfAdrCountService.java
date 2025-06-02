@@ -329,15 +329,17 @@ public class EtfAdrCountService {
         }
 
         System.out.println(methodName + ",日期：" + date + ",排序字段：" + orderField);
-        handlerShowHead();//首行标题信息
         handlerShowEtfAdr(rs, condFiter);//显示etf涨幅统计列表数据
         return rs;
     }
 
     /**
-     * 首行标题信息
+     * 显示etf涨幅统计列表数据
+     *
+     * @param stockAdrCountList etf涨幅统计列表
+     * @param condFiter         过滤条件
      */
-    private static void handlerShowHead() {
+    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
         StringBuffer sbHead = new StringBuffer();//首行标题信息
         boolean isShowCode = true;
         sbHead.append(StockUtil.formatStName("名称", SIZE_20));
@@ -345,8 +347,6 @@ public class EtfAdrCountService {
             sbHead.append(StockUtil.formatStName("编码", SIZE_10));
         }
         sbHead.append(StockUtil.formatStName("类型", SIZE_16));
-
-
         sbHead.append(StockUtil.formatStName("涨和", SIZE_8));
         sbHead.append(StockUtil.formatStName("涨和排序", SIZE_8));
         sbHead.append(StockUtil.formatStName("1_60和", SIZE_10));
@@ -403,16 +403,7 @@ public class EtfAdrCountService {
         sbHead.append(StockUtil.formatStName("涨序排序", SIZE_10));
 
         System.out.println(sbHead);//首行标题信息
-    }
 
-
-    /**
-     * 显示etf涨幅统计列表数据
-     *
-     * @param stockAdrCountList etf涨幅统计列表
-     * @param condFiter         过滤条件
-     */
-    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
         int num = 0;//序号
         Map<String, Integer> showTypeLimitCountMap = new HashMap<>();//限定类型个数的键值对
         for (EtfAdrCountVo vo : stockAdrCountList) {
