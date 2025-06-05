@@ -5,6 +5,7 @@ import ttjj.dto.EtfAdrCountVo;
 import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 import utils.Content;
+import utils.ContentCookie;
 import utils.DateUtil;
 
 import java.util.Arrays;
@@ -119,11 +120,14 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
+            int unit = 3;
             try {
-                if (jobCountUpdateUpMa % 2 == 0) {
+                if (jobCountUpdateUpMa % unit == 0) {
                     EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线（常用ETF）
-                } else if (jobCountUpdateUpMa % 2 == 1) {
+                } else if (jobCountUpdateUpMa % unit == 1) {
                     EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-每个类型涨幅前n个
+                } else if (jobCountUpdateUpMa % unit == 3) {
+                    EtfControl.updateUpMaMyPosition(date, null,maKltList, ContentCookie.COOKIE_DFCF);
                 }
                 jobCountUpdateUpMa++;
             } catch (Exception e) {

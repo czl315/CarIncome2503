@@ -377,6 +377,7 @@ public class EtfAdrCountService {
         sbHead.append(StockUtil.formatStName("跌60", SIZE_8));
         sbHead.append(StockUtil.formatStName("跌30", SIZE_8));
         sbHead.append(StockUtil.formatStName("跌15", SIZE_8));
+        sbHead.append(StockUtil.formatStName("跌5", SIZE_8));
 
         sbHead.append(StockUtil.formatStName("周线比", SIZE_10));
         sbHead.append(StockUtil.formatStName("日线比", SIZE_10));
@@ -529,6 +530,8 @@ public class EtfAdrCountService {
             BigDecimal maPct30 = handlerMaPct(curAmt, maNet30);
             BigDecimal maNet15 = vo.getMA_NET_60_15();
             BigDecimal maPct15 = handlerMaPct(curAmt, maNet15);
+            BigDecimal maNet5 = vo.getMA_NET_60_5();
+            BigDecimal maPct5 = handlerMaPct(curAmt, maNet5);
             //跌周-跌落均线：昨日收盘价高于均线价，当前价格低于均线价
             if(maNet102 != null && maPct102 != null && curAmt.compareTo(maNet102)<=0 && yesterDayAmt.compareTo(maNet102)>=0){
                 sb.append(StockUtil.formatDouble(maPct102.setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
@@ -556,6 +559,12 @@ public class EtfAdrCountService {
             // 跌15
             if(maNet15 != null && maPct15 != null && curAmt.compareTo(maNet15)<=0 && yesterDayAmt.compareTo(maNet15)>=0){
                 sb.append(StockUtil.formatDouble(maPct15.setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            }else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            // 跌5
+            if(maNet5 != null && maPct5 != null && curAmt.compareTo(maNet5)<=0 && yesterDayAmt.compareTo(maNet5)>=0){
+                sb.append(StockUtil.formatDouble(maPct5.setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             }else {
                 sb.append(StockUtil.formatStName("", SIZE_8));
             }

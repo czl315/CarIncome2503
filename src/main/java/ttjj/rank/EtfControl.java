@@ -54,13 +54,14 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
 //        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, "科技-香港");//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
-        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+//        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+//        updateUpMaMyPosition(date, null,Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102),ContentCookie.COOKIE_DFCF);
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
@@ -98,8 +99,37 @@ public class EtfControl {
 //        }
 
         //查询我的ETF持仓
-//        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
+        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
 
+    }
+
+    /**
+     * ETF涨幅数据-更新超过均线-我的持仓
+     * @param date                 日期
+     * @param maxAdrUpSumTotalRank 最高涨幅累计排名
+     * @param maKltList 均线类型
+     * @param cookie    cookie
+     */
+    public static void updateUpMaMyPosition(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList,String cookie) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "ETF涨幅数据-更新超过均线-我的持仓：";
+
+        List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
+
+        //查询ETF列表
+        CondEtfAdrCount condition = new CondEtfAdrCount();
+        condition.setDate(date);
+        condition.setMaxAdrUpSumTotalRank(maxAdrUpSumTotalRank == null ? null : new BigDecimal(maxAdrUpSumTotalRank));
+        condition.setStCodeList(zqdmList);
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
+
+        //更新超过均线
+        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+
+        if (isShowLog) {
+            System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
     }
 
     /**
@@ -148,7 +178,7 @@ public class EtfControl {
      * @param etfAdrCountVoList etf列表
      * @param maKltList 均线列表
      */
-    public static void updateUpMa(String date, List<EtfAdrCountVo> etfAdrCountVoList, List<String> maKltList) {
+    public static int updateUpMa(String date, List<EtfAdrCountVo> etfAdrCountVoList, List<String> maKltList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-：";
@@ -158,7 +188,7 @@ public class EtfControl {
         int curPosition = 0;
         if (etfAdrCountVoList == null) {
             System.out.println(methodName + "etfAdrCountVoList==null");
-            return;
+            return updateRs;
         }
         for (EtfAdrCountVo etfAdrCountVo : etfAdrCountVoList) {
             String zqdm = etfAdrCountVo.getF12();
@@ -335,6 +365,7 @@ public class EtfControl {
         if (isShowLog) {
             System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
+        return updateRs;
     }
 
     /**
