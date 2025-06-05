@@ -379,11 +379,12 @@ public class EtfAdrCountService {
         sbHead.append(StockUtil.formatStName("跌15", SIZE_8));
         sbHead.append(StockUtil.formatStName("跌5", SIZE_8));
 
-        sbHead.append(StockUtil.formatStName("周线比", SIZE_10));
-        sbHead.append(StockUtil.formatStName("日线比", SIZE_10));
-        sbHead.append(StockUtil.formatStName("60分比", SIZE_10));
-        sbHead.append(StockUtil.formatStName("30分比", SIZE_10));
-        sbHead.append(StockUtil.formatStName("15分比", SIZE_10));
+        sbHead.append(StockUtil.formatStName("周线比", SIZE_8));
+        sbHead.append(StockUtil.formatStName("日线比", SIZE_8));
+        sbHead.append(StockUtil.formatStName("60分比", SIZE_8));
+        sbHead.append(StockUtil.formatStName("30分比", SIZE_8));
+        sbHead.append(StockUtil.formatStName("15分比", SIZE_8));
+        sbHead.append(StockUtil.formatStName("5分比", SIZE_8));
 
         //净值区间
         sbHead.append(StockUtil.formatStName("区间5", SIZE_8));
@@ -577,27 +578,34 @@ public class EtfAdrCountService {
             }
 
             if (maNet101 != null && maPct101 != null) {
-                sb.append(StockUtil.formatDouble(maPct101.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(maPct101.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
             if (maPct60 != null && maPct60 != null) {
-                sb.append(StockUtil.formatDouble(maPct60.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(maPct60.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
             if (maNet30 != null && maPct30 != null) {
-                sb.append(StockUtil.formatDouble(maPct30.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(maPct30.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
+            //15分比
             if (maNet15 != null && maPct15 != null) {
-                sb.append(StockUtil.formatDouble(maPct15.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(maPct15.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            //5分比
+            if (maNet5 != null && maPct5 != null) {
+                sb.append(StockUtil.formatDouble(maPct5.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
             //净值区间

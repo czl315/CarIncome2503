@@ -113,7 +113,7 @@ public class EtfControl {
     public static void updateUpMaMyPosition(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList,String cookie) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "ETF涨幅数据-更新超过均线-我的持仓：";
+        String methodName = "ETF涨幅数据-更新超过均线（我的持仓）：";
 
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
 
@@ -141,7 +141,7 @@ public class EtfControl {
     public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "ETF涨幅数据-更新超过均线-每个类型涨幅前n个：";
+        String methodName = "ETF涨幅数据-更新超过均线-（每个类型涨幅前n个）：";
 
         //查询ETF列表
         CondEtfAdrCount condition = new CondEtfAdrCount();
