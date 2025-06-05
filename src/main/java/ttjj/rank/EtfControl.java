@@ -152,7 +152,11 @@ public class EtfControl {
         List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
 
         //更新超过均线
-        updateUpMa( date,  etfAdrCountVoList, maKltList);
+        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+
+        if (isShowLog) {
+            System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
     }
 
     /**
@@ -169,7 +173,11 @@ public class EtfControl {
         List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, null, null, null);
 
         //更新超过均线
-        updateUpMa( date,  etfAdrCountVoList, maKltList);
+        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+
+        if (isShowLog) {
+            System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
     }
 
     /**
@@ -180,7 +188,7 @@ public class EtfControl {
      */
     public static int updateUpMa(String date, List<EtfAdrCountVo> etfAdrCountVoList, List<String> maKltList) {
         long begTime = System.currentTimeMillis();
-        boolean isShowLog = true;
+        boolean isShowLog = false;
         String methodName = "ETF涨幅数据-更新超过均线-：";
 
         int updateRs = 0;//更新成功个数
