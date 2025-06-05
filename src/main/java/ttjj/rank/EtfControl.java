@@ -36,9 +36,9 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-05-30";
+//        String date = "2025-06-03";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-//            return;
+            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -1940,7 +1940,7 @@ public class EtfControl {
      * @return
      */
     public static List<RankBizDataDiff> listEtfListLastDayByMarketValue(BigDecimal minMv, BigDecimal maxMv, String spTypeName) {
-        boolean isShowLog = false;
+        boolean isShowLog = true;
         int countMinMvLimit = 0;
         int countMaxMvLimit = 0;
         List<RankBizDataDiff> etfList = listEtfListLastDay();

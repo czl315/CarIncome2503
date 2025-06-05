@@ -529,52 +529,59 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> KEJI_HK = new HashMap<>();//科技-香港科技
-
     static {
-        KEJI_HK.put("513860", "科技-香港             ");//港股通科技ETF         市值：18.29     累涨：75.63     36.60     16.99     22.04     10.36     5日： 7.10      累涨修正：160.83    1
-        KEJI_HK.put("513560", "科技-香港             ");//香港科技ETF           市值：4.63      累涨：85.18     47.69     16.67     20.82     9.10      5日： 5.48      累涨修正：150.94    2
-        KEJI_HK.put("513980", "科技-香港             ");//港股科技50ETF         市值：144.10    累涨：77.61     38.03     18.02     21.56     9.45      5日： 5.73      累涨修正：146.37    3
-        KEJI_HK.put("159636", "科技-香港             ");//港股通科技30ETF       市值：213.50    累涨：73.53     36.07     17.64     19.82     9.03      5日： 5.96      累涨修正：145.05    4
-        KEJI_HK.put("513050", "科技-香港             ");//中概互联网ETF         市值：343.84    累涨：70.58     36.03     19.12     15.43     8.98      5日： 6.07      累涨修正：143.42    5
-        KEJI_HK.put("159607", "科技-香港             ");//中概互联网ETF         市值：14.03     累涨：68.45     33.35     19.73     15.37     8.67      5日： 5.98      累涨修正：140.21    6
-        KEJI_HK.put("513770", "科技-香港             ");//港股互联网ETF         市值：47.67     累涨：75.29     39.88     18.29     17.12     8.02      5日： 5.17      累涨修正：137.33    7
-        KEJI_HK.put("513020", "科技-香港             ");//港股科技ETF           市值：10.67     累涨：74.55     37.10     16.89     20.56     8.72      5日： 5.23      累涨修正：137.31    8
-        KEJI_HK.put("513040", "科技-香港             ");//港股通互联网ETF       市值：6.45      累涨：74.09     39.18     18.01     16.90     7.71      5日： 5.24      累涨修正：136.97    9
-        KEJI_HK.put("513150", "科技-香港             ");//港股通科技ETF华泰柏瑞 市值：1.36      累涨：74.89     36.60     17.47     20.82     8.68      5日： 5.15      累涨修正：136.69    10
-        KEJI_HK.put("159605", "科技-香港             ");//中概互联ETF           市值：52.75     累涨：68.20     33.42     20.19     14.59     8.61      5日： 5.49      累涨修正：134.08    11
-        KEJI_HK.put("159568", "科技-香港             ");//港股互联网ETF         市值：3.56      累涨：75.59     40.05     18.50     17.04     7.96      5日： 4.85      累涨修正：133.79    12
-        KEJI_HK.put("159792", "科技-香港             ");//港股通互联网ETF       市值：474.43    累涨：74.64     40.06     18.29     16.29     7.90      5日： 4.92      累涨修正：133.68    13
-        KEJI_HK.put("159747", "科技-香港             ");//香港科技ETF           市值：4.48      累涨：68.46     32.77     17.07     18.62     8.12      5日： 5.40      累涨修正：133.26    14
-        KEJI_HK.put("513320", "科技-香港             ");//恒生新经济ETF         市值：2.29      累涨：68.97     34.26     15.37     19.34     8.36      5日： 5.30      累涨修正：132.57    15
-        KEJI_HK.put("159750", "科技-香港             ");//港股科技50ETF         市值：5.74      累涨：72.09     36.51     17.09     18.49     7.87      5日： 5.02      累涨修正：132.33    16
-        KEJI_HK.put("513220", "科技-香港             ");//中概互联ETF           市值：3.19      累涨：63.95     31.68     18.37     13.90     8.02      5日： 5.63      累涨修正：131.51    17
-        KEJI_HK.put("159688", "科技-香港             ");//恒生互联网ETF         市值：9.94      累涨：70.01     33.51     20.46     16.04     6.85      5日： 4.99      累涨修正：129.89    18
-        KEJI_HK.put("513380", "科技-香港             ");//恒生科技ETF龙头       市值：48.79     累涨：68.14     33.43     17.16     17.55     7.03      5日： 4.88      累涨修正：126.70    19
-        KEJI_HK.put("159822", "科技-香港             ");//新经济ETF             市值：4.48      累涨：85.67     41.33     34.22     10.12     4.66      5日： 3.36      累涨修正：125.99    20
-        KEJI_HK.put("159751", "科技-香港             ");//港股科技ETF           市值：5.74      累涨：72.35     36.14     16.47     19.74     7.89      5日： 4.47      累涨修正：125.99    21
-        KEJI_HK.put("513160", "科技-香港             ");//港股科技30ETF         市值：12.84     累涨：71.57     37.47     17.64     16.46     6.65      5日： 4.47      累涨修正：125.21    22
-        KEJI_HK.put("513580", "科技-香港             ");//恒生科技ETF指数基金   市值：26.44     累涨：67.98     33.16     17.31     17.51     7.31      5日： 4.75      累涨修正：124.98    23
-        KEJI_HK.put("159741", "科技-香港             ");//恒生科技ETF基金       市值：10.42     累涨：68.31     33.76     17.16     17.39     6.63      5日： 4.50      累涨修正：122.31    24
-        KEJI_HK.put("513330", "科技-香港             ");//恒生互联网ETF         市值：239.02    累涨：69.00     34.01     19.62     15.37     6.20      5日： 4.42      累涨修正：122.04    25
-        KEJI_HK.put("513260", "科技-香港             ");//恒生科技ETF基金       市值：42.30     累涨：67.37     32.62     17.60     17.15     6.97      5日： 4.54      累涨修正：121.85    26
-        KEJI_HK.put("513010", "科技-香港             ");//恒生科技ETF易方达     市值：121.98    累涨：67.17     33.05     17.24     16.88     6.66      5日： 4.46      累涨修正：120.69    27
-        KEJI_HK.put("159742", "科技-香港             ");//恒生科技指数ETF       市值：18.58     累涨：66.71     32.88     16.60     17.23     6.13      5日： 4.36      累涨修正：119.03    28
-        KEJI_HK.put("159740", "科技-香港             ");//恒生科技ETF           市值：71.14     累涨：66.62     33.39     16.82     16.41     6.33      5日： 4.35      累涨修正：118.82    29
-        KEJI_HK.put("513180", "科技-香港             ");//恒生科技指数ETF       市值：269.24    累涨：67.39     33.70     16.74     16.95     6.67      5日： 4.27      累涨修正：118.63    30
-        KEJI_HK.put("513130", "科技-香港             ");//恒生科技ETF           市值：248.03    累涨：67.90     33.33     17.50     17.07     6.59      5日： 4.17      累涨修正：117.94    31
-        KEJI_HK.put("513890", "科技-香港             ");//恒生科技HKETF         市值：4.07      累涨：66.02     33.33     16.43     16.26     6.33      5日： 4.23      累涨修正：116.78    32
-        KEJI_HK.put("517360", "科技-香港             ");//沪港深科技ETF         市值：0.35      累涨：56.23     26.71     14.53     14.99     7.54      5日： 4.56      累涨修正：110.95    33
-        KEJI_HK.put("517200", "科技-香港             ");//互联网ETF             市值：1.17      累涨：60.97     32.99     15.94     12.04     5.72      5日： 3.95      累涨修正：108.37    34
-        KEJI_HK.put("159856", "科技-香港             ");//互联网龙头ETF         市值：2.84      累涨：59.47     33.09     13.98     12.40     5.94      5日： 3.99      累涨修正：107.35    35
-        KEJI_HK.put("159729", "科技-香港             ");//互联网ETF             市值：0.79      累涨：58.53     31.91     14.35     12.27     5.50      5日： 3.35      累涨修正：98.73     36
-        KEJI_HK.put("517050", "科技-香港             ");//互联网ETF华泰柏瑞     市值：4.31      累涨：57.69     31.88     13.83     11.98     5.42      5日： 3.42      累涨修正：98.73     37
-        KEJI_HK.put("517350", "科技-香港             ");//科技ETF沪港深         市值：0.88      累涨：51.23     26.45     11.81     12.97     6.04      5日： 3.77      累涨修正：96.47     38
-        KEJI_HK.put("159723", "科技-香港             ");//科技龙头ETF           市值：0.73      累涨：49.23     25.23     11.69     12.31     5.60      5日： 3.14      累涨修正：86.91     39
-        KEJI_HK.put("159778", "科技-香港             ");//工业互联ETF           市值：0.52      累涨：41.31     22.34     7.99      10.98     3.88      5日： 2.37      累涨修正：69.75     40
-        KEJI_HK.put("159202", "科技-香港             ");//恒生互联网科技ETF     市值：1.30      累涨：                                        8.07      5日： 5.68      累涨修正：68.16     41
-        KEJI_HK.put("516050", "科技-香港             ");//科技龙头ETF           市值：4.11      累涨：38.46     18.77     9.93      9.76      2.45      5日： 1.07      累涨修正：51.30     42
+        KEJI_HK.put("513330", "科技-香港             ");//恒生互联网ETF         市值：231.07    累涨：49.02     19.62     15.37     14.03     4.90      5日： 3.43      累涨修正：90.18     1
+        KEJI_HK.put("159688", "科技-香港             ");//恒生互联网ETF         市值：8.02      累涨：50.31     20.46     16.04     13.81     4.50      5日： 3.27      累涨修正：89.55     2
+        KEJI_HK.put("513580", "科技-香港             ");//恒生科技ETF指数基金   市值：22.91     累涨：47.73     17.31     17.51     12.91     4.17      5日： 3.04      累涨修正：84.21     3
+        KEJI_HK.put("159636", "科技-香港             ");//港股通科技30ETF       市值：215.79    累涨：50.46     17.64     19.82     13.00     5.17      5日： 2.81      累涨修正：84.18     4
+        KEJI_HK.put("513180", "科技-香港             ");//恒生科技指数ETF       市值：264.59    累涨：46.34     16.74     16.95     12.65     4.13      5日： 3.01      累涨修正：82.46     5
+        KEJI_HK.put("513860", "科技-香港             ");//港股通科技ETF         市值：17.11     累涨：51.94     16.99     22.04     12.91     5.33      5日： 2.49      累涨修正：81.82     6
+        KEJI_HK.put("520520", "科技-香港             ");//恒生消费ETF华泰柏瑞   市值：0.75      累涨：38.44     14.97     14.70     8.77      4.75      5日： 3.56      累涨修正：81.16     7
+        KEJI_HK.put("159568", "科技-香港             ");//港股互联网ETF         市值：3.14      累涨：49.00     18.50     17.04     13.46     4.26      5日： 2.63      累涨修正：80.56     8
+        KEJI_HK.put("513010", "科技-香港             ");//恒生科技ETF易方达     市值：110.41    累涨：46.66     17.24     16.88     12.54     3.91      5日： 2.81      累涨修正：80.38     9
+        KEJI_HK.put("513040", "科技-香港             ");//港股通互联网ETF       市值：6.94      累涨：49.11     18.01     16.90     14.20     4.43      5日： 2.60      累涨修正：80.31     10
+        KEJI_HK.put("159792", "科技-香港             ");//港股通互联网ETF       市值：449.31    累涨：48.40     18.29     16.29     13.82     4.41      5日： 2.64      累涨修正：80.08     11
+        KEJI_HK.put("513130", "科技-香港             ");//恒生科技ETF           市值：245.93    累涨：46.94     17.50     17.07     12.37     4.04      5日： 2.76      累涨修正：80.06     12
+        KEJI_HK.put("513260", "科技-香港             ");//恒生科技ETF基金       市值：43.26     累涨：47.09     17.60     17.15     12.34     4.02      5日： 2.70      累涨修正：79.49     13
+        KEJI_HK.put("513980", "科技-香港             ");//港股科技50ETF         市值：137.10    累涨：52.46     18.02     21.56     12.88     5.17      5日： 2.19      累涨修正：78.74     14
+        KEJI_HK.put("513770", "科技-香港             ");//港股互联网ETF         市值：47.57     累涨：49.07     18.29     17.12     13.66     4.09      5日： 2.45      累涨修正：78.47     15
+        KEJI_HK.put("513160", "科技-香港             ");//港股科技30ETF         市值：10.56     累涨：47.07     17.64     16.46     12.97     3.69      5日： 2.58      累涨修正：78.03     16
+        KEJI_HK.put("513320", "科技-香港             ");//恒生新经济ETF         市值：1.55      累涨：47.78     15.37     19.34     13.07     4.86      5日： 2.46      累涨修正：77.30     17
+        KEJI_HK.put("159607", "科技-香港             ");//中概互联网ETF         市值：10.87     累涨：48.27     19.73     15.37     13.17     3.72      5日： 2.41      累涨修正：77.19     18
+        KEJI_HK.put("159699", "科技-香港             ");//恒生消费ETF           市值：13.36     累涨：37.93     15.00     14.14     8.79      4.55      5日： 3.26      累涨修正：77.05     19
+        KEJI_HK.put("159742", "科技-香港             ");//恒生科技指数ETF       市值：19.24     累涨：46.04     16.60     17.23     12.21     3.64      5日： 2.54      累涨修正：76.52     20
+        KEJI_HK.put("159605", "科技-香港             ");//中概互联ETF           市值：46.93     累涨：48.70     20.19     14.59     13.92     3.61      5日： 2.30      累涨修正：76.30     21
+        KEJI_HK.put("513380", "科技-香港             ");//恒生科技ETF龙头       市值：47.83     累涨：47.40     17.16     17.55     12.69     3.92      5日： 2.37      累涨修正：75.84     22
+        KEJI_HK.put("513050", "科技-香港             ");//中概互联网ETF         市值：333.48    累涨：48.07     19.12     15.43     13.52     3.32      5日： 2.26      累涨修正：75.19     23
+        KEJI_HK.put("159740", "科技-香港             ");//恒生科技ETF           市值：72.61     累涨：45.08     16.82     16.41     11.85     3.61      5日： 2.47      累涨修正：74.72     24
+        KEJI_HK.put("513150", "科技-香港             ");//港股通科技ETF华泰柏瑞 市值：1.34      累涨：50.72     17.47     20.82     12.43     4.90      5日： 1.93      累涨修正：73.88     25
+        KEJI_HK.put("513890", "科技-香港             ");//恒生科技HKETF         市值：4.15      累涨：44.76     16.43     16.26     12.07     3.51      5日： 2.39      累涨修正：73.44     26
+        KEJI_HK.put("513560", "科技-香港             ");//香港科技ETF           市值：5.20      累涨：49.49     16.67     20.82     12.00     5.20      5日： 1.98      累涨修正：73.25     27
+        KEJI_HK.put("159747", "科技-香港             ");//香港科技ETF           市值：3.94      累涨：48.04     17.07     18.62     12.35     4.66      5日： 2.09      累涨修正：73.12     28
+        KEJI_HK.put("513970", "科技-香港             ");//恒生消费ETF           市值：17.77     累涨：38.15     15.26     14.74     8.15      3.99      5日： 2.90      累涨修正：72.95     29
+        KEJI_HK.put("159725", "科技-香港             ");//线上消费ETF           市值：0.52      累涨：33.83     9.97      12.48     11.38     4.84      5日： 3.19      累涨修正：72.11     30
+        KEJI_HK.put("159750", "科技-香港             ");//港股科技50ETF         市值：5.68      累涨：47.44     17.09     18.49     11.86     4.75      5日： 2.05      累涨修正：72.04     31
+        KEJI_HK.put("159751", "科技-香港             ");//港股科技ETF           市值：5.55      累涨：47.83     16.47     19.74     11.62     5.06      5日： 2.01      累涨修正：71.95     32
+        KEJI_HK.put("513020", "科技-香港             ");//港股科技ETF           市值：12.08     累涨：49.37     16.89     20.56     11.92     4.80      5日： 1.88      累涨修正：71.93     33
+        KEJI_HK.put("513220", "科技-香港             ");//中概互联ETF           市值：2.78      累涨：46.05     18.37     13.90     13.78     3.50      5日： 2.14      累涨修正：71.73     34
+        KEJI_HK.put("159856", "科技-香港             ");//互联网龙头ETF         市值：2.80      累涨：39.00     13.98     12.40     12.62     3.63      5日： 2.63      累涨修正：70.56     35
+        KEJI_HK.put("159822", "科技-香港             ");//新经济ETF             市值：6.47      累涨：64.19     34.22     10.12     19.85     3.30      5日： 0.43      累涨修正：69.35     36
+        KEJI_HK.put("159735", "科技-香港             ");//港股消费ETF           市值：6.40      累涨：45.31     15.82     16.27     13.22     3.92      5日： 1.86      累涨修正：67.63     37
+        KEJI_HK.put("159729", "科技-香港             ");//互联网ETF             市值：0.81      累涨：39.63     14.35     12.27     13.01     3.75      5日： 2.32      累涨修正：67.47     38
+        KEJI_HK.put("513070", "科技-香港             ");//港股消费ETF易方达     市值：6.29      累涨：44.41     15.92     16.70     11.79     3.85      5日： 1.76      累涨修正：65.53     39
+        KEJI_HK.put("517360", "科技-香港             ");//沪港深科技ETF         市值：0.35      累涨：41.42     14.53     14.99     11.90     4.58      5日： 1.97      累涨修正：65.06     40
+        KEJI_HK.put("159728", "科技-香港             ");//在线消费ETF           市值：0.58      累涨：36.69     10.60     14.00     12.09     4.43      5日： 2.29      累涨修正：64.17     41
+        KEJI_HK.put("513230", "科技-香港             ");//港股消费ETF           市值：3.34      累涨：43.04     15.74     16.03     11.27     3.82      5日： 1.74      累涨修正：63.92     42
+        KEJI_HK.put("517050", "科技-香港             ");//互联网ETF华泰柏瑞     市值：4.27      累涨：37.52     13.83     11.98     11.71     3.08      5日： 2.20      累涨修正：63.92     43
+        KEJI_HK.put("517350", "科技-香港             ");//科技ETF沪港深         市值：0.85      累涨：35.47     11.81     12.97     10.69     3.94      5日： 2.33      累涨修正：63.43     44
+        KEJI_HK.put("517200", "科技-香港             ");//互联网ETF             市值：1.16      累涨：39.01     15.94     12.04     11.03     2.85      5日： 2.01      累涨修正：63.13     45
+        KEJI_HK.put("513590", "科技-香港             ");//香港消费ETF           市值：3.66      累涨：45.38     16.09     17.52     11.77     3.33      5日： 1.41      累涨修正：62.30     46
+        KEJI_HK.put("159793", "科技-香港             ");//线上消费ETF基金       市值：0.34      累涨：37.10     13.73     14.12     9.25      2.39      5日： 1.83      累涨修正：59.06     47
+        KEJI_HK.put("159778", "科技-香港             ");//工业互联ETF           市值：0.50      累涨：28.35     7.99      10.98     9.38      2.83      5日： 2.23      累涨修正：55.11     48
+        KEJI_HK.put("517550", "科技-香港             ");//消费ETF沪港深         市值：0.50      累涨：34.30     14.87     9.96      9.47      3.03      5日： 1.27      累涨修正：49.54     49
+        KEJI_HK.put("159202", "科技-香港             ");//恒生互联网科技ETF     市值：1.51      累涨：                              12.93     4.44      5日： 3.18      累涨修正：38.16     50
+        KEJI_HK.put("159741", "科技-香港             ");//恒生科技ETF基金       市值：7.83      累涨：                                                  5日：           累涨修正：0         51
     }
-
     public static Map<String, String> KEJI_NEW_ENERGY = new HashMap<>();//科技-新能源
 
     static {
@@ -1794,32 +1801,77 @@ public class ContMapEtfAll {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-04-30";
-//        findByTypeName(date,ContEtfNameKey.ZIYUAN_OIL,null,"ZIYUAN_OIL",ContEtfTypeName.ZIYUAN_OIL);//查询数据根据名称模糊查询
+//        String date = "2025-05-30";
 
-//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG);
-        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
-//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN);
-//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK);
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY);
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR);
+//        System.out.println("    public static Map<String, String> INDEX_CN_NOT = new HashMap<>();//指数-外盘");
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);
+//        System.out.println("    public static Map<String, String> INDEX_CN_NOT_USA = new HashMap<>();//指数-外盘-美股");
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA, null, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfAll.INDEX_CN_NOT_USA);
+//        System.out.println("    public static Map<String, String> INDEX_CN_1000 = new HashMap<>();//指数-中小盘");
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, ContEtfNameKey.INDEX_CN_1000_NOLIKE, "INDEX_CN_1000", ContEtfTypeName.INDEX_CN_1000, ContMapEtfAll.INDEX_CN_1000);
+//        System.out.println("    public static Map<String, String> INDEX_300 = new HashMap<>();//指数-创业板");
+//        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfAll.INDEX_300);
+//        System.out.println("    public static Map<String, String> INDEX_688 = new HashMap<>();//指数-科创板");
+//        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfAll.INDEX_688);
+//        System.out.println("    public static Map<String, String> INDEX_HK = new HashMap<>();//指数-港股");
+//        findByTypeName(date, ContEtfNameKey.INDEX_HK,  ContEtfNameKey.INDEX_HK_NOLIKE, "INDEX_HK", ContEtfTypeName.INDEX_HK, ContMapEtfAll.INDEX_HK);
+//        System.out.println("    public static Map<String, String> INDEX_CN_BIG = new HashMap<>();//指数-大盘");
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG,  ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
 
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, "ZIYUAN_OIL", ContEtfTypeName.ZIYUAN_OIL);//资源-石油
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU);
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON);
+        System.out.println("    public static Map<String, String> KEJI_HK = new HashMap<>();//科技-香港科技");
+        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
+//        System.out.println("    public static Map<String, String> KEJI_JUNGONG = new HashMap<>();//科技-军工");
+//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
+//        System.out.println("    public static Map<String, String> KEJI_GONG_YE = new HashMap<>();//科技-通用");
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
+//        System.out.println("    public static Map<String, String> KEJI_RUAN_JIAN = new HashMap<>();//科技-软件");
+//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);
+//        System.out.println("    public static Map<String, String> KEJI_XIN_PIAN = new HashMap<>();//科技-芯片");
+//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfAll.KEJI_XIN_PIAN);
+//        System.out.println("    public static Map<String, String> KEJI_TONG_XIN = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);
+//        System.out.println("    public static Map<String, String> KEJI_NEW_ENERGY = new HashMap<>();//科技-新能源");
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);
+//        System.out.println("    public static Map<String, String> KEJI_NEW_CAR = new HashMap<>();//科技-汽车");
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfAll.KEJI_NEW_CAR);
 
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_HK, null, "XIAOFEI_HK", ContEtfTypeName.XIAOFEI_HK);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA);
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE);
+//        System.out.println("    public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油");
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, "ZIYUAN_OIL", ContEtfTypeName.ZIYUAN_OIL, ContMapEtfAll.ZIYUAN_OIL);//资源-石油
+//        System.out.println("    public static Map<String, String> ZIYUAN_NONGYE = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_NONGYE, null, "ZIYUAN_NONGYE", ContEtfTypeName.ZIYUAN_NONGYE, ContMapEtfAll.ZIYUAN_NONGYE);
+//        System.out.println("    public static Map<String, String> ZIYUAN_XIYOU = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, "ZIYUAN_XIYOU", ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfAll.ZIYUAN_XIYOU);
+//        System.out.println("    public static Map<String, String> ZIYUAN_COMMON = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN, ContEtfNameKey.ZIYUAN_NOLIKE, "ZIYUAN", ContEtfTypeName.ZIYUAN_STR, ContMapEtfAll.ZIYUAN);
 
-//        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON);
 
-//        findByTypeName(date, ContEtfNameKey.JINRONG_CASH, null, "JINRONG_CASH", ContEtfTypeName.JINRONG_CASH);
+//        System.out.println("    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();//消费-通用");
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON);
+//        System.out.println("    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒");
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
+//        System.out.println("    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐");
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
-        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
+//        System.out.println("    public static Map<String, String> YILIAO_COMMON = new HashMap<>();//医疗");
+//        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON, ContMapEtfAll.YILIAO_COMMON);
+
+
+//        System.out.println("    public static Map<String, String> JINRONG_GOLD = new HashMap<>();//金融-黄金");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_GOLD,  ContEtfNameKey.JINRONG_GOLD_NOLIKE, "JINRONG_GOLD", ContEtfTypeName.JINRONG_GOLD, ContMapEtfAll.JINRONG_GOLD);
+//        System.out.println("    public static Map<String, String> JINRONG_BANK = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_BANK,  null, "JINRONG_BANK", ContEtfTypeName.JINRONG_BANK, ContMapEtfAll.JINRONG_BANK);
+//        System.out.println("    public static Map<String, String> JINRONG_ZHENGQUAN = new HashMap<>();//金融-证券");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_ZHENGQUAN,  ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE, "JINRONG_ZHENGQUAN", ContEtfTypeName.JINRONG_ZHENGQUAN, ContMapEtfAll.JINRONG_ZHENGQUAN);
+//        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN,  null, "JINRONG_FANGDICHAN", ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
+//        public static String INDEX_CN_CITY = "指数-国内城市";
+
+////        //etf头部数据
+//        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.ETF_All.keySet());
+//        int count = 0;
+//        for (String zqdm : zqdmList) {
+//            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
+//        }
     }
 }
