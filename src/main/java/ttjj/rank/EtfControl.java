@@ -36,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-06-03";
+//        String date = "2025-06-05";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -99,7 +99,7 @@ public class EtfControl {
 //        }
 
         //查询我的ETF持仓
-        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
+//        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
 
     }
 
@@ -2198,18 +2198,18 @@ public class EtfControl {
             BigDecimal adrUpSum1To10 = etfAdrCountVo.getADR_UP_SUM_1_10() != null ? etfAdrCountVo.getADR_UP_SUM_1_10() : new BigDecimal("0");
 //            adrUpSum1To10 = adrUpSum1To10.multiply(new BigDecimal("2"));
             BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5() != null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
-            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("2"));
+//            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("2"));
             BigDecimal adrUpSum1To3 = etfAdrCountVo.getADR_UP_SUM_1_3() != null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
-            adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("4"));
+            adrUpSum1To3 = adrUpSum1To3.multiply(new BigDecimal("2"));
 
             //如果涨和超过100，可能是复权错误，不累加
             if (adrUpSum140To60.compareTo(new BigDecimal(100)) > 0) {
                 adrUpSum140To60 = new BigDecimal("0");
-                System.out.println("涨和超过100%：" + etfAdrCountVo.getF14());
+                System.out.println("adrUpSum140To60-涨和超过100%：" + etfAdrCountVo.getF14());
             }
             if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
                 adrUpSum120To40 = new BigDecimal("0");
-                System.out.println("涨和超过100%：" + etfAdrCountVo.getF14());
+                System.out.println("adrUpSum120To40-涨和超过100%：" + etfAdrCountVo.getF14());
             }
 
             BigDecimal adrUpSum1Total = adrUpSum140To60.add(adrUpSum120To40).add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5).add(adrUpSum1To3);
