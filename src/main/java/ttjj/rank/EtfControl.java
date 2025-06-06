@@ -53,8 +53,8 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, "科技-香港");//1、查询etf列表   JINRONG_GOLD
+        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
@@ -167,7 +167,7 @@ public class EtfControl {
     public static void updateUpMaByContMapEtfTop(String date, List<String> maKltList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "ETF涨幅数据-更新超过均线（常用ETF）：";
+        String methodName = "ETF涨幅数据-更新超过均线（常用头部ETF）：";
 
         //查询ETF列表
         List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, null, null, null);
