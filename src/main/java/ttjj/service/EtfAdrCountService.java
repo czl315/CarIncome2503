@@ -344,20 +344,20 @@ public class EtfAdrCountService {
         boolean isShowCode = true;
         sbHead.append(StockUtil.formatStName("名称", SIZE_20));
         if (isShowCode) {
-            sbHead.append(StockUtil.formatStName("编码", SIZE_10));
+            sbHead.append(StockUtil.formatStName("编码", SIZE_8));
         }
         sbHead.append(StockUtil.formatStName("类型", SIZE_16));
         sbHead.append(StockUtil.formatStName("涨和", SIZE_8));
         sbHead.append(StockUtil.formatStName("涨和排序", SIZE_8));
-        sbHead.append(StockUtil.formatStName("1_60和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("40_60和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("20_40和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_20和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_10和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_5和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_3和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_2和", SIZE_10));
-        sbHead.append(StockUtil.formatStName("1_1和", SIZE_10));
+        sbHead.append(StockUtil.formatStName("1_60和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("40_60和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("20_40和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_20和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_10和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_5和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_3和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_2和", SIZE_8));
+        sbHead.append(StockUtil.formatStName("1_1和", SIZE_8));
         sbHead.append(StockUtil.formatStName("上3涨", SIZE_8));
         sbHead.append(StockUtil.formatStName("上2涨", SIZE_8));
         sbHead.append(StockUtil.formatStName("上1涨", SIZE_8));
@@ -426,7 +426,7 @@ public class EtfAdrCountService {
                 zqmc = zqmc.substring(0, 10);
             }
             sb.append(StockUtil.formatStName(zqmc, SIZE_20));//名称
-            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_10));
+            sb.append(StockUtil.formatStName(vo.getF12(), SIZE_8));
             sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
 
 
@@ -441,49 +441,49 @@ public class EtfAdrCountService {
                 sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));//1_60和
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_40_60() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));//40_60和
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_20_40() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_20() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_10() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_5() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_2() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_1() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_1().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
             //上3涨
@@ -572,9 +572,9 @@ public class EtfAdrCountService {
 
             //周线比
             if (maNet102 != null && maPct102 != null) {
-                sb.append(StockUtil.formatDouble(maPct102.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_10));
+                sb.append(StockUtil.formatDouble(maPct102.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_10));
+                sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
             if (maNet101 != null && maPct101 != null) {
