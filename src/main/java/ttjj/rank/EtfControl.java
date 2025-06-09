@@ -54,10 +54,10 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-//        updateAdrSumSse(date, etfList);
-//        updateUpSumOrder(date);
-//        updateLatestDayAdr(condition, date, httpKlineApiType);
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+        updateAdrSumSse(date, etfList);
+        updateUpSumOrder(date);
+        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
@@ -105,12 +105,13 @@ public class EtfControl {
 
     /**
      * ETF涨幅数据-更新超过均线-我的持仓
+     *
      * @param date                 日期
      * @param maxAdrUpSumTotalRank 最高涨幅累计排名
-     * @param maKltList 均线类型
-     * @param cookie    cookie
+     * @param maKltList            均线类型
+     * @param cookie               cookie
      */
-    public static void updateUpMaMyPosition(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList,String cookie) {
+    public static void updateUpMaMyPosition(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList, String cookie) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线（我的持仓）：";
@@ -125,7 +126,7 @@ public class EtfControl {
         List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
 
         //更新超过均线
-        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+        int updateRs = updateUpMa(date, etfAdrCountVoList, maKltList);
 
         if (isShowLog) {
             System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
@@ -152,7 +153,7 @@ public class EtfControl {
         List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
 
         //更新超过均线
-        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+        int updateRs = updateUpMa(date, etfAdrCountVoList, maKltList);
 
         if (isShowLog) {
             System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
@@ -161,6 +162,7 @@ public class EtfControl {
 
     /**
      * 更新超过均线（常用ETF）
+     *
      * @param date
      * @param maKltList
      */
@@ -170,10 +172,10 @@ public class EtfControl {
         String methodName = "ETF涨幅数据-更新超过均线（常用头部ETF）：";
 
         //查询ETF列表
-        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, null, null, null);
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()), null, F3_DESC, null, null, null);
 
         //更新超过均线
-        int updateRs = updateUpMa( date,  etfAdrCountVoList, maKltList);
+        int updateRs = updateUpMa(date, etfAdrCountVoList, maKltList);
 
         if (isShowLog) {
             System.out.println(methodName + "个数:" + etfAdrCountVoList.size() + ",更新成功：" + updateRs + "用时：" + (System.currentTimeMillis() - begTime) / 1000);
@@ -182,9 +184,10 @@ public class EtfControl {
 
     /**
      * 更新超过均线
-     * @param date 日期
+     *
+     * @param date              日期
      * @param etfAdrCountVoList etf列表
-     * @param maKltList 均线列表
+     * @param maKltList         均线列表
      */
     public static int updateUpMa(String date, List<EtfAdrCountVo> etfAdrCountVoList, List<String> maKltList) {
         long begTime = System.currentTimeMillis();

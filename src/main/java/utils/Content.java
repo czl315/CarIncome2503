@@ -749,17 +749,21 @@ public class Content {
      */
     public static String ADR_UP_SUM_1_20_DESC = "ADR_UP_SUM_1_20 DESC";
     /**
-     *  ADR_UP_SUM_1_10
+     * ADR_UP_SUM_1_10
      */
     public static String ADR_UP_SUM_1_10_DESC = "ADR_UP_SUM_1_10 DESC";
     /**
-     *  ADR_UP_SUM_1_5
+     * ADR_UP_SUM_1_5
      */
     public static String ADR_UP_SUM_1_5_DESC = "ADR_UP_SUM_1_5 DESC";
     /**
-     *
+     * 排序字段
      */
     public static String ADR_UP_SUM_1_3_DESC = "ADR_UP_SUM_1_3 DESC";
+    /**
+     * 排序字段
+     */
+    public static String ADR_UP_SUM_1_2_DESC = "ADR_UP_SUM_1_2 DESC";
     /**
      * 排序字段
      */
