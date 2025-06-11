@@ -633,8 +633,8 @@ public class EtfControl {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
-        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, typeName, maxAdrUpSumTotalRank);
+    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, List<String> typeNameList, Integer maxAdrUpSumTotalRank) {
+        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, typeNameList, maxAdrUpSumTotalRank);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);

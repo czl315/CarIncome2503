@@ -292,7 +292,7 @@ public class EtfAdrCountService {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, String typeName, Integer maxAdrUpSumTotalRank) {
+    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, List<String> typeNameList, Integer maxAdrUpSumTotalRank) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据-查询-：";
@@ -319,7 +319,7 @@ public class EtfAdrCountService {
         if (zqdmList != null && zqdmList.size() > 0) {
             condition.setStCodeList(zqdmList);
         }
-        condition.setType_name(typeName);
+        condition.setBizList(typeNameList);
 //        condition.setMaxNetAreaDay10(null);//净值区间最高限定
 //        condition.setMaxNetAreaDay20(new BigDecimal("30"));//净值区间最高限定
         rs = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
