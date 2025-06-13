@@ -173,7 +173,7 @@ public class EtfControl {
         String methodName = "ETF涨幅数据-更新超过均线（常用头部ETF）：";
 
         //查询ETF列表
-        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()), null, F3_DESC, null, null, null);
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()), null, F3_DESC, null,  null,new CondEtfAdrCount());
 
         //更新超过均线
         int updateRs = updateUpMa(date, etfAdrCountVoList, maKltList);
@@ -634,8 +634,8 @@ public class EtfControl {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, List<String> typeNameList, Integer maxAdrUpSumTotalRank) {
-        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, typeNameList, maxAdrUpSumTotalRank);
+    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank,CondEtfAdrCount condFiter) {
+        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condFiter);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
