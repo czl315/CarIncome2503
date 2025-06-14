@@ -277,10 +277,11 @@ public class EtfAdrCountService {
      * 查询我的ETF持仓
      *
      * @param date
+     * @param condition
      */
-    public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String cookie) {
+    public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String cookie, CondEtfAdrCount condition) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, null);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, condition);
     }
 
     /**

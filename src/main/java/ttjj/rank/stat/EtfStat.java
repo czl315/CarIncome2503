@@ -45,11 +45,11 @@ public class EtfStat {
         String orderField = F3_DESC;//F3_DESC  ADR_UP_SUM_TOTAL_DESC   ADR_UP_SUM_1_60_DESC   NET_AREA_DAY_20
         CondEtfAdrCount condition = new CondEtfAdrCount();//过滤条件
 //        condition.setBizList(Arrays.asList("科技-软件"));// Arrays.asList("资源-通用", "资源-石油", "资源-稀有","资源-农业")
-        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//医疗-通用
+//        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//医疗-通用
         for (String day : dateList) {
             rs = EtfAdrCountService.findByDateOrderByField(day, orderField, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);//涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
-//            EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null, ContentCookie.COOKIE_DFCF);//查询我的ETF持仓
-//            rs = EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, null);//最近20日价格区间
+//            EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null, ContentCookie.COOKIE_DFCF,condition);//查询我的ETF持仓
+//            rs = EtfControl.findByDateOrder(day, zqdmList, null, NET_AREA_DAY_20, maxAdrUpSumOrderStat, null, condition);//最近20日价格区间
 //            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计分类型排名前n个
 //            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//常用etf
 //            rs = EtfControl.findByDateOrder(day, null, null, F3_DESC, maxAdrUpSumOrderStat, typeName, maxAdrUpSumTotalRank);//涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
