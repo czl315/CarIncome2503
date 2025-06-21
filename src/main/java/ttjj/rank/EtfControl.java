@@ -30,6 +30,7 @@ import static utils.DateUtil.YYYY_MM_DD;
  * 1、查询每日涨幅最多的Etf
  * 2、均线突破：周、日、60
  * 3、
+ *  TODO 跌幅合计
  */
 public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;

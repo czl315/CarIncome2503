@@ -208,8 +208,8 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_XIAOFEI_WINE = new HashMap<>();
 
     static {
-        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.22      累涨：34.71     9.70      18.37     6.64      10日：3.69      2.20      1.76      -0.43     1         累涨修正：44.12     净值区间：74      76      77      56      56      1
-        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：108.68    累涨：24.84     12.21     8.27      4.36      10日：1.36      0.85      0.17      0.17      5         累涨修正：27.39     净值区间：27      19      9       8       5       8
+        TOP_XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.22      累涨：34.71     9.70      18.37     6.64      10日：3.69      2.20      1.76      -0.43     1         累涨修正：44.12     净值区间：74      76      77      56      56      1
+        TOP_XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：108.68    累涨：24.84     12.21     8.27      4.36      10日：1.36      0.85      0.17      0.17      5         累涨修正：27.39     净值区间：27      19      9       8       5       8
     }
 
     static {
@@ -238,9 +238,9 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_XIAOFEI = new HashMap<>();
 
     static {
-        XIAOFEI.putAll(TOP_XIAOFEI_COMMON);
-        XIAOFEI.putAll(TOP_XIAOFEI_MEDIA);
-        XIAOFEI.putAll(TOP_XIAOFEI_WINE);
+        TOP_XIAOFEI.putAll(TOP_XIAOFEI_COMMON);
+        TOP_XIAOFEI.putAll(TOP_XIAOFEI_MEDIA);
+        TOP_XIAOFEI.putAll(TOP_XIAOFEI_WINE);
     }
 
 
@@ -1966,10 +1966,10 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
 ////        //etf头部数据
-//        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.ETF_All.keySet());
-//        int count = 0;
-//        for (String zqdm : zqdmList) {
-//            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
-//        }
+        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.TOP_XIAOFEI.keySet());
+        int count = 0;
+        for (String zqdm : zqdmList) {
+            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
+        }
     }
 }
