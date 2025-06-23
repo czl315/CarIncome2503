@@ -122,14 +122,14 @@ public class EtfAdrJob {
             List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
             int unit = 3;
             try {
-                if (jobCountUpdateUpMa % unit == 0) {
-                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线（常用ETF）
-                } else if (jobCountUpdateUpMa % unit == 1) {
-                    EtfControl.updateUpMaMyPosition(date, null,maKltList, ContentCookie.COOKIE_DFCF);
-                } else if (jobCountUpdateUpMa % unit == 2) {
-                    EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-每个类型涨幅前n个
-                }
                 jobCountUpdateUpMa++;
+                if (jobCountUpdateUpMa % unit == 1) {
+                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线（常用头部ETF）
+                } else if (jobCountUpdateUpMa % unit == 2) {
+                    EtfControl.updateUpMaMyPosition(date, null,maKltList, ContentCookie.COOKIE_DFCF);//更新超过均线（我的持仓）
+                } else if (jobCountUpdateUpMa % unit == 3) {
+                    EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-（每个类型涨幅前n个）
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

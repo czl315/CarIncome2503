@@ -30,7 +30,7 @@ import static utils.DateUtil.YYYY_MM_DD;
  * 1、查询每日涨幅最多的Etf
  * 2、均线突破：周、日、60
  * 3、
- *  TODO 跌幅合计
+ * TODO 跌幅合计
  */
 public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
@@ -174,7 +174,7 @@ public class EtfControl {
         String methodName = "ETF涨幅数据-更新超过均线（常用头部ETF）：";
 
         //查询ETF列表
-        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()), null, F3_DESC, null,  null,new CondEtfAdrCount());
+        List<EtfAdrCountVo> etfAdrCountVoList = EtfControl.findByDateOrder(date, new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()), null, F3_DESC, null, null, new CondEtfAdrCount());
 
         //更新超过均线
         int updateRs = updateUpMa(date, etfAdrCountVoList, maKltList);
@@ -635,7 +635,7 @@ public class EtfControl {
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
      */
-    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank,CondEtfAdrCount condition) {
+    public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank, CondEtfAdrCount condition) {
         return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
@@ -1843,20 +1843,14 @@ public class EtfControl {
         //查询每只股票的涨幅
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
-//            if (zqdm.equals("159315")) {
-//                System.out.println("特定证券代码：" + zqdm);
+//            if (zqdm.equals("159822")) {
+//                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
 //            }
 
             //当前交易日
             String curTradeDay = date.replace("-", "");
 
-            List<Kline> klines60 = null;//查询最近61天k线
-            if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_START)) {
-                klines60 = SseService.daykline(zqdm, DAYS_INT_61);
-            } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
-                klines60 = SseService.dayklineSz(zqdm, DAYS_INT_61, CYCLE_TYPE_DAY);
-            }
-
+            List<Kline> klines60 = SseService.klineExchange(zqdm, DAYS_INT_61, CYCLE_TYPE_DAY);//查询最近61天k线
             EtfAdrCount entity = new EtfAdrCount();
             entity.setF12(zqdm);
             entity.setDate(date);
@@ -1881,7 +1875,7 @@ public class EtfControl {
                 BigDecimal adr = kline.getZhangDieFu();
                 //只计算正增长的
                 if (adr == null) {
-                    continue;
+                    adr = new BigDecimal("0");
                 }
 
                 if (adr.compareTo(new BigDecimal("0")) > 0) {
@@ -1890,6 +1884,7 @@ public class EtfControl {
                     }
                     adrSum = adrSum.add(adr);
                 }
+                //TODO 跌幅合计
                 if (temp == 1) {
                     entity.setADR_UP_SUM_1_1(adrSum);
                 } else if (temp == 2) {

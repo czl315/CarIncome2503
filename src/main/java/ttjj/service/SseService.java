@@ -37,10 +37,10 @@ public class SseService {
     public static void main(String[] args) {
 
         //查询K线-查询交易日列表，查询贵州茅台的日k线
-        int count = 40;
+        int count = 61;
         String endDate = DateUtil.getToday(YYYY_MM_DD);
 //        String stCode = "517400";
-        String zqdm = "510100";// 159509
+        String zqdm = "159822";// 159509
 //        String klineRs = SseService.daykRsStrHttp(stCode, 2);
 //        String klineRs = SseService.daykRsStrHttpSz(stCode, 2, CYCLE_TYPE_WEEK);
 //        System.out.println("k线：" + klineRs);
