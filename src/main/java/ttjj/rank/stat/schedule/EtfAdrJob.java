@@ -120,20 +120,30 @@ public class EtfAdrJob {
          */
         new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
             List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
-            int unit = 3;
+            int unit = 2;
             try {
                 jobCountUpdateUpMa++;
                 if (jobCountUpdateUpMa % unit == 1) {
-                    EtfControl.updateUpMaByContMapEtfTop(date,  maKltList);//更新超过均线（常用头部ETF）
-                } else if (jobCountUpdateUpMa % unit == 2) {
-                    EtfControl.updateUpMaMyPosition(date, null,maKltList, ContentCookie.COOKIE_DFCF);//更新超过均线（我的持仓）
-                } else if (jobCountUpdateUpMa % unit == 3) {
+                    EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
+                } else if (jobCountUpdateUpMa % unit == 0) {
                     EtfControl.updateUpMaTypeTopN(date, 2, maKltList);//更新超过均线-（每个类型涨幅前n个）
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }, 1, 180, TimeUnit.SECONDS);
+
+        /**
+         * 更新我的持仓
+         */
+        new ScheduledThreadPoolExecutor(1).scheduleAtFixedRate(() -> {
+            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
+            try {
+                EtfControl.updateUpMaMyPosition(date, null, maKltList, ContentCookie.COOKIE_DFCF);//更新超过均线（我的持仓）
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 10, 900, TimeUnit.SECONDS);
 
         /**
          * 更新-价格区间
