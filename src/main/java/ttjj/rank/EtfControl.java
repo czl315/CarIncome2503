@@ -36,8 +36,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-06-05";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-06-27";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -1824,7 +1824,7 @@ public class EtfControl {
     }
 
     /**
-     * 更新上涨之和(上交所深交所)
+     * 更新上涨之和:1、只计算正增长。2、如果上涨之和高于限定值，上涨之和设置为限定值。
      *
      * @param date
      * @param etfList
@@ -1833,9 +1833,11 @@ public class EtfControl {
     private static int updateAdrSumSse(String date, List<RankBizDataDiff> etfList) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
-        String methodName = "更新上涨之和(上交所深交所)-";
+        String methodName = "更新上涨之和-";
         int curPosition = 0;
         int rs = 0;
+        BigDecimal adrMax = new BigDecimal("3"); //上涨之和限定值
+
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         CondStockAdrCount condStockAdrCount = new CondStockAdrCount();
         condStockAdrCount.setDate(date);
@@ -1843,6 +1845,7 @@ public class EtfControl {
         //查询每只股票的涨幅
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
+            String zqmc = etfVo.getF14();
 //            if (zqdm.equals("159822")) {
 //                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
 //            }
@@ -1865,17 +1868,21 @@ public class EtfControl {
             BigDecimal adrSum21_40 = null;
             BigDecimal adrSum41_60 = null;
             for (Kline kline : klines60) {
+                String klineDate = kline.getKtime();
                 //最近交易日不计算
-                if (curTradeDay.equals(kline.getKtime())) {
+                if (curTradeDay.equals(klineDate)) {
 //                    System.out.println("最近交易日不计算");
                     continue;
                 }
                 temp++;
-                //计算涨幅累计:只计算正增长
+                //计算上涨之和累计:1、只计算正增长。
                 BigDecimal adr = kline.getZhangDieFu();
-                //只计算正增长的
                 if (adr == null) {
                     adr = new BigDecimal("0");
+                }
+                //2、如果上涨之和高于限定值，上涨之和设置为限定值。
+                if (adr.compareTo(adrMax) > 0) {
+                    System.out.println("上涨之和【" + adr + "】高于限定值【" + adrMax + "】，上涨之和设置为限定值。" + zqmc + "::" + klineDate + "::" + adr);
                 }
 
                 if (adr.compareTo(new BigDecimal("0")) > 0) {
@@ -2191,7 +2198,7 @@ public class EtfControl {
             etfAdrCountVo.setADR_UP_SUM_ORDER_STAT(adr_up_sum_order_stat);
             adr_up_sum_order_stat = new BigDecimal("0");
 
-            //涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=40_60和+20_40和+1_20和+10*2+5日*4+3日*7（已废弃：涨幅合计=60日+20日*3+10*6+5日*12+3日*20）
+            //涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=40_60和+20_40和+1_20和+10+5日+3日*2（已废弃：涨幅合计=60日+20日*3+10*6+5日*12+3日*20）
             BigDecimal adrUpSum140To60 = etfAdrCountVo.getADR_UP_SUM_40_60() != null ? etfAdrCountVo.getADR_UP_SUM_40_60() : new BigDecimal("0");
             BigDecimal adrUpSum120To40 = etfAdrCountVo.getADR_UP_SUM_20_40() != null ? etfAdrCountVo.getADR_UP_SUM_20_40() : new BigDecimal("0");
             BigDecimal adrUpSum1To20 = etfAdrCountVo.getADR_UP_SUM_1_20() != null ? etfAdrCountVo.getADR_UP_SUM_1_20() : new BigDecimal("0");

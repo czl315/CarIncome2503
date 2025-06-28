@@ -44,7 +44,7 @@ public class EtfStat {
         List<EtfAdrCountVo> rs = null;
         String orderField = F3_DESC;//F3_DESC  ADR_UP_SUM_TOTAL_DESC   ADR_UP_SUM_1_60_DESC   NET_AREA_DAY_20
         CondEtfAdrCount condition = new CondEtfAdrCount();//过滤条件
-//        condition.setBizList(Arrays.asList("科技-软件"));// "资源-通用", "资源-石油", "资源-稀有","资源-农业","金融-黄金","资源-农业"
+//        condition.setBizList(Arrays.asList("金融-银行"));// "资源-通用", "资源-石油", "资源-稀有","资源-农业","金融-黄金","资源-农业"  科技-软件  金融-银行
 //        condition.setTypeNameListNotIn(Arrays.asList("资源-通用", "资源-石油","金融-黄金","科技-军工"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
         for (String day : dateList) {
 //            rs = EtfAdrCountService.findByDateOrderByField(day, orderField, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);//涨幅倒序
