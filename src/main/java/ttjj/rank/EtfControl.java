@@ -36,8 +36,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-06-27";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-06-27";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -1882,7 +1882,9 @@ public class EtfControl {
                 }
                 //2、如果上涨之和高于限定值，上涨之和设置为限定值。
                 if (adr.compareTo(adrMax) > 0) {
-                    System.out.println("上涨之和【" + adr + "】高于限定值【" + adrMax + "】，上涨之和设置为限定值。" + zqmc + "::" + klineDate + "::" + adr);
+                    if(zqdm.equals("159822")){
+                        System.out.println("上涨之和【" + adr + "】高于限定值【" + adrMax + "】，上涨之和设置为限定值。" + zqmc + "::" + klineDate + "::" + adr);
+                    }
                 }
 
                 if (adr.compareTo(new BigDecimal("0")) > 0) {
@@ -2214,10 +2216,10 @@ public class EtfControl {
                 adrUpSum140To60 = new BigDecimal("0");
                 System.out.println("adrUpSum140To60-涨和超过100%：" + etfAdrCountVo.getF14());
             }
-            if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
-                adrUpSum120To40 = new BigDecimal("0");
-                System.out.println("adrUpSum120To40-涨和超过100%：" + etfAdrCountVo.getF14());
-            }
+//            if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
+//                adrUpSum120To40 = new BigDecimal("0");
+//                System.out.println("adrUpSum120To40-涨和超过100%：" + etfAdrCountVo.getF14());
+//            }
 
             BigDecimal adrUpSum1Total = adrUpSum140To60.add(adrUpSum120To40).add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5).add(adrUpSum1To3);
             etfAdrCountVo.setADR_UP_SUM_TOTAL(adrUpSum1Total);
