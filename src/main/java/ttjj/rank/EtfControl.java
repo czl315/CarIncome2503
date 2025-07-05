@@ -37,7 +37,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-06-27";
+//        String date = "2025-07-04";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }

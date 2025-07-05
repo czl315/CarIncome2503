@@ -50,9 +50,9 @@ public class ContEtfTypeName {
      * 消费
      */
     public static String XIAOFEI_COMMON = "消费-通用";
-    public static String XIAOFEI_HK = "消费-香港消费";
     public static String XIAOFEI_MEDIA = "消费-文娱传媒";
     public static String XIAOFEI_WINE = "消费-吃喝玩乐";
+//    public static String XIAOFEI_HK = "消费-香港消费";
 //    public static String XIAOFEI_HOUSE = "消费-家电";
 //    public static String XIAOFEI_FILM = "消费-影视";
 //    public static String XIAOFEI_GAME = "消费-游戏";
@@ -62,9 +62,9 @@ public class ContEtfTypeName {
     public static List XIAOFEI = new ArrayList();//消费
     static {
         XIAOFEI.add(XIAOFEI_COMMON);
-        XIAOFEI.add(XIAOFEI_HK);
         XIAOFEI.add(XIAOFEI_MEDIA);
         XIAOFEI.add(XIAOFEI_WINE);
+//        XIAOFEI.add(XIAOFEI_HK);
 //        XIAOFEI.add(XIAOFEI_HOUSE);
 //        XIAOFEI.add(XIAOFEI_TRAVEL);
 //        XIAOFEI.add(XIAOFEI_FILM);
@@ -80,17 +80,17 @@ public class ContEtfTypeName {
     public static String INDEX_CN_BIG = "指数-大盘";
     public static String INDEX_300 = "指数-创业板";
     public static String INDEX_688 = "指数-科创板";
-    public static String INDEX_HK = "指数-港股";
     public static String INDEX_CN_CITY = "指数-国内城市";
+//    public static String INDEX_HK = "指数-港股";
     public static List INDEX = new ArrayList();
     static {
         INDEX.add(INDEX_CN_1000);
         INDEX.add(INDEX_300);
         INDEX.add(INDEX_688);
-        INDEX.add(INDEX_HK);
         INDEX.add(INDEX_CN_BIG);
         INDEX.add(INDEX_CN_NOT);
         INDEX.add(INDEX_CN_NOT_USA);
+//        INDEX.add(INDEX_HK);
 //        INDEX.add(INDEX_CN_CITY);
     }
 

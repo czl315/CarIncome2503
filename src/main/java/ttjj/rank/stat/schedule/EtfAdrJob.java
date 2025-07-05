@@ -36,7 +36,7 @@ public class EtfAdrJob {
      */
     private static void statShowEtfAdrCountSchedule() {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//            String date = "2025-05-28";
+//            String date = "2025-07-04";
         /**
          * 更新基础信息
          */

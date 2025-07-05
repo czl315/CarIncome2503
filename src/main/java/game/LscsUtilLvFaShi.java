@@ -17,7 +17,7 @@ public class LscsUtilLvFaShi {
         }
 
         String pageSize = "200";
-        String series = "70";//68-胜地历险记;69-行旅旅行社;70-深谙领域
+        String series = "76";//68-胜地历险记;69-行旅旅行社;70-深谙领域
         String cardClass = "neutral";
         String rsJson = findJsonCard("", cardClass, pageSize, series);
 //            System.out.println(rsJson);//返回结果
