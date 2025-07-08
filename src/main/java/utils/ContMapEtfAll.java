@@ -185,23 +185,21 @@ public class ContMapEtfAll {
         XIAOFEI_COMMON.put("516130", "消费-通用             ");//消费龙头ETF           市值：1.00      累涨：19.13     8.47      6.66      4.00      10日：0.65      0.65      0.13      -0.39     23        累涨修正：20.69     净值区间：13      8       8       72      51      25
     }
 
-    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
-    public static Map<String, String> TOP_XIAOFEI_MEDIA = new HashMap<>();
-
+    public static Map<String, String> TOP_XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
     static {
-        TOP_XIAOFEI_MEDIA.put("516770", "消费-文娱传媒         ");//游戏ETF华泰柏瑞       市值：1.31      累涨：46.23     12.42     18.67     15.14     10日：10.70     5.56      3.55      1.68      1         累涨修正：69.59     净值区间：95      96      98      98      70      1
+        TOP_XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：20.34     累涨：58.06     20.14     16.31     21.61     10日：11.92     2.55      2.47      2.76      1         累涨修正：77.47     净值区间：84      90      92      95      96      1
     }
-
+    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
     static {
-        XIAOFEI_MEDIA.put("516770", "消费-文娱传媒         ");//游戏ETF华泰柏瑞       市值：1.31      累涨：46.23     12.42     18.67     15.14     10日：10.70     5.56      3.55      1.68      1         累涨修正：69.59     净值区间：95      96      98      98      70      1
-        XIAOFEI_MEDIA.put("159869", "消费-文娱传媒         ");//游戏ETF               市值：67.70     累涨：44.48     11.07     18.37     15.04     10日：10.90     5.95      3.77      1.74      2         累涨修正：68.87     净值区间：95      96      97      98      68      2
-        XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：16.12     累涨：45.68     11.50     19.23     14.95     10日：10.42     5.62      3.52      1.66      3         累涨修正：68.76     净值区间：94      95      96      98      69      3
-        XIAOFEI_MEDIA.put("516620", "消费-文娱传媒         ");//影视ETF               市值：0.50      累涨：37.84     13.55     14.27     10.02     10日：5.61      4.22      2.31      1.44      5         累涨修正：52.29     净值区间：100     100     100     97      55      4
-        XIAOFEI_MEDIA.put("159855", "消费-文娱传媒         ");//影视ETF               市值：0.56      累涨：37.82     14.01     14.27     9.54      10日：5.67      4.24      2.10      1.38      4         累涨修正：51.93     净值区间：98      98      98      88      53      5
-        XIAOFEI_MEDIA.put("516190", "消费-文娱传媒         ");//文娱传媒ETF           市值：0.17      累涨：36.38     10.10     16.17     10.11     10日：5.74      3.68      2.04      1.40      6         累涨修正：49.88     净值区间：100     100     100     96      64      6
-        XIAOFEI_MEDIA.put("512980", "消费-文娱传媒         ");//传媒ETF               市值：26.02     累涨：36.52     10.99     16.00     9.53      10日：5.78      3.38      1.87      1.35      7         累涨修正：49.42     净值区间：94      95      96      93      67      7
-        XIAOFEI_MEDIA.put("159805", "消费-文娱传媒         ");//传媒ETF               市值：1.37      累涨：35.70     10.91     15.94     8.85      10日：5.90      3.48      1.96      1.22      8         累涨修正：49        净值区间：94      94      95      96      67      8
-        XIAOFEI_MEDIA.put("517770", "消费-文娱传媒         ");//游戏传媒ETF           市值：0.29      累涨：35.29     12.38     15.39     7.52      10日：4.44      3.40      1.33      1.42      9         累涨修正：45.79     净值区间：97      97      77      91      47      9
+        XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：20.34     累涨：58.06     20.14     16.31     21.61     10日：11.92     2.55      2.47      2.76      1         累涨修正：77.47     净值区间：84      90      92      95      96      1
+        XIAOFEI_MEDIA.put("516770", "消费-文娱传媒         ");//游戏ETF华泰柏瑞       市值：1.55      累涨：57.58     19.28     16.96     21.34     10日：11.78     2.22      2.22      2.65      2         累涨修正：76.02     净值区间：87      91      94      96      97      2
+        XIAOFEI_MEDIA.put("159869", "消费-文娱传媒         ");//游戏ETF               市值：69.99     累涨：56.56     19.09     16.75     20.72     10日：11.60     2.21      2.21      2.73      3         累涨修正：74.79     净值区间：87      91      93      96      96      3
+        XIAOFEI_MEDIA.put("159805", "消费-文娱传媒         ");//传媒ETF               市值：1.94      累涨：40.17     15.95     10.67     13.55     10日：7.48      1.35      1.35      1.58      4         累涨修正：51.7      净值区间：91      94      96      97      97      4
+        XIAOFEI_MEDIA.put("516190", "消费-文娱传媒         ");//文娱传媒ETF           市值：0.17      累涨：40.70     16.97     11.61     12.12     10日：6.48      1.34      1.34      1.44      7         累涨修正：51.2      净值区间：93      95      96      97      98      5
+        XIAOFEI_MEDIA.put("517770", "消费-文娱传媒         ");//游戏传媒ETF           市值：0.35      累涨：39.23     15.69     11.03     12.51     10日：7.28      1.53      1.53      2.26      5         累涨修正：51.1      净值区间：96      97      98      99      99      6
+        XIAOFEI_MEDIA.put("512980", "消费-文娱传媒         ");//传媒ETF               市值：25.78     累涨：40.31     16.49     11.24     12.58     10日：7.12      1.19      1.19      1.64      6         累涨修正：51        净值区间：94      96      97      98      98      7
+        XIAOFEI_MEDIA.put("516620", "消费-文娱传媒         ");//影视ETF               市值：0.50      累涨：39.58     15.31     11.85     12.42     10日：4.71      0.30      0.30      1.22      8         累涨修正：45.19     净值区间：83      71      53      66      66      8
+        XIAOFEI_MEDIA.put("159855", "消费-文娱传媒         ");//影视ETF               市值：0.58      累涨：37.21     15.08     11.83     10.30     10日：4.45      0.57      0.57      1.48      9         累涨修正：43.37     净值区间：95      66      56      65      67      9
     }
 
     public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
@@ -1519,10 +1517,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产
+
     static {
         TOP_JINRONG_FANGDICHAN.put("159933", "金融-地产             ");//国投金融地产ETF       市值：1.52      累涨：28.13     8.34      7.71      12.08     10日：7.04      3.48      2.09      0.06      1         累涨修正：42.83     净值区间：61      76      80      86      91      1
     }
+
     public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产
+
     static {
         JINRONG_FANGDICHAN.put("159933", "金融-地产             ");//国投金融地产ETF       市值：1.52      累涨：28.13     8.34      7.71      12.08     10日：7.04      3.48      2.09      0.06      1         累涨修正：42.83     净值区间：61      76      80      86      91      1
         JINRONG_FANGDICHAN.put("515060", "金融-地产             ");//房地产ETF基金         市值：6.47      累涨：29.68     15.07     5.79      8.82      10日：5.82      2.65      1.87      0.92      4         累涨修正：41.89     净值区间：95      97      98      98      57      2
@@ -1896,12 +1897,12 @@ public class ContMapEtfAll {
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.JINRONG_ZHENGQUAN,  ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE, "JINRONG_ZHENGQUAN", ContEtfTypeName.JINRONG_ZHENGQUAN, ContMapEtfAll.JINRONG_ZHENGQUAN);
-        name = "JINRONG_FANGDICHAN";
-        System.out.println("    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
-        System.out.println("    static {");
-        System.out.println("    }");
-        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
-        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN, null, name, ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
+//        name = "JINRONG_FANGDICHAN";
+//        System.out.println("    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN, null, name, ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
 //        System.out.println("    public static Map<String, String> JINRONG_CASH = new HashMap<>();//金融-现金");
 //        System.out.println("    public static Map<String, String> TOP_JINRONG_CASH = new HashMap<>();");
 //        System.out.println("    static {");
@@ -1910,8 +1911,12 @@ public class ContMapEtfAll {
 
 //        System.out.println("    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();//消费-通用");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON);
-//        System.out.println("    public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒");
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
+        name = "XIAOFEI_MEDIA";
+        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//消费-文娱传媒");
+        System.out.println("    static {");
+        System.out.println("    }");
+        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//消费-文娱传媒");
+        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, name, ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
 //        System.out.println("    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
@@ -1924,7 +1929,7 @@ public class ContMapEtfAll {
 
 
 //        name = "KEJI_HK";
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-香港");
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-香港");
