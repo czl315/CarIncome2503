@@ -413,32 +413,29 @@ public class ContMapEtfAll {
         KEJI_HK.put("159550", "科技-香港             ");//互联网ETF沪港深       市值：2.21      累涨：                                        10日：                              1.95                累涨修正：          净值区间：77                                      55
     }
 
-    public static Map<String, String> KEJI_JUNGONG = new HashMap<>();//科技-军工
     public static Map<String, String> TOP_KEJI_JUNGONG = new HashMap<>();
-
     static {
-        TOP_KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：96.34     累涨：42.46     10.38     13.86     18.22     10日：3.89      2.92      1.61      0.16      1         累涨修正：52.49     净值区间：60      63      38      74      74      1
+        TOP_KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：128.51    累涨：47.03     18.64     13.45     14.94     10日：10.46     0.45      0.45      0.45      1         累涨修正：58.84     净值区间：57      68      73      77      83      1
     }
-
+    public static Map<String, String> KEJI_JUNGONG = new HashMap<>();//科技-军工
     static {
-        KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：96.34     累涨：42.46     10.38     13.86     18.22     10日：3.89      2.92      1.61      0.16      1         累涨修正：52.49     净值区间：60      63      38      74      74      1
-        KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：46.91     累涨：42.19     11.43     13.75     17.01     10日：4.10      2.83      1.26      0.28      3         累涨修正：51.64     净值区间：66      67      35      70      65      2
-        KEJI_JUNGONG.put("159378", "科技-军工             ");//通用航空ETF           市值：8.68      累涨：38.51     5.95      16.97     15.59     10日：4.93      3.80      1.18      0.45      2         累涨修正：49.6      净值区间：70      71      62      87      73      3
-        KEJI_JUNGONG.put("159638", "科技-军工             ");//高端装备ETF           市值：12.56     累涨：40.52     8.60      15.02     16.90     10日：3.90      2.46      1.16      0.38      4         累涨修正：49.2      净值区间：68      69      38      73      66      4
-        KEJI_JUNGONG.put("512660", "科技-军工             ");//军工ETF               市值：142.09    累涨：36.25     7.27      14.46     14.52     10日：3.22      2.15      0.10      0.48      6         累涨修正：41.82     净值区间：74      74      31      69      68      5
-        KEJI_JUNGONG.put("512680", "科技-军工             ");//军工ETF龙头           市值：46.82     累涨：35.10     6.82      13.77     14.51     10日：3.22      2.08      0.28      0.47      8         累涨修正：40.96     净值区间：72      72      30      70      68      6
-        KEJI_JUNGONG.put("512810", "科技-军工             ");//国防军工ETF           市值：6.14      累涨：35.25     7.30      14.10     13.85     10日：2.85      1.93      0.25      0.33      7         累涨修正：40.53     净值区间：71      71      30      69      69      7
-        KEJI_JUNGONG.put("512560", "科技-军工             ");//军工ETF易方达         市值：7.02      累涨：35.24     7.45      14.02     13.77     10日：2.71      1.91      0.16      0.47      9         累涨修正：40.18     净值区间：77      77      32      70      70      8
-        KEJI_JUNGONG.put("159231", "科技-军工             ");//通用航空ETF华宝       市值：0.36      累涨：                              16.20     10日：4.78      3.81      1.22      0.28      5         累涨修正：27.23     净值区间：64      69      64                      9
-        KEJI_JUNGONG.put("516320", "科技-军工             ");//高端装备ETF           市值：0.73      累涨：21.81     3.94      10.01     7.86      10日：2.68      1.57      0.43      0.14      11        累涨修正：26.92     净值区间：56      16      11      59      44      10
-        KEJI_JUNGONG.put("562910", "科技-军工             ");//高端制造ETF           市值：0.93      累涨：21.32     3.95      9.72      7.65      10日：1.96      1.32      0.33      0.49      12        累涨修正：25.26     净值区间：70      28      18      61      44      11
-        KEJI_JUNGONG.put("159208", "科技-军工             ");//航天航空ETF           市值：0.61      累涨：                                        10日：2.97      2.57      0.49      0.19      10        累涨修正：6.52      净值区间：60      61                              12
-        KEJI_JUNGONG.put("159230", "科技-军工             ");//通用航空ETF基金       市值：0.55      累涨：                                        10日：                    0.98      -0.20               累涨修正：          净值区间：                                        13
-        KEJI_JUNGONG.put("159227", "科技-军工             ");//航空航天ETF           市值：2.46      累涨：                                        10日：3.74      2.83      0.70      0.10                累涨修正：          净值区间：60      61                              14
-        KEJI_JUNGONG.put("159241", "科技-军工             ");//航空航天ETF天弘       市值：1.98      累涨：                                        10日：                    0.49      0.10                累涨修正：          净值区间：59                                      15
-        KEJI_JUNGONG.put("159392", "科技-军工             ");//航空ETF               市值：1.31      累涨：                                        10日：4.92      3.99      1.21      -0.10               累涨修正：          净值区间：62      65                              16
+        KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：128.51    累涨：47.03     18.64     13.45     14.94     10日：10.46     0.45      0.45      0.45      1         累涨修正：58.84     净值区间：57      68      73      77      83      1
+        KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：60.28     累涨：45.82     18.46     12.65     14.71     10日：10.51     0.13      0.13      0.78      3         累涨修正：56.72     净值区间：52      71      76      79      84      2
+        KEJI_JUNGONG.put("159378", "科技-军工             ");//通用航空ETF           市值：8.86      累涨：46.26     23.02     11.54     11.70     10日：8.32      0.35      0.35      0.87      12        累涨修正：55.63     净值区间：56      69      78      80      87      3
+        KEJI_JUNGONG.put("159638", "科技-军工             ");//高端装备ETF           市值：11.77     累涨：44.02     18.54     12.50     12.98     10日：8.89      0.24      0.24      1.20      8         累涨修正：53.63     净值区间：70      79      84      85      90      4
+        KEJI_JUNGONG.put("512660", "科技-军工             ");//军工ETF               市值：158.01    累涨：42.39     18.06     10.78     13.55     10日：9.43      0.54      0.54      0.63      5         累涨修正：53.44     净值区间：48      74      79      80      86      5
+        KEJI_JUNGONG.put("512560", "科技-军工             ");//军工ETF易方达         市值：6.43      累涨：41.61     17.48     10.07     14.06     10日：9.66      0.59      0.59      0.88      4         累涨修正：53.04     净值区间：57      73      77      79      84      6
+        KEJI_JUNGONG.put("512680", "科技-军工             ");//军工ETF龙头           市值：55.34     累涨：41.58     17.29     10.96     13.33     10日：9.01      0.43      0.43      0.61      11        累涨修正：51.88     净值区间：48      73      78      80      85      7
+        KEJI_JUNGONG.put("512810", "科技-军工             ");//国防军工ETF           市值：7.97      累涨：39.93     17.53     10.20     12.20     10日：9.72      0.61      0.61      0.62      6         累涨修正：51.48     净值区间：53      66      8       8       8       8
+        KEJI_JUNGONG.put("159208", "科技-军工             ");//航天航空ETF           市值：0.59      累涨：                    6.88      17.11     10日：11.69     0.72      0.72      0.36      2         累涨修正：37.84     净值区间：46      67      71      75              9
+        KEJI_JUNGONG.put("516320", "科技-军工             ");//高端装备ETF           市值：0.72      累涨：26.36     11.18     6.46      8.72      10日：6.44      0.96      0.82      1.77      13        累涨修正：35.4      净值区间：95      97      98      98      99      10
+        KEJI_JUNGONG.put("159231", "科技-军工             ");//通用航空ETF华宝       市值：0.32      累涨：                    11.96     12.17     10日：8.32      0.63      0.63      1.16      10        累涨修正：34.34     净值区间：72      68      75      79              11
+        KEJI_JUNGONG.put("562910", "科技-军工             ");//高端制造ETF           市值：0.96      累涨：25.09     10.77     6.34      7.98      10日：5.84      0.79      0.47      2.37      16        累涨修正：32.66     净值区间：100     100     100     100     100     12
+        KEJI_JUNGONG.put("159241", "科技-军工             ");//航空航天ETF天弘       市值：3.31      累涨：                              15.93     10日：11.44     0.45      0.45      0.54      7         累涨修正：28.72     净值区间：43      70      74                      13
+        KEJI_JUNGONG.put("159227", "科技-军工             ");//航空航天ETF           市值：4.51      累涨：                              16.12     10日：10.98     0.27      0.27      0.64      9         累涨修正：27.91     净值区间：50      70      74                      14
+        KEJI_JUNGONG.put("159230", "科技-军工             ");//通用航空ETF基金       市值：0.21      累涨：                              12.17     10日：8.53      0.56      0.56      0.85      14        累涨修正：22.38     净值区间：48      64      75                      15
+        KEJI_JUNGONG.put("159392", "科技-军工             ");//航空ETF               市值：0.51      累涨：                              11.41     10日：8.00      0.67      0.67      0.86      15        累涨修正：21.42     净值区间：58      59      67                      16
     }
-
     public static Map<String, String> KEJI_GONG_YE = new HashMap<>();//科技-通用
     public static Map<String, String> TOP_KEJI_GONG_YE = new HashMap<>();
 
@@ -1816,54 +1813,6 @@ public class ContMapEtfAll {
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, name, ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
 
-        name = "KEJI_HK";
-        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-        System.out.println("    static {");
-        System.out.println("    }");
-        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-香港");
-        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, name, ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
-//        name = "KEJI_JUNGONG";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-军工");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, name, ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
-//        name = "KEJI_GONG_YE";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-通用");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, name, ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
-//        name = "KEJI_RUAN_JIAN";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-软件");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, name, ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);
-//        name = "KEJI_XIN_PIAN";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-芯片");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, name, ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfAll.KEJI_XIN_PIAN);
-//        name = "KEJI_TONG_XIN";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, name, ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);
-//        name = "KEJI_NEW_ENERGY";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-新能源");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, name, ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);
-//        name = "KEJI_NEW_CAR";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-汽车");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, name, ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfAll.KEJI_NEW_CAR);
 
 //        name = "ZIYUAN_OIL";
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//资源-石油");
@@ -1938,5 +1887,55 @@ public class ContMapEtfAll {
 //        for (String zqdm : zqdmList) {
 //            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
 //        }
+
+
+//        name = "KEJI_HK";
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-香港");
+//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, name, ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
+        name = "KEJI_JUNGONG";
+        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+        System.out.println("    static {");
+        System.out.println("    }");
+        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-军工");
+        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, name, ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
+//        name = "KEJI_GONG_YE";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-通用");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, name, ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
+//        name = "KEJI_RUAN_JIAN";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-软件");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, name, ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);
+//        name = "KEJI_XIN_PIAN";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-芯片");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, name, ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfAll.KEJI_XIN_PIAN);
+//        name = "KEJI_TONG_XIN";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, name, ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);
+//        name = "KEJI_NEW_ENERGY";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-新能源");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, name, ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);
+//        name = "KEJI_NEW_CAR";
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-汽车");
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, name, ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfAll.KEJI_NEW_CAR);
     }
 }
