@@ -22,10 +22,13 @@ public class ContMapEtfAll {
      * 资源
      */
     public static Map<String, String> TOP_ZIYUAN_OIL = new HashMap<>();//资源-石油
+
     static {
         TOP_ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.02      累涨：59.76     26.60     14.85     18.31     10日：4.58      2.57      1.45      -0.44     1         累涨修正：69.81     净值区间：38      55      17      39      66      1
     }
+
     public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
+
     static {
         ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.02      累涨：59.76     26.60     14.85     18.31     10日：4.58      2.57      1.45      -0.44     1         累涨修正：69.81     净值区间：38      55      17      39      66      1
         ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.63      累涨：59.44     26.29     15.01     18.14     10日：4.27      2.35      1.49      -0.32     2         累涨修正：69.04     净值区间：48      62      19      39      66      2
@@ -67,10 +70,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_ZIYUAN_COMMON = new HashMap<>();//资源-通用
+
     static {
         TOP_ZIYUAN_COMMON.put("561330", "资源-通用             ");//矿业ETF               市值：0.85      累涨：36.66     15.33     10.00     11.33     10日：6.46      2.91      0.45      0.36      1         累涨修正：46.93     净值区间：44      73      78      85      90      1
     }
+
     public static Map<String, String> ZIYUAN_COMMON = new HashMap<>();//资源-通用
+
     static {
         ZIYUAN_COMMON.put("561330", "资源-通用             ");//矿业ETF               市值：0.85      累涨：36.66     15.33     10.00     11.33     10日：6.46      2.91      0.45      0.36      1         累涨修正：46.93     净值区间：44      73      78      85      90      1
         ZIYUAN_COMMON.put("159690", "资源-通用             ");//矿业ETF               市值：0.13      累涨：37.39     17.25     9.61      10.53     10日：5.92      2.38      0.35      1.15      2         累涨修正：46.39     净值区间：39      71      77      86      89      2
@@ -192,24 +198,22 @@ public class ContMapEtfAll {
         XIAOFEI_MEDIA.put("159855", "消费-文娱传媒         ");//影视ETF               市值：0.58      累涨：37.21     15.08     11.83     10.30     10日：4.45      0.57      0.57      1.48      9         累涨修正：43.37     净值区间：95      66      56      65      67      9
     }
 
-    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
-    public static Map<String, String> TOP_XIAOFEI_WINE = new HashMap<>();
-
+    public static Map<String, String> TOP_XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
     static {
-        TOP_XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.22      累涨：34.71     9.70      18.37     6.64      10日：3.69      2.20      1.76      -0.43     1         累涨修正：44.12     净值区间：74      76      77      56      56      1
-        TOP_XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：108.68    累涨：24.84     12.21     8.27      4.36      10日：1.36      0.85      0.17      0.17      5         累涨修正：27.39     净值区间：27      19      9       8       5       8
+        TOP_XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.02      累涨：24.21     12.52     7.22      4.47      10日：3.59      0.30      0.30      0.44      2         累涨修正：28.7      净值区间：88      56      63      63      32      1
+        TOP_XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：127.65    累涨：13.41     4.61      3.52      5.28      10日：1.99      0.54      0.18      0.90      3         累涨修正：16.3      净值区间：100     100     61      27      25      3
     }
-
+    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
     static {
-        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.22      累涨：34.71     9.70      18.37     6.64      10日：3.69      2.20      1.76      -0.43     1         累涨修正：44.12     净值区间：74      76      77      56      56      1
-        XIAOFEI_WINE.put("159766", "消费-吃喝玩乐         ");//旅游ETF               市值：29.58     累涨：33.66     9.34      18.34     5.98      10日：3.14      1.64      1.34      -0.29     2         累涨修正：41.12     净值区间：72      75      77      55      55      2
-        XIAOFEI_WINE.put("159736", "消费-吃喝玩乐         ");//食品饮料ETF天弘       市值：47.55     累涨：25.46     10.66     9.80      5.00      10日：1.94      1.52      0.69      -0.69     3         累涨修正：30.3      净值区间：47      47      33      66      51      3
-        XIAOFEI_WINE.put("516900", "消费-吃喝玩乐         ");//食品饮料ETF基金       市值：0.74      累涨：26.84     13.29     9.38      4.17      10日：1.13      0.97      0.16      -0.32     6         累涨修正：29.26     净值区间：31      24      14      52      31      4
-        XIAOFEI_WINE.put("159862", "消费-吃喝玩乐         ");//食品ETF               市值：0.40      累涨：25.27     9.88      10.93     4.46      10日：1.45      1.16      0.44      -0.44     4         累涨修正：28.76     净值区间：27      24      13      51      41      5
-        XIAOFEI_WINE.put("159843", "消费-吃喝玩乐         ");//食品饮料ETF           市值：2.66      累涨：24.35     11.47     8.70      4.18      10日：1.35      1.05      0.45      -0.45     8         累涨修正：27.65     净值区间：40      30      19      58      40      6
-        XIAOFEI_WINE.put("515170", "消费-吃喝玩乐         ");//食品饮料ETF           市值：32.32     累涨：24.42     11.81     8.55      4.06      10日：1.19      1.19      0.34      -0.34     7         累涨修正：27.48     净值区间：36      29      18      57      41      7
-        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：108.68    累涨：24.84     12.21     8.27      4.36      10日：1.36      0.85      0.17      0.17      5         累涨修正：27.39     净值区间：27      19      9       8       5       8
-        XIAOFEI_WINE.put("515710", "消费-吃喝玩乐         ");//食品ETF               市值：8.61      累涨：25.29     11.77     9.53      3.99      10日：0.80      0.64      0.16      -0.32     9         累涨修正：27.05     净值区间：40      32      21      58      42      9
+        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.02      累涨：24.21     12.52     7.22      4.47      10日：3.59      0.30      0.30      0.44      2         累涨修正：28.7      净值区间：88      56      63      63      32      1
+        XIAOFEI_WINE.put("159766", "消费-吃喝玩乐         ");//旅游ETF               市值：30.66     累涨：23.85     12.94     6.57      4.34      10日：3.61      0.30      0.30      0.45      1         累涨修正：28.36     净值区间：75      53      62      62      31      2
+        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：127.65    累涨：13.41     4.61      3.52      5.28      10日：1.99      0.54      0.18      0.90      3         累涨修正：16.3      净值区间：100     100     61      27      25      3
+        XIAOFEI_WINE.put("159736", "消费-吃喝玩乐         ");//食品饮料ETF天弘       市值：47.25     累涨：13.58     5.94      4.44      3.20      10日：1.89                          0.58      6         累涨修正：15.47     净值区间：71      78      34      23      20      4
+        XIAOFEI_WINE.put("515710", "消费-吃喝玩乐         ");//食品ETF               市值：9.09      累涨：12.30     5.24      3.35      3.71      10日：2.02      0.34      0.17      0.34      4         累涨修正：15        净值区间：57      56      29      16      16      5
+        XIAOFEI_WINE.put("159843", "消费-吃喝玩乐         ");//食品饮料ETF           市值：2.96      累涨：12.10     4.74      3.58      3.78      10日：1.89      0.16      0.16      0.63      5         累涨修正：14.47     净值区间：83      78      34      19      19      6
+        XIAOFEI_WINE.put("515170", "消费-吃喝玩乐         ");//食品饮料ETF           市值：31.99     累涨：11.85     5.07      3.55      3.23      10日：1.62      0.18      0.18      0.54      7         累涨修正：14.01     净值区间：71      63      32      18      18      7
+        XIAOFEI_WINE.put("516900", "消费-吃喝玩乐         ");//食品饮料ETF基金       市值：0.81      累涨：12.02     5.42      3.37      3.23      10日：1.19                          0.68      9         累涨修正：13.21     净值区间：100     67      33      17      16      8
+        XIAOFEI_WINE.put("159862", "消费-吃喝玩乐         ");//食品ETF               市值：0.42      累涨：11.10     3.86      3.75      3.49      10日：1.67      0.15                0.61      8         累涨修正：12.92     净值区间：57      45      32      17      17      9
     }
 
     public static Map<String, String> XIAOFEI = new HashMap<>();
@@ -434,10 +438,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_GONG_YE = new HashMap<>();//科技-通用
+
     static {
         TOP_KEJI_GONG_YE.put("515860", "科技-通用             ");//科技ETF嘉实           市值：1.90      累涨：36.40     14.75     9.72      11.93     10日：8.50      3.04      2.63      2.76      2         累涨修正：53.2      净值区间：96      98      98      99      99      1
     }
+
     public static Map<String, String> KEJI_GONG_YE = new HashMap<>();//科技-通用
+
     static {
         KEJI_GONG_YE.put("515860", "科技-通用             ");//科技ETF嘉实           市值：1.90      累涨：36.40     14.75     9.72      11.93     10日：8.50      3.04      2.63      2.76      2         累涨修正：53.2      净值区间：96      98      98      99      99      1
         KEJI_GONG_YE.put("159777", "科技-通用             ");//创科技ETF             市值：0.90      累涨：35.22     14.36     10.36     10.50     10日：8.39      1.30      1.30      2.62      5         累涨修正：47.51     净值区间：92      94      96      97      98      2
@@ -491,11 +498,14 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_RUAN_JIAN = new HashMap<>();//科技-软件
+
     static {
         TOP_KEJI_RUAN_JIAN.put("159851", "科技-软件             ");//金融科技ETF           市值：64.74     累涨：67.65     21.26     18.67     27.72     10日：15.03     3.59      3.59      2.05      2         累涨修正：93.45     净值区间：93      82      89      91      92      1
         TOP_KEJI_RUAN_JIAN.put("159381", "科技-软件             ");//创业板人工智能ETF华夏 市值：1.99      累涨：59.76     27.00     16.87     15.89     10日：10.34     1.23      1.23      3.50      1         累涨修正：73.79     净值区间：96      94      97      98      98      4
     }
+
     public static Map<String, String> KEJI_RUAN_JIAN = new HashMap<>();//科技-软件
+
     static {
         KEJI_RUAN_JIAN.put("159851", "科技-软件             ");//金融科技ETF           市值：64.74     累涨：67.65     21.26     18.67     27.72     10日：15.03     3.59      3.59      2.05      2         累涨修正：93.45     净值区间：93      82      89      91      92      1
         KEJI_RUAN_JIAN.put("516860", "科技-软件             ");//金融科技ETF           市值：11.15     累涨：66.25     20.23     18.47     27.55     10日：15.37     3.41      3.41      2.05      4         累涨修正：91.85     净值区间：97      80      88      90      91      2
@@ -568,12 +578,16 @@ public class ContMapEtfAll {
         KEJI_RUAN_JIAN.put("561220", "科技-软件             ");//数字经济ETF工银       市值：3.93      累涨：                              7.25      10日：5.03      0.69      0.69      1.57      64        累涨修正：14.35     净值区间：82      77      89                      69
         KEJI_RUAN_JIAN.put("589380", "科技-软件             ");//AIETF富国             市值：0.72      累涨：                                        10日：          0.30      0.30      2.03                累涨修正：          净值区间：84                                      70
     }
+
     public static Map<String, String> TOP_KEJI_XIN_PIAN = new HashMap<>();
+
     static {
         TOP_KEJI_XIN_PIAN.put("159732", "科技-芯片             ");//消费电子ETF           市值：20.00     累涨：44.02     19.86     11.90     12.26     10日：8.39      2.97      2.73      2.23      1         累涨修正：60.84     净值区间：89      92      95      96      97      1
         TOP_KEJI_XIN_PIAN.put("588780", "科技-芯片             ");//科创芯片设计ETF       市值：2.47      累涨：40.36     22.08     9.13      9.15      10日：7.57      0.10      0.10      1.65      11        累涨修正：48.23     净值区间：66      42      64      55      40      11
     }
+
     public static Map<String, String> KEJI_XIN_PIAN = new HashMap<>();//科技-芯片
+
     static {
         KEJI_XIN_PIAN.put("159732", "科技-芯片             ");//消费电子ETF           市值：20.00     累涨：44.02     19.86     11.90     12.26     10日：8.39      2.97      2.73      2.23      1         累涨修正：60.84     净值区间：89      92      95      96      97      1
         KEJI_XIN_PIAN.put("561100", "科技-芯片             ");//消费电子ETF富国       市值：4.67      累涨：40.33     18.65     10.07     11.61     10日：8.60      2.58      2.58      2.57      2         累涨修正：56.67     净值区间：88      89      94      90      93      2
@@ -1438,10 +1452,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();//金融-银行
+
     static {
         TOP_JINRONG_BANK.put("512730", "金融-银行             ");//银行ETF指数           市值：1.00      累涨：32.37     11.37     7.67      13.33     10日：7.06      4.63      2.46      -0.27     2         累涨修正：48.98     净值区间：83      90      94      95      97      1
     }
+
     public static Map<String, String> JINRONG_BANK = new HashMap<>();//金融-银行
+
     static {
         JINRONG_BANK.put("512730", "金融-银行             ");//银行ETF指数           市值：1.00      累涨：32.37     11.37     7.67      13.33     10日：7.06      4.63      2.46      -0.27     2         累涨修正：48.98     净值区间：83      90      94      95      97      1
         JINRONG_BANK.put("515020", "金融-银行             ");//银行ETF基金           市值：5.06      累涨：32.93     11.94     8.09      12.90     10日：6.85      4.45      2.36      -0.37     3         累涨修正：48.95     净值区间：82      89      93      95      97      2
@@ -1897,8 +1914,12 @@ public class ContMapEtfAll {
 //        System.out.println("    }");
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//消费-文娱传媒");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, name, ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
-//        System.out.println("    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐");
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
+        name = "XIAOFEI_WINE";
+        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//消费-吃喝玩乐");
+        System.out.println("    static {");
+        System.out.println("    }");
+        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//消费-吃喝玩乐");
+        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, name, ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
 //////        //etf头部数据
 //        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.TOP_XIAOFEI.keySet());
@@ -1919,12 +1940,12 @@ public class ContMapEtfAll {
 //        System.out.println("    }");
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-军工");
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, name, ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
-        name = "KEJI_GONG_YE";
-        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-通用");
-        System.out.println("    static {");
-        System.out.println("    }");
-        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-通用");
-        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, name, ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
+//        name = "KEJI_GONG_YE";
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-通用");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-通用");
+//        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, name, ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
 //        name = "KEJI_RUAN_JIAN";
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-软件");
 //        System.out.println("    static {");
@@ -1943,12 +1964,12 @@ public class ContMapEtfAll {
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, name, ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);
-//        name = "KEJI_NEW_ENERGY";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-新能源");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, name, ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);
+        name = "KEJI_NEW_ENERGY";
+        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-新能源");
+        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+        System.out.println("    static {");
+        System.out.println("    }");
+        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, name, ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);
 //        name = "KEJI_NEW_CAR";
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-汽车");
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
