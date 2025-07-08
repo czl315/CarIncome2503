@@ -21,24 +21,22 @@ public class ContMapEtfAll {
     /**
      * 资源
      */
-    public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
-    public static Map<String, String> TOP_ZIYUAN_OIL = new HashMap<>();
-
+    public static Map<String, String> TOP_ZIYUAN_OIL = new HashMap<>();//资源-石油
     static {
-        TOP_ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.12      累涨：51.90     12.17     23.09     16.64     10日：5.15      3.80      2.36      -2.19     1         累涨修正：65.57     净值区间：16      19      51      76      59      1
+        TOP_ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.02      累涨：59.76     26.60     14.85     18.31     10日：4.58      2.57      1.45      -0.44     1         累涨修正：69.81     净值区间：38      55      17      39      66      1
     }
-
+    public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
     static {
-        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.12      累涨：51.90     12.17     23.09     16.64     10日：5.15      3.80      2.36      -2.19     1         累涨修正：65.57     净值区间：16      19      51      76      59      1
-        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.22      累涨：50.20     10.39     23.39     16.42     10日：5.14      3.85      2.46      -2.41     2         累涨修正：64.11     净值区间：8       15      49      76      59      2
-        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.22      累涨：24.76     8.61      9.47      6.68      10日：2.55      1.32      0.77      0.00      4         累涨修正：30.17     净值区间：77      87      91      97      69      3
-        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：0.57      累涨：23.49     9.23      6.39      7.87      10日：3.09      1.91      0.42      0.21      3         累涨修正：29.33     净值区间：12      23      32      62      62      4
-        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：0.60      累涨：22.33     7.79      8.01      6.53      10日：2.75      1.54      0.44      0.00      5         累涨修正：27.5      净值区间：71      79      96      83      72      5
-        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：0.72      累涨：22.90     7.61      8.72      6.57      10日：2.39      1.45      0.31      -0.10     6         累涨修正：27.36     净值区间：58      76      81      94      60      6
-        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.12      累涨：20.35     6.99      6.63      6.73      10日：2.55      1.48      0.63      -0.32     7         累涨修正：25.64     净值区间：67      81      80      84      72      7
-        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：0.98      累涨：21.42     6.87      8.62      5.93      10日：1.90      1.00      0.50      0.20      8         累涨修正：25.32     净值区间：83      89      81      95      66      8
-        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.32      累涨：18.05     5.26      8.08      4.71      10日：1.52      1.07      0.46      0.61      9         累涨修正：21.56     净值区间：100     71      45      81      51      9
-        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.24      累涨：                                        10日：                              -0.22     10        累涨修正：0         净值区间：82      23      29      55      55      10
+        ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.02      累涨：59.76     26.60     14.85     18.31     10日：4.58      2.57      1.45      -0.44     1         累涨修正：69.81     净值区间：38      55      17      39      66      1
+        ZIYUAN_OIL.put("513350", "资源-石油             ");//标普油气ETF           市值：6.63      累涨：59.44     26.29     15.01     18.14     10日：4.27      2.35      1.49      -0.32     2         累涨修正：69.04     净值区间：48      62      19      39      66      2
+        ZIYUAN_OIL.put("159309", "资源-石油             ");//油气资源ETF           市值：1.13      累涨：27.47     7.05      8.68      11.74     10日：2.17      1.03                0.41      3         累涨修正：30.67     净值区间：48      52      18      43      72      3
+        ZIYUAN_OIL.put("563150", "资源-石油             ");//油气资源ETF           市值：0.26      累涨：27.22     9.02      7.43      10.77     10日：1.82      0.75                0.65      4         累涨修正：29.79     净值区间：42      54      20      32      48      4
+        ZIYUAN_OIL.put("561760", "资源-石油             ");//油气ETF博时           市值：0.38      累涨：23.80     7.25      7.08      9.47      10日：1.49      0.53                0.21      6         累涨修正：25.82     净值区间：47      55      29      29      40      5
+        ZIYUAN_OIL.put("561570", "资源-石油             ");//油气ETF华泰柏瑞       市值：0.23      累涨：21.89     7.39      7.24      7.26      10日：1.88      1.04                0.52      5         累涨修正：24.81     净值区间：43      59      24      26      42      6
+        ZIYUAN_OIL.put("159588", "资源-石油             ");//石油天然气ETF         市值：1.40      累涨：21.21     5.80      7.04      8.37      10日：1.71      0.96                0.21      8         累涨修正：23.88     净值区间：69      69      17      31      60      7
+        ZIYUAN_OIL.put("561360", "资源-石油             ");//石油ETF               市值：1.83      累涨：20.63     6.95      6.30      7.38      10日：1.85      0.88                0.49      7         累涨修正：23.36     净值区间：73      80      20      27      46      8
+        ZIYUAN_OIL.put("159697", "资源-石油             ");//油气ETF               市值：1.63      累涨：21.22     6.63      6.95      7.64      10日：1.30      0.70                0.30      10        累涨修正：23.22     净值区间：44      47      21      46      61      9
+        ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.35      累涨：15.61     5.94      6.07      3.60      10日：1.80      0.90      0.15      0.89      9         累涨修正：18.61     净值区间：73      82      74      80      87      10
     }
 
     public static Map<String, String> ZIYUAN_NONGYE = new HashMap<>();
@@ -186,10 +184,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
+
     static {
         TOP_XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：20.34     累涨：58.06     20.14     16.31     21.61     10日：11.92     2.55      2.47      2.76      1         累涨修正：77.47     净值区间：84      90      92      95      96      1
     }
+
     public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();//消费-文娱传媒
+
     static {
         XIAOFEI_MEDIA.put("516010", "消费-文娱传媒         ");//游戏ETF               市值：20.34     累涨：58.06     20.14     16.31     21.61     10日：11.92     2.55      2.47      2.76      1         累涨修正：77.47     净值区间：84      90      92      95      96      1
         XIAOFEI_MEDIA.put("516770", "消费-文娱传媒         ");//游戏ETF华泰柏瑞       市值：1.55      累涨：57.58     19.28     16.96     21.34     10日：11.78     2.22      2.22      2.65      2         累涨修正：76.02     净值区间：87      91      94      96      97      2
@@ -1457,24 +1458,22 @@ public class ContMapEtfAll {
         JINRONG_GOLD.put("159830", "金融-黄金             ");//上海金ETF             市值：14.25     累涨：37.61     9.20      19.53     8.88      10日：5.89      2.48      2.41      0.14      20        累涨修正：50.8      净值区间：86      82      66      57      65      20
     }
 
-    public static Map<String, String> JINRONG_BANK = new HashMap<>();
-    public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();
-
+    public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();//金融-银行
     static {
-        TOP_JINRONG_BANK.put("517900", "金融-银行             ");//银行ETF优选           市值：2.46      累涨：28.52     8.27      8.45      11.80     10日：5.25      2.62      2.62      -0.26     1         累涨修正：41.63     净值区间：75      76      89      94      94      2
+        TOP_JINRONG_BANK.put("512730", "金融-银行             ");//银行ETF指数           市值：1.00      累涨：32.37     11.37     7.67      13.33     10日：7.06      4.63      2.46      -0.27     2         累涨修正：48.98     净值区间：83      90      94      95      97      1
     }
-
+    public static Map<String, String> JINRONG_BANK = new HashMap<>();//金融-银行
     static {
-        JINRONG_BANK.put("516310", "金融-银行             ");//银行ETF易方达         市值：16.04     累涨：28.71     6.62      10.24     11.85     10日：4.98      2.86      2.86      -0.74     2         累涨修正：42.27     净值区间：74      75      88      94      94      1
-        JINRONG_BANK.put("517900", "金融-银行             ");//银行ETF优选           市值：2.46      累涨：28.52     8.27      8.45      11.80     10日：5.25      2.62      2.62      -0.26     1         累涨修正：41.63     净值区间：75      76      89      94      94      2
-        JINRONG_BANK.put("516210", "金融-银行             ");//银行ETF指数基金       市值：1.26      累涨：28.21     6.78      9.97      11.46     10日：4.82      2.55      2.55      -0.72     4         累涨修正：40.68     净值区间：57      59      72      84      84      3
-        JINRONG_BANK.put("515290", "金融-银行             ");//银行ETF天弘           市值：42.83     累涨：28.08     7.03      9.51      11.54     10日：4.73      2.57      2.57      -0.61     3         累涨修正：40.52     净值区间：69      69      85      92      92      4
-        JINRONG_BANK.put("512700", "金融-银行             ");//银行ETF南方           市值：14.50     累涨：27.28     7.14      8.72      11.42     10日：4.68      2.70      2.70      -0.72     5         累涨修正：40.06     净值区间：69      70      85      93      93      5
-        JINRONG_BANK.put("512820", "金融-银行             ");//银行ETF龙头           市值：6.66      累涨：27.48     6.94      9.36      11.18     10日：4.53      2.54      2.54      -0.69     7         累涨修正：39.63     净值区间：67      68      84      92      92      6
-        JINRONG_BANK.put("515020", "金融-银行             ");//银行ETF基金           市值：3.91      累涨：27.10     6.62      9.22      11.26     10日：4.59      2.53      2.53      -0.75     8         累涨修正：39.28     净值区间：65      67      84      92      92      7
-        JINRONG_BANK.put("512800", "金融-银行             ");//银行ETF               市值：82.41     累涨：26.65     7.07      8.20      11.38     10日：4.66      2.54      2.54      -0.73     6         累涨修正：38.93     净值区间：66      67      84      92      92      8
-        JINRONG_BANK.put("512730", "金融-银行             ");//中证银行ETF           市值：0.80      累涨：26.53     6.71      8.95      10.87     10日：4.43      2.42      2.42      -0.65     9         累涨修正：38.22     净值区间：63      64      82      91      85      9
-        JINRONG_BANK.put("159887", "金融-银行             ");//银行ETF               市值：4.85      累涨：26.02     6.80      8.43      10.79     10日：4.04      2.21      2.21      -0.45     10        累涨修正：36.69     净值区间：71      72      87      93      93      10
+        JINRONG_BANK.put("512730", "金融-银行             ");//银行ETF指数           市值：1.00      累涨：32.37     11.37     7.67      13.33     10日：7.06      4.63      2.46      -0.27     2         累涨修正：48.98     净值区间：83      90      94      95      97      1
+        JINRONG_BANK.put("515020", "金融-银行             ");//银行ETF基金           市值：5.06      累涨：32.93     11.94     8.09      12.90     10日：6.85      4.45      2.36      -0.37     3         累涨修正：48.95     净值区间：82      89      93      95      97      2
+        JINRONG_BANK.put("512820", "金融-银行             ");//银行ETF龙头           市值：9.74      累涨：32.48     11.43     8.03      13.02     10日：7.16      4.53      2.34      -0.26     1         累涨修正：48.85     净值区间：83      90      93      95      97      3
+        JINRONG_BANK.put("516310", "金融-银行             ");//银行ETF易方达         市值：20.56     累涨：32.61     11.70     8.19      12.72     10日：6.80      4.48      2.36      -0.14     6         累涨修正：48.61     净值区间：88      93      95      97      98      4
+        JINRONG_BANK.put("512700", "金融-银行             ");//银行ETF南方           市值：17.02     累涨：32.60     11.73     8.03      12.84     10日：6.85      4.46      2.32      -0.22     4         累涨修正：48.55     净值区间：85      91      94      96      97      5
+        JINRONG_BANK.put("515290", "金融-银行             ");//银行ETF天弘           市值：55.44     累涨：32.55     11.47     8.31      12.77     10日：6.74      4.50      2.29      -0.25     5         累涨修正：48.37     净值区间：83      90      93      95      97      6
+        JINRONG_BANK.put("516210", "金融-银行             ");//银行ETF指数基金       市值：1.45      累涨：32.04     11.24     8.36      12.44     10日：6.64      4.27      2.15      -0.20     7         累涨修正：47.25     净值区间：81      46      57      67      75      7
+        JINRONG_BANK.put("159887", "金融-银行             ");//银行ETF               市值：7.85      累涨：31.46     11.19     7.65      12.62     10日：6.58      4.24      2.31      -0.28     10        累涨修正：46.9      净值区间：85      91      94      96      97      8
+        JINRONG_BANK.put("517900", "金融-银行             ");//银行AH优选ETF         市值：7.39      累涨：32.58     10.77     9.72      12.09     10日：6.32      4.03      1.65      0.06      8         累涨修正：46.23     净值区间：81      87      91      95      97      9
+        JINRONG_BANK.put("512800", "金融-银行             ");//银行ETF               市值：125.53    累涨：31.86     11.64     8.23      11.99     10日：6.18      3.82      1.78      -0.34     9         累涨修正：45.42     净值区间：1       1       1       1       1       10
     }
 
     public static Map<String, String> JINRONG_ZHENGQUAN = new HashMap<>();//金融-证券
@@ -1848,12 +1847,12 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, name, ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
 
 
-//        name = "ZIYUAN_OIL";
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//资源-石油");
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, name, ContEtfTypeName.ZIYUAN_OIL, ContMapEtfAll.ZIYUAN_OIL);//资源-石油
+        name = "ZIYUAN_OIL";
+        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//资源-石油");
+        System.out.println("    static {");
+        System.out.println("    }");
+        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//资源-石油");
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, name, ContEtfTypeName.ZIYUAN_OIL, ContMapEtfAll.ZIYUAN_OIL);//资源-石油
 //        name = "ZIYUAN_NONGYE";
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();");
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
@@ -1887,11 +1886,12 @@ public class ContMapEtfAll {
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.JINRONG_GOLD,  ContEtfNameKey.JINRONG_GOLD_NOLIKE, "JINRONG_GOLD", ContEtfTypeName.JINRONG_GOLD, ContMapEtfAll.JINRONG_GOLD);
-//        System.out.println("    public static Map<String, String> JINRONG_BANK = new HashMap<>();");
-//        System.out.println("    public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();");
+//        name = "JINRONG_BANK";
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//金融-银行");
 //        System.out.println("    static {");
 //        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.JINRONG_BANK,  null, "JINRONG_BANK", ContEtfTypeName.JINRONG_BANK, ContMapEtfAll.JINRONG_BANK);
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//金融-银行");
+//        findByTypeName(date, ContEtfNameKey.JINRONG_BANK, null, name, ContEtfTypeName.JINRONG_BANK, ContMapEtfAll.JINRONG_BANK);
 //        System.out.println("    public static Map<String, String> JINRONG_ZHENGQUAN = new HashMap<>();//金融-证券");
 //        System.out.println("    public static Map<String, String> TOP_JINRONG_ZHENGQUAN = new HashMap<>();");
 //        System.out.println("    static {");
@@ -1911,12 +1911,12 @@ public class ContMapEtfAll {
 
 //        System.out.println("    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();//消费-通用");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON);
-        name = "XIAOFEI_MEDIA";
-        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//消费-文娱传媒");
-        System.out.println("    static {");
-        System.out.println("    }");
-        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//消费-文娱传媒");
-        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, name, ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
+//        name = "XIAOFEI_MEDIA";
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//消费-文娱传媒");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//消费-文娱传媒");
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, name, ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);
 //        System.out.println("    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, "XIAOFEI_WINE", ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
@@ -1926,7 +1926,6 @@ public class ContMapEtfAll {
 //        for (String zqdm : zqdmList) {
 //            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
 //        }
-
 
 //        name = "KEJI_HK";
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-香港");
