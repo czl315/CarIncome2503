@@ -65,9 +65,11 @@ public class ContMapEtfAll {
 
     public static Map<String, String> ZIYUAN_XIYOU = new HashMap<>();
     public static Map<String, String> TOP_ZIYUAN_XIYOU = new HashMap<>();
+
     static {
         TOP_ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：11.16     累涨：38.56     13.09     13.67     11.80     10日：6.11      0.44      0.44      1.87      4         累涨修正：45.99     净值区间：91      90      89      93      95      1
     }
+
     static {
         ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：11.16     累涨：38.56     13.09     13.67     11.80     10日：6.11      0.44      0.44      1.87      4         累涨修正：45.99     净值区间：91      90      89      93      95      1
         ZIYUAN_XIYOU.put("159715", "资源-稀有             ");//稀土ETF易方达         市值：2.09      累涨：38.16     13.94     12.61     11.61     10日：5.98      0.52      0.39      1.70      6         累涨修正：45.44     净值区间：90      93      92      95      97      2
@@ -351,10 +353,13 @@ public class ContMapEtfAll {
      * 科技
      */
     public static Map<String, String> TOP_KEJI_HK = new HashMap<>();
+
     static {
         TOP_KEJI_HK.put("513860", "科技-香港             ");//港股通科技ETF         市值：19.83     累涨：49.51     25.89     14.08     9.54      10日：3.97      0.14                1.42      2         累涨修正：53.62     净值区间：69      58      57      57      77      1
     }
+
     public static Map<String, String> KEJI_HK = new HashMap<>();//科技-香港
+
     static {
         KEJI_HK.put("513860", "科技-香港             ");//港股通科技ETF         市值：19.83     累涨：49.51     25.89     14.08     9.54      10日：3.97      0.14                1.42      2         累涨修正：53.62     净值区间：69      58      57      57      77      1
         KEJI_HK.put("513980", "科技-香港             ");//港股科技50ETF         市值：154.26    累涨：48.56     24.97     14.37     9.22      10日：4.38      0.14      0.14      1.56      1         累涨修正：53.36     净值区间：72      56      58      59      77      2
@@ -414,10 +419,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_JUNGONG = new HashMap<>();
+
     static {
         TOP_KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：128.51    累涨：47.03     18.64     13.45     14.94     10日：10.46     0.45      0.45      0.45      1         累涨修正：58.84     净值区间：57      68      73      77      83      1
     }
+
     public static Map<String, String> KEJI_JUNGONG = new HashMap<>();//科技-军工
+
     static {
         KEJI_JUNGONG.put("512710", "科技-军工             ");//军工龙头ETF           市值：128.51    累涨：47.03     18.64     13.45     14.94     10日：10.46     0.45      0.45      0.45      1         累涨修正：58.84     净值区间：57      68      73      77      83      1
         KEJI_JUNGONG.put("512670", "科技-军工             ");//国防ETF               市值：60.28     累涨：45.82     18.46     12.65     14.71     10日：10.51     0.13      0.13      0.78      3         累涨修正：56.72     净值区间：52      71      76      79      84      2
@@ -436,6 +444,7 @@ public class ContMapEtfAll {
         KEJI_JUNGONG.put("159230", "科技-军工             ");//通用航空ETF基金       市值：0.21      累涨：                              12.17     10日：8.53      0.56      0.56      0.85      14        累涨修正：22.38     净值区间：48      64      75                      15
         KEJI_JUNGONG.put("159392", "科技-军工             ");//航空ETF               市值：0.51      累涨：                              11.41     10日：8.00      0.67      0.67      0.86      15        累涨修正：21.42     净值区间：58      59      67                      16
     }
+
     public static Map<String, String> KEJI_GONG_YE = new HashMap<>();//科技-通用
     public static Map<String, String> TOP_KEJI_GONG_YE = new HashMap<>();
 
@@ -719,9 +728,11 @@ public class ContMapEtfAll {
 
     public static Map<String, String> KEJI_NEW_CAR = new HashMap<>();//科技-汽车
     public static Map<String, String> TOP_KEJI_NEW_CAR = new HashMap<>();
+
     static {
         TOP_KEJI_NEW_CAR.put("520600", "科技-汽车             ");//港股汽车ETF           市值：6.56      累涨：51.50     24.89     16.36     10.25     10日：4.67      1.04      0.86      0.77      13        累涨修正：58.93     净值区间：79      44      45      33      53      1
     }
+
     static {
         KEJI_NEW_CAR.put("520600", "科技-汽车             ");//港股汽车ETF           市值：6.56      累涨：51.50     24.89     16.36     10.25     10日：4.67      1.04      0.86      0.77      13        累涨修正：58.93     净值区间：79      44      45      33      53      1
         KEJI_NEW_CAR.put("159323", "科技-汽车             ");//港股通汽车ETF         市值：2.14      累涨：50.55     24.34     15.85     10.36     10日：4.41      0.83      0.66      0.75      15        累涨修正：57.11     净值区间：71      44      44      32      51      2
@@ -798,10 +809,12 @@ public class ContMapEtfAll {
      */
     public static Map<String, String> INDEX_CN_NOT = new HashMap<>();//指数-外盘
     public static Map<String, String> TOP_INDEX_CN_NOT = new HashMap<>();
+
     static {
         TOP_INDEX_CN_NOT.put("513730", "指数-外盘             ");//东南亚科技ETF         市值：15.76     累涨：41.03     25.34     7.65      8.04      10日：6.01      2.53      1.60      1.00      2         累涨修正：52.77     净值区间：93      96      97      61      79      1
         TOP_INDEX_CN_NOT.put("513030", "指数-外盘             ");//德国ETF               市值：13.94     累涨：38.85     22.09     9.18      7.58      10日：5.67      0.59      0.59      0.69      4         累涨修正：46.29     净值区间：86      70      82      82      95      2
     }
+
     static {
         INDEX_CN_NOT.put("513730", "指数-外盘             ");//东南亚科技ETF         市值：15.76     累涨：41.03     25.34     7.65      8.04      10日：6.01      2.53      1.60      1.00      2         累涨修正：52.77     净值区间：93      96      97      61      79      1
         INDEX_CN_NOT.put("513030", "指数-外盘             ");//德国ETF               市值：13.94     累涨：38.85     22.09     9.18      7.58      10日：5.67      0.59      0.59      0.69      4         累涨修正：46.29     净值区间：86      70      82      82      95      2
@@ -817,12 +830,16 @@ public class ContMapEtfAll {
         INDEX_CN_NOT.put("159329", "指数-外盘             ");//沙特ETF               市值：12.71     累涨：24.52     8.17      12.92     3.43      10日：2.33      0.40      0.40      0.00      12        累涨修正：28.05     净值区间：36      27      34      12      12      12
         INDEX_CN_NOT.put("520830", "指数-外盘             ");//沙特ETF               市值：9.74      累涨：18.44     8.17      6.48      3.79      10日：3.48      0.94      0.94      0.21      11        累涨修正：24.74     净值区间：93      76      69      21      21      13
     }
+
     public static Map<String, String> TOP_INDEX_CN_NOT_USA = new HashMap<>();
+
     static {
         TOP_INDEX_CN_NOT_USA.put("159509", "指数-外盘-美股        ");//纳指科技ETF           市值：107.41    累涨：51.57     24.75     15.59     11.23     10日：9.68      1.83      1.03      0.78      1         累涨修正：65.14     净值区间：93      93      95      96      98      1
         TOP_INDEX_CN_NOT_USA.put("159612", "指数-外盘-美股        ");//标普500ETF            市值：6.59      累涨：55.77     21.37     24.01     10.39     10日：3.70      1.45                0.22      3         累涨修正：60.92     净值区间：36      45      40      58      75      2
     }
+
     public static Map<String, String> INDEX_CN_NOT_USA = new HashMap<>();//指数-外盘-美股
+
     static {
         INDEX_CN_NOT_USA.put("159509", "指数-外盘-美股        ");//纳指科技ETF           市值：107.41    累涨：51.57     24.75     15.59     11.23     10日：9.68      1.83      1.03      0.78      1         累涨修正：65.14     净值区间：93      93      95      96      98      1
         INDEX_CN_NOT_USA.put("159612", "指数-外盘-美股        ");//标普500ETF            市值：6.59      累涨：55.77     21.37     24.01     10.39     10日：3.70      1.45                0.22      3         累涨修正：60.92     净值区间：36      45      40      58      75      2
@@ -849,11 +866,15 @@ public class ContMapEtfAll {
         INDEX_CN_NOT_USA.put("513400", "指数-外盘-美股        ");//道琼斯ETF             市值：15.07     累涨：31.01     16.61     7.78      6.62      10日：6.26      2.02      0.35      -0.43     15        累涨修正：39.99     净值区间：36      85      90      91      95      23
         INDEX_CN_NOT_USA.put("562060", "指数-外盘-美股        ");//标普红利ETF           市值：15.13     累涨：20.38     6.71      7.93      5.74      10日：3.55      2.33      1.20      0.34      56        累涨修正：28.66     净值区间：96      98      98      99      99      24
     }
+
     public static Map<String, String> TOP_INDEX_CN_1000 = new HashMap<>();
+
     static {
         TOP_INDEX_CN_1000.put("159552", "指数-中小盘           ");//中证2000增强ETF       市值：1.38      累涨：55.44     24.20     17.55     13.69     10日：9.92      3.15      2.14      2.12      1         累涨修正：72.79     净值区间：98      99      99      100     100     1
     }
+
     public static Map<String, String> INDEX_CN_1000 = new HashMap<>();//指数-中小盘
+
     static {
         INDEX_CN_1000.put("159552", "指数-中小盘           ");//中证2000增强ETF       市值：1.38      累涨：55.44     24.20     17.55     13.69     10日：9.92      3.15      2.14      2.12      1         累涨修正：72.79     净值区间：98      99      99      100     100     1
         INDEX_CN_1000.put("159553", "指数-中小盘           ");//2000ETF增强           市值：0.14      累涨：44.59     19.96     12.45     12.18     10日：7.83      2.39      2.05      1.56      2         累涨修正：58.91     净值区间：66      77      85      89      94      2
@@ -981,11 +1002,15 @@ public class ContMapEtfAll {
         INDEX_CN_1000.put("516460", "指数-中小盘           ");//现金流ETF800          市值：0.14      累涨：                                        10日：                              0.19                累涨修正：          净值区间：                                        124
         INDEX_CN_1000.put("561090", "指数-中小盘           ");//中证A500增强ETF       市值：1.31      累涨：                                        10日：                    0.50      0.70                累涨修正：          净值区间：87                                      125
     }
+
     public static Map<String, String> TOP_INDEX_300 = new HashMap<>();
+
     static {
         TOP_INDEX_300.put("159967", "指数-创业板           ");//创业板成长ETF         市值：41.98     累涨：44.03     18.76     11.99     13.28     10日：9.98      1.35      1.35      2.24      8         累涨修正：58.06     净值区间：88      93      96      96      97      1
     }
+
     public static Map<String, String> INDEX_300 = new HashMap<>();//指数-创业板
+
     static {
         INDEX_300.put("159967", "指数-创业板           ");//创业板成长ETF         市值：41.98     累涨：44.03     18.76     11.99     13.28     10日：9.98      1.35      1.35      2.24      8         累涨修正：58.06     净值区间：88      93      96      96      97      1
         INDEX_300.put("159371", "指数-创业板           ");//创50ETF富国           市值：0.27      累涨：40.85     15.72     12.79     12.34     10日：9.59      2.62      2.42      2.40      3         累涨修正：57.9      净值区间：17      31      40      41      53      2
@@ -1038,11 +1063,15 @@ public class ContMapEtfAll {
         INDEX_300.put("159372", "指数-创业板           ");//创业板50ETF万家       市值：0.32      累涨：                              13.50     10日：9.64      2.45      2.45      2.43                累涨修正：          净值区间：93      96      97                      49
         INDEX_300.put("159205", "指数-创业板           ");//创业板ETF东财         市值：1.22      累涨：                                        10日：8.43      1.65      1.65      2.42                累涨修正：          净值区间：100     100                             50
     }
+
     public static Map<String, String> TOP_INDEX_688 = new HashMap<>();
+
     static {
         TOP_INDEX_688.put("588820", "指数-科创板           ");//科创200ETF基金        市值：0.20      累涨：43.00     21.20     9.97      11.83     10日：8.40      2.23      1.24      1.25      1         累涨修正：56.11     净值区间：36      51      65      71      78      1
     }
+
     public static Map<String, String> INDEX_688 = new HashMap<>();//指数-科创板
+
     static {
         INDEX_688.put("588820", "指数-科创板           ");//科创200ETF基金        市值：0.20      累涨：43.00     21.20     9.97      11.83     10日：8.40      2.23      1.24      1.25      1         累涨修正：56.11     净值区间：36      51      65      71      78      1
         INDEX_688.put("588240", "指数-科创板           ");//科创200ETF指数        市值：1.33      累涨：45.41     22.16     10.60     12.65     10日：7.49      1.42      0.76      1.15      2         累涨修正：55.84     净值区间：86      88      94      95      97      2
@@ -1127,11 +1156,15 @@ public class ContMapEtfAll {
         INDEX_688.put("588270", "指数-科创板           ");//科创200ETF易方达      市值：0.43      累涨：                                        10日：7.93      0.66      0.57      1.63                累涨修正：          净值区间：51      62                              81
         INDEX_688.put("588670", "指数-科创板           ");//科创综指增强ETF       市值：1.70      累涨：                                        10日：4.41      0.20      0.20      1.20                累涨修正：          净值区间：70      57                              82
     }
+
     public static Map<String, String> TOP_INDEX_CN_BIG = new HashMap<>();
+
     static {
         TOP_INDEX_CN_BIG.put("562310", "指数-大盘             ");//沪深300成长ETF        市值：8.66      累涨：20.72     8.58      6.26      5.88      10日：4.44      1.16      1.16      1.03      40        累涨修正：28.64     净值区间：61      76      83      83      90      37
     }
+
     public static Map<String, String> INDEX_CN_BIG = new HashMap<>();//指数-大盘
+
     static {
         INDEX_CN_BIG.put("159906", "指数-大盘             ");//深成长龙头ETF         市值：1.14      累涨：37.15     17.35     10.77     9.03      10日：5.80      1.45      1.14      1.66      16        累涨修正：46.68     净值区间：95      98      98      99      99      1
         INDEX_CN_BIG.put("560170", "指数-大盘             ");//央企科技ETF           市值：14.23     累涨：35.17     15.30     9.47      10.40     10日：7.39      0.46      0.46      1.38      18        累涨修正：43.94     净值区间：88      82      87      89      91      2
@@ -1349,6 +1382,7 @@ public class ContMapEtfAll {
         INDEX_CN_BIG.put("159238", "指数-大盘             ");//300ETF增强            市值：0.88      累涨：                              6.59      10日：4.39      1.64      1.06      0.67                累涨修正：          净值区间：95      97      98                      214
         INDEX_CN_BIG.put("562080", "指数-大盘             ");//300现金流ETF          市值：1.80      累涨：                                        10日：                              -0.09               累涨修正：          净值区间：                                        215
     }
+
     public static Map<String, String> INDEX_CN_CITY = new HashMap<>();//指数-国内城市
 
     static {
@@ -1378,6 +1412,7 @@ public class ContMapEtfAll {
         INDEX.putAll(INDEX_CN_CITY);
 //        INDEX.putAll(INDEX_HK);
     }
+
     public static Map<String, String> TOP_INDEX = new HashMap<>();//指数-全部-etf
 
     static {
@@ -1483,35 +1518,33 @@ public class ContMapEtfAll {
         JINRONG_ZHENGQUAN.put("510230", "金融-证券             ");//金融ETF               市值：48.14     累涨：21.92     5.74      6.74      9.44      10日：3.03      1.85      1.78      0.29      25        累涨修正：30.36     净值区间：90      90      88      95      95      29
     }
 
-    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();
-    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();
-
+    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产
     static {
-        TOP_JINRONG_FANGDICHAN.put("515060", "金融-地产             ");//房地产ETF基金         市值：6.56      累涨：31.80     6.67      18.74     6.39      10日：2.84      2.05      1.10      0.16      2         累涨修正：38.89     净值区间：87      89      52      51      48      1
+        TOP_JINRONG_FANGDICHAN.put("159933", "金融-地产             ");//国投金融地产ETF       市值：1.52      累涨：28.13     8.34      7.71      12.08     10日：7.04      3.48      2.09      0.06      1         累涨修正：42.83     净值区间：61      76      80      86      91      1
     }
-
+    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产
     static {
-        JINRONG_FANGDICHAN.put("515060", "金融-地产             ");//房地产ETF基金         市值：6.56      累涨：31.80     6.67      18.74     6.39      10日：2.84      2.05      1.10      0.16      2         累涨修正：38.89     净值区间：87      89      52      51      48      1
-        JINRONG_FANGDICHAN.put("512200", "金融-地产             ");//房地产ETF             市值：64.87     累涨：30.68     6.75      17.57     6.36      10日：2.55      1.95      0.97      0.07      5         累涨修正：37.12     净值区间：79      81      45      50      46      2
-        JINRONG_FANGDICHAN.put("159940", "金融-地产             ");//金融地产ETF           市值：10.11     累涨：25.51     6.09      9.75      9.67      10日：3.34      2.57      1.62      -0.08     3         累涨修正：34.66     净值区间：85      86      79      91      91      3
-        JINRONG_FANGDICHAN.put("159933", "金融-地产             ");//国投金融地产ETF       市值：1.44      累涨：24.97     6.83      8.54      9.60      10日：3.38      2.31      1.84      0.21      1         累涨修正：34.34     净值区间：67      67      73      88      88      4
-        JINRONG_FANGDICHAN.put("510650", "金融-地产             ");//金融地产ETF           市值：0.41      累涨：23.87     6.05      8.07      9.75      10日：3.24      1.92      1.92      0.11      8         累涨修正：32.87     净值区间：93      94      90      96      96      5
-        JINRONG_FANGDICHAN.put("516750", "金融-地产             ");//建材ETF               市值：0.52      累涨：24.32     7.25      12.08     4.99      10日：2.59      2.27      1.29      -0.48     4         累涨修正：31.76     净值区间：64      50      45      53      38      6
-        JINRONG_FANGDICHAN.put("159745", "金融-地产             ");//建材ETF               市值：5.33      累涨：24.38     6.76      12.18     5.44      10日：2.29      2.12      1.41      -0.52     6         累涨修正：31.61     净值区间：69      56      47      60      44      7
-        JINRONG_FANGDICHAN.put("159787", "金融-地产             ");//建材ETF易方达         市值：0.52      累涨：23.64     6.97      12.16     4.51      10日：2.43      2.11      1.29      -0.48     7         累涨修正：30.76     净值区间：53      53      45      62      43      8
-        JINRONG_FANGDICHAN.put("512640", "金融-地产             ");//金融地产ETF基金       市值：0.71      累涨：22.48     6.09      7.35      9.04      10日：2.82      2.08      1.69      0.17      9         累涨修正：30.76     净值区间：90      90      77      92      92      9
-        JINRONG_FANGDICHAN.put("159707", "金融-地产             ");//地产ETF               市值：4.80      累涨：26.68     6.20      16.73     3.75      10日：1.22      1.22      0.35      0.17      11        累涨修正：29.82     净值区间：78      50      22      35      31      10
-        JINRONG_FANGDICHAN.put("159768", "金融-地产             ");//房地产ETF             市值：6.54      累涨：25.40     5.13      16.68     3.59      10日：1.35      1.35      0.58      0.19      14        累涨修正：29.26     净值区间：86      43      21      32      29      11
-        JINRONG_FANGDICHAN.put("159662", "金融-地产             ");//交运ETF               市值：0.68      累涨：22.92     3.86      12.08     6.98      10日：2.17      1.08      0.10      -0.20     12        累涨修正：26.37     净值区间：7       32      63      88      88      12
-        JINRONG_FANGDICHAN.put("561320", "金融-地产             ");//交运ETF               市值：0.62      累涨：21.73     4.00      10.48     7.25      10日：2.91      1.24                -0.31     10        累涨修正：25.88     净值区间：30      45      67      87      87      13
-        JINRONG_FANGDICHAN.put("516970", "金融-地产             ");//基建50ETF             市值：23.48     累涨：22.05     5.52      11.10     5.43      10日：1.63      1.16      0.29      0.00      13        累涨修正：25.42     净值区间：82      54      37      80      63      14
-        JINRONG_FANGDICHAN.put("159666", "金融-地产             ");//交通运输ETF           市值：0.65      累涨：21.29     3.67      8.87      8.75      10日：2.55      1.12      0.20      -0.10     15        累涨修正：25.36     净值区间：13      39      56      81      81      15
-        JINRONG_FANGDICHAN.put("560190", "金融-地产             ");//公用事业ETF           市值：0.54      累涨：20.65     5.82      10.04     4.79      10日：1.00      0.30      0.10      -0.41     17        累涨修正：22.15     净值区间：8       4       21      71      71      16
-        JINRONG_FANGDICHAN.put("159635", "金融-地产             ");//基建50ETF             市值：0.94      累涨：18.21     3.92      9.94      4.35      10日：1.33      1.33      0.41      -0.20     16        累涨修正：21.69     净值区间：43      33      21      71      53      17
-        JINRONG_FANGDICHAN.put("516950", "金融-地产             ");//基建ETF               市值：5.30      累涨：17.62     3.60      9.28      4.74      10日：1.56      1.27      0.29      -0.10     18        累涨修正：21.03     净值区间：50      35      23      72      55      18
-        JINRONG_FANGDICHAN.put("560620", "金融-地产             ");//公用事业ETF基金       市值：0.53      累涨：19.93     6.01      9.75      4.17      10日：0.55      0.11                -0.11     19        累涨修正：20.59     净值区间：22      19      20      75      75      19
-        JINRONG_FANGDICHAN.put("159301", "金融-地产             ");//公用事业ETF           市值：0.51      累涨：18.45     5.84      8.81      3.80      10日：0.86      0.11                -0.33     20        累涨修正：19.42     净值区间：7       4       31      72      72      20
-        JINRONG_FANGDICHAN.put("159619", "金融-地产             ");//基建ETF               市值：1.05      累涨：                                        10日：                              -0.11     21        累涨修正：0         净值区间：46      35      20      73      55      21
+        JINRONG_FANGDICHAN.put("159933", "金融-地产             ");//国投金融地产ETF       市值：1.52      累涨：28.13     8.34      7.71      12.08     10日：7.04      3.48      2.09      0.06      1         累涨修正：42.83     净值区间：61      76      80      86      91      1
+        JINRONG_FANGDICHAN.put("515060", "金融-地产             ");//房地产ETF基金         市值：6.47      累涨：29.68     15.07     5.79      8.82      10日：5.82      2.65      1.87      0.92      4         累涨修正：41.89     净值区间：95      97      98      98      57      2
+        JINRONG_FANGDICHAN.put("512200", "金融-地产             ");//房地产ETF             市值：63.66     累涨：29.99     15.22     5.71      9.06      10日：5.83      2.22      1.63      1.09      7         累涨修正：41.3      净值区间：100     100     100     100     59      3
+        JINRONG_FANGDICHAN.put("510650", "金融-地产             ");//金融地产ETF           市值：0.38      累涨：28.40     9.40      7.68      11.32     10日：6.27      2.91      1.78      0.23      2         累涨修正：41.14     净值区间：89      94      96      97      98      4
+        JINRONG_FANGDICHAN.put("159940", "金融-地产             ");//金融地产ETF           市值：10.05     累涨：27.19     8.04      8.05      11.10     10日：6.18      2.38      1.58      0.39      3         累涨修正：38.91     净值区间：88      93      96      97      98      5
+        JINRONG_FANGDICHAN.put("512640", "金融-地产             ");//金融地产ETF嘉实       市值：0.75      累涨：26.45     7.98      7.61      10.86     10日：6.32      2.58      1.53      0.20      8         累涨修正：38.41     净值区间：85      91      95      96      98      6
+        JINRONG_FANGDICHAN.put("159787", "金融-地产             ");//建材ETF易方达         市值：0.58      累涨：20.98     8.97      4.35      7.66      10日：6.34      3.70      1.91      0.94      9         累涨修正：34.84     净值区间：93      94      96      96      94      7
+        JINRONG_FANGDICHAN.put("159745", "金融-地产             ");//建材ETF               市值：5.19      累涨：21.28     8.54      4.92      7.82      10日：6.56      3.50      1.56      0.86      5         累涨修正：34.46     净值区间：92      94      96      96      90      8
+        JINRONG_FANGDICHAN.put("159707", "金融-地产             ");//地产ETF               市值：4.88      累涨：23.71     12.48     3.26      7.97      10日：5.19      2.06      1.72      0.67      11        累涨修正：34.4      净值区间：94      96      97      90      47      9
+        JINRONG_FANGDICHAN.put("516750", "金融-地产             ");//建材ETF               市值：0.50      累涨：21.23     8.62      4.83      7.78      10日：6.48      3.52      1.58      1.26      6         累涨修正：34.39     净值区间：100     100     100     100     89      10
+        JINRONG_FANGDICHAN.put("159768", "金融-地产             ");//房地产ETF             市值：6.38      累涨：23.71     12.18     3.42      8.11      10日：5.40      1.91      1.34      0.94      10        累涨修正：33.7      净值区间：94      95      97      89      46      11
+        JINRONG_FANGDICHAN.put("560190", "金融-地产             ");//公用事业ETF           市值：0.43      累涨：18.07     7.48      4.37      6.22      10日：4.08      2.74      1.92      -0.40     13        累涨修正：28.73     净值区间：75      76      80      80      85      12
+        JINRONG_FANGDICHAN.put("516950", "金融-地产             ");//基建ETF               市值：4.59      累涨：18.50     7.07      4.94      6.49      10日：5.03      2.20      0.76      0.57      12        累涨修正：27.25     净值区间：92      94      97      97      97      13
+        JINRONG_FANGDICHAN.put("159301", "金融-地产             ");//公用事业ETF           市值：0.48      累涨：16.06     6.29      3.47      6.30      10日：4.23      2.92      1.94      -0.32     18        累涨修正：27.09     净值区间：78      85      86      86      91      14
+        JINRONG_FANGDICHAN.put("560620", "金融-地产             ");//公用事业ETF基金       市值：1.07      累涨：15.89     6.57      3.29      6.03      10日：4.49      2.95      1.85      -0.53     14        累涨修正：27.03     净值区间：73      81      85      85      89      15
+        JINRONG_FANGDICHAN.put("516970", "金融-地产             ");//基建50ETF             市值：22.43     累涨：18.75     7.41      5.62      5.72      10日：4.27      1.21      0.65      0.46      17        累涨修正：25.53     净值区间：88      91      95      95      95      16
+        JINRONG_FANGDICHAN.put("159619", "金融-地产             ");//基建ETF               市值：1.04      累涨：17.71     7.41      4.71      5.59      10日：4.62      1.91      0.42      0.94      16        累涨修正：25.08     净值区间：100     100     100     100     100     17
+        JINRONG_FANGDICHAN.put("159635", "金融-地产             ");//基建50ETF             市值：0.94      累涨：17.49     6.87      4.65      5.97      10日：4.24      1.70      0.50      0.69      19        累涨修正：24.43     净值区间：91      94      96      96      97      18
+        JINRONG_FANGDICHAN.put("561320", "金融-地产             ");//交运ETF               市值：0.58      累涨：17.92     6.53      7.24      4.15      10日：1.87      0.52      0.31      0.10      20        累涨修正：20.93     净值区间：75      27      27      53      75      19
+        JINRONG_FANGDICHAN.put("159666", "金融-地产             ");//交通运输ETF           市值：0.64      累涨：18.55     7.61      8.01      2.93      10日：1.00      0.50      0.20      0.10      15        累涨修正：20.45     净值区间：64      60      44      54      83      20
+        JINRONG_FANGDICHAN.put("159662", "金融-地产             ");//交运ETF               市值：0.63      累涨：15.55     6.51      6.47      2.57      10日：0.69      0.10      0.10      0.10      21        累涨修正：16.54     净值区间：67      38      47      50      78      21
     }
 
     public static Map<String, String> JINRONG_CASH = new HashMap<>();//金融-现金
@@ -1863,11 +1896,12 @@ public class ContMapEtfAll {
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.JINRONG_ZHENGQUAN,  ContEtfNameKey.JINRONG_ZHENGQUAN_NOLIKE, "JINRONG_ZHENGQUAN", ContEtfTypeName.JINRONG_ZHENGQUAN, ContMapEtfAll.JINRONG_ZHENGQUAN);
-//        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();");
-//        System.out.println("    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN,  null, "JINRONG_FANGDICHAN", ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
+        name = "JINRONG_FANGDICHAN";
+        System.out.println("    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
+        System.out.println("    static {");
+        System.out.println("    }");
+        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
+        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN, null, name, ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
 //        System.out.println("    public static Map<String, String> JINRONG_CASH = new HashMap<>();//金融-现金");
 //        System.out.println("    public static Map<String, String> TOP_JINRONG_CASH = new HashMap<>();");
 //        System.out.println("    static {");
@@ -1895,12 +1929,12 @@ public class ContMapEtfAll {
 //        System.out.println("    }");
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-香港");
 //        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, name, ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
-        name = "KEJI_JUNGONG";
-        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
-        System.out.println("    static {");
-        System.out.println("    }");
-        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-军工");
-        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, name, ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
+//        name = "KEJI_JUNGONG";
+//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
+//        System.out.println("    static {");
+//        System.out.println("    }");
+//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-军工");
+//        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, name, ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);
 //        name = "KEJI_GONG_YE";
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-通用");
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
