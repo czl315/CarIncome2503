@@ -49,7 +49,7 @@ public class EtfControl {
 //        condition.setStCodeList(new ArrayList<>(ContMapEtfTop.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setType_name(INDEX_CN_NOT_USA);
+//        condition.setType_name(KEJI_XIN_PIAN);
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
@@ -824,7 +824,7 @@ public class EtfControl {
 
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         //1、查询etf列表
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null);
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null,condition.getType_name());
         for (RankBizDataDiff etf : etfList) {
             //市值过滤
             BigDecimal marketValue = etf.getF20();
