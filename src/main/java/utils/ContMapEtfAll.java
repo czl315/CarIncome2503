@@ -42,33 +42,6 @@ public class ContMapEtfAll {
         ZIYUAN_OIL.put("159731", "资源-石油             ");//石化ETF               市值：0.35      累涨：15.61     5.94      6.07      3.60      10日：1.80      0.90      0.15      0.89      9         累涨修正：18.61     净值区间：73      82      74      80      87      10
     }
 
-    public static Map<String, String> ZIYUAN_XIYOU = new HashMap<>();
-    public static Map<String, String> TOP_ZIYUAN_XIYOU = new HashMap<>();
-
-    static {
-        TOP_ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：11.16     累涨：38.56     13.09     13.67     11.80     10日：6.11      0.44      0.44      1.87      4         累涨修正：45.99     净值区间：91      90      89      93      95      1
-    }
-
-    static {
-        ZIYUAN_XIYOU.put("516780", "资源-稀有             ");//稀土ETF               市值：11.16     累涨：38.56     13.09     13.67     11.80     10日：6.11      0.44      0.44      1.87      4         累涨修正：45.99     净值区间：91      90      89      93      95      1
-        ZIYUAN_XIYOU.put("159715", "资源-稀有             ");//稀土ETF易方达         市值：2.09      累涨：38.16     13.94     12.61     11.61     10日：5.98      0.52      0.39      1.70      6         累涨修正：45.44     净值区间：90      93      92      95      97      2
-        ZIYUAN_XIYOU.put("516150", "资源-稀有             ");//稀土ETF嘉实           市值：24.85     累涨：37.99     13.88     12.62     11.49     10日：5.81      0.25      0.25      1.71      13        累涨修正：44.55     净值区间：91      93      88      92      95      3
-        ZIYUAN_XIYOU.put("159652", "资源-稀有             ");//有色50ETF             市值：2.73      累涨：35.12     15.31     9.18      10.63     10日：6.60      2.32      0.20      0.81      1         累涨修正：44.44     净值区间：43      69      74      82      87      4
-        ZIYUAN_XIYOU.put("516650", "资源-稀有             ");//有色金属ETF基金       市值：1.28      累涨：34.44     14.67     8.99      10.78     10日：6.55      2.68      0.35      0.99      2         累涨修正：44.37     净值区间：33      71      80      83      89      5
-        ZIYUAN_XIYOU.put("159880", "资源-稀有             ");//有色ETF基金           市值：0.96      累涨：33.26     13.90     8.83      10.53     10日：7.07      2.41      0.34      1.04      5         累涨修正：43.42     净值区间：41      75      80      85      90      6
-        ZIYUAN_XIYOU.put("159713", "资源-稀有             ");//稀土ETF               市值：3.90      累涨：36.09     12.15     12.40     11.54     10日：6.17      0.36      0.36      2.04      10        累涨修正：43.34     净值区间：96      94      90      94      95      7
-        ZIYUAN_XIYOU.put("159881", "资源-稀有             ");//有色60ETF             市值：0.53      累涨：34.45     14.36     9.66      10.43     10日：6.12      2.33      0.18      1.08      7         累涨修正：43.26     净值区间：41      72      78      84      89      8
-        ZIYUAN_XIYOU.put("159876", "资源-稀有             ");//有色龙头ETF           市值：0.61      累涨：34.14     14.97     9.09      10.08     10日：5.96      2.34      0.41      1.18      14        累涨修正：43.26     净值区间：42      72      78      84      89      9
-        ZIYUAN_XIYOU.put("512400", "资源-稀有             ");//有色金属ETF           市值：50.14     累涨：34.36     14.99     9.10      10.27     10日：6.14      2.35      0.17      1.05      8         累涨修正：43.19     净值区间：41      73      78      85      89      10
-        ZIYUAN_XIYOU.put("159608", "资源-稀有             ");//稀有金属ETF           市值：2.05      累涨：33.34     11.22     10.46     11.66     10日：6.23      1.44      0.96      2.42      3         累涨修正：42.93     净值区间：84      91      94      96      97      11
-        ZIYUAN_XIYOU.put("561800", "资源-稀有             ");//稀有金属ETF基金       市值：0.87      累涨：32.72     11.89     9.55      11.28     10日：6.55      1.21      0.69      1.91      12        累涨修正：41.86     净值区间：87      94      96      97      98      12
-        ZIYUAN_XIYOU.put("159671", "资源-稀有             ");//稀有金属ETF基金       市值：4.93      累涨：32.69     11.51     9.64      11.54     10日：6.22      1.32      0.79      2.13      9         累涨修正：41.81     净值区间：91      95      97      98      98      13
-        ZIYUAN_XIYOU.put("562800", "资源-稀有             ");//稀有金属ETF           市值：8.71      累涨：32.46     10.59     10.41     11.46     10日：5.83      1.10      0.73      2.22      15        累涨修正：40.85     净值区间：94      96      98      98      99      14
-        ZIYUAN_XIYOU.put("560860", "资源-稀有             ");//工业有色ETF           市值：4.51      累涨：31.96     11.47     10.10     10.39     10日：6.64      1.78                0.89      11        累涨修正：40.38     净值区间：46      79      91      91      91      15
-        ZIYUAN_XIYOU.put("159980", "资源-稀有             ");//有色ETF               市值：10.46     累涨：18.53     8.36      5.60      4.57      10日：3.08      0.88      0.29      0.29      16        累涨修正：23.07     净值区间：26      53      60      68      80      16
-        ZIYUAN_XIYOU.put("159871", "资源-稀有             ");//有色金属ETF           市值：0.77      累涨：                                        10日：                              1.03      17        累涨修正：0         净值区间：37      68      74      82      87      17
-    }
-
     public static Map<String, String> TOP_ZIYUAN_COMMON = new HashMap<>();//资源-通用
 
     static {
@@ -143,8 +116,8 @@ public class ContMapEtfAll {
 
     static {
         ZIYUAN.putAll(ZIYUAN_OIL);
-        ZIYUAN.putAll(ZIYUAN_XIYOU);
         ZIYUAN.putAll(ZIYUAN_COMMON);
+//        ZIYUAN.putAll(ZIYUAN_XIYOU);
 //        ZIYUAN.putAll(ZIYUAN_NONGYE);
     }
 
@@ -152,8 +125,8 @@ public class ContMapEtfAll {
 
     static {
         TOP_ZIYUAN.putAll(TOP_ZIYUAN_OIL);
-        TOP_ZIYUAN.putAll(TOP_ZIYUAN_XIYOU);
         TOP_ZIYUAN.putAll(TOP_ZIYUAN_COMMON);
+//        TOP_ZIYUAN.putAll(TOP_ZIYUAN_XIYOU);
 //        TOP_ZIYUAN.putAll(TOP_ZIYUAN_NONGYE);
     }
 
@@ -1823,8 +1796,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-09";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-07-11";
 
         String name = "";
         Map<String, String> nameMap = new HashMap<>();
@@ -1875,12 +1848,8 @@ public class ContMapEtfAll {
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_XIYOU, null, name, ContEtfTypeName.ZIYUAN_XIYOU, ContMapEtfAll.ZIYUAN_XIYOU);
-//        name = "ZIYUAN_COMMON";
-//        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//资源-通用");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//资源-通用");
-//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, name, ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);
+        name = "ZIYUAN_COMMON";
+        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, name, ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);
         //        name = "ZIYUAN_NONGYE";
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();");
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
@@ -1944,12 +1913,12 @@ public class ContMapEtfAll {
 //            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
 //        }
 
-        name = "KEJI_HK";
+//        name = "KEJI_HK";
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();//科技-香港");
 //        System.out.println("    static {");
 //        System.out.println("    }");
 //        System.out.println("    public static Map<String, String> " + name + " = new HashMap<>();//科技-香港");
-        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, name, ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
+//        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, name, ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);
 //        name = "KEJI_JUNGONG";
 //        System.out.println("    public static Map<String, String> TOP_" + name + " = new HashMap<>();");
 //        System.out.println("    static {");
