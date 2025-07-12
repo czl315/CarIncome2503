@@ -98,17 +98,17 @@ public class ContEtfTypeName {
      * 资源
      */
     public static String ZIYUAN_OIL  = "资源-石油";
-    public static String ZIYUAN_NONGYE  = "资源-农业";
+//    public static String ZIYUAN_NONGYE  = "资源-农业";
 //    public static String ZIYUAN_CAILIAO = "资源-材料";
-    public static String ZIYUAN_XIYOU = "资源-稀有";
+//    public static String ZIYUAN_XIYOU = "资源-稀有";
     public static String ZIYUAN_COMMON = "资源-通用";
     public static String ZIYUAN_STR = "资源";
     public static List ZIYUAN = new ArrayList();
     static {
         ZIYUAN.add(ZIYUAN_OIL);
-        ZIYUAN.add(ZIYUAN_NONGYE);
-        ZIYUAN.add(ZIYUAN_XIYOU);
         ZIYUAN.add(ZIYUAN_COMMON);
+//        ZIYUAN.add(ZIYUAN_XIYOU);
+//        ZIYUAN.add(ZIYUAN_NONGYE);
 //        ZIYUAN.add(ZIYUAN_CAILIAO);
     }
 

@@ -136,6 +136,7 @@ public interface EtfAdrCountMapper {
             "    <if test='maxPct != null'>maxPct=#{maxPct},</if>",
             "    <if test='minPct != null'>minPct=#{minPct},</if>",
             "    <if test='ADR_UP_SUM_TOTAL != null'>ADR_UP_SUM_TOTAL=#{ADR_UP_SUM_TOTAL},</if>",
+            "    <if test='ADR_UP_SUM_TOTAL_REAL != null'>ADR_UP_SUM_TOTAL_REAL=#{ADR_UP_SUM_TOTAL_REAL},</if>",
             "    <if test='ADR_UP_SUM_TOTAL_RANK != null'>ADR_UP_SUM_TOTAL_RANK=#{ADR_UP_SUM_TOTAL_RANK},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",

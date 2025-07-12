@@ -184,17 +184,69 @@ public class EtfAdrCount {
      */
     private BigDecimal ADR_UP_SUM_1_60;
     /**
-     * 涨幅合计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
+     * ADR_UP_SUM_1_3
+     */
+    private BigDecimal ADR_DOWN_SUM_1_3;
+    /**
+     * ADR_UP_SUM_1_5 上涨之和
+     */
+    private BigDecimal ADR_DOWN_SUM_1_5;
+    /**
+     * ADR_UP_SUM_1_10
+     */
+    private BigDecimal ADR_DOWN_SUM_1_10;
+    /**
+     * ADR_UP_SUM_1_20
+     */
+    private BigDecimal ADR_DOWN_SUM_1_20;
+    /**
+     * ADR_UP_COUNT_SUM_20_40 涨幅次数统计
+     */
+    private BigDecimal ADR_DOWN_SUM_20_40;
+    /**
+     * ADR_UP_COUNT_SUM_40_60 涨幅次数统计
+     */
+    private BigDecimal ADR_DOWN_SUM_40_60;
+    /**
+     * ADR_UP_SUM_1_60
+     */
+    private BigDecimal ADR_DOWN_SUM_1_60;
+    /**
+     * 涨幅合计
      */
     private BigDecimal ADR_UP_SUM_TOTAL;
+    /**
+     * 涨幅合计：实际值无权重
+     */
+    private BigDecimal ADR_UP_SUM_TOTAL_REAL;
+    /**
+     * 下跌合计
+     */
+    private BigDecimal ADR_DOWN_SUM_TOTAL;
+    /**
+     * 下跌合计：实际值无权重
+     */
+    private BigDecimal ADR_DOWN_SUM_TOTAL_REAL;
     /**
      * 涨幅合计排名
      */
     private BigDecimal ADR_UP_SUM_TOTAL_RANK;
     /**
-     * 上涨排序统计
+     * 上涨排序统计：增加权重，近期涨幅多的累加。涨幅合计=60日+20日*3+10*6+5日*12+3日*20
      */
     private BigDecimal ADR_UP_SUM_ORDER_STAT;
+    /**
+     * 上涨排序统计：实际值无权重
+     */
+    private BigDecimal ADR_UP_SUM_ORDER_STAT_REAL;
+    /**
+     * 下跌累计统计：增加权重
+     */
+    private BigDecimal ADR_DOWN_SUM_ORDER_STAT;
+    /**
+     * 下跌累计统计：实际值无权重
+     */
+    private BigDecimal ADR_DOWN_SUM_ORDER_STAT_REAL;
     /**
      * ADR_UP_SUM_ORDER_1_3 上涨之和排序
      */
@@ -356,6 +408,110 @@ public class EtfAdrCount {
      * 最低下跌百分比
      */
     private BigDecimal minPct;
+
+    public BigDecimal getADR_UP_SUM_TOTAL_REAL() {
+        return ADR_UP_SUM_TOTAL_REAL;
+    }
+
+    public void setADR_UP_SUM_TOTAL_REAL(BigDecimal ADR_UP_SUM_TOTAL_REAL) {
+        this.ADR_UP_SUM_TOTAL_REAL = ADR_UP_SUM_TOTAL_REAL;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_TOTAL() {
+        return ADR_DOWN_SUM_TOTAL;
+    }
+
+    public void setADR_DOWN_SUM_TOTAL(BigDecimal ADR_DOWN_SUM_TOTAL) {
+        this.ADR_DOWN_SUM_TOTAL = ADR_DOWN_SUM_TOTAL;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_TOTAL_REAL() {
+        return ADR_DOWN_SUM_TOTAL_REAL;
+    }
+
+    public void setADR_DOWN_SUM_TOTAL_REAL(BigDecimal ADR_DOWN_SUM_TOTAL_REAL) {
+        this.ADR_DOWN_SUM_TOTAL_REAL = ADR_DOWN_SUM_TOTAL_REAL;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_1_3() {
+        return ADR_DOWN_SUM_1_3;
+    }
+
+    public void setADR_DOWN_SUM_1_3(BigDecimal ADR_DOWN_SUM_1_3) {
+        this.ADR_DOWN_SUM_1_3 = ADR_DOWN_SUM_1_3;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_1_5() {
+        return ADR_DOWN_SUM_1_5;
+    }
+
+    public void setADR_DOWN_SUM_1_5(BigDecimal ADR_DOWN_SUM_1_5) {
+        this.ADR_DOWN_SUM_1_5 = ADR_DOWN_SUM_1_5;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_1_10() {
+        return ADR_DOWN_SUM_1_10;
+    }
+
+    public void setADR_DOWN_SUM_1_10(BigDecimal ADR_DOWN_SUM_1_10) {
+        this.ADR_DOWN_SUM_1_10 = ADR_DOWN_SUM_1_10;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_1_20() {
+        return ADR_DOWN_SUM_1_20;
+    }
+
+    public void setADR_DOWN_SUM_1_20(BigDecimal ADR_DOWN_SUM_1_20) {
+        this.ADR_DOWN_SUM_1_20 = ADR_DOWN_SUM_1_20;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_20_40() {
+        return ADR_DOWN_SUM_20_40;
+    }
+
+    public void setADR_DOWN_SUM_20_40(BigDecimal ADR_DOWN_SUM_20_40) {
+        this.ADR_DOWN_SUM_20_40 = ADR_DOWN_SUM_20_40;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_40_60() {
+        return ADR_DOWN_SUM_40_60;
+    }
+
+    public void setADR_DOWN_SUM_40_60(BigDecimal ADR_DOWN_SUM_40_60) {
+        this.ADR_DOWN_SUM_40_60 = ADR_DOWN_SUM_40_60;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_1_60() {
+        return ADR_DOWN_SUM_1_60;
+    }
+
+    public void setADR_DOWN_SUM_1_60(BigDecimal ADR_DOWN_SUM_1_60) {
+        this.ADR_DOWN_SUM_1_60 = ADR_DOWN_SUM_1_60;
+    }
+
+    public BigDecimal getADR_UP_SUM_ORDER_STAT_REAL() {
+        return ADR_UP_SUM_ORDER_STAT_REAL;
+    }
+
+    public void setADR_UP_SUM_ORDER_STAT_REAL(BigDecimal ADR_UP_SUM_ORDER_STAT_REAL) {
+        this.ADR_UP_SUM_ORDER_STAT_REAL = ADR_UP_SUM_ORDER_STAT_REAL;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_ORDER_STAT() {
+        return ADR_DOWN_SUM_ORDER_STAT;
+    }
+
+    public void setADR_DOWN_SUM_ORDER_STAT(BigDecimal ADR_DOWN_SUM_ORDER_STAT) {
+        this.ADR_DOWN_SUM_ORDER_STAT = ADR_DOWN_SUM_ORDER_STAT;
+    }
+
+    public BigDecimal getADR_DOWN_SUM_ORDER_STAT_REAL() {
+        return ADR_DOWN_SUM_ORDER_STAT_REAL;
+    }
+
+    public void setADR_DOWN_SUM_ORDER_STAT_REAL(BigDecimal ADR_DOWN_SUM_ORDER_STAT_REAL) {
+        this.ADR_DOWN_SUM_ORDER_STAT_REAL = ADR_DOWN_SUM_ORDER_STAT_REAL;
+    }
 
     public BigDecimal getADR_UP_SUM_TOTAL() {
         return ADR_UP_SUM_TOTAL;

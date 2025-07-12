@@ -438,7 +438,7 @@ public class EtfAdrCountService {
             sb.append(StockUtil.formatStName(vo.getF12(), SIZE_8));
             sb.append(StockUtil.formatStName(vo.getType_name(), SIZE_16));
 
-
+            //涨和
             if (vo.getADR_UP_SUM_TOTAL() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL(), SIZE_8));
             } else {
