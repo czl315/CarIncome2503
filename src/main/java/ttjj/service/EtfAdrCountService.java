@@ -351,6 +351,7 @@ public class EtfAdrCountService {
     private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
         StringBuffer sbHead = new StringBuffer();//首行标题信息
         boolean isShowCode = true;
+        boolean isShowDownSum = true;//是否显示下跌累计
         sbHead.append(StockUtil.formatStName("名称", SIZE_20));
         if (isShowCode) {
             sbHead.append(StockUtil.formatStName("编码", SIZE_8));
@@ -371,6 +372,16 @@ public class EtfAdrCountService {
         sbHead.append(StockUtil.formatStName("上2涨", SIZE_8));
         sbHead.append(StockUtil.formatStName("上1涨", SIZE_8));
         sbHead.append(StockUtil.formatStName("今涨", SIZE_10));
+
+        if (isShowDownSum) {
+            sbHead.append(StockUtil.formatStName("1_60跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("40_60跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("20_40跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("1_20跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("1_10跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("1_5跌", SIZE_8));
+            sbHead.append(StockUtil.formatStName("1_3跌", SIZE_8));
+        }
 
         sbHead.append(StockUtil.formatStName("超周", SIZE_8));
         sbHead.append(StockUtil.formatStName("超日", SIZE_8));
@@ -517,6 +528,44 @@ public class EtfAdrCountService {
                 sb.append(StockUtil.formatDouble(vo.getF3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+
+            if (isShowDownSum) {
+                if (vo.getADR_DOWN_SUM_1_60() != null) {
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_1_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_40_60() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_20_40() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_1_20() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_1_20().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_1_10() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_1_10().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_1_5() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_1_5().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
+                if (vo.getADR_DOWN_SUM_1_3() != null) {//1_3跌
+                    sb.append(StockUtil.formatDouble(vo.getADR_DOWN_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                } else {
+                    sb.append(StockUtil.formatStName("", SIZE_8));
+                }
             }
 
             sb.append(StockUtil.formatStName(vo.getUP_MA_102() != null ? vo.getUP_MA_102() : "", SIZE_8));//超周

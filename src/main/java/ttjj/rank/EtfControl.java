@@ -1825,6 +1825,7 @@ public class EtfControl {
 
     /**
      * 更新上涨之和:1、只计算正增长。2、如果上涨之和高于限定值，上涨之和设置为限定值。
+     * 3、跌幅累计
      *
      * @param date
      * @param etfList
@@ -1864,9 +1865,12 @@ public class EtfControl {
                 continue;
             }
             int temp = 0;
-            BigDecimal adrSum = null;
+            BigDecimal adrSum = null;//上涨累计
+            BigDecimal downSum = null;//下跌累计
             BigDecimal adrSum21_40 = null;
+            BigDecimal downSum21_40 = null;//下跌累计
             BigDecimal adrSum41_60 = null;
+            BigDecimal downSum41_60 = null;//下跌累计
             for (Kline kline : klines60) {
                 String klineDate = kline.getKtime();
                 //最近交易日不计算
@@ -1888,27 +1892,40 @@ public class EtfControl {
                     adr = adrMax;
                 }
 
+                //计算正增长
                 if (adr.compareTo(new BigDecimal("0")) > 0) {
                     if (adrSum == null) {
                         adrSum = new BigDecimal("0");
                     }
                     adrSum = adrSum.add(adr);
                 }
-                //TODO 跌幅合计
+                //计算下跌累计
+                if (adr.compareTo(new BigDecimal("0")) < 0) {
+                    if (downSum == null) {
+                        downSum = new BigDecimal("0");
+                    }
+                    downSum = downSum.add(adr);
+                }
+
                 if (temp == 1) {
                     entity.setADR_UP_SUM_1_1(adrSum);
                 } else if (temp == 2) {
                     entity.setADR_UP_SUM_1_2(adrSum);
                 } else if (temp == 3) {
                     entity.setADR_UP_SUM_1_3(adrSum);
+                    entity.setADR_DOWN_SUM_1_3(downSum);// 跌幅合计
                 } else if (temp == 5) {
                     entity.setADR_UP_SUM_1_5(adrSum);
+                    entity.setADR_DOWN_SUM_1_5(downSum);
                 } else if (temp == 10) {
                     entity.setADR_UP_SUM_1_10(adrSum);
+                    entity.setADR_DOWN_SUM_1_10(downSum);
                 } else if (temp == 20) {
                     entity.setADR_UP_SUM_1_20(adrSum);
+                    entity.setADR_DOWN_SUM_1_20(downSum);
                 } else if (temp == 60) {
                     entity.setADR_UP_SUM_1_60(adrSum);
+                    entity.setADR_DOWN_SUM_1_60(downSum);
                 }
 
                 if (temp >= 21 && temp <= 40) {
@@ -1918,9 +1935,16 @@ public class EtfControl {
                         }
                         adrSum21_40 = adrSum21_40.add(adr);
                     }
+                    if (adr.compareTo(new BigDecimal("0")) < 0) {
+                        if (downSum21_40 == null) {
+                            downSum21_40 = new BigDecimal("0");
+                        }
+                        downSum21_40 = downSum21_40.add(adr);
+                    }
                 }
                 if (temp == 40) {
                     entity.setADR_UP_SUM_20_40(adrSum21_40);
+                    entity.setADR_DOWN_SUM_20_40(downSum21_40);
                 }
 
                 if (temp >= 41 && temp <= 60) {
@@ -1930,14 +1954,21 @@ public class EtfControl {
                         }
                         adrSum41_60 = adrSum41_60.add(adr);
                     }
+                    if (adr.compareTo(new BigDecimal("0")) < 0) {
+                        if (downSum41_60 == null) {
+                            downSum41_60 = new BigDecimal("0");
+                        }
+                        downSum41_60 = downSum41_60.add(adr);
+                    }
                 }
                 if (temp == 60) {
                     entity.setADR_UP_SUM_40_60(adrSum41_60);
+                    entity.setADR_DOWN_SUM_40_60(downSum41_60);
                 }
             }
             //所有涨幅全部为空，则不执行更新
-            if (adrSum == null) {
-                System.out.println(methodName + "所有涨幅全部为空，则不执行更新:" + JSON.toJSONString(entity));
+            if (adrSum == null && downSum==null) {
+                System.out.println(methodName + "所有涨幅或跌幅全部为空，则不执行更新:" + JSON.toJSONString(entity));
             } else {
                 etfAdrCountList.add(entity);
                 int updateRs = EtfAdrCountService.update(entity);//更新涨幅次数

@@ -733,6 +733,14 @@ public class Content {
      */
     public static String ADR_UP_SUM_1_60_DESC = "ADR_UP_SUM_1_60 DESC";
     /**
+     * 排序字段：下跌累计-正序
+     */
+    public static String ADR_DOWN_SUM_1_60 = "ADR_DOWN_SUM_1_60";
+    /**
+     * 排序字段：下跌累计-倒序
+     */
+    public static String ADR_DOWN_SUM_1_60_DESC = "ADR_DOWN_SUM_1_60 DESC";
+    /**
      * ADR_UP_SUM_1_40
      */
     public static String ADR_UP_SUM_1_40_DESC = "ADR_UP_SUM_1_40 DESC";
