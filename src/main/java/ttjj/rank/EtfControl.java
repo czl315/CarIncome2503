@@ -1883,7 +1883,7 @@ public class EtfControl {
                 //2、如果上涨之和高于限定值，上涨之和设置为限定值。
                 if (adr.compareTo(adrMax) > 0) {
 //                    if (zqdm.equals("159822")) {
-                        System.out.println("上涨之和【" + adr + "】高于限定值【" + adrMax + "】，上涨之和设置为限定值。" + zqmc + "::" + klineDate + "::" + adr);
+//                        System.out.println("上涨之和【" + adr + "】高于限定值【" + adrMax + "】，上涨之和设置为限定值。" + zqmc + "::" + klineDate + "::" + adr);
 //                    }
                     adr = adrMax;
                 }
