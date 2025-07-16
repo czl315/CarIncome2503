@@ -407,11 +407,11 @@ public class EtfAdrCountService {
         sbHead.append(StockUtil.formatStName("5分比", SIZE_8));
 
         //净值区间
-        sbHead.append(StockUtil.formatStName("区间5", SIZE_8));
-        sbHead.append(StockUtil.formatStName("区间10", SIZE_8));
-        sbHead.append(StockUtil.formatStName("区间20", SIZE_8));
-        sbHead.append(StockUtil.formatStName("区间40", SIZE_8));
-        sbHead.append(StockUtil.formatStName("区间60", SIZE_8));
+        sbHead.append(StockUtil.formatStName("区间5", SIZE_6));
+        sbHead.append(StockUtil.formatStName("区间10", SIZE_6));
+        sbHead.append(StockUtil.formatStName("区间20", SIZE_6));
+        sbHead.append(StockUtil.formatStName("区间40", SIZE_6));
+        sbHead.append(StockUtil.formatStName("区间60", SIZE_6));
 
         sbHead.append(StockUtil.formatStName("市值", SIZE_8));
 
@@ -668,34 +668,34 @@ public class EtfAdrCountService {
 
             //净值区间
             BigDecimal curArea = vo.getNET_AREA_DAY_5();
-            if (curArea != null) {
-                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            if (curArea != null) {//区间5
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_6));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
             curArea = vo.getNET_AREA_DAY_10();
             if (curArea != null) {
-                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_6));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
             curArea = vo.getNET_AREA_DAY_20();
             if (curArea != null) {
-                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_6));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
             curArea = vo.getNET_AREA_DAY_40();
             if (curArea != null) {
-                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_6));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
             curArea = vo.getNET_AREA_DAY_60();
             if (curArea != null) {
-                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                sb.append(StockUtil.formatDouble(curArea.setScale(0, BigDecimal.ROUND_HALF_UP), SIZE_6));
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
 
             BigDecimal marketValue = null;
