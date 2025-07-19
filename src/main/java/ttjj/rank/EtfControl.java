@@ -53,8 +53,8 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
 //        updateUpSumOrder(date);
@@ -915,17 +915,6 @@ public class EtfControl {
         if (isShowLog) {
             System.out.println(methodName + "-需要更新个数:" + etfAdrCountList.size() + ",更新成功个数：" + updateCount + "end,用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
-    }
-
-    /**
-     * 保存或更新ETF涨幅次数,非今日数据默认不更新
-     *
-     * @param condition 市值限定
-     * @param date      日期
-     * @return 结果
-     */
-    public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date) {
-        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);
     }
 
     /**

@@ -44,7 +44,7 @@ public class EtfAdrJob {
             try {
                 CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
-                EtfControl.saveOrUpdateListNetLastDay(condition, date);
+                EtfControl.saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);
                 jobSeconds++;
             } catch (Exception e) {
                 e.printStackTrace();
