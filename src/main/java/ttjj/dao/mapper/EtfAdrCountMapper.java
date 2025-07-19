@@ -52,6 +52,7 @@ public interface EtfAdrCountMapper {
             ", #{ADR_UP_SUM_1_5}, #{ADR_UP_SUM_1_10}, #{ADR_UP_SUM_1_20}, #{ADR_UP_SUM_20_40}, #{ADR_UP_SUM_40_60}, #{ADR_UP_SUM_1_60}",
             ", #{ADR_UP_SUM_1_40}",
             ", #{ADR_UP_SUM_ORDER_1_5}, #{ADR_UP_SUM_ORDER_1_10}, #{ADR_UP_SUM_ORDER_1_20}, #{ADR_UP_SUM_ORDER_20_40}, #{ADR_UP_SUM_ORDER_40_60}, #{ADR_UP_SUM_ORDER_1_60}",
+            ", #{channel}",
             ");",
             "</script>"})
     int insert(EtfAdrCount entity);
@@ -145,6 +146,7 @@ public interface EtfAdrCountMapper {
             "    <if test='ADR_UP_SUM_TOTAL != null'>ADR_UP_SUM_TOTAL=#{ADR_UP_SUM_TOTAL},</if>",
             "    <if test='ADR_UP_SUM_TOTAL_REAL != null'>ADR_UP_SUM_TOTAL_REAL=#{ADR_UP_SUM_TOTAL_REAL},</if>",
             "    <if test='ADR_UP_SUM_TOTAL_RANK != null'>ADR_UP_SUM_TOTAL_RANK=#{ADR_UP_SUM_TOTAL_RANK},</if>",
+            "    <if test='channel != null'>channel=#{channel},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",
             " LIMIT 1; ",

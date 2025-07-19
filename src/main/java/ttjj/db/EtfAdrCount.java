@@ -23,6 +23,10 @@ public class EtfAdrCount {
      */
     private String type_name;
     /**
+     * 渠道。10:ETF;
+     */
+    private String channel;
+    /**
      * order_num 排序号
      */
     private BigDecimal order_num;
@@ -408,6 +412,14 @@ public class EtfAdrCount {
      * 最低下跌百分比
      */
     private BigDecimal minPct;
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 
     public BigDecimal getADR_UP_SUM_TOTAL_REAL() {
         return ADR_UP_SUM_TOTAL_REAL;

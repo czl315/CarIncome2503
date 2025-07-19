@@ -30,7 +30,7 @@ import static utils.Content.*;
 public class StockAdrCountControl {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-01-15";
+//        String date = "2025-07-18";
         Long board = DB_RANK_BIZ_F139_BK_MAIN;//
         String spBizName = null;//特定业务：半导体 "半导体"
 //        String spBizName = "半导体";//特定业务：半导体 "半导体"
@@ -56,15 +56,15 @@ public class StockAdrCountControl {
 //        stockAdrCountCond.setUpdateNetArea(true);//总花费时间：613
 
         //保存
-        save(date, bizList, false, spBizName, stockAdrCountCond);
+//        save(date, bizList, false, spBizName, stockAdrCountCond);
 
-        updateListByBizAll(date, bizList, begBiz, spBizName, stockAdrCountCond);
+//        updateListByBizAll(date, bizList, begBiz, spBizName, stockAdrCountCond);
 
         //        更新涨和+涨序：(40亿以上)用时：1447 1418   1556；(50亿以上)，用时：1185
 //        更新均值+区间，用时：(40亿以上)用时：2085 1963  ；(50亿以上)，用时：1790 1643 1527 1844
 //        更新涨和+涨序+均值+区间，用时：3225 用时：3119
 
-//        updateAdrCountAllBiz(date, bizList, board, mvMin, mvMax, spBizName);
+        updateAdrCountAllBiz(date, bizList, board, mvMin, mvMax, spBizName);
 
 //        findListDemo(date);
 
