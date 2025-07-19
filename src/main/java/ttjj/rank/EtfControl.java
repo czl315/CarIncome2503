@@ -30,16 +30,15 @@ import static utils.DateUtil.YYYY_MM_DD;
  * 1、查询每日涨幅最多的Etf
  * 2、均线突破：周、日、60
  * 3、跌幅合计(250714)
- *
  */
 public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-11";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-07-18";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-            return;
+//            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -55,11 +54,11 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
         saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-        updateAdrSumSse(date, etfList);
-        updateUpSumOrder(date);
-        updateLatestDayAdr(condition, date, httpKlineApiType);
+//        saveOrUpdateListNetLastDay(condition, date);//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+//        updateAdrSumSse(date, etfList);
+//        updateUpSumOrder(date);
+//        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
@@ -926,7 +925,7 @@ public class EtfControl {
      * @return 结果
      */
     public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date) {
-        saveOrUpdateListNetLastDay(condition, date, false);
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);
     }
 
     /**
@@ -938,9 +937,10 @@ public class EtfControl {
      * @param condition       市值限定
      * @param date            日期
      * @param isUpdateNoToday 非今日数据是否更新
+     * @param channel         渠道
      * @saveOrUpdateListNetLastDay
      */
-    public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date, boolean isUpdateNoToday) {
+    public static void saveOrUpdateListNetLastDay(CondEtfAdrCount condition, String date, boolean isUpdateNoToday, String channel) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "保存或更新ETF涨幅次数-批量更新基础信息";
@@ -951,7 +951,7 @@ public class EtfControl {
                 System.out.println("注意！！！非今日数据，也更新数据:" + date);
             } else {
                 System.out.println("非今日数据，不再更新数据:" + date);
-                return;
+//                return;
             }
         }
 
@@ -970,6 +970,7 @@ public class EtfControl {
             }
 
             EtfAdrCount entity = new EtfAdrCount();
+            entity.setChannel(channel);
             entity.setDate(date);
             entity.setF12(code);
 
@@ -1967,7 +1968,7 @@ public class EtfControl {
                 }
             }
             //所有涨幅全部为空，则不执行更新
-            if (adrSum == null && downSum==null) {
+            if (adrSum == null && downSum == null) {
                 System.out.println(methodName + "所有涨幅或跌幅全部为空，则不执行更新:" + JSON.toJSONString(entity));
             } else {
                 etfAdrCountList.add(entity);
