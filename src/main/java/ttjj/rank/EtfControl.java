@@ -35,10 +35,10 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-07-18";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-07-18";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-//            return;
+            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -68,6 +68,7 @@ public class EtfControl {
 //        saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
 //        updateAdrSumStock(date, null);//"小金属"
         updateUpSumOrderStock(date);
+//        updateLatestDayAdr(condition, date, httpKlineApiType);//TODO 股票
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -1157,6 +1158,7 @@ public class EtfControl {
                 entity.setF62(stockCommpanyDb.getF62());
                 entity.setF21(stockCommpanyDb.getF21());
                 entity.setF139(stockCommpanyDb.getF139());
+                entity.setF148(stockCommpanyDb.getF148());
                 entity.setUPDATE_TIME(new Date());
 
                 BigDecimal curAmt = stockCommpanyDb.getF2();
@@ -2585,6 +2587,7 @@ public class EtfControl {
         if(isOnlyMian){
             condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);
         }
+        condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST));
         List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
         for (EtfAdrCountVo etfAdrCountVo : stList) {

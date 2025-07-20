@@ -167,6 +167,19 @@ public class CondEtfAdrCount extends EtfAdrCount {
      */
     private BigDecimal f3Max;
 
+    /**
+     * 过滤特性列表
+     */
+    private List<Long> notInF148;
+
+    public List<Long> getNotInF148() {
+        return notInF148;
+    }
+
+    public void setNotInF148(List<Long> notInF148) {
+        this.notInF148 = notInF148;
+    }
+
     public BigDecimal getF3Min() {
         return f3Min;
     }

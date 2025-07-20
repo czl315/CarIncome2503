@@ -110,6 +110,14 @@ public class EtfAdrCount {
      * f139 2-A股主板(00XXXX/60XXXX);3-B股(200XXX/900XXX);5-创业板(30XXXX);32-科创板(688XXX);33-存托凭证(689XXX,689是科创板专门为CDR存托凭证公司)
      */
     private Long f139;
+    /**
+     * f148 特性：
+     *  2-B股退市完成(20XXXX或90XXXX);2048-退市整理期;
+     *  4-ST股；8-次新股；16-未上市;17-换股吸收合并？；32-暂停上市；
+     *  65-融资融券；72-注册制次新股；
+     *  513-沪股通；520-沪股通 次新股；    577-沪股通 融资融券；584-沪股通 次新股 融资融券；1025-深股通；1032-深股通 次新股；1089-深股通 融资融券；1096-深股通 次新股 融资融券；33345-GDR HS300_ MSCI中国 标准普尔 富时罗素
+     */
+    private Long f148;
 
     /**
      * ADR_UP_COUNT_1 涨幅次数之和：1日
@@ -412,6 +420,14 @@ public class EtfAdrCount {
      * 最低下跌百分比
      */
     private BigDecimal minPct;
+
+    public Long getF148() {
+        return f148;
+    }
+
+    public void setF148(Long f148) {
+        this.f148 = f148;
+    }
 
     public String getChannel() {
         return channel;

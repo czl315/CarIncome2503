@@ -37,6 +37,7 @@ public interface EtfAdrCountMapper {
             ", `ADR_UP_SUM_1_40`",
             ", `ADR_UP_SUM_ORDER_1_5`, `ADR_UP_SUM_ORDER_1_10`, `ADR_UP_SUM_ORDER_1_20`, `ADR_UP_SUM_ORDER_20_40`, `ADR_UP_SUM_ORDER_40_60`, `ADR_UP_SUM_ORDER_1_60`",
             ", `channel`",
+            ", `f148`",
             ") VALUES (",
             "#{date},#{type_name},#{f2},#{f3},#{f4}",
             ",#{f5},#{f6},#{f7},#{f8},#{f9}",
@@ -54,6 +55,7 @@ public interface EtfAdrCountMapper {
             ", #{ADR_UP_SUM_1_40}",
             ", #{ADR_UP_SUM_ORDER_1_5}, #{ADR_UP_SUM_ORDER_1_10}, #{ADR_UP_SUM_ORDER_1_20}, #{ADR_UP_SUM_ORDER_20_40}, #{ADR_UP_SUM_ORDER_40_60}, #{ADR_UP_SUM_ORDER_1_60}",
             ", #{channel}",
+            ", #{f148}",
             ");",
             "</script>"})
     int insert(EtfAdrCount entity);
@@ -148,6 +150,7 @@ public interface EtfAdrCountMapper {
             "    <if test='ADR_UP_SUM_TOTAL_REAL != null'>ADR_UP_SUM_TOTAL_REAL=#{ADR_UP_SUM_TOTAL_REAL},</if>",
             "    <if test='ADR_UP_SUM_TOTAL_RANK != null'>ADR_UP_SUM_TOTAL_RANK=#{ADR_UP_SUM_TOTAL_RANK},</if>",
             "    <if test='channel != null'>channel=#{channel},</if>",
+            "    <if test='f148 != null'>f148=#{f148},</if>",
             "  </set>",
             "where date=#{date} AND f12=#{f12}",
             " LIMIT 1; ",
@@ -314,6 +317,12 @@ public interface EtfAdrCountMapper {
             "       </if> ",
             "       <if test='maxAdrUpSumTotalRank != null'> ",
             "       <![CDATA[ AND ADR_UP_SUM_TOTAL_RANK <= #{maxAdrUpSumTotalRank} ]]> ",
+            "       </if> ",
+            "       <if test='notInF148 != null'> ",
+            "           AND f148 NOT IN  ",
+            "           <foreach collection='notInF148' item='item' open='(' separator=',' close=')'>  ",
+            "               #{item} ",
+            "           </foreach> ",
             "       </if> ",
 
             "       <if test='orderBy != null '> ",
