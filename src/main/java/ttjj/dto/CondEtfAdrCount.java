@@ -158,6 +158,30 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * 每个类型限定n个
      */
     private Integer showCountTypeGroup;
+    /**
+     * 涨幅最低
+     */
+    private BigDecimal f3Min;
+    /**
+     * 涨幅最高
+     */
+    private BigDecimal f3Max;
+
+    public BigDecimal getF3Min() {
+        return f3Min;
+    }
+
+    public void setF3Min(BigDecimal f3Min) {
+        this.f3Min = f3Min;
+    }
+
+    public BigDecimal getF3Max() {
+        return f3Max;
+    }
+
+    public void setF3Max(BigDecimal f3Max) {
+        this.f3Max = f3Max;
+    }
 
     public BigDecimal getMaxAdrUpSumTotalRank() {
         return maxAdrUpSumTotalRank;

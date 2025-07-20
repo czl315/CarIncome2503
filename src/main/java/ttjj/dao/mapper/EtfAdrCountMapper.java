@@ -36,6 +36,7 @@ public interface EtfAdrCountMapper {
             ", `ADR_UP_SUM_1_5`, `ADR_UP_SUM_1_10`, `ADR_UP_SUM_1_20`, `ADR_UP_SUM_20_40`, `ADR_UP_SUM_40_60`, `ADR_UP_SUM_1_60`",
             ", `ADR_UP_SUM_1_40`",
             ", `ADR_UP_SUM_ORDER_1_5`, `ADR_UP_SUM_ORDER_1_10`, `ADR_UP_SUM_ORDER_1_20`, `ADR_UP_SUM_ORDER_20_40`, `ADR_UP_SUM_ORDER_40_60`, `ADR_UP_SUM_ORDER_1_60`",
+            ", `channel`",
             ") VALUES (",
             "#{date},#{type_name},#{f2},#{f3},#{f4}",
             ",#{f5},#{f6},#{f7},#{f8},#{f9}",
@@ -163,9 +164,8 @@ public interface EtfAdrCountMapper {
             "       <if test='f20 != null'> ",
             "       AND f20 >= #{f20} ",
             "       </if> ",
-            "       <if test='type_name != null'> ",
-            "       AND type_name = #{type_name} ",
-            "       </if> ",
+            "       <if test='type_name != null'> AND type_name = #{type_name} </if> ",
+            "       <if test='channel != null'> AND channel = #{channel} </if> ",
             "       <if test='f12 != null'> ",
             "       AND f12 = #{f12} ",
             "       </if> ",
@@ -300,6 +300,8 @@ public interface EtfAdrCountMapper {
             "       <if test='f10Max != null'> ",
             "       <![CDATA[ AND f10 <= #{f10Max} ]]> ",
             "       </if> ",
+            "       <if test='f3Min != null'> <![CDATA[ AND f3 >= #{f3Min} ]]> </if> ",
+            "       <if test='f3Max != null'> <![CDATA[ AND f3 <= #{f3Max} ]]> </if> ",
             "       <if test='notLikeNameList != null'> ",
             "       <foreach collection='notLikeNameList' item='item' open='AND  (' separator='AND' close=')'>  ",
             "           f14 NOT LIKE CONCAT('%',#{item},'%') ",
@@ -323,7 +325,8 @@ public interface EtfAdrCountMapper {
 
 
     /**
-     *  ETF涨幅数据：查询列表，模糊查询：名称列表
+     * ETF涨幅数据：查询列表，模糊查询：名称列表
+     *
      * @param condition 条件
      * @return rs
      */

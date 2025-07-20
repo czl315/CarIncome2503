@@ -1011,5 +1011,9 @@ public class Content {
      * 渠道。10:ETF;
      */
     public static String CHANNEL_ETF = "10";
+    /**
+     *  渠道。20:股票;
+     */
+    public static String CHANNEL_STOCK = "20";
 
 }

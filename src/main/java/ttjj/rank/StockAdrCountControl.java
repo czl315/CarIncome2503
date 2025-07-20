@@ -56,7 +56,7 @@ public class StockAdrCountControl {
 //        stockAdrCountCond.setUpdateNetArea(true);//总花费时间：613
 
         //保存
-//        save(date, bizList, false, spBizName, stockAdrCountCond);
+        save(date, bizList, false, spBizName, stockAdrCountCond);
 
 //        updateListByBizAll(date, bizList, begBiz, spBizName, stockAdrCountCond);
 

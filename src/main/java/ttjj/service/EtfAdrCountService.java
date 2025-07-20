@@ -281,7 +281,7 @@ public class EtfAdrCountService {
      */
     public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String cookie, CondEtfAdrCount condition) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, condition);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, condition,CHANNEL_ETF);
     }
 
     /**
@@ -292,8 +292,9 @@ public class EtfAdrCountService {
      * @param orderField           排序字段
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
+     * @param channel 渠道
      */
-    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank, CondEtfAdrCount condition) {
+    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank, CondEtfAdrCount condition, String channel) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据-查询-：";
@@ -313,6 +314,8 @@ public class EtfAdrCountService {
             }
         }
         condition.setTypeNameListNotIn(typeNameListNotIn);
+
+        condition.setChannel(channel);
 
         //净值区间最高限定
         CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
@@ -792,7 +795,7 @@ public class EtfAdrCountService {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList, 100, null, null);
+        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList, 100, null, null,CHANNEL_ETF);
 //        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
     }
 
