@@ -1103,11 +1103,11 @@ public class EtfControl {
             //查询业务类别下是否都存在。如果数据不足再新增保存
             List<RankStockCommpanyDb> stList = BizService.listRankStockByBiz(NUM_MAX_999, bizCode);
             List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
-            for (RankStockCommpanyDb etf : stList) {
-                String code = etf.getF12();
+            for (RankStockCommpanyDb stockCommpanyDb : stList) {
+                String code = stockCommpanyDb.getF12();
 
                 //市值过滤
-                BigDecimal marketValue = etf.getF20();
+                BigDecimal marketValue = stockCommpanyDb.getF20();
                 if (handlerMarketValueFilter(marketValue, mvMin, mvMax)) {
                     continue;
                 }
@@ -1118,49 +1118,50 @@ public class EtfControl {
                 entity.setF12(code);
                 entity.setType_name(bizName);
 
-                if (etf.getF2() != null) {
-                    entity.setF2(etf.getF2());
+                if (stockCommpanyDb.getF2() != null) {
+                    entity.setF2(stockCommpanyDb.getF2());
                 }
-                entity.setF3(etf.getF3());
-                if (etf.getF4() != null) {
-                    entity.setF4(new BigDecimal(etf.getF4()));
+                entity.setF3(stockCommpanyDb.getF3());
+                if (stockCommpanyDb.getF4() != null) {
+                    entity.setF4(new BigDecimal(stockCommpanyDb.getF4()));
                 }
-                entity.setF5(etf.getF5());
-                entity.setF6(etf.getF6());
-                if (etf.getF7() != null) {
-                    entity.setF7(new BigDecimal(etf.getF7()));
+                entity.setF5(stockCommpanyDb.getF5());
+                entity.setF6(stockCommpanyDb.getF6());
+                if (stockCommpanyDb.getF7() != null) {
+                    entity.setF7(new BigDecimal(stockCommpanyDb.getF7()));
                 }
-                if (etf.getF8() != null) {
-                    entity.setF8(new BigDecimal(etf.getF8()));
+                if (stockCommpanyDb.getF8() != null) {
+                    entity.setF8(new BigDecimal(stockCommpanyDb.getF8()));
                 }
-                if (etf.getF9() != null) {
-                    entity.setF9(new BigDecimal(etf.getF9()));
+                if (stockCommpanyDb.getF9() != null) {
+                    entity.setF9(new BigDecimal(stockCommpanyDb.getF9()));
                 }
-                if (etf.getF10() != null) {
-                    entity.setF10(etf.getF10());
+                if (stockCommpanyDb.getF10() != null) {
+                    entity.setF10(stockCommpanyDb.getF10());
                 }
-                entity.setF14(etf.getF14());
-                if (etf.getF15() != null) {
-                    entity.setF15(new BigDecimal(etf.getF15().toString()));
+                entity.setF14(stockCommpanyDb.getF14());
+                if (stockCommpanyDb.getF15() != null) {
+                    entity.setF15(new BigDecimal(stockCommpanyDb.getF15().toString()));
                 }
-                if (etf.getF16() != null) {
-                    entity.setF16(new BigDecimal(etf.getF16().toString()));
+                if (stockCommpanyDb.getF16() != null) {
+                    entity.setF16(new BigDecimal(stockCommpanyDb.getF16().toString()));
                 }
-                if (etf.getF17() != null) {
-                    entity.setF17(new BigDecimal(etf.getF17().toString()));
+                if (stockCommpanyDb.getF17() != null) {
+                    entity.setF17(new BigDecimal(stockCommpanyDb.getF17().toString()));
                 }
-                if (etf.getF18() != null) {
-                    entity.setF18(new BigDecimal(etf.getF18().toString()));
+                if (stockCommpanyDb.getF18() != null) {
+                    entity.setF18(new BigDecimal(stockCommpanyDb.getF18().toString()));
                 }
-                entity.setF20(etf.getF20());
-                entity.setF62(etf.getF62());
-                entity.setF21(etf.getF21());
+                entity.setF20(stockCommpanyDb.getF20());
+                entity.setF62(stockCommpanyDb.getF62());
+                entity.setF21(stockCommpanyDb.getF21());
+                entity.setF139(stockCommpanyDb.getF139());
                 entity.setUPDATE_TIME(new Date());
 
-                BigDecimal curAmt = etf.getF2();
-                BigDecimal maxAmt = etf.getF15();
-                BigDecimal minAmt = etf.getF16();
-                BigDecimal yesterdayAmt = etf.getF18();
+                BigDecimal curAmt = stockCommpanyDb.getF2();
+                BigDecimal maxAmt = stockCommpanyDb.getF15();
+                BigDecimal minAmt = stockCommpanyDb.getF16();
+                BigDecimal yesterdayAmt = stockCommpanyDb.getF18();
                 entity.setMaxDown(StockUtil.handlerMaxDown(curAmt, maxAmt));//计算最大回撤
                 if (curAmt != null && minAmt != null) {
                     BigDecimal minRise = curAmt.subtract(minAmt).divide(minAmt, 4, RoundingMode.HALF_UP).multiply(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP);

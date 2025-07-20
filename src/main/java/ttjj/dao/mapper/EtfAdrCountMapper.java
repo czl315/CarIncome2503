@@ -302,6 +302,8 @@ public interface EtfAdrCountMapper {
             "       </if> ",
             "       <if test='f3Min != null'> <![CDATA[ AND f3 >= #{f3Min} ]]> </if> ",
             "       <if test='f3Max != null'> <![CDATA[ AND f3 <= #{f3Max} ]]> </if> ",
+            "       <if test='f139 != null'> <![CDATA[ AND f139 = #{f139} ]]> </if> ",
+
             "       <if test='notLikeNameList != null'> ",
             "       <foreach collection='notLikeNameList' item='item' open='AND  (' separator='AND' close=')'>  ",
             "           f14 NOT LIKE CONCAT('%',#{item},'%') ",

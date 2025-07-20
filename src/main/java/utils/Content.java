@@ -163,6 +163,10 @@ public class Content {
      * ST_PLATE_F139_CTPZ 33-存托凭证(689XXX,689是科创板专门为CDR存托凭证公司)
      */
     public static String ST_PLATE_F139_CTPZ = "33";
+    /**
+     * 股票-板块-80：北交所
+     */
+    public static String ST_PLATE_F139_BJS = "80";
 
     /**
      * 股票编码-开头：60XXXX：沪市；
