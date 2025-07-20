@@ -12,7 +12,6 @@ import ttjj.dto.CondStock;
 import ttjj.dto.Kline;
 import ttjj.dto.KlineDto;
 import utils.ContExchange;
-import utils.Content;
 import utils.DateUtil;
 import utils.HttpUtil;
 
@@ -40,13 +39,14 @@ public class SseService {
         int count = 61;
         String endDate = DateUtil.getToday(YYYY_MM_DD);
 //        String stCode = "517400";
-        String zqdm = "159822";// 159509
+        String zqdm = "600111";// 159509    600111    301026
 //        String klineRs = SseService.daykRsStrHttp(stCode, 2);
 //        String klineRs = SseService.daykRsStrHttpSz(stCode, 2, CYCLE_TYPE_WEEK);
 //        System.out.println("k线：" + klineRs);
 //        List<Kline> klineList = daykline(stCode, 5);
 //        List<Kline> klineList = dayklineSz(stCode, 61, CYCLE_TYPE_WEEK);
-        List<Kline> klineList = klineExchange(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
+//        List<Kline> klineList = klineExchange(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
+        List<Kline> klineList = klineExchangeStock(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
         int i = 1;
         for (Kline kline : klineList) {
             System.out.println((i++) + ":" + kline.getZqdm() + ":" + kline.getKtime() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());
@@ -80,6 +80,48 @@ public class SseService {
                 System.out.println("暂不支持【上交所】特殊k线【" + cycleType + "】查询！");
             }
         } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_START)) {
+            if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK) || cycleType.equals(CYCLE_TYPE_MINU60) || cycleType.equals(CYCLE_TYPE_MINU30) || cycleType.equals(CYCLE_TYPE_MINU15)) {
+                rs = SseService.dayklineSz(zqdm, count, cycleType);
+            } else {
+                System.out.println("暂不支持【深交所】特殊k线【" + cycleType + "】查询！");
+            }
+        } else {
+            System.out.println("根据证券代码识别交易所-异常：" + zqdm);
+        }
+        return rs;
+    }
+
+    /**
+     * 查询交易所k线(股票)：根据证券代码识别交易所
+     *
+     * @param zqdm      证券代码
+     * @param count     个数
+     * @param cycleType 周期
+     * @return k线列表
+     */
+    public static List<Kline> klineExchangeStock(String zqdm, int count, String cycleType) {
+        long begTime = System.currentTimeMillis();
+        boolean isShowLog = true;
+        String methodName = "查询交易所k线(股票)-";
+
+        List<Kline> rs = null;//k线
+        if (zqdm.startsWith(ContExchange.SHANGHAI_EXCH_STOCK_MAIN_START) || zqdm.startsWith(ContExchange.SHENZHEN_EXCH_STOCK_KCB_START)) {
+            if (cycleType.equals(CYCLE_TYPE_DAY)) {
+                rs = SseService.daykline(zqdm, count);
+            } else if (cycleType.equals(CYCLE_TYPE_WEEK)) {
+                int week60Days = -420;
+                String begDate = DateUtil.getCurDateStrAddDaysByFormat(YYYYMMDD, week60Days);
+                String endDate = DateUtil.getToday(YYYYMMDD);
+                rs = SohuService.findKline(zqdm, ContExchange.KLINE_TYPE_SOHU_MKLINE_WEEK, begDate, endDate, count);
+//                System.out.println("上交所周线查询使用接口(SohuService)！");
+            } else if (cycleType.equals(CYCLE_TYPE_MINU60) || cycleType.equals(CYCLE_TYPE_MINU30) || cycleType.equals(CYCLE_TYPE_MINU15) || cycleType.equals(CYCLE_TYPE_MINU5)) {
+                String begDate = null;
+                String endDate = null;
+                rs = SohuService.findKline(zqdm, ContExchange.getKlineTypeWeekSohu(cycleType), begDate, endDate, count);
+            } else {
+                System.out.println(methodName + "暂不支持【上交所】特殊k线【" + cycleType + "】查询！");
+            }
+        } else if (zqdm.startsWith(ContExchange.SHENZHEN_EXCH_STOCK_MAIN_START) || zqdm.startsWith(ContExchange.SHANGHAI_EXCH_STOCK_CYB_START)) {
             if (cycleType.equals(CYCLE_TYPE_DAY) || cycleType.equals(CYCLE_TYPE_WEEK) || cycleType.equals(CYCLE_TYPE_MINU60) || cycleType.equals(CYCLE_TYPE_MINU30) || cycleType.equals(CYCLE_TYPE_MINU15)) {
                 rs = SseService.dayklineSz(zqdm, count, cycleType);
             } else {

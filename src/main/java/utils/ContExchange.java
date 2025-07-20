@@ -9,6 +9,10 @@ public class ContExchange {
      */
     public static String SHANGHAI_EXCH_START = "5";
     public static String SHENZHEN_EXCH_START = "1";//深交所证券代码开头
+    public static String SHANGHAI_EXCH_STOCK_MAIN_START = "60";//上交所主板股票代码开头
+    public static String SHANGHAI_EXCH_STOCK_CYB_START = "30";//上交所创业板股票代码开头
+    public static String SHENZHEN_EXCH_STOCK_MAIN_START = "00";//深交所主板股票代码开头
+    public static String SHENZHEN_EXCH_STOCK_KCB_START = "68";//深交所科创板股票代码开头
     public static String CYCLE_TYPE_MINU5 = "17";//k线类型：18=15分钟；19=30分钟；20=60分钟；21=240分钟(日线？)；32=日线；33=周线；34=月线
     public static String CYCLE_TYPE_MINU15 = "18";//k线类型：18=15分钟；19=30分钟；20=60分钟；21=240分钟(日线？)；32=日线；33=周线；34=月线
     public static String CYCLE_TYPE_MINU30 = "19";//k线类型：18=15分钟；19=30分钟；20=60分钟；21=240分钟(日线？)；32=日线；33=周线；34=月线
