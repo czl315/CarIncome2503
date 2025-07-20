@@ -281,7 +281,7 @@ public class EtfAdrCountService {
      */
     public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String cookie, CondEtfAdrCount condition) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, null, condition,CHANNEL_ETF);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, null, condition,CHANNEL_ETF);
     }
 
     /**
@@ -294,7 +294,7 @@ public class EtfAdrCountService {
      * @param maxAdrUpSumOrderStat
      * @param channel 渠道
      */
-    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank, CondEtfAdrCount condition, String channel) {
+    public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, CondEtfAdrCount condition, String channel) {
         boolean isShowLog = false;
         long begTime = System.currentTimeMillis();
         String methodName = "ETF涨幅数据-查询-：";
@@ -327,7 +327,7 @@ public class EtfAdrCountService {
         condition.setDate(date);
 //        condition.setADR_UP_SUM_1_60(new BigDecimal("1"));
         condition.setTypeNameListNotIn(typeNameListNotIn);//
-        condition.setMaxAdrUpSumTotalRank(maxAdrUpSumTotalRank == null ? null : new BigDecimal(maxAdrUpSumTotalRank));
+//        condition.setMaxAdrUpSumTotalRank(maxAdrUpSumTotalRank == null ? null : new BigDecimal(maxAdrUpSumTotalRank));
         condition.setOrderBy(orderField);//ORDER_FIELD_F3   ORDER_FIELD_ADR_UP_SUM_1_60  ORDER_FIELD_NET_AREA_DAY_20     + DB_DESC
         if (zqdmList != null && zqdmList.size() > 0) {
             condition.setStCodeList(zqdmList);
@@ -795,7 +795,7 @@ public class EtfAdrCountService {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList, 100, null, null,CHANNEL_ETF);
+        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList,  null, null,CHANNEL_ETF);
 //        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
     }
 

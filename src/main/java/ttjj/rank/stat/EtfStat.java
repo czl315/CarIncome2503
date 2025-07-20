@@ -35,7 +35,6 @@ public class EtfStat {
 
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
-        Integer maxAdrUpSumTotalRank = null;
         int days = 1;
         Set<String> zqdmSet = new HashSet<>();
         List<String> zqdmList = null;
@@ -44,8 +43,9 @@ public class EtfStat {
         List<EtfAdrCountVo> rs = null;
         String orderField = F3_DESC;//F3_DESC  ADR_UP_SUM_TOTAL_DESC   ADR_UP_SUM_1_60_DESC   NET_AREA_DAY_20
         CondEtfAdrCount condition = new CondEtfAdrCount();//过滤条件
-        condition.setF3Min(new BigDecimal("9"));//当日涨幅最低
+//        condition.setF3Min(new BigDecimal("5"));//当日涨幅最低
         condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);//股票-交易所板块
+        condition.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
 //        condition.setBizList(Arrays.asList("科技-软件"));// "资源-通用", "资源-石油", "资源-稀有","资源-农业","金融-黄金","资源-农业"  科技-软件  金融-银行
 //        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
         for (String day : dateList) {
@@ -60,7 +60,7 @@ public class EtfStat {
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_40_60_DESC, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);//近60日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, NET_AREA_DAY_20, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);//最近20日价格区间
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_DOWN_SUM_1_60_DESC, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition);//排序字段：下跌累计-正序
-            rs = EtfAdrCountService.findByDateOrderByField(day, orderField, null, zqdmList, maxAdrUpSumOrderStat, maxAdrUpSumTotalRank, condition,CHANNEL_STOCK);//涨幅倒序
+            rs = EtfAdrCountService.findByDateOrderByField(day, orderField, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_STOCK);//涨幅倒序
 //            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计分类型排名前n个
 //            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//常用etf
 //            EtfControl.findByDateOrder(day, zqdmList, null, ADR_UP_SUM_1_5_DESC, maxAdrUpSumOrderStat, null, null);//查询数据根据日期，按照涨幅倒序  F3_DESC;//ORDER_FIELD_F3   ADR_UP_SUM_1_60_DESC
