@@ -30,8 +30,8 @@ import static utils.Content.*;
  */
 public class EtfStat {
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-07-21";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-07-21";
 
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
@@ -73,10 +73,11 @@ public class EtfStat {
 
             {
                 CondEtfAdrCount conditionStock = new CondEtfAdrCount();//过滤条件
-                conditionStock.setF3Min(new BigDecimal("9"));//当日涨幅最低
+//                conditionStock.setF3Min(new BigDecimal("9"));//当日涨幅最低
                 conditionStock.setF139(DB_RANK_BIZ_F139_BK_MAIN);//股票-交易所板块
 //                conditionStock.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
-                rs = EtfAdrCountService.findByDateOrderByField(date, orderField, null, null, maxAdrUpSumOrderStat,  conditionStock,CHANNEL_STOCK);//涨幅倒序
+//                conditionStock.setType_name("证券");//证券
+                rs = EtfAdrCountService.findByDateOrderByField(date, ADR_UP_SUM_TOTAL_DESC, null, null, maxAdrUpSumOrderStat,  conditionStock,CHANNEL_STOCK);//涨幅倒序
             }
 
             if (rs == null) break;

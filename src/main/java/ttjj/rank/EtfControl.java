@@ -35,8 +35,8 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-07-21";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-07-21";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
 //            return;
         }
@@ -53,12 +53,12 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
-//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-//        updateAdrSumSse(date, etfList);
-//        updateUpSumOrder(date, CHANNEL_ETF);
-//        updateLatestDayAdr(condition, date, httpKlineApiType);
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+        updateAdrSumSse(date, etfList);
+        updateUpSumOrder(date, CHANNEL_ETF);
+        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
@@ -66,9 +66,10 @@ public class EtfControl {
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
 //        saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
-//        updateAdrSumStock(date, null);//"小金属"
+//        updateAdrSumStock(date, "证券");//"小金属"   证券
 //        updateUpSumOrderStock(date,CHANNEL_STOCK);
-        updateLatestDayAdrStock(condition, date);
+//        updateLatestDayAdrStock(condition, date);
+//        updateUpMaTypeTopN(date, 1,Arrays.asList(KLT_15),CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -144,8 +145,9 @@ public class EtfControl {
      *
      * @param date                 日期
      * @param maxAdrUpSumTotalRank 最高涨幅累计排名
+     * @param channel 渠道
      */
-    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList) {
+    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList,String channel) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-（每个类型涨幅前n个）：";
@@ -154,6 +156,7 @@ public class EtfControl {
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setMaxAdrUpSumTotalRank(new BigDecimal(maxAdrUpSumTotalRank));
+        condition.setChannel(channel);
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
         List<EtfAdrCountVo> etfAdrCountVoList = EtfAdrCountService.findEtfList(condition);
@@ -2678,7 +2681,7 @@ public class EtfControl {
         condition.setType_name(bizName);
         if (channel.equals(CHANNEL_STOCK) && isOnlyMian) {
             condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);
-            condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST));
+            condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST,DB_RANK_BIZ_F148_STOCK_STATUS_DELISTING));
         }
         List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
