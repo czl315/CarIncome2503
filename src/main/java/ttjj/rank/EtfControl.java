@@ -35,10 +35,10 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-18";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-07-21";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-            return;
+//            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -57,7 +57,7 @@ public class EtfControl {
 //        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
 //        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
 //        updateAdrSumSse(date, etfList);
-//        updateUpSumOrder(date);
+//        updateUpSumOrder(date, CHANNEL_ETF);
 //        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
@@ -67,8 +67,8 @@ public class EtfControl {
 
 //        saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
 //        updateAdrSumStock(date, null);//"小金属"
-        updateUpSumOrderStock(date);
-//        updateLatestDayAdr(condition, date, httpKlineApiType);//TODO 股票
+//        updateUpSumOrderStock(date,CHANNEL_STOCK);
+        updateLatestDayAdrStock(condition, date);
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -640,7 +640,7 @@ public class EtfControl {
      * @param maxAdrUpSumOrderStat
      */
     public static List<EtfAdrCountVo> findByDateOrder(String date, List<String> zqdmList, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, Integer maxAdrUpSumTotalRank, CondEtfAdrCount condition) {
-        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat,  condition, CHANNEL_ETF);
+        return EtfAdrCountService.findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_3, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_5, 1);
 //        findByDateOrderByField(date, ORDER_FIELD_ADR_UP_SUM_1_10, 1);
@@ -917,6 +917,98 @@ public class EtfControl {
 //                updateCount++;
 //            }
 //        }
+        if (isShowLog) {
+            System.out.println(methodName + "-需要更新个数:" + etfAdrCountList.size() + ",更新成功个数：" + updateCount + "end,用时：" + (System.currentTimeMillis() - begTime) / 1000);
+        }
+    }
+
+    /**
+     * 更新最近交易日的涨幅(股票)，最近3日
+     *
+     * @param condition
+     * @param date
+     */
+    public static void updateLatestDayAdrStock(CondEtfAdrCount condition, String date) {
+        String methodName = "更新最近交易日的涨幅(股票)-";
+        boolean isShowLog = true;
+        long begTime = System.currentTimeMillis();
+
+        boolean isUpdateNoMian = true;//是否更新非主板
+        int curPosition = 0;
+        int updateCount = 0;//更新成功个数
+
+        List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
+        List<RankBizDataDiff> bizList = StockService.listBiz(NUM_MAX_99);//查询业务列表
+
+        for (RankBizDataDiff rankBizDataDiff : bizList) {
+            String bizCode = rankBizDataDiff.getF12();
+            String bizName = rankBizDataDiff.getF14();
+            //查询业务类别下是否都存在。如果数据不足再新增保存
+            List<RankStockCommpanyDb> stList = BizService.listRankStockByBiz(NUM_MAX_999, bizCode);
+            for (RankStockCommpanyDb stockCommpanyDb : stList) {
+                String zqdm = stockCommpanyDb.getF12();
+                String zqmc = stockCommpanyDb.getF14();
+//            if (zqdm.equals("159822")) {
+//                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
+//            }
+                if (isUpdateNoMian && !checkStockMain(zqdm)) {
+//                    System.out.println("不更新非主板股票：" + zqdm + "," + zqmc);
+                    continue;
+                }
+
+                //市值过滤
+                BigDecimal marketValue = stockCommpanyDb.getF20();
+                BigDecimal mvMin = condition.getMvMin();
+                BigDecimal mvMax = condition.getMvMax();
+                if (handlerMarketValueFilter(marketValue, mvMin, mvMax)) {
+                    continue;
+                }
+
+                EtfAdrCount entity = new EtfAdrCount();
+                entity.setDate(date);
+                entity.setF12(stockCommpanyDb.getF12());
+
+                //显示指定日期最近3个K线交易日的涨跌
+                int days = 3;
+                List<Kline> klineListDays = SseService.klineExchangeStock(zqdm, 4, CYCLE_TYPE_DAY);
+                if (klineListDays == null) {
+                    continue;
+                }
+                for (Kline klineListDay : klineListDays) {
+                    if (days <= 0) {
+                        break;
+                    }
+                    //判断是否是今天，如果是今天，继续下一个
+                    if (klineListDay.getKtime().equals(date.replace("-", ""))) {
+                        continue;
+                    }
+                    if (days == 3) {
+                        entity.setLatestAdr_1(klineListDay.getZhangDieFu());
+                    } else if (days == 2) {
+                        entity.setLatestAdr_2(klineListDay.getZhangDieFu());
+                    } else if (days == 1) {
+                        entity.setLatestAdr_3(klineListDay.getZhangDieFu());
+                    }
+                    days--;
+                }
+                entity.setUPDATE_TIME(new Date());
+
+                int updateRs = EtfAdrCountService.update(entity);
+                if (updateRs != 1) {
+                    System.out.println(methodName + "更新-失败：" + updateRs + "" + JSON.toJSONString(entity));
+                } else {
+                    updateCount++;
+                }
+
+                etfAdrCountList.add(entity);
+
+                if (isShowLog && (++curPosition % 100 == 0)) {
+                    System.out.println(methodName + "-正在处理位置:" + curPosition + ",用时：" + (System.currentTimeMillis() - begTime) / 1000);
+                }
+            }
+        }
+
+
         if (isShowLog) {
             System.out.println(methodName + "-需要更新个数:" + etfAdrCountList.size() + ",更新成功个数：" + updateCount + "end,用时：" + (System.currentTimeMillis() - begTime) / 1000);
         }
@@ -1864,7 +1956,7 @@ public class EtfControl {
      *
      * @param date date
      */
-    public static void updateUpSumOrder(String date) {
+    public static void updateUpSumOrder(String date, String channel) {
         List<String> bizNameList = ALL;
         for (String type : bizNameList) {
             //更新-上涨之和排序
@@ -1874,7 +1966,7 @@ public class EtfControl {
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
-            updateAdrSumOrderStatByBiz(date, type);
+            updateAdrSumOrderStatByBiz(date, type, channel);
         }
     }
 
@@ -1883,7 +1975,7 @@ public class EtfControl {
      *
      * @param date
      */
-    public static void updateUpSumOrderStock(String date) {
+    public static void updateUpSumOrderStock(String date, String channel) {
         List<RankBizDataDiff> bizList = StockService.listBiz(NUM_MAX_99);//查询业务列表
         for (RankBizDataDiff rankBizDataDiff : bizList) {
             String bizName = rankBizDataDiff.getF14();
@@ -1894,7 +1986,7 @@ public class EtfControl {
             updateAdrSumOrderByBiz(date, bizName, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20);
             updateAdrSumOrderByBiz(date, bizName, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
             updateAdrSumOrderByBiz(date, bizName, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
-            updateAdrSumOrderStatByBiz(date, bizName);
+            updateAdrSumOrderStatByBiz(date, bizName, channel);
 
         }
     }
@@ -2576,7 +2668,7 @@ public class EtfControl {
      * @param date    日期
      * @param bizName 业务名称
      */
-    private static int updateAdrSumOrderStatByBiz(String date, String bizName) {
+    private static int updateAdrSumOrderStatByBiz(String date, String bizName, String channel) {
         String methodName = "更新上涨累计排序的统计数值";
         boolean isOnlyMian = true;//只更新主板
         int rs = 0;
@@ -2584,10 +2676,10 @@ public class EtfControl {
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setType_name(bizName);
-        if(isOnlyMian){
+        if (channel.equals(CHANNEL_STOCK) && isOnlyMian) {
             condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);
+            condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST));
         }
-        condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST));
         List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
         for (EtfAdrCountVo etfAdrCountVo : stList) {
