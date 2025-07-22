@@ -35,10 +35,10 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-07-22";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-07-22";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-//            return;
+            return;
         }
         List<String> zqdmList = new ArrayList<>();//代码列表
 

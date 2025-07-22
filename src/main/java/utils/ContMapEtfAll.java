@@ -1767,8 +1767,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-07-17";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-07-17";
 
         //////        //etf头部数据
 //        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.TOP_XIAOFEI.keySet());
