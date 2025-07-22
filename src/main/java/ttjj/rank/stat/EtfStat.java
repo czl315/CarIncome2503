@@ -30,8 +30,8 @@ import static utils.Content.*;
  */
 public class EtfStat {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-21";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-07-22";
 
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
