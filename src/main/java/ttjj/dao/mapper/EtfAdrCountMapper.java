@@ -354,6 +354,7 @@ public interface EtfAdrCountMapper {
             "       <if test='type_name != null'> ",
             "       AND type_name = #{type_name} ",
             "       </if> ",
+            "       <if test='channel != null'> AND channel = #{channel} </if> ",
 
             "       <if test='likeNameList != null'> ",
             "       <foreach collection='likeNameList' item='item' open='AND  (' separator='or' close=')'>  ",

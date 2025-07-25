@@ -53,23 +53,23 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
-//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
-//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-//        updateAdrSumSse(date, etfList);
-//        updateUpSumOrder(date, CHANNEL_ETF);
-//        updateLatestDayAdr(condition, date, httpKlineApiType);
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
+        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
+        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+        updateAdrSumSse(date, etfList);
+        updateUpSumOrder(date, CHANNEL_ETF);
+        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
 //        updateUpMaMyPosition(date, null,Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102),ContentCookie.COOKIE_DFCF);
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 
-//        saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
-//        updateAdrSumStock(date, null);//"小金属"   证券
-//        updateUpSumOrderStock(date,CHANNEL_STOCK);
-//        updateLatestDayAdrStock(condition, date);
-//        updateUpMaTypeTopN(date, 1,Arrays.asList(KLT_15,KLT_30,KLT_60,KLT_101, KLT_102),CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+        saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
+        updateAdrSumStock(date, null);//"小金属"   证券
+        updateUpSumOrderStock(date, CHANNEL_STOCK);
+        updateLatestDayAdrStock(condition, date);
+        updateUpMaTypeTopN(date, 1, Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102), CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
 
@@ -145,9 +145,9 @@ public class EtfControl {
      *
      * @param date                 日期
      * @param maxAdrUpSumTotalRank 最高涨幅累计排名
-     * @param channel 渠道
+     * @param channel              渠道
      */
-    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList,String channel) {
+    public static void updateUpMaTypeTopN(String date, Integer maxAdrUpSumTotalRank, List<String> maKltList, String channel) {
         long begTime = System.currentTimeMillis();
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-（每个类型涨幅前n个）：";
@@ -2249,7 +2249,7 @@ public class EtfControl {
     }
 
     /**
-     * 更新上涨之和(股票)
+     * 更新上涨之和(股票)：上涨之和限定值
      *
      * @param date      日期
      * @param spBizName 特定业务
@@ -2262,8 +2262,11 @@ public class EtfControl {
         boolean isUpdateNoMian = true;//是否更新非主板
         int curPosition = 0;
         int rs = 0;
-//        BigDecimal adrMax = new BigDecimal("3"); //上涨之和限定值
-        BigDecimal adrMax = null; //上涨之和限定值
+        BigDecimal adrMax = new BigDecimal("5"); //上涨之和限定值
+//        BigDecimal adrMax = null; //上涨之和限定值
+        BigDecimal mvMin = NUM_YI_40;//NUM_YI_1000  NUM_YI_50  NUM_YI_100
+        BigDecimal mvMax = null;
+        int countMvCheckNo = 0;//市值判定不通过个数
 
         CondStockAdrCount condStockAdrCount = new CondStockAdrCount();
         condStockAdrCount.setDate(date);
@@ -2294,11 +2297,20 @@ public class EtfControl {
             for (RankStockCommpanyDb stockCommpanyDb : stList) {
                 String zqdm = stockCommpanyDb.getF12();
                 String zqmc = stockCommpanyDb.getF14();
+                BigDecimal mv = stockCommpanyDb.getF20();
 //            if (zqdm.equals("159822")) {
 //                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
 //            }
                 if (isUpdateNoMian && !checkStockMain(zqdm)) {
 //                    System.out.println("不更新非主板股票：" + zqdm + "," + zqmc);
+                    continue;
+                }
+
+                if (!checkStockMarketValue(zqmc, mv, mvMin, mvMax)) {
+                    if (++countMvCheckNo % 100 == 0) {
+                        System.out.println("市值判定不通过个数：" + countMvCheckNo);
+                    }
+//                    System.out.println("(" + zqmc + ")市值判定不通过(" + (++countMvCheckNo) + ")：" + mv.divide(NUM_YI_1).setScale(0, BigDecimal.ROUND_HALF_UP));
                     continue;
                 }
 
@@ -2549,6 +2561,33 @@ public class EtfControl {
     }
 
     /**
+     * '
+     * 市值判定
+     *
+     * @param mv
+     * @param minMv
+     * @param maxMv
+     * @return
+     */
+    private static boolean checkStockMarketValue(String zqmc, BigDecimal mv, BigDecimal minMv, BigDecimal maxMv) {
+        if (mv == null) {
+            return true;
+        }
+        if (minMv == null && maxMv == null) {
+            return true;
+        }
+        if (minMv != null && mv.compareTo(minMv) < 0) {
+//            System.out.println("(" + zqmc + ")市值最低判定最低不通过：" + mv + ":" + minMv);
+            return false;
+        }
+        if (maxMv != null && mv.compareTo(maxMv) > 0) {
+            System.out.println("(" + zqmc + ")市值最高判定最低不通过：" + mv + ":" + minMv);
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 查询etf列表:市值过滤
      *
      * @param minMv 最低市值
@@ -2681,7 +2720,7 @@ public class EtfControl {
         condition.setType_name(bizName);
         if (channel.equals(CHANNEL_STOCK) && isOnlyMian) {
             condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);
-            condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST,DB_RANK_BIZ_F148_STOCK_STATUS_DELISTING));
+            condition.setNotInF148(Arrays.asList(DB_RANK_BIZ_F148_STOCK_STATUS_ST, DB_RANK_BIZ_F148_STOCK_STATUS_DELISTING));
         }
         List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");

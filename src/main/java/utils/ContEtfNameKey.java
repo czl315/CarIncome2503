@@ -28,7 +28,7 @@ public class ContEtfNameKey {
 
     public static List INDEX_CN_NOT = Arrays.asList("德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
     public static List INDEX_CN_NOT_USA = Arrays.asList("标普", "纳", "道琼斯", "美国");//指数-外盘-美股
-    public static List INDEX_CN_NOT_USA_NOLIKE = Arrays.asList("标普油气");
+    public static List INDEX_CN_NOT_USA_NOLIKE = Arrays.asList("标普油气","生物科技");
 
     public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘

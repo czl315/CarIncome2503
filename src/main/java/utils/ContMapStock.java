@@ -189,7 +189,7 @@ public class ContMapStock {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
-            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
+//            sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_STAT(), SIZE_10));
             sb.append(StockUtil.formatStName("累涨修正：", SIZE_10));
 //            sb.append(StockUtil.formatDouble(vo.getAdrUpSum_60_and_10c6(), SIZE_10));
             sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_TOTAL(), SIZE_10));
