@@ -36,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-22";
+//        String date = "2025-07-25";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -48,17 +48,17 @@ public class EtfControl {
 //        condition.setStCodeList(new ArrayList<>(ContMapEtfTop.ZIYUAN.keySet()));
 //        condition.setMvMin(NUM_YI_100);
 //        condition.setMvMax(NUM_YI_1000);
-//        condition.setType_name(KEJI_XIN_PIAN);
+//        condition.setType_name(XIAOFEI_MEDIA);//   KEJI_XIN_PIAN
 //        condition.setMaKltList(Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
-        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
-        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
-        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-        updateAdrSumSse(date, etfList);
-        updateUpSumOrder(date, CHANNEL_ETF);
-        updateLatestDayAdr(condition, date, httpKlineApiType);
+//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
+//        saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);;//保存或更新ETF涨幅次数-批量更新基础信息
+//        List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, "消费-文娱传媒");//1、查询etf列表   JINRONG_GOLD
+//        updateAdrSumSse(date, etfList);
+//        updateUpSumOrder(date, CHANNEL_ETF);
+//        updateLatestDayAdr(condition, date, httpKlineApiType);
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
@@ -2104,9 +2104,9 @@ public class EtfControl {
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
             String zqmc = etfVo.getF14();
-//            if (zqdm.equals("159822")) {
-//                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
-//            }
+            if (zqdm.equals("516100")) {
+                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
+            }
 
             //当前交易日
             String curTradeDay = date.replace("-", "");
@@ -2278,6 +2278,8 @@ public class EtfControl {
         for (RankBizDataDiff rankBizDataDiff : bizList) {
             String bizCode = rankBizDataDiff.getF12();
             String bizName = rankBizDataDiff.getF14();
+            BigDecimal bizF3 = rankBizDataDiff.getF3();
+
             //特定业务处理
             if (spBizName != null && !bizName.equals(spBizName)) {
                 continue;
@@ -2448,7 +2450,7 @@ public class EtfControl {
             }
 
             if (isShowLog) {
-                System.out.println(methodName + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",成功个数：" + rs + ",业务：" + bizName);
+                System.out.println(methodName + "用时：" + (System.currentTimeMillis() - begTime) / 1000 + ",成功个数：" + rs + ",业务：" + bizName+ ",业务涨幅：" + bizF3);
             }
 
         }
@@ -2725,6 +2727,10 @@ public class EtfControl {
         List<EtfAdrCountVo> stList = EtfAdrCountService.findEtfList(condition);
         BigDecimal adr_up_sum_order_stat = new BigDecimal("0");
         for (EtfAdrCountVo etfAdrCountVo : stList) {
+            String zqdm = etfAdrCountVo.getF12();
+//            if (zqdm.equals("516100")) {
+//                System.out.println("特定证券代码：" + zqdm);
+//            }
 //            BigDecimal adr_up_sum_order_1_3 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_3();
             BigDecimal adr_up_sum_order_1_5 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_5();
             BigDecimal adr_up_sum_order_1_10 = etfAdrCountVo.getADR_UP_SUM_ORDER_1_10();

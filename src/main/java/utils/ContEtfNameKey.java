@@ -37,9 +37,9 @@ public class ContEtfNameKey {
             "央视", "深价值", "A50", "红利", "深100", "国企", "380", "MSCI", "质量", "上证综合", "上证中盘", "基本面", "价值", "上证指数", "高股息", "一带一路", "50ETF基金");//指数-大盘
     public static List INDEX_CN_BIG_NOLIKE = Arrays.asList("恒生", "港股", "双创", "科创", "科创", "创业板", "标普", "中证1000", "500", "中证500");
     public static List INDEX_300 = Arrays.asList("创业", "创中盘", "创400", "创300", "创大盘", "创50", "创100", "深创");//指数-创业板
-    public static List INDEX_300_NOLIKE = Arrays.asList("信创", "人工智能", "科创");//指数-创业板（不匹配）
+    public static List INDEX_300_NOLIKE = Arrays.asList("信创", "人工智能", "科创", "医药");//指数-创业板（不匹配）
     public static List INDEX_688 = Arrays.asList("科创", "双创");//指数-科创板
-    public static List INDEX_688_NOLIKE = Arrays.asList("芯片", "医药", "人工智能","AI", "新能源");//指数-创业板（不匹配）
+    public static List INDEX_688_NOLIKE = Arrays.asList("芯片", "医药", "人工智能","AI", "新能源", "半导体");//指数-创业板（不匹配）
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股", "沪港深");//指数-港股
     public static List INDEX_HK_NOLIKE = Arrays.asList("创新药", "医", "生物", "汽车", "消费");
     public static List INDEX = new ArrayList();
