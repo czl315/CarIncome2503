@@ -43,70 +43,73 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_ZIYUAN_COMMON = new HashMap<>();
+
     static {
-        TOP_ZIYUAN_COMMON.put("159715", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF易方达         市值：3.12      累涨：48.87     10.48     17.58     20.81     10日：12.46     5.24      5.13      -1.25     2         累涨修正：76.83     净值区间：85      91      94      95      95      1
+        TOP_ZIYUAN_COMMON.put("516780", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF               市值：17.19     累涨：46.01     11.73     14.14     20.14     10日：11.03     1.65                -1.93     2         累涨修正：58.69     净值区间：3       38      68      72      75      1
     }
+
     public static Map<String, String> ZIYUAN_COMMON = new HashMap<>();
+
     static {
-        ZIYUAN_COMMON.put("159715", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF易方达         市值：3.12      累涨：48.87     10.48     17.58     20.81     10日：12.46     5.24      5.13      -1.25     2         累涨修正：76.83     净值区间：85      91      94      95      95      1
-        ZIYUAN_COMMON.put("516780", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF               市值：17.15     累涨：49.90     11.32     18.00     20.58     10日：12.10     5.03      4.65      -1.06     3         累涨修正：76.33     净值区间：85      91      94      95      95      2
-        ZIYUAN_COMMON.put("516150", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF嘉实           市值：39.69     累涨：47.76     10.19     17.67     19.90     10日：11.85     4.66      4.59      -1.09     6         累涨修正：73.45     净值区间：85      91      94      95      95      3
-        ZIYUAN_COMMON.put("159713", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF               市值：6.73      累涨：47.59     10.48     17.37     19.74     10日：11.46     4.35      4.35      -1.05     8         累涨修正：72.1      净值区间：85      92      94      95      95      4
-        ZIYUAN_COMMON.put("159608", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF           市值：3.01      累涨：46.19     9.29      15.22     21.68     10日：12.58     6.12      3.53      -0.39     1         累涨修正：71.95     净值区间：88      94      95      96      96      5
-        ZIYUAN_COMMON.put("159671", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF基金       市值：5.23      累涨：43.41     8.18      14.75     20.48     10日：12.05     5.34      3.33      -0.22     4         累涨修正：67.46     净值区间：87      93      94      96      96      6
-        ZIYUAN_COMMON.put("561800", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF基金       市值：1.14      累涨：42.86     8.43      14.75     19.68     10日：11.68     5.45      3.43      -0.57     5         累涨修正：66.85     净值区间：85      92      93      95      95      7
-        ZIYUAN_COMMON.put("159690", ContEtfTypeName.ZIYUAN_COMMON);//矿业ETF               市值：0.17      累涨：39.66     8.07      12.52     19.07     10日：11.31     5.30      3.00      -0.24     7         累涨修正：62.27     净值区间：68      87      89      92      93      8
-        ZIYUAN_COMMON.put("560860", ContEtfTypeName.ZIYUAN_COMMON);//工业有色ETF           市值：10.99     累涨：39.62     8.38      12.84     18.40     10日：10.82     4.91      3.19      -0.38     9         累涨修正：61.73     净值区间：75      90      92      95      95      9
-        ZIYUAN_COMMON.put("561330", ContEtfTypeName.ZIYUAN_COMMON);//矿业ETF               市值：1.06      累涨：38.95     7.68      12.86     18.41     10日：11.33     5.11      3.00      0.00      10        累涨修正：61.39     净值区间：67      86      89      92      92      10
-        ZIYUAN_COMMON.put("512400", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF           市值：63.12     累涨：37.97     7.82      11.90     18.25     10日：11.08     5.37      3.00      -0.55     11        累涨修正：60.42     净值区间：64      85      87      91      92      11
-        ZIYUAN_COMMON.put("159652", ContEtfTypeName.ZIYUAN_COMMON);//有色50ETF             市值：4.91      累涨：37.34     8.25      12.02     17.07     10日：11.00     5.17      2.89      -0.36     12        累涨修正：59.29     净值区间：64      86      87      91      92      12
-        ZIYUAN_COMMON.put("159876", ContEtfTypeName.ZIYUAN_COMMON);//有色龙头ETF           市值：0.77      累涨：37.23     8.07      11.51     17.65     10日：10.77     4.96      3.00      -0.53     13        累涨修正：58.96     净值区间：63      85      87      91      92      13
-        ZIYUAN_COMMON.put("159881", ContEtfTypeName.ZIYUAN_COMMON);//有色60ETF             市值：0.56      累涨：37.81     7.97      12.35     17.49     10日：10.57     4.56      2.97      -0.48     16        累涨修正：58.88     净值区间：64      86      88      92      92      14
-        ZIYUAN_COMMON.put("159871", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF           市值：0.80      累涨：36.36     7.24      11.34     17.78     10日：10.85     5.17      3.00      -0.46     15        累涨修正：58.38     净值区间：74      88      90      93      94      15
-        ZIYUAN_COMMON.put("516650", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF基金       市值：1.71      累涨：37.38     7.78      11.77     17.83     10日：10.39     4.73      2.72      -0.72     17        累涨修正：57.94     净值区间：59      85      87      91      92      16
-        ZIYUAN_COMMON.put("159981", ContEtfTypeName.ZIYUAN_COMMON);//能源化工ETF           市值：5.55      累涨：33.67     10.64     11.19     11.84     10日：8.54      6.08      4.69      0.36      14        累涨修正：57.67     净值区间：21      46      50      64      69      17
-        ZIYUAN_COMMON.put("159880", ContEtfTypeName.ZIYUAN_COMMON);//有色ETF基金           市值：1.15      累涨：36.03     7.84      11.40     16.79     10日：10.31     4.48      2.71      -0.47     19        累涨修正：56.24     净值区间：71      87      88      92      92      18
-        ZIYUAN_COMMON.put("515210", ContEtfTypeName.ZIYUAN_COMMON);//钢铁ETF               市值：33.81     累涨：33.13     5.44      6.79      20.90     10日：11.30     5.23      2.70      2.07      21        累涨修正：55.06     净值区间：61      83      88      90      90      19
-        ZIYUAN_COMMON.put("510410", ContEtfTypeName.ZIYUAN_COMMON);//资源ETF               市值：5.08      累涨：31.42     7.54      7.70      16.18     10日：10.38     6.00      3.00      0.29      18        累涨修正：53.8      净值区间：40      77      78      84      86      20
-        ZIYUAN_COMMON.put("588010", ContEtfTypeName.ZIYUAN_COMMON);//科创新材料ETF         市值：2.51      累涨：31.72     8.30      12.49     10.93     10日：7.43      5.06      4.13      0.74      20        累涨修正：52.47     净值区间：97      98      98      99      99      21
-        ZIYUAN_COMMON.put("510170", ContEtfTypeName.ZIYUAN_COMMON);//大宗商品ETF           市值：1.85      累涨：30.38     6.95      7.11      16.32     10日：10.65     5.71      2.71      0.50      22        累涨修正：52.16     净值区间：62      85      87      90      91      22
-        ZIYUAN_COMMON.put("159944", ContEtfTypeName.ZIYUAN_COMMON);//材料ETF               市值：0.28      累涨：31.19     6.26      8.28      16.65     10日：10.63     4.82      2.06      -0.28     25        累涨修正：50.76     净值区间：52      68      71      78      79      23
-        ZIYUAN_COMMON.put("588160", ContEtfTypeName.ZIYUAN_COMMON);//科创材料ETF           市值：2.53      累涨：30.64     7.99      12.35     10.30     10日：7.02      4.68      3.61      0.88      26        累涨修正：49.56     净值区间：97      98      98      99      99      24
-        ZIYUAN_COMMON.put("159761", ContEtfTypeName.ZIYUAN_COMMON);//新材料50ETF           市值：1.63      累涨：30.21     7.73      9.39      13.09     10日：8.59      4.78      2.74      0.00      23        累涨修正：49.06     净值区间：100     100     100     100     100     25
-        ZIYUAN_COMMON.put("516890", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF指数基金     市值：0.27      累涨：28.53     6.90      8.54      13.09     10日：8.60      4.59      2.73      -0.18     28        累涨修正：47.18     净值区间：92      98      98      99      99      26
-        ZIYUAN_COMMON.put("516480", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF基金         市值：0.13      累涨：28.37     7.85      8.39      12.13     10日：8.52      4.98      2.63      0.15      24        累涨修正：47.13     净值区间：95      98      98      99      99      27
-        ZIYUAN_COMMON.put("159763", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF基金         市值：0.56      累涨：29.19     7.20      9.39      12.60     10日：8.42      4.33      2.34      0.19      29        累涨修正：46.62     净值区间：88      95      96      97      97      28
-        ZIYUAN_COMMON.put("516710", ContEtfTypeName.ZIYUAN_COMMON);//新材料50ETF           市值：0.38      累涨：29.01     7.66      9.22      12.13     10日：8.04      4.25      2.50      0.38      31        累涨修正：46.3      净值区间：100     100     100     100     100     29
-        ZIYUAN_COMMON.put("159703", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF             市值：0.58      累涨：28.92     7.87      8.96      12.09     10日：8.23      4.29      2.37      0.15      27        累涨修正：46.18     净值区间：100     100     100     100     100     30
-        ZIYUAN_COMMON.put("516360", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF             市值：0.57      累涨：28.28     7.66      8.61      12.01     10日：8.18      4.15      2.33      0.00      32        累涨修正：45.27     净值区间：95      98      99      99      99      31
-        ZIYUAN_COMMON.put("515220", ContEtfTypeName.ZIYUAN_COMMON);//煤炭ETF               市值：72.69     累涨：27.83     7.66      6.63      13.54     10日：8.57      4.62      1.62      0.83      30        累涨修正：44.26     净值区间：24      58      61      64      66      32
-        ZIYUAN_COMMON.put("516120", ContEtfTypeName.ZIYUAN_COMMON);//化工50ETF             市值：2.51      累涨：25.58     6.00      6.16      13.42     10日：9.69      3.79      1.66      -0.30     35        累涨修正：42.38     净值区间：50      84      85      88      89      33
-        ZIYUAN_COMMON.put("516020", ContEtfTypeName.ZIYUAN_COMMON);//化工ETF               市值：7.00      累涨：25.30     6.11      6.40      12.79     10日：9.17      3.86      1.53      -0.15     36        累涨修正：41.39     净值区间：31      70      72      77      78      34
-        ZIYUAN_COMMON.put("562010", ContEtfTypeName.ZIYUAN_COMMON);//绿色能源ETF           市值：0.14      累涨：29.02     8.91      9.28      10.83     10日：5.33      2.77      1.71      0.13      33        累涨修正：40.54     净值区间：65      87      91      93      93      35
-        ZIYUAN_COMMON.put("159870", ContEtfTypeName.ZIYUAN_COMMON);//化工ETF               市值：33.79     累涨：25.76     6.45      6.42      12.89     10日：8.89      3.43      1.13      0.16      34        累涨修正：40.34     净值区间：40      80      82      86      86      36
-        ZIYUAN_COMMON.put("159587", ContEtfTypeName.ZIYUAN_COMMON);//粮食ETF广发           市值：0.35      累涨：23.85     8.70      5.33      9.82      10日：6.87      3.86      2.68      -0.83     37        累涨修正：39.94     净值区间：23      52      54      65      80      37
-        ZIYUAN_COMMON.put("516220", ContEtfTypeName.ZIYUAN_COMMON);//化工龙头ETF           市值：1.39      累涨：24.51     6.34      5.66      12.51     10日：8.70      3.12      1.18      -0.15     38        累涨修正：38.69     净值区间：62      84      85      88      89      38
-        ZIYUAN_COMMON.put("516570", ContEtfTypeName.ZIYUAN_COMMON);//化工行业ETF           市值：0.67      累涨：22.67     5.22      5.44      12.01     10日：8.31      3.75      1.15      -0.25     39        累涨修正：37.03     净值区间：78      78      78      82      83      39
-        ZIYUAN_COMMON.put("159616", ContEtfTypeName.ZIYUAN_COMMON);//农牧ETF               市值：0.52      累涨：22.92     6.15      6.66      10.11     10日：6.51      3.08      1.28      -1.01     46        累涨修正：35.07     净值区间：40      76      79      84      87      40
-        ZIYUAN_COMMON.put("516810", ContEtfTypeName.ZIYUAN_COMMON);//农业50ETF             市值：1.81      累涨：24.04     6.60      7.33      10.11     10日：6.31      2.85      0.64      -1.28     41        累涨修正：34.48     净值区间：19      63      67      76      80      41
-        ZIYUAN_COMMON.put("159930", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF               市值：2.30      累涨：22.46     6.47      5.52      10.47     10日：6.11      3.88      0.88      0.97      42        累涨修正：34.21     净值区间：29      59      64      69      76      42
-        ZIYUAN_COMMON.put("159945", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF广发           市值：0.29      累涨：22.38     6.29      5.57      10.52     10日：6.34      3.80      0.80      0.36      43        累涨修正：34.12     净值区间：15      44      49      56      63      43
-        ZIYUAN_COMMON.put("159698", ContEtfTypeName.ZIYUAN_COMMON);//粮食ETF               市值：2.32      累涨：20.72     7.66      4.83      8.23      10日：5.78      3.03      2.05      -0.64     51        累涨修正：33.63     净值区间：28      62      64      74      76      44
-        ZIYUAN_COMMON.put("159825", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF               市值：21.42     累涨：24.38     6.87      7.75      9.76      10日：6.18      2.51      0.26      -0.91     40        累涨修正：33.59     净值区间：21      60      64      72      78      45
-        ZIYUAN_COMMON.put("561790", ContEtfTypeName.ZIYUAN_COMMON);//央企现代能源ETF       市值：0.51      累涨：20.03     4.65      4.59      10.79     10日：7.76      3.66      0.87      0.18      47        累涨修正：33.19     净值区间：14      46      48      58      63      46
-        ZIYUAN_COMMON.put("159827", ContEtfTypeName.ZIYUAN_COMMON);//农业50ETF             市值：0.92      累涨：23.69     6.64      7.34      9.71      10日：5.99      2.46      0.24      -1.21     45        累涨修正：32.62     净值区间：17      58      62      72      77      47
-        ZIYUAN_COMMON.put("562900", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF易方达         市值：0.65      累涨：22.72     6.68      7.19      8.85      10日：5.82      2.16      0.25      -1.14     49        累涨修正：31.2      净值区间：14      45      48      59      65      48
-        ZIYUAN_COMMON.put("159865", ContEtfTypeName.ZIYUAN_COMMON);//养殖ETF               市值：40.39     累涨：23.07     6.97      7.01      9.09      10日：5.64      2.06      0.16      -1.42     48        累涨修正：31.09     净值区间：15      49      57      66      68      49
-        ZIYUAN_COMMON.put("159867", ContEtfTypeName.ZIYUAN_COMMON);//畜牧ETF               市值：6.48      累涨：22.37     7.03      6.72      8.62      10日：5.53      2.18      0.31      -1.23     50        累涨修正：30.7      净值区间：17      49      55      64      68      50
-        ZIYUAN_COMMON.put("561260", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF               市值：0.40      累涨：19.34     4.95      4.21      10.18     10日：7.05      3.23      0.43      0.09      52        累涨修正：30.48     净值区间：17      48      50      61      66      51
-        ZIYUAN_COMMON.put("516670", ContEtfTypeName.ZIYUAN_COMMON);//畜牧养殖ETF           市值：8.64      累涨：22.64     6.80      7.26      8.58      10日：5.27      1.73                -1.14     53        累涨修正：29.64     净值区间：16      47      56      65      68      52
-        ZIYUAN_COMMON.put("589180", ContEtfTypeName.ZIYUAN_COMMON);//科创新材料ETF汇添富   市值：0.23      累涨：                              10.15     10日：7.18      4.71      3.68      1.08      44        累涨修正：29.4      净值区间：98      99      99                      53
-        ZIYUAN_COMMON.put("516760", ContEtfTypeName.ZIYUAN_COMMON);//养殖ETF               市值：1.27      累涨：21.73     7.20      5.79      8.74      10日：5.31      1.79      0.15      -1.18     54        累涨修正：29.13     净值区间：14      50      59      66      68      54
-        ZIYUAN_COMMON.put("562850", ContEtfTypeName.ZIYUAN_COMMON);//央企能源ETF           市值：0.91      累涨：19.36     5.41      4.58      9.37      10日：6.53      2.71      0.09      0.09      55        累涨修正：28.78     净值区间：16      52      55      64      68      55
-        ZIYUAN_COMMON.put("516550", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF               市值：1.84      累涨：17.73     4.79      5.54      7.40      10日：4.85      2.18      0.72      -0.43     56        累涨修正：26.2      净值区间：28      67      68      75      80      56
-        ZIYUAN_COMMON.put("159980", ContEtfTypeName.ZIYUAN_COMMON);//有色ETF               市值：11.23     累涨：14.83     4.09      5.50      5.24      10日：3.18      0.93      0.70      -0.18     58        累涨修正：20.34     净值区间：14      53      53      63      69      57
-        ZIYUAN_COMMON.put("159985", ContEtfTypeName.ZIYUAN_COMMON);//豆粕ETF               市值：26.00     累涨：14.59     3.46      5.96      5.17      10日：3.46      0.80                -0.31     57        累涨修正：18.85     净值区间：10      10      23      28      38      58
-        ZIYUAN_COMMON.put("562800", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF           市值：12.17     累涨：                                        10日：                              -0.30     59        累涨修正：0         净值区间：86      93      94      95      96      59
+        ZIYUAN_COMMON.put("516780", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF               市值：17.19     累涨：46.01     11.73     14.14     20.14     10日：11.03     1.65                -1.93     2         累涨修正：58.69     净值区间：3       38      68      72      75      1
+        ZIYUAN_COMMON.put("159715", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF易方达         市值：3.10      累涨：44.99     10.70     13.87     20.42     10日：11.24     2.13                -1.65     1         累涨修正：58.36     净值区间：6       39      68      72      75      2
+        ZIYUAN_COMMON.put("516150", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF嘉实           市值：40.91     累涨：43.90     10.84     13.41     19.65     10日：10.66     1.59                -2.08     3         累涨修正：56.15     净值区间：2       35      67      71      74      3
+        ZIYUAN_COMMON.put("159608", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF           市值：3.02      累涨：43.27     9.63      13.14     20.50     10日：11.44     0.79      0.26      -1.39     5         累涨修正：55.76     净值区间：4       40      64      70      74      4
+        ZIYUAN_COMMON.put("515210", ContEtfTypeName.ZIYUAN_COMMON);//钢铁ETF               市值：32.59     累涨：34.26     3.80      9.60      20.86     10日：13.32     3.95      3.95      -1.07     8         累涨修正：55.48     净值区间：1       27      58      69      69      5
+        ZIYUAN_COMMON.put("159713", ContEtfTypeName.ZIYUAN_COMMON);//稀土ETF               市值：7.01      累涨：43.52     10.40     13.74     19.38     10日：10.35     1.35                -2.10     4         累涨修正：55.22     净值区间：1       36      67      71      74      6
+        ZIYUAN_COMMON.put("562800", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF           市值：12.47     累涨：40.91     9.44      12.53     18.94     10日：10.65     0.15                -1.27     9         累涨修正：51.71     净值区间：4       41      64      70      74      7
+        ZIYUAN_COMMON.put("159671", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF基金       市值：4.78      累涨：40.41     8.37      12.88     19.16     10日：10.77     0.33                -1.26     6         累涨修正：51.51     净值区间：0       39      63      70      73      8
+        ZIYUAN_COMMON.put("561800", ContEtfTypeName.ZIYUAN_COMMON);//稀有金属ETF基金       市值：1.05      累涨：39.86     8.83      12.56     18.47     10日：10.51     0.43                -1.79     7         累涨修正：50.8      净值区间：4       41      63      70      73      9
+        ZIYUAN_COMMON.put("159690", ContEtfTypeName.ZIYUAN_COMMON);//矿业ETF               市值：0.16      累涨：36.99     8.01      12.13     16.85     10日：11.21     0.16      0.16      -0.41     10        累涨修正：48.52     净值区间：4       31      57      67      72      10
+        ZIYUAN_COMMON.put("561330", ContEtfTypeName.ZIYUAN_COMMON);//矿业ETF               市值：0.96      累涨：36.91     8.74      12.59     15.58     10日：10.60     0.08      0.08      -0.34     12        累涨修正：47.67     净值区间：3       27      56      67      71      11
+        ZIYUAN_COMMON.put("560860", ContEtfTypeName.ZIYUAN_COMMON);//工业有色ETF           市值：10.48     累涨：37.11     8.19      12.30     16.62     10日：10.28     0.19                -0.50     13        累涨修正：47.58     净值区间：7       40      65      79      79      12
+        ZIYUAN_COMMON.put("512400", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF           市值：60.58     累涨：35.27     7.60      11.77     15.90     10日：10.73                         -0.49     14        累涨修正：46        净值区间：6       31      57      68      71      13
+        ZIYUAN_COMMON.put("159881", ContEtfTypeName.ZIYUAN_COMMON);//有色60ETF             市值：0.52      累涨：35.25     8.32      11.77     15.16     10日：10.04                         -0.08     16        累涨修正：45.29     净值区间：3       26      55      67      71      14
+        ZIYUAN_COMMON.put("516650", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF基金       市值：1.64      累涨：34.92     7.65      12.12     15.15     10日：10.21     0.08                -0.25     18        累涨修正：45.21     净值区间：4       27      55      68      70      15
+        ZIYUAN_COMMON.put("159652", ContEtfTypeName.ZIYUAN_COMMON);//有色50ETF             市值：4.73      累涨：34.56     8.11      11.70     14.75     10日：10.40                         -0.29     17        累涨修正：44.96     净值区间：4       28      56      67      71      16
+        ZIYUAN_COMMON.put("159876", ContEtfTypeName.ZIYUAN_COMMON);//有色龙头ETF           市值：0.75      累涨：34.48     7.76      11.41     15.31     10日：10.11                         -0.31     20        累涨修正：44.59     净值区间：3       26      55      66      70      17
+        ZIYUAN_COMMON.put("159871", ContEtfTypeName.ZIYUAN_COMMON);//有色金属ETF           市值：0.73      累涨：33.92     7.20      11.24     15.48     10日：10.43                         -0.32     21        累涨修正：44.35     净值区间：3       27      56      68      71      18
+        ZIYUAN_COMMON.put("159981", ContEtfTypeName.ZIYUAN_COMMON);//能源化工ETF           市值：5.73      累涨：32.83     10.77     10.98     11.08     10日：8.60      2.35      0.36      -0.96     11        累涨修正：44.14     净值区间：2       1       21      41      45      19
+        ZIYUAN_COMMON.put("159880", ContEtfTypeName.ZIYUAN_COMMON);//有色ETF基金           市值：1.07      累涨：33.74     7.62      11.74     14.38     10日：9.79      0.16                -0.41     24        累涨修正：43.69     净值区间：6       28      55      67      70      20
+        ZIYUAN_COMMON.put("510170", ContEtfTypeName.ZIYUAN_COMMON);//大宗商品ETF           市值：1.71      累涨：28.53     5.40      7.60      15.53     10日：11.51     1.08      1.08      -0.41     15        累涨修正：42.2      净值区间：4       39      57      66      69      21
+        ZIYUAN_COMMON.put("510410", ContEtfTypeName.ZIYUAN_COMMON);//资源ETF               市值：4.90      累涨：29.53     6.24      8.34      14.95     10日：10.72     0.65      0.65      -1.18     22        累涨修正：41.55     净值区间：3       24      48      60      64      22
+        ZIYUAN_COMMON.put("588010", ContEtfTypeName.ZIYUAN_COMMON);//科创新材料ETF         市值：2.38      累涨：29.36     6.77      11.88     10.71     10日：7.04      3.31      1.04      0.46      19        累涨修正：40.75     净值区间：20      52      66      78      81      23
+        ZIYUAN_COMMON.put("159944", ContEtfTypeName.ZIYUAN_COMMON);//材料ETF               市值：0.27      累涨：29.14     5.26      8.92      14.96     10日：10.38     0.46      0.46      -0.47     27        累涨修正：40.44     净值区间：4       28      50      61      64      24
+        ZIYUAN_COMMON.put("588160", ContEtfTypeName.ZIYUAN_COMMON);//科创材料ETF           市值：2.47      累涨：28.62     6.34      12.06     10.22     10日：6.62      3.56      1.32      0.30      23        累涨修正：40.12     净值区间：16      52      64      79      80      25
+        ZIYUAN_COMMON.put("515220", ContEtfTypeName.ZIYUAN_COMMON);//煤炭ETF               市值：71.95     累涨：27.09     7.02      7.43      12.64     10日：9.29      0.92      0.92      0.09      25        累涨修正：38.22     净值区间：12      27      37      46      47      26
+        ZIYUAN_COMMON.put("159761", ContEtfTypeName.ZIYUAN_COMMON);//新材料50ETF           市值：1.56      累涨：28.09     6.07      9.75      12.27     10日：7.79      0.90      0.36      -0.18     26        累涨修正：37.14     净值区间：14      29      54      70      70      27
+        ZIYUAN_COMMON.put("516120", ContEtfTypeName.ZIYUAN_COMMON);//化工50ETF             市值：2.50      累涨：24.10     4.66      6.28      13.16     10日：10.08     1.49      1.04      -0.61     30        累涨修正：36.71     净值区间：9       30      58      67      68      28
+        ZIYUAN_COMMON.put("516020", ContEtfTypeName.ZIYUAN_COMMON);//化工ETF               市值：7.42      累涨：24.29     5.08      6.20      13.01     10日：9.73      1.21      1.21      -0.62     33        累涨修正：36.44     净值区间：9       29      54      63      64      29
+        ZIYUAN_COMMON.put("516710", ContEtfTypeName.ZIYUAN_COMMON);//新材料50ETF           市值：0.35      累涨：27.20     6.16      9.38      11.66     10日：7.39      0.94      0.56      -0.58     31        累涨修正：36.09     净值区间：8       17      52      69      69      30
+        ZIYUAN_COMMON.put("159763", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF基金         市值：0.54      累涨：26.92     5.43      9.77      11.72     10日：7.56      1.15      0.38      -0.40     29        累涨修正：36.01     净值区间：11      19      51      68      68      31
+        ZIYUAN_COMMON.put("516570", ContEtfTypeName.ZIYUAN_COMMON);//化工行业ETF           市值：0.66      累涨：22.34     4.08      5.55      12.71     10日：9.43      2.55      1.66      -1.16     35        累涨修正：35.98     净值区间：58      58      58      64      66      32
+        ZIYUAN_COMMON.put("159870", ContEtfTypeName.ZIYUAN_COMMON);//化工ETF               市值：36.17     累涨：24.36     5.01      6.38      12.97     10日：9.32      1.12      1.12      -0.16     37        累涨修正：35.92     净值区间：10      34      59      68      69      33
+        ZIYUAN_COMMON.put("159703", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF             市值：0.54      累涨：26.90     6.28      9.08      11.54     10日：7.19      0.93      0.46      -0.64     34        累涨修正：35.48     净值区间：12      23      52      69      69      34
+        ZIYUAN_COMMON.put("516360", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF             市值：0.59      累涨：26.06     6.11      8.71      11.24     10日：7.13      1.50      0.41      -0.56     32        累涨修正：35.1      净值区间：8       16      49      67      67      35
+        ZIYUAN_COMMON.put("516220", ContEtfTypeName.ZIYUAN_COMMON);//化工龙头ETF           市值：1.39      累涨：23.04     4.54      5.95      12.55     10日：9.38      1.31      1.31      -0.30     39        累涨修正：35.04     净值区间：63      63      63      67      68      36
+        ZIYUAN_COMMON.put("516480", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF基金         市值：0.12      累涨：26.96     6.81      9.19      10.96     10日：7.21      0.61      0.15      -0.62     41        累涨修正：34.93     净值区间：6       26      54      69      70      37
+        ZIYUAN_COMMON.put("516890", ContEtfTypeName.ZIYUAN_COMMON);//新材料ETF指数基金     市值：0.25      累涨：26.04     5.05      9.09      11.90     10日：7.62      0.90      0.18      -0.37     40        累涨修正：34.74     净值区间：7       24      51      68      68      38
+        ZIYUAN_COMMON.put("159587", ContEtfTypeName.ZIYUAN_COMMON);//粮食ETF广发           市值：0.31      累涨：23.47     8.05      5.58      9.84      10日：7.68      1.66      1.33      0.08      28        累涨修正：34.14     净值区间：11      25      40      54      74      39
+        ZIYUAN_COMMON.put("562010", ContEtfTypeName.ZIYUAN_COMMON);//绿色能源ETF           市值：0.13      累涨：28.07     8.17      10.50     9.40      10日：4.76      0.65      0.65      0.41      36        累涨修正：34.13     净值区间：23      22      36      60      60      40
+        ZIYUAN_COMMON.put("159930", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF               市值：2.27      累涨：22.79     5.72      6.37      10.70     10日：7.67      1.64      1.64      -1.50     38        累涨修正：33.74     净值区间：4       11      34      40      51      41
+        ZIYUAN_COMMON.put("159945", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF广发           市值：0.29      累涨：22.45     5.68      6.60      10.17     10日：7.23      1.26      1.17      -1.19     42        累涨修正：32.11     净值区间：6       11      30      35      45      42
+        ZIYUAN_COMMON.put("516810", ContEtfTypeName.ZIYUAN_COMMON);//农业50ETF             市值：1.77      累涨：23.40     7.25      7.43      8.72      10日：5.89      0.65      0.52      -0.26     45        累涨修正：30.46     净值区间：11      27      45      64      69      43
+        ZIYUAN_COMMON.put("159827", ContEtfTypeName.ZIYUAN_COMMON);//农业50ETF             市值：0.90      累涨：23.09     7.54      7.42      8.13      10日：5.72      0.61      0.49      0.12      48        累涨修正：29.91     净值区间：7       22      45      60      68      44
+        ZIYUAN_COMMON.put("159825", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF               市值：21.15     累涨：23.45     7.54      7.84      8.07      10日：5.47      0.39      0.39      0.00      50        累涨修正：29.7      净值区间：10      19      42      57      66      45
+        ZIYUAN_COMMON.put("159616", ContEtfTypeName.ZIYUAN_COMMON);//农牧ETF               市值：0.47      累涨：22.16     6.25      6.90      9.01      10日：5.82      1.15      0.51      -0.13     43        累涨修正：29.64     净值区间：8       35      58      68      74      46
+        ZIYUAN_COMMON.put("516760", ContEtfTypeName.ZIYUAN_COMMON);//养殖ETF               市值：1.25      累涨：22.11     8.10      5.81      8.20      10日：4.65      1.19      1.19      -0.75     44        累涨修正：29.14     净值区间：13      17      41      58      61      47
+        ZIYUAN_COMMON.put("561790", ContEtfTypeName.ZIYUAN_COMMON);//央企现代能源ETF       市值：0.49      累涨：19.59     3.87      5.51      10.21     10日：8.29      0.62      0.62      -0.63     52        累涨修正：29.12     净值区间：5       2       26      37      43      48
+        ZIYUAN_COMMON.put("562900", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF易方达         市值：0.62      累涨：22.68     7.60      7.31      7.77      10日：5.14      0.64      0.64      -0.13     49        累涨修正：29.1      净值区间：11      9       34      50      57      49
+        ZIYUAN_COMMON.put("516670", ContEtfTypeName.ZIYUAN_COMMON);//畜牧养殖ETF           市值：8.52      累涨：22.74     8.45      6.80      7.49      10日：4.36      0.72      0.72      -0.29     46        累涨修正：28.54     净值区间：12      14      41      57      60      50
+        ZIYUAN_COMMON.put("159865", ContEtfTypeName.ZIYUAN_COMMON);//养殖ETF               市值：39.79     累涨：22.70     7.95      6.84      7.91      10日：4.64      0.48      0.48      0.00      51        累涨修正：28.3      净值区间：13      17      40      57      59      51
+        ZIYUAN_COMMON.put("159867", ContEtfTypeName.ZIYUAN_COMMON);//畜牧ETF               市值：6.39      累涨：21.84     7.83      6.72      7.29      10日：4.56      0.31      0.31      -0.16     53        累涨修正：27.02     净值区间：9       14      37      54      59      52
+        ZIYUAN_COMMON.put("159698", ContEtfTypeName.ZIYUAN_COMMON);//粮食ETF               市值：2.30      累涨：18.58     5.24      5.16      8.18      10日：6.08      1.07      1.07      -0.11     54        累涨修正：26.8      净值区间：13      26      47      62      62      53
+        ZIYUAN_COMMON.put("561260", ContEtfTypeName.ZIYUAN_COMMON);//能源ETF               市值：0.39      累涨：18.63     4.08      5.23      9.32      10日：7.31      0.35      0.35      -0.89     56        累涨修正：26.64     净值区间：5       10      26      42      42      54
+        ZIYUAN_COMMON.put("562850", ContEtfTypeName.ZIYUAN_COMMON);//央企能源ETF           市值：0.89      累涨：18.29     4.25      5.60      8.44      10日：6.71      0.18      0.18      -0.89     57        累涨修正：25.36     净值区间：8       4       30      42      45      55
+        ZIYUAN_COMMON.put("516550", ContEtfTypeName.ZIYUAN_COMMON);//农业ETF               市值：1.81      累涨：18.13     5.82      5.24      7.07      10日：5.12      0.87      0.87      0.00      55        累涨修正：24.99     净值区间：17      15      44      57      65      56
+        ZIYUAN_COMMON.put("589180", ContEtfTypeName.ZIYUAN_COMMON);//科创新材料ETF汇添富   市值：0.19      累涨：                              10.74     10日：6.81      3.45      1.35      0.37      47        累涨修正：22.35     净值区间：18      55      67                      57
+        ZIYUAN_COMMON.put("159985", ContEtfTypeName.ZIYUAN_COMMON);//豆粕ETF               市值：26.31     累涨：15.26     3.72      5.86      5.68      10日：2.94      0.98      0.98      0.31      58        累涨修正：20.16     净值区间：84      31      37      44      52      58
+        ZIYUAN_COMMON.put("159980", ContEtfTypeName.ZIYUAN_COMMON);//有色ETF               市值：10.99     累涨：14.77     5.12      5.17      4.48      10日：3.30      0.12      0.12      0.06      59        累涨修正：18.31     净值区间：23      15      20      34      47      59
     }
 
     public static Map<String, String> ZIYUAN = new HashMap<>();
@@ -166,10 +169,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_XIAOFEI_MEDIA = new HashMap<>();
+
     static {
         TOP_XIAOFEI_MEDIA.put("159869", ContEtfTypeName.XIAOFEI_MEDIA);//游戏ETF               市值：81.38     累涨：45.67     15.19     19.18     11.30     10日：2.52      1.89      1.42      0.47      1         累涨修正：52.92     净值区间：50      28      57      76      79      1
     }
+
     public static Map<String, String> XIAOFEI_MEDIA = new HashMap<>();
+
     static {
         XIAOFEI_MEDIA.put("159869", ContEtfTypeName.XIAOFEI_MEDIA);//游戏ETF               市值：81.38     累涨：45.67     15.19     19.18     11.30     10日：2.52      1.89      1.42      0.47      1         累涨修正：52.92     净值区间：50      28      57      76      79      1
         XIAOFEI_MEDIA.put("516770", ContEtfTypeName.XIAOFEI_MEDIA);//游戏ETF华泰柏瑞       市值：1.63      累涨：45.20     15.66     18.87     10.67     10日：2.06      1.83      1.45      0.30      3         累涨修正：51.99     净值区间：48      25      57      76      82      2
@@ -227,10 +233,13 @@ public class ContMapEtfAll {
      * 医疗
      */
     public static Map<String, String> TOP_YILIAO_COMMON = new HashMap<>();
+
     static {
         TOP_YILIAO_COMMON.put("159570", ContEtfTypeName.YILIAO_COMMON);//港股通创新药ETF       市值：118.80    累涨：71.31     23.31     23.33     24.67     10日：11.60     7.99      6.00      0.05      2         累涨修正：102.9     净值区间：43      55      76      81      87      1
     }
+
     public static Map<String, String> YILIAO_COMMON = new HashMap<>();
+
     static {
         YILIAO_COMMON.put("159570", ContEtfTypeName.YILIAO_COMMON);//港股通创新药ETF       市值：118.80    累涨：71.31     23.31     23.33     24.67     10日：11.60     7.99      6.00      0.05      2         累涨修正：102.9     净值区间：43      55      76      81      87      1
         YILIAO_COMMON.put("513780", ContEtfTypeName.YILIAO_COMMON);//港股创新药50ETF       市值：16.19     累涨：71.00     22.36     23.26     25.38     10日：11.77     7.96      6.00      -0.05     1         累涨修正：102.73    净值区间：46      57      77      82      87      2
@@ -331,10 +340,13 @@ public class ContMapEtfAll {
      * 科技
      */
     public static Map<String, String> TOP_KEJI_HK = new HashMap<>();
+
     static {
         TOP_KEJI_HK.put("513980", ContEtfTypeName.KEJI_HK);//港股科技50ETF         市值：175.13    累涨：37.48     11.11     12.34     14.03     10日：7.46      2.30      1.28      0.00      1         累涨修正：49.8      净值区间：15      31      72      76      76      1
     }
+
     public static Map<String, String> KEJI_HK = new HashMap<>();
+
     static {
         KEJI_HK.put("513980", ContEtfTypeName.KEJI_HK);//港股科技50ETF         市值：175.13    累涨：37.48     11.11     12.34     14.03     10日：7.46      2.30      1.28      0.00      1         累涨修正：49.8      净值区间：15      31      72      76      76      1
         KEJI_HK.put("513860", ContEtfTypeName.KEJI_HK);//港股通科技ETF         市值：26.17     累涨：36.87     10.97     12.65     13.25     10日：6.96      1.66      1.15      -0.39     2         累涨修正：47.79     净值区间：15      33      72      76      76      2
@@ -397,10 +409,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_JUNGONG = new HashMap<>();
+
     static {
         TOP_KEJI_JUNGONG.put("512710", ContEtfTypeName.KEJI_JUNGONG);//军工龙头ETF           市值：136.81    累涨：39.85     13.34     13.59     12.92     10日：7.95      4.20      2.17      0.00      2         累涨修正：56.34     净值区间：64      82      83      91      94      1
     }
+
     public static Map<String, String> KEJI_JUNGONG = new HashMap<>();
+
     static {
         KEJI_JUNGONG.put("512710", ContEtfTypeName.KEJI_JUNGONG);//军工龙头ETF           市值：136.81    累涨：39.85     13.34     13.59     12.92     10日：7.95      4.20      2.17      0.00      2         累涨修正：56.34     净值区间：64      82      83      91      94      1
         KEJI_JUNGONG.put("512670", ContEtfTypeName.KEJI_JUNGONG);//国防ETF               市值：68.67     累涨：39.38     13.43     12.82     13.13     10日：8.29      4.25      2.12      0.12      1         累涨修正：56.16     净值区间：78      90      90      95      96      2
@@ -483,11 +498,14 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_RUAN_JIAN = new HashMap<>();
+
     static {
         TOP_KEJI_RUAN_JIAN.put("159388", ContEtfTypeName.KEJI_RUAN_JIAN);//创业板人工智能ETF国泰 市值：0.55      累涨：50.45     13.40     20.30     16.75     10日：8.38      5.05      4.06      0.79      1         累涨修正：72        净值区间：61      68      84      87      89      1
         TOP_KEJI_RUAN_JIAN.put("516860", ContEtfTypeName.KEJI_RUAN_JIAN);//金融科技ETF           市值：12.92     累涨：46.90     11.91     20.52     14.47     10日：6.01      4.55      2.53      -1.04     13        累涨修正：62.52     净值区间：0       16      50      75      79      6
     }
+
     public static Map<String, String> KEJI_RUAN_JIAN = new HashMap<>();
+
     static {
         KEJI_RUAN_JIAN.put("159388", ContEtfTypeName.KEJI_RUAN_JIAN);//创业板人工智能ETF国泰 市值：0.55      累涨：50.45     13.40     20.30     16.75     10日：8.38      5.05      4.06      0.79      1         累涨修正：72        净值区间：61      68      84      87      89      1
         KEJI_RUAN_JIAN.put("159363", ContEtfTypeName.KEJI_RUAN_JIAN);//创业板人工智能ETF华宝 市值：18.88     累涨：50.66     13.98     20.60     16.08     10日：8.20      5.03      3.84      0.81      3         累涨修正：71.57     净值区间：62      7       7       7       7       2
@@ -567,10 +585,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_XIN_PIAN = new HashMap<>();
+
     static {
         TOP_KEJI_XIN_PIAN.put("159909", ContEtfTypeName.KEJI_XIN_PIAN);//TMT50ETF              市值：5.11      累涨：41.71     11.91     15.05     14.75     10日：9.62      3.22      3.22      1.44      2         累涨修正：60.99     净值区间：100     100     100     100     100     1
     }
+
     public static Map<String, String> KEJI_XIN_PIAN = new HashMap<>();
+
     static {
         KEJI_XIN_PIAN.put("159909", ContEtfTypeName.KEJI_XIN_PIAN);//TMT50ETF              市值：5.11      累涨：41.71     11.91     15.05     14.75     10日：9.62      3.22      3.22      1.44      2         累涨修正：60.99     净值区间：100     100     100     100     100     1
         KEJI_XIN_PIAN.put("512220", ContEtfTypeName.KEJI_XIN_PIAN);//TMTETF                市值：4.48      累涨：39.21     10.22     15.41     13.58     10日：8.86      3.43      3.43      1.85      3         累涨修正：58.36     净值区间：100     100     100     100     100     2
@@ -642,10 +663,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_NEW_ENERGY = new HashMap<>();
+
     static {
         TOP_KEJI_NEW_ENERGY.put("588830", ContEtfTypeName.KEJI_NEW_ENERGY);//科创新能源ETF         市值：4.81      累涨：40.11     9.39      14.62     16.10     10日：8.84      6.70      5.04      -0.99     2         累涨修正：65.73     净值区间：83      89      91      95      95      1
     }
+
     public static Map<String, String> KEJI_NEW_ENERGY = new HashMap<>();
+
     static {
         KEJI_NEW_ENERGY.put("588830", ContEtfTypeName.KEJI_NEW_ENERGY);//科创新能源ETF         市值：4.81      累涨：40.11     9.39      14.62     16.10     10日：8.84      6.70      5.04      -0.99     2         累涨修正：65.73     净值区间：83      89      91      95      95      1
         KEJI_NEW_ENERGY.put("588960", ContEtfTypeName.KEJI_NEW_ENERGY);//科创板新能源ETF       市值：1.08      累涨：38.94     9.42      13.46     16.06     10日：8.62      6.74      5.08      -1.02     1         累涨修正：64.46     净值区间：77      86      88      93      93      2
@@ -702,10 +726,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_NEW_CAR = new HashMap<>();
+
     static {
         TOP_KEJI_NEW_CAR.put("159755", ContEtfTypeName.KEJI_NEW_CAR);//电池ETF               市值：40.06     累涨：38.14     12.46     12.69     12.99     10日：8.97      6.85      4.49      -0.66     1         累涨修正：62.94     净值区间：82      89      90      93      94      1
     }
+
     public static Map<String, String> KEJI_NEW_CAR = new HashMap<>();
+
     static {
         KEJI_NEW_CAR.put("159755", ContEtfTypeName.KEJI_NEW_CAR);//电池ETF               市值：40.06     累涨：38.14     12.46     12.69     12.99     10日：8.97      6.85      4.49      -0.66     1         累涨修正：62.94     净值区间：82      89      90      93      94      1
         KEJI_NEW_CAR.put("159757", ContEtfTypeName.KEJI_NEW_CAR);//电池30ETF             市值：3.10      累涨：36.92     11.83     12.03     13.06     10日：9.24      7.17      4.65      -0.80     2         累涨修正：62.63     净值区间：82      89      89      93      94      2
@@ -781,12 +808,15 @@ public class ContMapEtfAll {
      * 指数
      */
     public static Map<String, String> TOP_INDEX_CN_NOT = new HashMap<>();
+
     static {
         TOP_INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
 //        TOP_INDEX_CN_NOT.put("513730", ContEtfTypeName.INDEX_CN_NOT);//东南亚科技ETF         市值：15.89     累涨：29.67     10.04     8.88      10.75     10日：6.72      2.65      1.28      -0.95     1         累涨修正：41.6      净值区间：11      63      68      77      77      6
         TOP_INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.61     累涨：28.97     11.24     6.84      10.89     10日：4.22      2.61      1.37      -0.93     5         累涨修正：38.54     净值区间：35      54      50      78      82      9
     }
+
     public static Map<String, String> INDEX_CN_NOT = new HashMap<>();
+
     static {
         INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
         INDEX_CN_NOT.put("513880", ContEtfTypeName.INDEX_CN_NOT);//日经225ETF            市值：15.55     累涨：25.07     7.44      8.84      8.79      10日：6.11      4.59      4.45      -1.43     3         累涨修正：44.67     净值区间：65      67      67      76      80      2
@@ -804,10 +834,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_INDEX_CN_NOT_USA = new HashMap<>();
+
     static {
         TOP_INDEX_CN_NOT_USA.put("159509", ContEtfTypeName.INDEX_CN_NOT_USA);//纳指科技ETF           市值：113.84    累涨：40.62     16.36     9.11      15.15     10日：7.23      3.30      1.49      0.00      1         累涨修正：54.13     净值区间：62      83      90      93      95      1
     }
+
     public static Map<String, String> INDEX_CN_NOT_USA = new HashMap<>();
+
     static {
         INDEX_CN_NOT_USA.put("159509", ContEtfTypeName.INDEX_CN_NOT_USA);//纳指科技ETF           市值：113.84    累涨：40.62     16.36     9.11      15.15     10日：7.23      3.30      1.49      0.00      1         累涨修正：54.13     净值区间：62      83      90      93      95      1
         INDEX_CN_NOT_USA.put("513390", ContEtfTypeName.INDEX_CN_NOT_USA);//纳指100ETF            市值：32.87     累涨：29.67     13.80     9.10      6.77      10日：3.60      1.57      0.22      0.16      2         累涨修正：35.28     净值区间：66      84      88      94      97      2
@@ -970,10 +1003,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_INDEX_300 = new HashMap<>();
+
     static {
         TOP_INDEX_300.put("159370", ContEtfTypeName.INDEX_300);//创50ETF工银           市值：0.85      累涨：41.82     12.13     14.57     15.12     10日：7.76      3.27      1.93      -0.35     2         累涨修正：56.71     净值区间：82      93      95      97      97      1
     }
+
     public static Map<String, String> INDEX_300 = new HashMap<>();
+
     static {
         INDEX_300.put("159370", ContEtfTypeName.INDEX_300);//创50ETF工银           市值：0.85      累涨：41.82     12.13     14.57     15.12     10日：7.76      3.27      1.93      -0.35     2         累涨修正：56.71     净值区间：82      93      95      97      97      1
         INDEX_300.put("159383", ContEtfTypeName.INDEX_300);//创业板50ETF华泰柏瑞   市值：0.87      累涨：40.70     12.05     13.37     15.28     10日：8.15      3.37      2.14      -0.55     1         累涨修正：56.5      净值区间：82      92      95      97      97      2
@@ -1028,10 +1064,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_INDEX_688 = new HashMap<>();
+
     static {
         TOP_INDEX_688.put("588240", ContEtfTypeName.INDEX_688);//科创200ETF指数        市值：1.35      累涨：38.93     9.59      15.60     13.74     10日：8.26      2.86      1.60      1.14      2         累涨修正：53.25     净值区间：98      99      99      100     100     3
     }
+
     public static Map<String, String> INDEX_688 = new HashMap<>();
+
     static {
         INDEX_688.put("588910", ContEtfTypeName.INDEX_688);//科创价值ETF           市值：3.42      累涨：32.99     6.66      12.26     14.07     10日：9.21      6.02      3.11      -0.37     1         累涨修正：54.44     净值区间：91      95      95      97      97      1
         INDEX_688.put("588850", ContEtfTypeName.INDEX_688);//科创机械ETF           市值：0.19      累涨：33.27     8.23      10.97     14.07     10日：8.91      5.34      3.05      0.09      3         累涨修正：53.62     净值区间：37      56      63      69      69      2
@@ -1387,10 +1426,13 @@ public class ContMapEtfAll {
      * 金融
      */
     public static Map<String, String> TOP_JINRONG_GOLD = new HashMap<>();
+
     static {
         TOP_JINRONG_GOLD.put("517400", ContEtfTypeName.JINRONG_GOLD);//黄金股票ETF           市值：1.05      累涨：36.21     10.78     13.43     12.00     10日：6.95      4.62      3.75      -0.92     2         累涨修正：55.28     净值区间：57      59      59      57      65      1
     }
+
     public static Map<String, String> JINRONG_GOLD = new HashMap<>();
+
     static {
         JINRONG_GOLD.put("517400", ContEtfTypeName.JINRONG_GOLD);//黄金股票ETF           市值：1.05      累涨：36.21     10.78     13.43     12.00     10日：6.95      4.62      3.75      -0.92     2         累涨修正：55.28     净值区间：57      59      59      57      65      1
         JINRONG_GOLD.put("517520", ContEtfTypeName.JINRONG_GOLD);//黄金股ETF             市值：44.70     累涨：36.72     10.90     13.85     11.97     10日：7.08      4.40      3.44      -1.12     1         累涨修正：55.08     净值区间：48      54      55      72      80      2
@@ -1415,10 +1457,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();
+
     static {
         TOP_JINRONG_BANK.put("512700", ContEtfTypeName.JINRONG_BANK);//银行ETF南方           市值：15.79     累涨：29.33     9.62      10.37     9.34      10日：3.25      1.25      0.57      -1.42     1         累涨修正：34.97     净值区间：4       2       19      54      67      1
     }
+
     public static Map<String, String> JINRONG_BANK = new HashMap<>();
+
     static {
         JINRONG_BANK.put("512700", ContEtfTypeName.JINRONG_BANK);//银行ETF南方           市值：15.79     累涨：29.33     9.62      10.37     9.34      10日：3.25      1.25      0.57      -1.42     1         累涨修正：34.97     净值区间：4       2       19      54      67      1
         JINRONG_BANK.put("517900", ContEtfTypeName.JINRONG_BANK);//银行AH优选ETF         市值：9.12      累涨：29.54     10.59     11.39     7.56      10日：2.74      0.99      0.75      -0.74     2         累涨修正：34.77     净值区间：17      9       24      60      72      2
@@ -1472,10 +1517,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();
+
     static {
         TOP_JINRONG_FANGDICHAN.put("159745", ContEtfTypeName.JINRONG_FANGDICHAN);//建材ETF               市值：17.69     累涨：26.14     4.38      6.79      14.97     10日：8.21      7.37      4.37      -2.41     2         累涨修正：50.46     净值区间：41      54      62      66      66      1
     }
+
     public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();
+
     static {
         JINRONG_FANGDICHAN.put("159745", ContEtfTypeName.JINRONG_FANGDICHAN);//建材ETF               市值：17.69     累涨：26.14     4.38      6.79      14.97     10日：8.21      7.37      4.37      -2.41     2         累涨修正：50.46     净值区间：41      54      62      66      66      1
         JINRONG_FANGDICHAN.put("516970", ContEtfTypeName.JINRONG_FANGDICHAN);//基建50ETF             市值：33.42     累涨：23.84     5.44      6.25      12.15     10日：8.81      8.08      4.26      -2.33     1         累涨修正：49.25     净值区间：32      54      60      66      66      2
@@ -1685,10 +1733,22 @@ public class ContMapEtfAll {
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
             }
+            BigDecimal rank60 = vo.getADR_UP_SUM_ORDER_1_60();
+            if (rank60 != null) {
+                sb.append(StockUtil.formatDouble(rank60, SIZE_6));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_6));
+            }
             if (vo.getADR_UP_SUM_40_60() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_40_60().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
             } else {
                 sb.append(StockUtil.formatStName("", SIZE_10));
+            }
+            BigDecimal rank40To60 = vo.getADR_UP_SUM_ORDER_40_60();
+            if (rank40To60 != null) {
+                sb.append(StockUtil.formatDouble(rank40To60, SIZE_6));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_6));
             }
             if (vo.getADR_UP_SUM_20_40() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_20_40().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_10));
@@ -1769,8 +1829,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-31";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-08-01";
 
         //////        //etf头部数据
 //        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.TOP_XIAOFEI.keySet());
@@ -1788,7 +1848,7 @@ public class ContMapEtfAll {
 
 
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, "ZIYUAN_OIL", ContEtfTypeName.ZIYUAN_OIL, ContMapEtfAll.ZIYUAN_OIL);//资源-石油
-        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);//资源-通用
+//        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);//资源-通用
 
 //        findByTypeName(date, ContEtfNameKey.YILIAO_COMMON, null, "YILIAO_COMMON", ContEtfTypeName.YILIAO_COMMON, ContMapEtfAll.YILIAO_COMMON);//医疗-通用
 
@@ -1808,7 +1868,7 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);//科技-香港
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);//科技-军工
 //        findByTypeName(date, ContEtfNameKey.KEJI_GONG_YE, ContEtfNameKey.KEJI_GONG_YE_NOLIKE, "KEJI_GONG_YE", ContEtfTypeName.KEJI_GONG_YE, ContMapEtfAll.KEJI_GONG_YE);
-//        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);//科技-软件
+        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);//科技-软件
 //        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfAll.KEJI_XIN_PIAN);//科技-芯片
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);//科技-通信
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);//科技-新能源

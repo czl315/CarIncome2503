@@ -36,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-07-25";
+//        String date = "2025-08-01";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -1975,6 +1975,7 @@ public class EtfControl {
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_5);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_10);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20);
+            updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40);
             updateAdrSumOrderByBiz(date, type, DB_STOCK_ADR_COUNT_ADR_UP_SUM_40_60);
             updateAdrSumOrderStatByBiz(date, type, channel);
@@ -2646,8 +2647,8 @@ public class EtfControl {
         if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_20.equals(dbField)) {
             stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_20, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
         }
-        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_40.equals(dbField)) {
-            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
+        if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60.equals(dbField)) {
+            stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_1_60, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
         }
         if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_20_40.equals(dbField)) {
             stList = stList.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_20_40, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
@@ -2698,6 +2699,12 @@ public class EtfControl {
                     ++order;
                 }
                 entity.setADR_UP_SUM_ORDER_40_60(new BigDecimal(order));
+            }
+            if (DB_STOCK_ADR_COUNT_ADR_UP_SUM_1_60.equals(dbField)) {
+                if (etf.getADR_UP_SUM_1_60() != null) {
+                    ++order;
+                }
+                entity.setADR_UP_SUM_ORDER_1_60(new BigDecimal(order));
             }
 
             //更新
@@ -2765,17 +2772,18 @@ public class EtfControl {
             BigDecimal adrUpSum1To5 = etfAdrCountVo.getADR_UP_SUM_1_5() != null ? etfAdrCountVo.getADR_UP_SUM_1_5() : new BigDecimal("0");
 //            adrUpSum1To5 = adrUpSum1To5.multiply(new BigDecimal("2"));
             BigDecimal adrUpSum1To3Real = etfAdrCountVo.getADR_UP_SUM_1_3() != null ? etfAdrCountVo.getADR_UP_SUM_1_3() : new BigDecimal("0");
-            BigDecimal adrUpSum1To3 = adrUpSum1To3Real.multiply(new BigDecimal("2"));
+//            BigDecimal adrUpSum1To3 = adrUpSum1To3Real.multiply(new BigDecimal("2"));
+            BigDecimal adrUpSum1To3 = adrUpSum1To3Real;
 
 //            //如果涨和超过100，可能是复权错误，不累加
-//            if (adrUpSum140To60.compareTo(new BigDecimal(100)) > 0) {
-//                adrUpSum140To60 = new BigDecimal("0");
-//                System.out.println("adrUpSum140To60-涨和超过100%：" + etfAdrCountVo.getF14());
-//            }
-//            if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
-//                adrUpSum120To40 = new BigDecimal("0");
-//                System.out.println("adrUpSum120To40-涨和超过100%：" + etfAdrCountVo.getF14());
-//            }
+            if (adrUpSum140To60.compareTo(new BigDecimal(100)) > 0) {
+                adrUpSum140To60 = new BigDecimal("0");
+                System.out.println("adrUpSum140To60-涨和超过100%：" + etfAdrCountVo.getF14());
+            }
+            if (adrUpSum120To40.compareTo(new BigDecimal(100)) > 0) {
+                adrUpSum120To40 = new BigDecimal("0");
+                System.out.println("adrUpSum120To40-涨和超过100%：" + etfAdrCountVo.getF14());
+            }
 
             BigDecimal adrUpSum1TotalPre = adrUpSum140To60.add(adrUpSum120To40).add(adrUpSum1To20).add(adrUpSum1To10).add(adrUpSum1To5);
             BigDecimal adrUpSum1Total = adrUpSum1TotalPre.add(adrUpSum1To3);
