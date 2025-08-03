@@ -194,15 +194,41 @@ public class BizService {
     }
 
     /**
-     * 查询昨日主题排名
+     * 查询股票-根据业务,每页只能查询100个，需要多次查询
      */
     public static List<RankStockCommpanyDb> listRankStockByBiz(int pageSize, String biz) {
+        List<RankStockCommpanyDb> stList = new ArrayList<>();
+        int maxCount = 20;//最多查询次数
+        for (int i = 1; i <= maxCount; i++) {
+            List<RankStockCommpanyDb> curPageEtfList = BizService.listRankStockByBiz(i, pageSize, biz);
+            if (curPageEtfList != null && curPageEtfList.size() > 0) {
+//                System.out.println("当前页查询个数：" + curPageEtfList.size());
+                stList.addAll(curPageEtfList);
+                if (curPageEtfList.size() < 100) {//如果返回数据不足100个，直接返回
+                    return stList;
+                }
+            } else {
+                break;
+            }
+        }
+        return stList;
+    }
+
+    /**
+     * 查询股票-根据业务
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param biz
+     * @return
+     */
+    public static List<RankStockCommpanyDb> listRankStockByBiz(int pageNo, int pageSize, String biz) {
         //http://push2.eastmoney.com/api/qt/clist/get?cb=jQuery112307730222083783287_1617467610779&fid=f62&po=1&pz=50&pn=1&np=1&fltt=2&invt=2&ut=b2884a393a59ad64002292a3e90d46a5&fs=b%3ABK0891&fields=f12%2Cf14%2Cf2%2Cf3%2Cf62%2Cf184%2Cf66%2Cf69%2Cf72%2Cf75%2Cf78%2Cf81%2Cf84%2Cf87%2Cf204%2Cf205%2Cf124
         StringBuffer urlParam = new StringBuffer();
         long curTime = System.currentTimeMillis();
         String url = "http://push2.eastmoney.com/api/qt/clist/get";
         urlParam.append("cb=jQuery112307730222083783287_" + curTime +
-                "&pn=1" +//页数
+                "&pn=" + pageNo +//页数
                 "&pz=" + pageSize +//每页数量
                 "&po=1" +//pageorder:页面排序：0-正序；1-倒序
                 "&np=1" +
@@ -241,7 +267,7 @@ public class BizService {
 //        System.out.println(url + "?" + urlParam.toString());
         String rs = "";
         JSONObject rsJsonObj = null;
-        for (int i = 0; i < NUM_MAX_99; i++) {
+        for (int i = 0; i < NUM_MAX_20; i++) {
             rs = HttpUtil.sendGet(url, urlParam.toString(), "");
 //        System.out.println(rs);//返回结果
             if (rs.startsWith("jQuery")) {
@@ -260,11 +286,13 @@ public class BizService {
         }
 //        System.out.println(rs);//返回结果
 
-        JSONObject rsJsonData = rsJsonObj.getJSONObject("data");
         try {
-            JSONArray rsJsonDataDiff = rsJsonData.getJSONArray("diff");
-            List<RankStockCommpanyDb> rankBizDataDiffList = JSON.parseArray(JSON.toJSONString(rsJsonDataDiff), RankStockCommpanyDb.class);
-            return rankBizDataDiffList;
+            JSONObject rsJsonData = rsJsonObj.getJSONObject("data");
+            if (rsJsonData != null && rsJsonData.containsKey("diff")) {
+                JSONArray rsJsonDataDiff = rsJsonData.getJSONArray("diff");
+                List<RankStockCommpanyDb> rankBizDataDiffList = JSON.parseArray(JSON.toJSONString(rsJsonDataDiff), RankStockCommpanyDb.class);
+                return rankBizDataDiffList;
+            }
         } catch (Exception e) {
             System.out.println("Exception:" + rs);
             e.printStackTrace();
@@ -671,9 +699,6 @@ public class BizService {
         return rankBizDataDiffList;
     }
 
-    public static void main(String[] args) {
-        updateFuQuanBizByZqdm();
-    }
 
     /**
      * 复权更新-特定编码-特定日期
@@ -697,4 +722,15 @@ public class BizService {
 
     }
 
+    public static void main(String[] args) {
+        List<RankBizDataDiff> bizList = StockService.listBiz(NUM_MAX_99);//查询业务列表
+        for (RankBizDataDiff rankBizDataDiff : bizList) {
+            String bizCode = rankBizDataDiff.getF12();
+            String bizName = rankBizDataDiff.getF14();
+            List<RankStockCommpanyDb> stList = BizService.listRankStockByBiz(NUM_MAX_999, bizCode);
+            if (stList.size() >= 100) {
+                System.out.println("业务：" + bizName + "，个数：" + stList.size());
+            }
+        }
+    }
 }
