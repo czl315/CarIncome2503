@@ -35,15 +35,16 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-08-01";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-08-01";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-            return;
+//            return;
         }
 
-        boolean updateEtf = true;//更新ETF
-//        boolean updateStock = true;//更新股票
-        boolean updateStock = false;//更新股票
+//        boolean updateEtf = true;//更新ETF
+        boolean updateEtf = false;
+        boolean updateStock = true;//更新股票
+//        boolean updateStock = false;//更新股票
 
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -73,10 +74,10 @@ public class EtfControl {
         }
         if (updateStock) {
             saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
-            updateAdrSumStock(date, null);//"小金属"   证券
-            updateUpSumOrderStock(date, CHANNEL_STOCK);
-            updateLatestDayAdrStock(condition, date);
-            updateUpMaTypeTopN(date, 1, Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102), CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+//            updateAdrSumStock(date, null);//"小金属"   证券
+//            updateUpSumOrderStock(date, CHANNEL_STOCK);
+//            updateLatestDayAdrStock(condition, date);
+//            updateUpMaTypeTopN(date, 1, Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102), CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
         }
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
@@ -1197,6 +1198,10 @@ public class EtfControl {
                 continue;
             }
 
+            if (bizName.equals("电网设备")) {
+                System.out.println("特定业务：" + bizName);
+            }
+
             stBizCountTemp++;
             if (stBizCountTemp < startMapNum) {
                 System.out.println("已完成," + (stBizCountTemp) + ":" + bizName);
@@ -1209,7 +1214,11 @@ public class EtfControl {
             List<RankStockCommpanyDb> stList = BizService.listRankStockByBiz(NUM_MAX_999, bizCode);
             List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
             for (RankStockCommpanyDb stockCommpanyDb : stList) {
-                String code = stockCommpanyDb.getF12();
+                String zqdm = stockCommpanyDb.getF12();
+
+                if (zqdm.equals("002298")) {
+                    System.out.println("特定代码：" + zqdm);
+                }
 
                 //市值过滤
                 BigDecimal marketValue = stockCommpanyDb.getF20();
@@ -1220,7 +1229,7 @@ public class EtfControl {
                 EtfAdrCount entity = new EtfAdrCount();
                 entity.setChannel(channel);
                 entity.setDate(date);
-                entity.setF12(code);
+                entity.setF12(zqdm);
                 entity.setType_name(bizName);
 
                 if (stockCommpanyDb.getF2() != null) {
@@ -2476,7 +2485,7 @@ public class EtfControl {
         int maxCount = 100;//最多查询次数
         for (int i = 1; i <= maxCount; i++) {
             List<RankBizDataDiff> curPageEtfList = EtfService.listEtfFromHttp(i, NUM_MAX_99);//查询列表
-            if (curPageEtfList.size() > 0) {
+            if (curPageEtfList != null && curPageEtfList.size() > 0) {
 //                System.out.println("当前页查询个数：" + curPageEtfList.size());
                 etfList.addAll(curPageEtfList);
             } else {
