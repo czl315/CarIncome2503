@@ -287,6 +287,7 @@ public class EtfAdrCountService {
     /**
      * 查询etf涨幅数据：查询条件：日期，类型，净值区间；
      * 过滤条件：涨序排序前n的数据，每个类型限定n个；
+     * //TODO 增加均线百分比排序
      *
      * @param date
      * @param orderField           排序字段

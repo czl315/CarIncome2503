@@ -152,6 +152,7 @@ public class EtfAdrJob {
             try {
                 CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
+                condition.setChannel(CHANNEL_ETF);
                 List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
                 EtfControl.updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
             } catch (Exception e) {

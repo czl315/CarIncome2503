@@ -35,10 +35,10 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-08-01";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-08-04";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-//            return;
+            return;
         }
 
 //        boolean updateEtf = true;//更新ETF
@@ -74,10 +74,10 @@ public class EtfControl {
         }
         if (updateStock) {
             saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
-//            updateAdrSumStock(date, null);//"小金属"   证券
-//            updateUpSumOrderStock(date, CHANNEL_STOCK);
-//            updateLatestDayAdrStock(condition, date);
-//            updateUpMaTypeTopN(date, 1, Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102), CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
+            updateAdrSumStock(date, null);//"小金属"   证券
+            updateUpSumOrderStock(date, CHANNEL_STOCK);
+            updateLatestDayAdrStock(condition, date);
+            updateUpMaTypeTopN(date, 1, Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102), CHANNEL_STOCK);//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
         }
 
 //        findByDateOrder(date, zqdmList, 100,NET_AREA_DAY_20 , 200, null,2);//查询数据根据日期，按照涨幅倒序    F3_DESC  NET_AREA_DAY_20
@@ -1216,9 +1216,9 @@ public class EtfControl {
             for (RankStockCommpanyDb stockCommpanyDb : stList) {
                 String zqdm = stockCommpanyDb.getF12();
 
-                if (zqdm.equals("002298")) {
-                    System.out.println("特定代码：" + zqdm);
-                }
+//                if (zqdm.equals("002298")) {
+//                    System.out.println("特定代码：" + zqdm);
+//                }
 
                 //市值过滤
                 BigDecimal marketValue = stockCommpanyDb.getF20();
@@ -2122,9 +2122,9 @@ public class EtfControl {
         for (RankBizDataDiff etfVo : etfList) {
             String zqdm = etfVo.getF12();
             String zqmc = etfVo.getF14();
-            if (zqdm.equals("516100")) {
-                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
-            }
+//            if (zqdm.equals("516100")) {
+//                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
+//            }
 
             //当前交易日
             String curTradeDay = date.replace("-", "");
