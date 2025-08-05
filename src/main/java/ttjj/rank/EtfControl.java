@@ -705,8 +705,8 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "更新历史净值";
 
-        //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-03-17";
+                String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-03-17";
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         // 1、查询历史数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
