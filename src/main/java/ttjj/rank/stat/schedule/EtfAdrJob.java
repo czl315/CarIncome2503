@@ -45,11 +45,11 @@ public class EtfAdrJob {
                 CondEtfAdrCount condition = new CondEtfAdrCount();
                 condition.setDate(date);
                 EtfControl.saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);
-                jobSeconds++;
+                EtfControl.saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, jobSeconds, TimeUnit.SECONDS);
+        }, 0, 300, TimeUnit.SECONDS);
 
         /**
          * 更新最近交易日的涨幅，最近3日

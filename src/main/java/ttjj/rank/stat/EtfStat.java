@@ -59,7 +59,7 @@ public class EtfStat {
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_20_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_20_40_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_40_60_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
-            rs = EtfAdrCountService.findByDateOrderByField(day, NET_AREA_DAY_20, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//最近20日价格区间
+//            rs = EtfAdrCountService.findByDateOrderByField(day, NET_AREA_DAY_20, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//最近20日价格区间
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_DOWN_SUM_1_60_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//排序字段：下跌累计-正序
 //            rs = EtfControl.findByDateOrder(day, zqdmList, null, F3_DESC, maxAdrUpSumOrderStat, null, 2);//涨幅合计分类型排名前n个
 //            rs = EtfControl.findByDateOrder(day, new ArrayList<>(ContMapEtfTop.ETF_All.keySet()), null, F3_DESC, maxAdrUpSumOrderStat, null, maxAdrUpSumTotalRank);//常用etf
@@ -76,9 +76,9 @@ public class EtfStat {
                 CondEtfAdrCount conditionStock = new CondEtfAdrCount();//过滤条件
 //                conditionStock.setF3Min(new BigDecimal("9"));//当日涨幅最低
                 conditionStock.setF139(DB_RANK_BIZ_F139_BK_MAIN);//股票-交易所板块
-//                conditionStock.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
+                conditionStock.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
 //                conditionStock.setType_name("电网设备");//证券  电网设备
-                conditionStock.setUpMaKltOrList(Arrays.asList(KLT_30,KLT_60,KLT_101, KLT_102));
+//                conditionStock.setUpMaKltOrList(Arrays.asList(KLT_30,KLT_60,KLT_101, KLT_102));
 //                rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, null, maxAdrUpSumOrderStat,  conditionStock,CHANNEL_STOCK);//涨幅倒序
             }
 
