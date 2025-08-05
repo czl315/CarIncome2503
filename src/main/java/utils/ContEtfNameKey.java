@@ -30,7 +30,7 @@ public class ContEtfNameKey {
     public static List INDEX_CN_NOT_USA = Arrays.asList("标普", "纳", "道琼斯", "美国");//指数-外盘-美股
     public static List INDEX_CN_NOT_USA_NOLIKE = Arrays.asList("标普油气","生物科技");
 
-    public static List INDEX_CN_CITY = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
+    public static List INDEX_CN_CITY_NOCHECK = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘
     public static List INDEX_CN_1000_NOLIKE = Arrays.asList("标普");
     public static List INDEX_CN_BIG = Arrays.asList("沪深300", "深证", "上证50", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "300", "上证综指",
@@ -73,14 +73,14 @@ public class ContEtfNameKey {
     public static List JINRONG_ZHENGQUAN = Arrays.asList("证券", "券商", "金融");//金融-证券
     public static List JINRONG_ZHENGQUAN_NOLIKE = Arrays.asList("金融科技");
     public static List JINRONG_FANGDICHAN = Arrays.asList("地产", "建材", "基建", "交运", "交通", "公用");//金融-地产
-    public static List JINRONG_CASH = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快线", "快钱", "财富", "天天金");//金融-现金
+    public static List JINRONG_CASH_NOCHECK = Arrays.asList("现金", "添利", "国债", "日利", "货币", "添益", "快线", "快钱", "财富", "天天金");//金融-现金
     public static List JINRONG = new ArrayList();//金融
 
     static {
         JINRONG.addAll(JINRONG_BANK);
         JINRONG.addAll(JINRONG_ZHENGQUAN);
         JINRONG.addAll(JINRONG_FANGDICHAN);
-        JINRONG.addAll(JINRONG_CASH);
+        JINRONG.addAll(JINRONG_CASH_NOCHECK);
         JINRONG.addAll(JINRONG_GOLD);
     }
 

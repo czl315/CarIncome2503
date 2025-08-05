@@ -80,7 +80,7 @@ public class ContEtfTypeName {
     public static String INDEX_CN_BIG = "指数-大盘";
     public static String INDEX_300 = "指数-创业板";
     public static String INDEX_688 = "指数-科创板";
-    public static String INDEX_CN_CITY = "指数-国内城市";
+    public static String INDEX_CN_CITY_NOCHECK = "指数-国内城市";
 //    public static String INDEX_HK = "指数-港股";
     public static List INDEX = new ArrayList();
     static {
@@ -91,7 +91,7 @@ public class ContEtfTypeName {
         INDEX.add(INDEX_CN_NOT);
         INDEX.add(INDEX_CN_NOT_USA);
 //        INDEX.add(INDEX_HK);
-//        INDEX.add(INDEX_CN_CITY);
+//        INDEX.add(INDEX_CN_CITY_NOCHECK);
     }
 
     /**
@@ -119,14 +119,14 @@ public class ContEtfTypeName {
     public static String JINRONG_GOLD = "金融-黄金";
     public static String JINRONG_BANK = "金融-银行";
     public static String JINRONG_FANGDICHAN = "金融-地产";
-    public static String JINRONG_CASH  = "金融-现金";
+    public static String JINRONG_CASH_NOCHECK  = "金融-现金";
     public static List JINRONG = new ArrayList();
     static {
         JINRONG.add(JINRONG_ZHENGQUAN);
         JINRONG.add(JINRONG_GOLD);
         JINRONG.add(JINRONG_BANK);
         JINRONG.add(JINRONG_FANGDICHAN);
-//        JINRONG.add(JINRONG_CASH);
+//        JINRONG.add(JINRONG_CASH_NOCHECK);
     }
 
     public static List ALL = new ArrayList();

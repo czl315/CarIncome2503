@@ -1379,21 +1379,21 @@ public class ContMapEtfAll {
         INDEX_CN_BIG.put("562080", "指数-大盘             ");//300现金流ETF          市值：1.80      累涨：                                        10日：                              -0.09               累涨修正：          净值区间：                                        215
     }
 
-    public static Map<String, String> INDEX_CN_CITY = new HashMap<>();//指数-国内城市
+    public static Map<String, String> INDEX_CN_CITY_NOCHECK = new HashMap<>();//指数-国内城市
 
     static {
-        INDEX_CN_CITY.put("159976", "指数-国内城市         ");//湾创ETF               市值：1.19      累涨：33.24     7.08      16.06     13.43     8.12      4.73      1
-        INDEX_CN_CITY.put("512970", "指数-国内城市         ");//大湾区ETF             市值：0.75      累涨：29.62     9.03      14.23     9.72      6.35      4.34      2
-        INDEX_CN_CITY.put("159623", "指数-国内城市         ");//成渝经济圈ETF         市值：32.83     累涨：29.66     7.39      17.26     8.94      5.74      3.04      3
-        INDEX_CN_CITY.put("159743", "指数-国内城市         ");//湖北ETF               市值：1.57      累涨：40.34     12.22     20.84     14.69     5.67      2.86      4
-        INDEX_CN_CITY.put("517160", "指数-国内城市         ");//长江保护主题ETF       市值：13.73     累涨：22.55     4.70      11.26     9.63      5.63      4.10      5
-        INDEX_CN_CITY.put("512870", "指数-国内城市         ");//杭州湾区ETF           市值：0.41      累涨：33.69     11.23     17.08     12.09     5.51      3.32      6
-        INDEX_CN_CITY.put("517330", "指数-国内城市         ");//长江保护ETF           市值：13.72     累涨：22.51     4.98      11.97     8.90      5.47      3.81      7
-        INDEX_CN_CITY.put("515760", "指数-国内城市         ");//浙江国资ETF           市值：1.78      累涨：22.05     6.08      11.51     7.53      5.15      2.60      8
-        INDEX_CN_CITY.put("517850", "指数-国内城市         ");//张江ETF               市值：0.63      累涨：47.34     14.21     25.01     15.55     5.06      2.61      9
-        INDEX_CN_CITY.put("512650", "指数-国内城市         ");//长三角ETF             市值：3.94      累涨：25.38     7.56      13.08     9.40      5.01      3.10      10
-        INDEX_CN_CITY.put("512190", "指数-国内城市         ");//浙商之江凤凰ETF       市值：0.61      累涨：19.24     6.80      9.42      7.09      3.58      2.79      15
-        INDEX_CN_CITY.put("510810", "指数-国内城市         ");//上海国企ETF           市值：76.95     累涨：20.42     7.35      10.53     5.90      3.39      2.18      16
+        INDEX_CN_CITY_NOCHECK.put("159976", "指数-国内城市         ");//湾创ETF               市值：1.19      累涨：33.24     7.08      16.06     13.43     8.12      4.73      1
+        INDEX_CN_CITY_NOCHECK.put("512970", "指数-国内城市         ");//大湾区ETF             市值：0.75      累涨：29.62     9.03      14.23     9.72      6.35      4.34      2
+        INDEX_CN_CITY_NOCHECK.put("159623", "指数-国内城市         ");//成渝经济圈ETF         市值：32.83     累涨：29.66     7.39      17.26     8.94      5.74      3.04      3
+        INDEX_CN_CITY_NOCHECK.put("159743", "指数-国内城市         ");//湖北ETF               市值：1.57      累涨：40.34     12.22     20.84     14.69     5.67      2.86      4
+        INDEX_CN_CITY_NOCHECK.put("517160", "指数-国内城市         ");//长江保护主题ETF       市值：13.73     累涨：22.55     4.70      11.26     9.63      5.63      4.10      5
+        INDEX_CN_CITY_NOCHECK.put("512870", "指数-国内城市         ");//杭州湾区ETF           市值：0.41      累涨：33.69     11.23     17.08     12.09     5.51      3.32      6
+        INDEX_CN_CITY_NOCHECK.put("517330", "指数-国内城市         ");//长江保护ETF           市值：13.72     累涨：22.51     4.98      11.97     8.90      5.47      3.81      7
+        INDEX_CN_CITY_NOCHECK.put("515760", "指数-国内城市         ");//浙江国资ETF           市值：1.78      累涨：22.05     6.08      11.51     7.53      5.15      2.60      8
+        INDEX_CN_CITY_NOCHECK.put("517850", "指数-国内城市         ");//张江ETF               市值：0.63      累涨：47.34     14.21     25.01     15.55     5.06      2.61      9
+        INDEX_CN_CITY_NOCHECK.put("512650", "指数-国内城市         ");//长三角ETF             市值：3.94      累涨：25.38     7.56      13.08     9.40      5.01      3.10      10
+        INDEX_CN_CITY_NOCHECK.put("512190", "指数-国内城市         ");//浙商之江凤凰ETF       市值：0.61      累涨：19.24     6.80      9.42      7.09      3.58      2.79      15
+        INDEX_CN_CITY_NOCHECK.put("510810", "指数-国内城市         ");//上海国企ETF           市值：76.95     累涨：20.42     7.35      10.53     5.90      3.39      2.18      16
     }
 
     public static Map<String, String> INDEX = new HashMap<>();//指数-全部-etf
@@ -1405,7 +1405,7 @@ public class ContMapEtfAll {
         INDEX.putAll(INDEX_CN_1000);
         INDEX.putAll(INDEX_688);
         INDEX.putAll(INDEX_300);
-        INDEX.putAll(INDEX_CN_CITY);
+        INDEX.putAll(INDEX_CN_CITY_NOCHECK);
 //        INDEX.putAll(INDEX_HK);
     }
 
@@ -1548,62 +1548,62 @@ public class ContMapEtfAll {
         JINRONG_FANGDICHAN.put("560620", ContEtfTypeName.JINRONG_FANGDICHAN);//公用事业ETF基金       市值：1.19      累涨：14.99     5.39      3.30      6.30      10日：3.02      2.37      0.85      -0.85     21        累涨修正：22.08     净值区间：26      38      50      60      62      21
     }
 
-    public static Map<String, String> JINRONG_CASH = new HashMap<>();//金融-现金
+    public static Map<String, String> JINRONG_CASH_NOCHECK = new HashMap<>();//金融-现金
     public static Map<String, String> TOP_JINRONG_CASH = new HashMap<>();
 
     static {
     }
 
     static {
-        JINRONG_CASH.put("511620", "金融-现金             ");//货币基金ETF           市值：2.51      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        1
-        JINRONG_CASH.put("563900", "金融-现金             ");//沪深300自由现金流ETF摩根市值：1.86      累涨：                                        10日：1.46      0.49      0.29      -0.10               累涨修正：          净值区间：33      11      46                      2
-        JINRONG_CASH.put("563780", "金融-现金             ");//现金流全指ETF         市值：1.23      累涨：                                        10日：2.46      1.18                0.00                累涨修正：          净值区间：36      32                              3
-        JINRONG_CASH.put("159221", "金融-现金             ");//现金流100ETF          市值：1.50      累涨：                                        10日：2.18      1.19      0.30      0.00                累涨修正：          净值区间：58      43                              4
-        JINRONG_CASH.put("159233", "金融-现金             ");//自由现金流ETF基金     市值：6.52      累涨：                                        10日：                              -0.20               累涨修正：          净值区间：                                        5
-        JINRONG_CASH.put("159232", "金融-现金             ");//现金流ETF南方         市值：6.00      累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        6
-        JINRONG_CASH.put("159229", "金融-现金             ");//自由现金流ETF广发     市值：0.68      累涨：                                        10日：3.46      1.09      0.10      -0.10               累涨修正：          净值区间：14      13                              7
-        JINRONG_CASH.put("159001", "金融-现金             ");//货币ETF               市值：15.25     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        8
-        JINRONG_CASH.put("511690", "金融-现金             ");//交易货币ETF           市值：8.71      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        9
-        JINRONG_CASH.put("511650", "金融-现金             ");//华夏快线ETF           市值：0.98      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        10
-        JINRONG_CASH.put("511830", "金融-现金             ");//华泰货币ETF           市值：0.24      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        11
-        JINRONG_CASH.put("511600", "金融-现金             ");//货币ETF               市值：0.31      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        12
-        JINRONG_CASH.put("159005", "金融-现金             ");//汇添富快钱ETF         市值：0.90      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        13
-        JINRONG_CASH.put("511810", "金融-现金             ");//理财金货币ETF         市值：5.45      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        14
-        JINRONG_CASH.put("561080", "金融-现金             ");//全指现金流ETF华安     市值：0.55      累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        15
-        JINRONG_CASH.put("511930", "金融-现金             ");//国联日盈货币ETF       市值：0.20      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        16
-        JINRONG_CASH.put("159225", "金融-现金             ");//现金流ETF基金         市值：0.58      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        17
-        JINRONG_CASH.put("159201", "金融-现金             ");//自由现金流ETF         市值：35.85     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        18
-        JINRONG_CASH.put("511980", "金融-现金             ");//现金添富ETF           市值：0.24      累涨：                                        10日：                              -0.04               累涨修正：          净值区间：                                        19
-        JINRONG_CASH.put("511160", "金融-现金             ");//国债ETF东财           市值：37.63     累涨：                                        10日：                              0.03                累涨修正：          净值区间：                                        20
-        JINRONG_CASH.put("511880", "金融-现金             ");//银华日利ETF           市值：783.69    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        21
-        JINRONG_CASH.put("511960", "金融-现金             ");//嘉实快线ETF           市值：0.34      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        22
-        JINRONG_CASH.put("511920", "金融-现金             ");//广发货币ETF           市值：0.40      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        23
-        JINRONG_CASH.put("159003", "金融-现金             ");//招商快线ETF           市值：2.37      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        24
-        JINRONG_CASH.put("511900", "金融-现金             ");//富国货币ETF           市值：1.66      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        25
-        JINRONG_CASH.put("511850", "金融-现金             ");//财富宝ETF             市值：13.64     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        26
-        JINRONG_CASH.put("159222", "金融-现金             ");//自由现金流ETF易方达   市值：5.58      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        27
-        JINRONG_CASH.put("159235", "金融-现金             ");//中证现金流ETF         市值：4.37      累涨：                                        10日：                              -0.29               累涨修正：          净值区间：                                        28
-        JINRONG_CASH.put("561870", "金融-现金             ");//自由现金流ETF全指     市值：1.83      累涨：                                        10日：3.03      1.37      0.20      -0.10               累涨修正：          净值区间：20      17                              29
-        JINRONG_CASH.put("516460", "金融-现金             ");//现金流ETF800          市值：0.34      累涨：                                        10日：                              -0.39               累涨修正：          净值区间：                                        30
-        JINRONG_CASH.put("159236", "金融-现金             ");//自由现金流ETF工银     市值：1.63      累涨：                                        10日：2.57      1.28      0.10      -0.30               累涨修正：          净值区间：15      13                              31
-        JINRONG_CASH.put("563990", "金融-现金             ");//800现金流ETF          市值：1.18      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        32
-        JINRONG_CASH.put("159399", "金融-现金             ");//现金流ETF             市值：36.24     累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        33
-        JINRONG_CASH.put("563770", "金融-现金             ");//全指现金流ETF         市值：0.47      累涨：                                        10日：2.68      1.29                -0.10               累涨修正：          净值区间：21      17                              34
-        JINRONG_CASH.put("563680", "金融-现金             ");//800自由现金流ETF      市值：0.46      累涨：                                        10日：2.36      1.08      0.10      -0.10               累涨修正：          净值区间：25      36                              35
-        JINRONG_CASH.put("563830", "金融-现金             ");//全指现金流ETF基金     市值：0.95      累涨：                                        10日：          1.40      0.40      -0.30               累涨修正：          净值区间：15      17                              36
-        JINRONG_CASH.put("563390", "金融-现金             ");//现金流ETF全指         市值：2.99      累涨：                                        10日：                              -0.29               累涨修正：          净值区间：                                        37
-        JINRONG_CASH.put("562080", "金融-现金             ");//300现金流ETF          市值：1.73      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        38
-        JINRONG_CASH.put("511990", "金融-现金             ");//华宝添益ETF           市值：803.99    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        39
-        JINRONG_CASH.put("511970", "金融-现金             ");//国寿货币ETF           市值：0.31      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        40
-        JINRONG_CASH.put("511950", "金融-现金             ");//添利货币ETF           市值：0.29      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        41
-        JINRONG_CASH.put("511910", "金融-现金             ");//融通货币ETF           市值：0.16      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        42
-        JINRONG_CASH.put("511860", "金融-现金             ");//保证金货币ETF         市值：0.35      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        43
-        JINRONG_CASH.put("511820", "金融-现金             ");//鹏华添利ETF           市值：0.99      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        44
-        JINRONG_CASH.put("511800", "金融-现金             ");//易方达货币ETF         市值：1.52      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        45
-        JINRONG_CASH.put("511770", "金融-现金             ");//金鹰增益货币ETF       市值：0.13      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        46
-        JINRONG_CASH.put("511700", "金融-现金             ");//场内货币ETF           市值：11.17     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        47
-        JINRONG_CASH.put("511670", "金融-现金             ");//华泰天天金ETF         市值：0.16      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        48
-        JINRONG_CASH.put("511660", "金融-现金             ");//货币ETF建信添益       市值：109.89    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        49
+        JINRONG_CASH_NOCHECK.put("511620", "金融-现金             ");//货币基金ETF           市值：2.51      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        1
+        JINRONG_CASH_NOCHECK.put("563900", "金融-现金             ");//沪深300自由现金流ETF摩根市值：1.86      累涨：                                        10日：1.46      0.49      0.29      -0.10               累涨修正：          净值区间：33      11      46                      2
+        JINRONG_CASH_NOCHECK.put("563780", "金融-现金             ");//现金流全指ETF         市值：1.23      累涨：                                        10日：2.46      1.18                0.00                累涨修正：          净值区间：36      32                              3
+        JINRONG_CASH_NOCHECK.put("159221", "金融-现金             ");//现金流100ETF          市值：1.50      累涨：                                        10日：2.18      1.19      0.30      0.00                累涨修正：          净值区间：58      43                              4
+        JINRONG_CASH_NOCHECK.put("159233", "金融-现金             ");//自由现金流ETF基金     市值：6.52      累涨：                                        10日：                              -0.20               累涨修正：          净值区间：                                        5
+        JINRONG_CASH_NOCHECK.put("159232", "金融-现金             ");//现金流ETF南方         市值：6.00      累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        6
+        JINRONG_CASH_NOCHECK.put("159229", "金融-现金             ");//自由现金流ETF广发     市值：0.68      累涨：                                        10日：3.46      1.09      0.10      -0.10               累涨修正：          净值区间：14      13                              7
+        JINRONG_CASH_NOCHECK.put("159001", "金融-现金             ");//货币ETF               市值：15.25     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        8
+        JINRONG_CASH_NOCHECK.put("511690", "金融-现金             ");//交易货币ETF           市值：8.71      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        9
+        JINRONG_CASH_NOCHECK.put("511650", "金融-现金             ");//华夏快线ETF           市值：0.98      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        10
+        JINRONG_CASH_NOCHECK.put("511830", "金融-现金             ");//华泰货币ETF           市值：0.24      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        11
+        JINRONG_CASH_NOCHECK.put("511600", "金融-现金             ");//货币ETF               市值：0.31      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        12
+        JINRONG_CASH_NOCHECK.put("159005", "金融-现金             ");//汇添富快钱ETF         市值：0.90      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        13
+        JINRONG_CASH_NOCHECK.put("511810", "金融-现金             ");//理财金货币ETF         市值：5.45      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        14
+        JINRONG_CASH_NOCHECK.put("561080", "金融-现金             ");//全指现金流ETF华安     市值：0.55      累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        15
+        JINRONG_CASH_NOCHECK.put("511930", "金融-现金             ");//国联日盈货币ETF       市值：0.20      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        16
+        JINRONG_CASH_NOCHECK.put("159225", "金融-现金             ");//现金流ETF基金         市值：0.58      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        17
+        JINRONG_CASH_NOCHECK.put("159201", "金融-现金             ");//自由现金流ETF         市值：35.85     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        18
+        JINRONG_CASH_NOCHECK.put("511980", "金融-现金             ");//现金添富ETF           市值：0.24      累涨：                                        10日：                              -0.04               累涨修正：          净值区间：                                        19
+        JINRONG_CASH_NOCHECK.put("511160", "金融-现金             ");//国债ETF东财           市值：37.63     累涨：                                        10日：                              0.03                累涨修正：          净值区间：                                        20
+        JINRONG_CASH_NOCHECK.put("511880", "金融-现金             ");//银华日利ETF           市值：783.69    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        21
+        JINRONG_CASH_NOCHECK.put("511960", "金融-现金             ");//嘉实快线ETF           市值：0.34      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        22
+        JINRONG_CASH_NOCHECK.put("511920", "金融-现金             ");//广发货币ETF           市值：0.40      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        23
+        JINRONG_CASH_NOCHECK.put("159003", "金融-现金             ");//招商快线ETF           市值：2.37      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        24
+        JINRONG_CASH_NOCHECK.put("511900", "金融-现金             ");//富国货币ETF           市值：1.66      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        25
+        JINRONG_CASH_NOCHECK.put("511850", "金融-现金             ");//财富宝ETF             市值：13.64     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        26
+        JINRONG_CASH_NOCHECK.put("159222", "金融-现金             ");//自由现金流ETF易方达   市值：5.58      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        27
+        JINRONG_CASH_NOCHECK.put("159235", "金融-现金             ");//中证现金流ETF         市值：4.37      累涨：                                        10日：                              -0.29               累涨修正：          净值区间：                                        28
+        JINRONG_CASH_NOCHECK.put("561870", "金融-现金             ");//自由现金流ETF全指     市值：1.83      累涨：                                        10日：3.03      1.37      0.20      -0.10               累涨修正：          净值区间：20      17                              29
+        JINRONG_CASH_NOCHECK.put("516460", "金融-现金             ");//现金流ETF800          市值：0.34      累涨：                                        10日：                              -0.39               累涨修正：          净值区间：                                        30
+        JINRONG_CASH_NOCHECK.put("159236", "金融-现金             ");//自由现金流ETF工银     市值：1.63      累涨：                                        10日：2.57      1.28      0.10      -0.30               累涨修正：          净值区间：15      13                              31
+        JINRONG_CASH_NOCHECK.put("563990", "金融-现金             ");//800现金流ETF          市值：1.18      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        32
+        JINRONG_CASH_NOCHECK.put("159399", "金融-现金             ");//现金流ETF             市值：36.24     累涨：                                        10日：                              -0.10               累涨修正：          净值区间：                                        33
+        JINRONG_CASH_NOCHECK.put("563770", "金融-现金             ");//全指现金流ETF         市值：0.47      累涨：                                        10日：2.68      1.29                -0.10               累涨修正：          净值区间：21      17                              34
+        JINRONG_CASH_NOCHECK.put("563680", "金融-现金             ");//800自由现金流ETF      市值：0.46      累涨：                                        10日：2.36      1.08      0.10      -0.10               累涨修正：          净值区间：25      36                              35
+        JINRONG_CASH_NOCHECK.put("563830", "金融-现金             ");//全指现金流ETF基金     市值：0.95      累涨：                                        10日：          1.40      0.40      -0.30               累涨修正：          净值区间：15      17                              36
+        JINRONG_CASH_NOCHECK.put("563390", "金融-现金             ");//现金流ETF全指         市值：2.99      累涨：                                        10日：                              -0.29               累涨修正：          净值区间：                                        37
+        JINRONG_CASH_NOCHECK.put("562080", "金融-现金             ");//300现金流ETF          市值：1.73      累涨：                                        10日：                              -0.19               累涨修正：          净值区间：                                        38
+        JINRONG_CASH_NOCHECK.put("511990", "金融-现金             ");//华宝添益ETF           市值：803.99    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        39
+        JINRONG_CASH_NOCHECK.put("511970", "金融-现金             ");//国寿货币ETF           市值：0.31      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        40
+        JINRONG_CASH_NOCHECK.put("511950", "金融-现金             ");//添利货币ETF           市值：0.29      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        41
+        JINRONG_CASH_NOCHECK.put("511910", "金融-现金             ");//融通货币ETF           市值：0.16      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        42
+        JINRONG_CASH_NOCHECK.put("511860", "金融-现金             ");//保证金货币ETF         市值：0.35      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        43
+        JINRONG_CASH_NOCHECK.put("511820", "金融-现金             ");//鹏华添利ETF           市值：0.99      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        44
+        JINRONG_CASH_NOCHECK.put("511800", "金融-现金             ");//易方达货币ETF         市值：1.52      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        45
+        JINRONG_CASH_NOCHECK.put("511770", "金融-现金             ");//金鹰增益货币ETF       市值：0.13      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        46
+        JINRONG_CASH_NOCHECK.put("511700", "金融-现金             ");//场内货币ETF           市值：11.17     累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        47
+        JINRONG_CASH_NOCHECK.put("511670", "金融-现金             ");//华泰天天金ETF         市值：0.16      累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        48
+        JINRONG_CASH_NOCHECK.put("511660", "金融-现金             ");//货币ETF建信添益       市值：109.89    累涨：                                        10日：                              0.00                累涨修正：          净值区间：                                        49
     }
 
     /**
@@ -1616,7 +1616,7 @@ public class ContMapEtfAll {
         JINRONG.putAll(JINRONG_GOLD);
         JINRONG.putAll(JINRONG_BANK);
         JINRONG.putAll(JINRONG_FANGDICHAN);
-        JINRONG.putAll(JINRONG_CASH);
+        JINRONG.putAll(JINRONG_CASH_NOCHECK);
     }
 
     public static Map<String, String> TOP_JINRONG = new HashMap<>();
@@ -1818,6 +1818,58 @@ public class ContMapEtfAll {
                 sb.append(StockUtil.formatStName("", SIZE_8));
             }
 
+            //周线比
+            BigDecimal curAmt = vo.getF2() != null ? vo.getF2() : new BigDecimal("0");
+            BigDecimal yesterDayAmt = vo.getF18() != null ? vo.getF18() : new BigDecimal("0");
+            BigDecimal maNet102 = vo.getMA_NET_60_102();
+            BigDecimal maPct102 = EtfAdrCountService.handlerMaPct(curAmt, maNet102);
+            BigDecimal maNet101 = vo.getMA_NET_60_101();
+            BigDecimal maPct101 = EtfAdrCountService.handlerMaPct(curAmt, maNet101);
+            BigDecimal maNet60 = vo.getMA_NET_60_60();
+            BigDecimal maPct60 = EtfAdrCountService.handlerMaPct(curAmt, maNet60);
+            BigDecimal maNet30 = vo.getMA_NET_60_30();
+            BigDecimal maPct30 = EtfAdrCountService.handlerMaPct(curAmt, maNet30);
+            BigDecimal maNet15 = vo.getMA_NET_60_15();
+            BigDecimal maPct15 = EtfAdrCountService.handlerMaPct(curAmt, maNet15);
+            BigDecimal maNet5 = vo.getMA_NET_60_5();
+            BigDecimal maPct5 = EtfAdrCountService.handlerMaPct(curAmt, maNet5);
+            if (maNet102 != null && maPct102 != null) {
+                sb.append(StockUtil.formatDouble(maPct102.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
+            if (maNet101 != null && maPct101 != null) {
+                sb.append(StockUtil.formatDouble(maPct101.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
+            if (maPct60 != null && maPct60 != null) {
+                sb.append(StockUtil.formatDouble(maPct60.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
+            if (maNet30 != null && maPct30 != null) {
+                sb.append(StockUtil.formatDouble(maPct30.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
+            //15分比
+            if (maNet15 != null && maPct15 != null) {
+                sb.append(StockUtil.formatDouble(maPct15.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+            //5分比
+            if (maNet5 != null && maPct5 != null) {
+                sb.append(StockUtil.formatDouble(maPct5.setScale(1, BigDecimal.ROUND_HALF_UP), SIZE_8));
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_8));
+            }
+
             sb.append(StockUtil.formatInt(++num, SIZE_6));
 
 
@@ -1829,8 +1881,8 @@ public class ContMapEtfAll {
     }
 
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-08-01";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-08-05";
 
         //////        //etf头部数据
 //        List<String> zqdmList = new ArrayList<>(ContMapEtfAll.TOP_XIAOFEI.keySet());
@@ -1839,11 +1891,11 @@ public class ContMapEtfAll {
 //            System.out.println(++count + ":" + zqdm + ":" + ETF_All.get(zqdm));
 //        }
 
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);//指数-外盘
+        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);//指数-外盘
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA,  ContEtfNameKey.INDEX_CN_NOT_USA_NOLIKE, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfAll.INDEX_CN_NOT_USA);//指数-外盘-美股
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, ContEtfNameKey.INDEX_CN_1000_NOLIKE, name, ContEtfTypeName.INDEX_CN_1000, ContMapEtfAll.INDEX_CN_1000);
 //        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfAll.INDEX_300);//指数-创业板
-        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfAll.INDEX_688);//指数-科创板
+//        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfAll.INDEX_688);//指数-科创板
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
 
 

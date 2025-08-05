@@ -295,15 +295,6 @@ public class ContMapStock {
 //        findByTypeName(date, ContEtfNameKey.JINRONG_BANK, null, "JINRONG_BANK", ContEtfTypeName.JINRONG_BANK, ContMapEtfAll.JINRONG_BANK);//金融-银行
 //        name = "JINRONG_FANGDICHAN";
 //        System.out.println("    public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        System.out.println("    public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();//金融-地产");
-//        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN, null, name, ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);
-//        System.out.println("    public static Map<String, String> JINRONG_CASH = new HashMap<>();//金融-现金");
-//        System.out.println("    public static Map<String, String> TOP_JINRONG_CASH = new HashMap<>();");
-//        System.out.println("    static {");
-//        System.out.println("    }");
-//        findByTypeName(date, ContEtfNameKey.JINRONG_CASH,  null, "JINRONG_CASH", ContEtfTypeName.JINRONG_CASH, ContMapEtfAll.JINRONG_CASH);
 
 //        System.out.println("    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();//消费-通用");
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON);

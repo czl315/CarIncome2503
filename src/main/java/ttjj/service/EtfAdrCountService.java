@@ -15,8 +15,8 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.logging.Logger;
 
-import static utils.ContEtfTypeName.INDEX_CN_CITY;
-import static utils.ContEtfTypeName.JINRONG_CASH;
+import static utils.ContEtfTypeName.INDEX_CN_CITY_NOCHECK;
+import static utils.ContEtfTypeName.JINRONG_CASH_NOCHECK;
 import static utils.Content.*;
 
 /**
@@ -306,8 +306,8 @@ public class EtfAdrCountService {
         }
 
         List<String> typeNameListNotIn = new ArrayList<>();
-        typeNameListNotIn.add(JINRONG_CASH);
-        typeNameListNotIn.add(INDEX_CN_CITY);
+        typeNameListNotIn.add(JINRONG_CASH_NOCHECK);
+        typeNameListNotIn.add(INDEX_CN_CITY_NOCHECK);
         List<String> typeNameListNotInOri = condition.getTypeNameListNotIn();
         if (typeNameListNotInOri != null) {
             for (String typeName : typeNameListNotInOri) {
@@ -779,7 +779,7 @@ public class EtfAdrCountService {
      * @param maNet
      * @return
      */
-    private static BigDecimal handlerMaPct(BigDecimal curAmt, BigDecimal maNet) {
+    public static BigDecimal handlerMaPct(BigDecimal curAmt, BigDecimal maNet) {
         BigDecimal maPct = null;
         if (curAmt == null) {
 //            System.out.println("当前价null");

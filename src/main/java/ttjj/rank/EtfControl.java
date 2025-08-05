@@ -826,6 +826,7 @@ public class EtfControl {
 
     /**
      * ETF涨幅统计：更新最近交易日的涨幅，最近3日，增加交易所接口
+     * TODO 过滤涨幅较小的数据
      *
      * @param condition        条件
      * @param httpKlineApiType
@@ -2556,12 +2557,12 @@ public class EtfControl {
      * @return 是否过滤
      */
     private static boolean checkFiterType(String zqdm) {
-        if (ContMapEtfAll.INDEX_CN_CITY.containsKey(zqdm)) {
-//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY);
+        if (ContMapEtfAll.INDEX_CN_CITY_NOCHECK.containsKey(zqdm)) {
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY_NOCHECK);
             return true;
         }
-        if (ContMapEtfAll.JINRONG_CASH.containsKey(zqdm)) {
-//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH);
+        if (ContMapEtfAll.JINRONG_CASH_NOCHECK.containsKey(zqdm)) {
+//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH_NOCHECK);
             return true;
         }
         return false;
