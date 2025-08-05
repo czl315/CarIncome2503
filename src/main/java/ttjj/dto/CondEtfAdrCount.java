@@ -22,6 +22,10 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * orderBy 排序字段
      */
     private String orderBy;
+    /**
+     * orderBy 排序字段（vo）
+     */
+    private String orderByVoField;
 
     /**
      * limitCount 限定查询个数
@@ -171,6 +175,14 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * 过滤特性列表
      */
     private List<Long> notInF148;
+
+    public String getOrderByVoField() {
+        return orderByVoField;
+    }
+
+    public void setOrderByVoField(String orderByVoField) {
+        this.orderByVoField = orderByVoField;
+    }
 
     public List<Long> getNotInF148() {
         return notInF148;

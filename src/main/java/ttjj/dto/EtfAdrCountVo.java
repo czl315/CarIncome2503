@@ -330,6 +330,79 @@ public class EtfAdrCountVo extends EtfAdrCount {
      */
     private BigDecimal adrUpSum_60_and_10c6;
 
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct102;
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct101;
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct60;
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct30;
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct15;
+    /**
+     * 均线百分比
+     */
+    private BigDecimal maPct5;
+
+    public BigDecimal getMaPct102() {
+        return maPct102;
+    }
+
+    public void setMaPct102(BigDecimal maPct102) {
+        this.maPct102 = maPct102;
+    }
+
+    public BigDecimal getMaPct101() {
+        return maPct101;
+    }
+
+    public void setMaPct101(BigDecimal maPct101) {
+        this.maPct101 = maPct101;
+    }
+
+    public BigDecimal getMaPct60() {
+        return maPct60;
+    }
+
+    public void setMaPct60(BigDecimal maPct60) {
+        this.maPct60 = maPct60;
+    }
+
+    public BigDecimal getMaPct30() {
+        return maPct30;
+    }
+
+    public void setMaPct30(BigDecimal maPct30) {
+        this.maPct30 = maPct30;
+    }
+
+    public BigDecimal getMaPct15() {
+        return maPct15;
+    }
+
+    public void setMaPct15(BigDecimal maPct15) {
+        this.maPct15 = maPct15;
+    }
+
+    public BigDecimal getMaPct5() {
+        return maPct5;
+    }
+
+    public void setMaPct5(BigDecimal maPct5) {
+        this.maPct5 = maPct5;
+    }
+
     public BigDecimal getAdrUpSum_60_and_10c6() {
         return adrUpSum_60_and_10c6;
     }

@@ -871,6 +871,16 @@ public class Content {
     public static String ORDER_BY_F3 = " F3 DESC ";
 
     /**
+     * 排序字段（vo）
+     */
+    public static String ORDER_BY_VO_MAPCT_102 = "MAPCT_102";
+    public static String ORDER_BY_VO_MAPCT_101 = "MAPCT_101";
+    public static String ORDER_BY_VO_MAPCT_60 = "MAPCT_60";
+    public static String ORDER_BY_VO_MAPCT_30 = "MAPCT_30";
+    public static String ORDER_BY_VO_MAPCT_15 = "MAPCT_15";
+    public static String ORDER_BY_VO_MAPCT_5 = "MAPCT_5";
+
+    /**
      * 每天时间
      */
     public static String TIME_09_35 = "09:35:00";

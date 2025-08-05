@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static utils.ContEtfTypeName.INDEX_CN_CITY_NOCHECK;
 import static utils.ContEtfTypeName.JINRONG_CASH_NOCHECK;
@@ -281,7 +282,7 @@ public class EtfAdrCountService {
      */
     public static void findMyPosition(String date, Integer showCountTypeGroup, String orderField, Integer maxAdrUpSumOrderStat, String cookie, CondEtfAdrCount condition) {
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(cookie);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, null, condition,CHANNEL_ETF);
+        findByDateOrderByField(date, orderField, showCountTypeGroup, zqdmList, null, condition, CHANNEL_ETF);
     }
 
     /**
@@ -293,7 +294,7 @@ public class EtfAdrCountService {
      * @param orderField           排序字段
      * @param zqdmList
      * @param maxAdrUpSumOrderStat
-     * @param channel 渠道
+     * @param channel              渠道
      */
     public static List<EtfAdrCountVo> findByDateOrderByField(String date, String orderField, Integer showCountTypeGroup, List<String> zqdmList, Integer maxAdrUpSumOrderStat, CondEtfAdrCount condition, String channel) {
         boolean isShowLog = false;
@@ -340,6 +341,67 @@ public class EtfAdrCountService {
             System.out.println("数据为null");
             return null;
         }
+
+
+        //周线比
+        for (EtfAdrCountVo vo : rs) {
+            BigDecimal curAmt = vo.getF2() != null ? vo.getF2() : new BigDecimal("0");
+            BigDecimal maNet102 = vo.getMA_NET_60_102();
+            BigDecimal maPct102 = handlerMaPct(curAmt, maNet102);
+            BigDecimal maNet101 = vo.getMA_NET_60_101();
+            BigDecimal maPct101 = handlerMaPct(curAmt, maNet101);
+            BigDecimal maNet60 = vo.getMA_NET_60_60();
+            BigDecimal maPct60 = handlerMaPct(curAmt, maNet60);
+            BigDecimal maNet30 = vo.getMA_NET_60_30();
+            BigDecimal maPct30 = handlerMaPct(curAmt, maNet30);
+            BigDecimal maNet15 = vo.getMA_NET_60_15();
+            BigDecimal maPct15 = handlerMaPct(curAmt, maNet15);
+            BigDecimal maNet5 = vo.getMA_NET_60_5();
+            BigDecimal maPct5 = handlerMaPct(curAmt, maNet5);
+            //周线比
+            if (maNet102 != null && maPct102 != null) {
+                vo.setMaPct102(maPct102);
+            }
+            if (maNet101 != null && maPct101 != null) {
+                vo.setMaPct101(maPct101);
+            }
+            if (maNet60 != null && maPct60 != null) {
+                vo.setMaPct60(maPct60);
+            }
+            if (maNet30 != null && maPct30 != null) {
+                vo.setMaPct30(maPct30);
+            }
+            if (maNet15 != null && maPct15 != null) {
+                vo.setMaPct15(maPct15);
+            }
+            if (maNet5 != null && maPct5 != null) {
+                vo.setMaPct5(maPct5);
+            }
+        }
+
+        // vo排序字段
+        if(condition.getOrderByVoField()!=null){
+            String orderByVoField = condition.getOrderByVoField();
+            if (ORDER_BY_VO_MAPCT_102.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct102, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+            if (ORDER_BY_VO_MAPCT_101.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct101, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+            if (ORDER_BY_VO_MAPCT_60.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct60, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+            if (ORDER_BY_VO_MAPCT_30.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct30, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+            if (ORDER_BY_VO_MAPCT_15.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct15, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+            if (ORDER_BY_VO_MAPCT_5.equals(orderByVoField)) {
+                rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct5, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());
+            }
+        }
+
 
         System.out.println(methodName + ",日期：" + date + ",排序字段：" + orderField);
         handlerShowEtfAdr(rs, condFiter);//显示etf涨幅统计列表数据
@@ -796,7 +858,7 @@ public class EtfAdrCountService {
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         List<String> zqdmList = FupanControl.queryMyStockAssetPositionZqdm(ContentCookie.COOKIE_DFCF);//查询-我的股票-资产持仓-证券代码
-        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList,  null, null,CHANNEL_ETF);
+        findByDateOrderByField(date, NET_AREA_DAY_20, null, zqdmList, null, null, CHANNEL_ETF);
 //        EtfAdrCountService.findMyPosition(date, null, NET_AREA_DAY_20, null);
     }
 
