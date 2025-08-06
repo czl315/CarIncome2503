@@ -39,14 +39,14 @@ public class SseService {
         int count = 61;
         String endDate = DateUtil.getToday(YYYY_MM_DD);
 //        String stCode = "517400";
-        String zqdm = "600111";// 159509    600111    301026
+        String zqdm = "159509";// 159509    600111    301026
 //        String klineRs = SseService.daykRsStrHttp(stCode, 2);
 //        String klineRs = SseService.daykRsStrHttpSz(stCode, 2, CYCLE_TYPE_WEEK);
 //        System.out.println("k线：" + klineRs);
 //        List<Kline> klineList = daykline(stCode, 5);
 //        List<Kline> klineList = dayklineSz(stCode, 61, CYCLE_TYPE_WEEK);
-//        List<Kline> klineList = klineExchange(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
-        List<Kline> klineList = klineExchangeStock(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
+        List<Kline> klineList = klineExchange(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
+//        List<Kline> klineList = klineExchangeStock(zqdm, count, CYCLE_TYPE_DAY);//CYCLE_TYPE_WEEK
         int i = 1;
         for (Kline kline : klineList) {
             System.out.println((i++) + ":" + kline.getZqdm() + ":" + kline.getKtime() + ",今日收盘：" + kline.getCloseAmt() + ",涨幅：" + kline.getZhangDieFu());

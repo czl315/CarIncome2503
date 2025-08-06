@@ -222,7 +222,7 @@ public class EtfControl {
         for (EtfAdrCountVo etfAdrCountVo : etfAdrCountVoList) {
             String zqdm = etfAdrCountVo.getF12();
             BigDecimal curAmt = etfAdrCountVo.getF2();
-            if (checkFiterType(zqdm)) continue;//检查过滤类型
+            if (checkFiterType(zqdm)) continue;//检查过滤类型，减少http查询
 
 //            if (zqdm.equals("159509")) {
 //                System.out.println("特定证券代码：" + zqdm);
