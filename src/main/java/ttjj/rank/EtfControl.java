@@ -41,10 +41,10 @@ public class EtfControl {
             return;
         }
 
-//        boolean updateEtf = true;//更新ETF
-        boolean updateEtf = false;
-        boolean updateStock = true;//更新股票
-//        boolean updateStock = false;//更新股票
+        boolean updateEtf = true;//更新ETF
+//        boolean updateEtf = false;
+//        boolean updateStock = true;//更新股票
+        boolean updateStock = false;//更新股票
 
         List<String> zqdmList = new ArrayList<>();//代码列表
 
@@ -843,20 +843,22 @@ public class EtfControl {
         //1、查询etf列表
         List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, condition.getType_name());
         for (RankBizDataDiff etf : etfList) {
-            //市值过滤
+            String zqdm = etf.getF12();
             BigDecimal marketValue = etf.getF20();
             BigDecimal mvMin = condition.getMvMin();
             BigDecimal mvMax = condition.getMvMax();
+            //市值过滤
             if (handlerMarketValueFilter(marketValue, mvMin, mvMax)) {
                 continue;
             }
+
+            if (checkFiterType(zqdm)) continue;//检查过滤类型，减少http查询
 
             EtfAdrCount entity = new EtfAdrCount();
             entity.setDate(date);
             entity.setF12(etf.getF12());
 
             //显示指定日期最近3个K线交易日的涨跌
-            String zqdm = etf.getF12();
             int days = 3;
             if (httpKlineApiType.equals(API_TYPE_DACF)) {
                 List<Kline> klineListDays = KlineService.kline(zqdm, days, KLT_101, false, null, date, klineType);
