@@ -13,7 +13,7 @@ public class ContEtfTypeName {
     /**
      * 医疗
      */
-    public static String YILIAO_COMMON = "医疗-通用";
+    public static String YILIAO_COMMON = "医疗";
 //    public static String YILIAO_CN_MEDICINE = "医疗-中药";
     public static List YILIAO = new ArrayList();//医疗
     static {
@@ -25,18 +25,17 @@ public class ContEtfTypeName {
      * 科技
      */
     public static String KEJI_GONG_YE = "科技-通用";
-    public static String KEJI_NEW_CAR = "科技-汽车";
     public static String KEJI_NEW_ENERGY = "科技-新能源";
-//    public static String KEJI_ELECTRICITY = "科技-电力";
     public static String KEJI_RUAN_JIAN = "科技-软件";
     public static String KEJI_XIN_PIAN = "科技-芯片";
     public static String KEJI_TONG_XIN = "科技-通信";
     public static String KEJI_HK = "科技-香港";
     public static String KEJI_JUNGONG = "科技-军工";
+//    public static String KEJI_ELECTRICITY = "科技-电力";
+//    public static String KEJI_NEW_CAR = "科技-汽车";
     public static List KEJI = new ArrayList();//
     static {
         KEJI.add(KEJI_GONG_YE);
-        KEJI.add(KEJI_NEW_CAR);
         KEJI.add(KEJI_NEW_ENERGY);
         KEJI.add(KEJI_RUAN_JIAN);
         KEJI.add(KEJI_XIN_PIAN);
@@ -44,6 +43,7 @@ public class ContEtfTypeName {
         KEJI.add(KEJI_HK);
         KEJI.add(KEJI_JUNGONG);
 //        KEJI.add(KEJI_ELECTRICITY);
+//        KEJI.add(KEJI_NEW_CAR);
     }
 
     /**

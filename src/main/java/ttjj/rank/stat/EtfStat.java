@@ -30,8 +30,8 @@ import static utils.Content.*;
  */
 public class EtfStat {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-08-08";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-08-08";
 
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
@@ -43,9 +43,9 @@ public class EtfStat {
         conditionRankN.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
         conditionRankN.setChannel(CHANNEL_ETF);
         List<String> zqdmList = EtfAdrCountService.findListZqdmByRankN(conditionRankN);//查询列表：ETF；每种业务排名第n的数据
+
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
         List<EtfAdrCountVo> rs = null;
-        String orderField = F3_DESC;//F3_DESC  ADR_UP_SUM_TOTAL_DESC   ADR_UP_SUM_1_60_DESC   NET_AREA_DAY_20
         CondEtfAdrCount condition = new CondEtfAdrCount();//过滤条件
 //        condition.setF3Min(new BigDecimal("5"));//当日涨幅最低
 //        condition.setF139(DB_RANK_BIZ_F139_BK_MAIN);//股票-交易所板块
@@ -67,8 +67,8 @@ public class EtfStat {
             EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
         }
         for (String day : dateList) {
-            rs = EtfAdrCountService.findByDateOrderByField(day, orderField, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
-//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
+//            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
+            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近3日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_5_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近5日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_10_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
