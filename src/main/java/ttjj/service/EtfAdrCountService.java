@@ -28,6 +28,42 @@ import static utils.Content.*;
 public class EtfAdrCountService {
     private final static Logger logger = Logger.getLogger(EtfAdrCountService.class.getName());
 
+    /**
+     * 涨幅统计-查询列表：每种业务排名前n的数据
+     * @param condition 条件
+     * @return rs
+     */
+    public static List<EtfAdrCountVo> findListByRankN(CondEtfAdrCount condition) {
+        boolean isShowLog = false;
+        long begTime = System.currentTimeMillis();
+        String methodName = "涨幅统计-查询列表：每种业务排名前n的数据";
+//        if(isShowLog){
+//            System.out.println(methodName + "-beg:" + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0));
+//        }
+
+        List<EtfAdrCountVo> rs = EtfAdrCountService.findEtfList(condition);
+        if (isShowLog) {
+            System.out.println(methodName + DateUtil.getCurDateStrAddDaysByFormat(DateUtil.YYYY_MM_DD_HH_MM_SS, 0) + "，用时：" + new BigDecimal((System.currentTimeMillis() - begTime) / 1000).setScale(2, BigDecimal.ROUND_HALF_UP));
+        }
+        return rs;
+    }
+
+    /**
+     * 查询列表（证券代码）：每种业务排名前n的数据
+     * @param condition 条件
+     * @return rs
+     */
+    public static List<String> findListZqdmByRankN(CondEtfAdrCount condition ) {
+        List<String> zqdmList = new ArrayList<>();
+        List<EtfAdrCountVo> rs = EtfAdrCountService.findListByRankN(condition);//查询列表：ETF；每种业务排名第一的数据
+        if (rs != null) {
+            for (EtfAdrCountVo vo : rs) {
+                zqdmList.add(vo.getF12());
+            }
+        }
+        return zqdmList;
+    }
+
 
     /**
      * 废弃：可用查询限定字段的方法替代
@@ -380,7 +416,7 @@ public class EtfAdrCountService {
         }
 
         // vo排序字段
-        if(condition.getOrderByVoField()!=null){
+        if (condition.getOrderByVoField() != null) {
             String orderByVoField = condition.getOrderByVoField();
             if (ORDER_BY_VO_MAPCT_102.equals(orderByVoField)) {
                 rs = rs.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getMaPct102, Comparator.nullsFirst(BigDecimal::compareTo))).collect(Collectors.toList());

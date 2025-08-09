@@ -66,9 +66,11 @@ public class EtfControl {
             updateAdrSumSse(date, etfList);
             updateUpSumOrder(date, CHANNEL_ETF);
             updateLatestDayAdr(condition, date, httpKlineApiType);
+//            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
+//            EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
+//            updateUpMaTypeTopN(date, 2, maKltList, CHANNEL_ETF);//更新超过均线-（每个类型涨幅前n个）
 //        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
-//        updateUpMaTypeTopN(date, 2,Arrays.asList(KLT_102));//更新超过均线-每个类型涨幅前n个  Waing：数量过多超过东财访问次数限定
 //        updateUpMaMyPosition(date, null,Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102),ContentCookie.COOKIE_DFCF);
 //        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
         }
@@ -161,7 +163,7 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "ETF涨幅数据-更新超过均线-（每个类型涨幅前n个）：";
 
-        //查询ETF列表
+        //查询列表：ETF；每种业务排名第一的数据
         CondEtfAdrCount condition = new CondEtfAdrCount();
         condition.setDate(date);
         condition.setMaxAdrUpSumTotalRank(new BigDecimal(maxAdrUpSumTotalRank));
@@ -705,7 +707,7 @@ public class EtfControl {
         boolean isShowLog = true;
         String methodName = "更新历史净值";
 
-                String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
 //        String date = "2025-03-17";
         List<EtfAdrCount> etfAdrCountList = new ArrayList<>();
         // 1、查询历史数据
@@ -1201,9 +1203,9 @@ public class EtfControl {
                 continue;
             }
 
-            if (bizName.equals("电网设备")) {
-                System.out.println("特定业务：" + bizName);
-            }
+//            if (bizName.equals("电网设备")) {
+//                System.out.println("特定业务：" + bizName);
+//            }
 
             stBizCountTemp++;
             if (stBizCountTemp < startMapNum) {
