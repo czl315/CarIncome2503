@@ -1,14 +1,16 @@
 package ttjj.dto;
 
 import ttjj.db.EtfAdrCount;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * ETF涨跌次数
- *
  */
 public class CondEtfAdrCount extends EtfAdrCount {
+
+
     /**
      * order_num 查询条件：排序号列表
      */
@@ -175,6 +177,7 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * 过滤特性列表
      */
     private List<Long> notInF148;
+
 
     public String getOrderByVoField() {
         return orderByVoField;
@@ -503,5 +506,21 @@ public class CondEtfAdrCount extends EtfAdrCount {
 
     public void setShowMaDayCountUpDown(boolean showMaDayCountUpDown) {
         this.showMaDayCountUpDown = showMaDayCountUpDown;
+    }
+
+    public CondEtfAdrCount() {
+
+    }
+
+    public CondEtfAdrCount(String date, String channel, BigDecimal maxAdrUpSumTotalRank) {
+        setDate(date);
+        setChannel(channel);
+        this.maxAdrUpSumTotalRank = maxAdrUpSumTotalRank;
+    }
+    public CondEtfAdrCount(String date, String channel,String typeName, BigDecimal maxAdrUpSumTotalRank) {
+        setDate(date);
+        setChannel(channel);
+        setType_name(typeName);
+        this.maxAdrUpSumTotalRank = maxAdrUpSumTotalRank;
     }
 }

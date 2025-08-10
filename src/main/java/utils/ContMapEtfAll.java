@@ -1,10 +1,7 @@
 package utils;
 
 import ttjj.dto.CondEtfAdrCount;
-import ttjj.dto.CondStockAdrCount;
 import ttjj.dto.EtfAdrCountVo;
-import ttjj.dto.Kline;
-import ttjj.rank.EtfControl;
 import ttjj.service.EtfAdrCountService;
 
 import java.math.BigDecimal;
@@ -232,6 +229,7 @@ public class ContMapEtfAll {
      * 医疗
      */
     public static Map<String, String> TOP_YILIAO_COMMON = new HashMap<>();
+
     static {
     }
 
@@ -657,10 +655,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_KEJI_NEW_ENERGY = new HashMap<>();
+
     static {
         TOP_KEJI_NEW_ENERGY.put("588830", ContEtfTypeName.KEJI_NEW_ENERGY);//科创新能源ETF         市值：4.63      累涨：37.63     1     7.22      3     15.05     15.36     10日：6.52      3.62      2.60      -0.08     1         累涨修正：50.37     净值区间：73      60      76      86      88      8.3     9.9     0.8     0.8     0.1     -0.2    1
     }
+
     public static Map<String, String> KEJI_NEW_ENERGY = new HashMap<>();
+
     static {
         KEJI_NEW_ENERGY.put("588830", ContEtfTypeName.KEJI_NEW_ENERGY);//科创新能源ETF         市值：4.63      累涨：37.63     1     7.22      3     15.05     15.36     10日：6.52      3.62      2.60      -0.08     1         累涨修正：50.37     净值区间：73      60      76      86      88      8.3     9.9     0.8     0.8     0.1     -0.2    1
         KEJI_NEW_ENERGY.put("588960", ContEtfTypeName.KEJI_NEW_ENERGY);//科创板新能源ETF       市值：1.11      累涨：36.54     2     7.20      4     14.03     15.31     10日：6.69      3.65      2.24      -0.09     2         累涨修正：49.12     净值区间：73      59      75      86      87      10.7    9.8     0.7     0.7     0.0     -0.2    2
@@ -787,28 +788,26 @@ public class ContMapEtfAll {
      * 指数
      */
     public static Map<String, String> TOP_INDEX_CN_NOT = new HashMap<>();
-
     static {
-//        TOP_INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
-//        TOP_INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.61     累涨：28.97     11.24     6.84      10.89     10日：4.22      2.61      1.37      -0.93     5         累涨修正：38.54     净值区间：35      54      50      78      82      9
     }
-
     public static Map<String, String> INDEX_CN_NOT = new HashMap<>();
-
     static {
-        INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
-        INDEX_CN_NOT.put("513880", ContEtfTypeName.INDEX_CN_NOT);//日经225ETF            市值：15.55     累涨：25.07     7.44      8.84      8.79      10日：6.11      4.59      4.45      -1.43     3         累涨修正：44.67     净值区间：65      67      67      76      80      2
-        INDEX_CN_NOT.put("513000", ContEtfTypeName.INDEX_CN_NOT);//日经225ETF易方达      市值：13.25     累涨：24.02     6.92      8.58      8.52      10日：6.02      4.74      4.54      -1.58     6         累涨修正：43.86     净值区间：65      68      68      75      79      3
-        INDEX_CN_NOT.put("513800", ContEtfTypeName.INDEX_CN_NOT);//日本东证指数ETF       市值：7.52      累涨：21.00     6.43      6.70      7.87      10日：5.92      5.44      5.37      -1.80     7         累涨修正：43.1      净值区间：72      73      73      76      77      4
-        INDEX_CN_NOT.put("159687", ContEtfTypeName.INDEX_CN_NOT);//亚太精选ETF           市值：5.38      累涨：24.74     7.76      7.99      8.99      10日：5.28      4.34      3.69      -0.96     4         累涨修正：41.74     净值区间：65      71      67      66      74      5
-        INDEX_CN_NOT.put("513730", ContEtfTypeName.INDEX_CN_NOT);//东南亚科技ETF         市值：15.89     累涨：29.67     10.04     8.88      10.75     10日：6.72      2.65      1.28      -0.95     1         累涨修正：41.6      净值区间：11      63      68      77      77      6
-        INDEX_CN_NOT.put("159866", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：6.94      累涨：22.73     6.38      8.98      7.37      10日：5.37      4.04      3.77      -1.60     9         累涨修正：39.68     净值区间：55      58      58      70      73      7
-        INDEX_CN_NOT.put("513080", ContEtfTypeName.INDEX_CN_NOT);//法国CAC40ETF          市值：8.68      累涨：24.53     7.21      5.42      11.90     10日：5.22      3.82      2.89      -1.92     10        累涨修正：39.35     净值区间：30      42      43      70      73      8
-        INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.61     累涨：28.97     11.24     6.84      10.89     10日：4.22      2.61      1.37      -0.93     5         累涨修正：38.54     净值区间：35      54      50      78      82      9
-        INDEX_CN_NOT.put("513030", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.04     累涨：28.50     12.91     6.08      9.51      10日：3.61      2.22      1.48      -0.84     8         累涨修正：37.29     净值区间：42      54      47      72      79      10
-        INDEX_CN_NOT.put("159329", ContEtfTypeName.INDEX_CN_NOT);//沙特ETF               市值：14.72     累涨：14.00     7.28      5.52      1.20      10日：0.60      0.30      0.30      -0.20     11        累涨修正：15.5      净值区间：17      7       5       10      4       11
-        INDEX_CN_NOT.put("520830", ContEtfTypeName.INDEX_CN_NOT);//沙特ETF               市值：11.51     累涨：11.21     5.15      3.97      2.09      10日：0.63      0.53      0.42      -0.32     12        累涨修正：13.21     净值区间：57      22      16      16      5       12
-        INDEX_CN_NOT.put("520580", ContEtfTypeName.INDEX_CN_NOT);//新兴亚洲ETF           市值：4.01      累涨：                                        10日：                              -0.68     13        累涨修正：0         净值区间：16      50      50      70      48      13
+        INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：17.00     累涨：25.57     1     6.39      2     11.56     7.62      10日：3.40      2.39      2.39      1.03      1         累涨修正：33.75     净值区间：93      63      61      69      69      16.9    1.7     0.4     1.6     1.1     0.1     1
+        INDEX_CN_NOT.put("513730", ContEtfTypeName.INDEX_CN_NOT);//东南亚科技ETF         市值：15.25     累涨：25.25     2     4.93      9     9.21      11.11     10日：4.39      1.84      1.84      -0.71     3         累涨修正：33.32     净值区间：47      46      69      80      80      2.2     3.5     -0.4    -0.5    -0.6    -0.5    2
+        INDEX_CN_NOT.put("513800", ContEtfTypeName.INDEX_CN_NOT);//日本东证指数ETF       市值：7.74      累涨：22.12     9     5.11      6     6.62      10.39     10日：4.47      3.21      2.68      1.09      4         累涨修正：32.48     净值区间：89      89      93      94      94                                                      3
+        INDEX_CN_NOT.put("513000", ContEtfTypeName.INDEX_CN_NOT);//日经225ETF易方达      市值：13.41     累涨：23.98     4     5.31      5     9.16      9.51      10日：3.49      2.44      2.04      1.68      2         累涨修正：31.95     净值区间：91      91      85      88      89                                                      4
+        INDEX_CN_NOT.put("513880", ContEtfTypeName.INDEX_CN_NOT);//日经225ETF            市值：15.75     累涨：24.24     3     5.81      3     9.07      9.36      10日：3.25      2.26      1.90      1.74      5         累涨修正：31.65     净值区间：92      92      82      87      88                                                      5
+        INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：15.24     累涨：23.84     5     5.05      7     9.42      9.37      10日：3.09      2.04      1.84      1.75      6         累涨修正：30.81     净值区间：91      91      81      87      88      8.6     5.1     2.4     2.4     1.7     0.3     6
+        INDEX_CN_NOT.put("159866", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：7.09      累涨：22.69     8     4.58      10    9.25      8.86      10日：3.49      2.01      1.57      1.29      8         累涨修正：29.76     净值区间：82      82      74      81      82                                                      7
+        INDEX_CN_NOT.put("513030", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.83     累涨：23.66     6     7.20      1     10.06     6.40      10日：2.79      1.63      1.63      0.75      7         累涨修正：29.71     净值区间：86      56      55      57      57                                                      8
+        INDEX_CN_NOT.put("513080", ContEtfTypeName.INDEX_CN_NOT);//法国CAC40ETF          市值：9.09      累涨：23.55     7     5.03      8     10.37     8.15      10日：2.93      1.26      1.26      0.95      9         累涨修正：29        净值区间：98      44      41      49      49                                                      9
+        INDEX_CN_NOT.put("159687", ContEtfTypeName.INDEX_CN_NOT);//亚太精选ETF           市值：5.20      累涨：21.69     10    5.35      4     8.52      7.82      10日：2.54      2.40      2.04      0.35      10        累涨修正：28.67     净值区间：84      84      84      73      74                                                      10
+    }
+    public static Map<String, String> INDEX_CN_NOT_NOCHECK = new HashMap<>();
+    static {
+        INDEX_CN_NOT.put("520580", ContEtfTypeName.INDEX_CN_NOT);//新兴亚洲ETF           市值：4.07      累涨：12.28     11    3.46      12    4.36      4.46      10日：1.39      0.80      0.80      -0.49     11        累涨修正：15.27     净值区间：47      32      26      56      49                                                      1
+        INDEX_CN_NOT.put("159329", ContEtfTypeName.INDEX_CN_NOT);//沙特ETF               市值：16.04     累涨：9.55      12    3.95      11    3.04      2.56      10日：1.96      0.83      0.83      -0.41     12        累涨修正：13.17     净值区间：38      21      18      12      5                                                       2
+        INDEX_CN_NOT.put("520830", ContEtfTypeName.INDEX_CN_NOT);//沙特ETF               市值：12.91     累涨：7.94      13    2.23      13    3.90      1.81      10日：1.18      0.75      0.75      -0.32     13        累涨修正：10.62     净值区间：50      36      19      14      6                                                       3
     }
 
     public static Map<String, String> TOP_INDEX_CN_NOT_USA = new HashMap<>();
@@ -1042,10 +1041,13 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_INDEX_688 = new HashMap<>();
+
     static {
         TOP_INDEX_688.put("588230", ContEtfTypeName.INDEX_688);//科创200ETF            市值：3.77      累涨：38.42     1     9.83      1     13.23     15.36     10日：8.35      4.91      0.94      0.62      1         累涨修正：52.62     净值区间：59      80      87      91      92      1
     }
+
     public static Map<String, String> INDEX_688 = new HashMap<>();
+
     static {
         INDEX_688.put("588230", ContEtfTypeName.INDEX_688);//科创200ETF            市值：3.77      累涨：38.42     1     9.83      1     13.23     15.36     10日：8.35      4.91      0.94      0.62      1         累涨修正：52.62     净值区间：59      80      87      91      92      1
         INDEX_688.put("588240", ContEtfTypeName.INDEX_688);//科创200ETF指数        市值：1.80      累涨：38.26     2     9.20      2     14.05     15.01     10日：7.92      4.46      0.34      1.17      2         累涨修正：50.98     净值区间：82      92      95      97      97      2
@@ -1524,9 +1526,12 @@ public class ContMapEtfAll {
     }
 
     public static Map<String, String> TOP_JINRONG_CASH_NOCHECK = new HashMap<>();
+
     static {
     }
+
     public static Map<String, String> JINRONG_CASH_NOCHECK = new HashMap<>();
+
     static {
         JINRONG_CASH_NOCHECK.put("563830", ContEtfTypeName.JINRONG_CASH_NOCHECK);//全指现金流ETF基金     市值：0.23      累涨：                                                    10日：                              0.75                累涨修正：          净值区间：                                                                                        1
         JINRONG_CASH_NOCHECK.put("159276", ContEtfTypeName.JINRONG_CASH_NOCHECK);//现金流ETF汇添富       市值：3.33      累涨：                                                    10日：          1.83      1.63      0.20                累涨修正：          净值区间：95                                                                                      2
@@ -1656,16 +1661,27 @@ public class ContMapEtfAll {
         ETF_TOP_All.putAll(TOP_BIZ);
     }
 
+    /**
+     * 不检查键值队
+     */
+    public static Map<String, String> ETF_All_NOCHECK = new HashMap<>();
+    static {
+        ETF_All_NOCHECK.putAll(INDEX_CN_CITY_NOCHECK);
+        ETF_All_NOCHECK.putAll(JINRONG_CASH_NOCHECK);
+    }
+
 
     /**
      * ETF涨幅数据：查询数据根据名称列表模糊查询
+     * -顶级(TOP)键值队
+     * -不检查键值队:低于涨幅合计阈值。正常键值队:高于涨幅合计阈值
      */
-    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn, Map<String, String> typeMap) {
+    private static void findByTypeName(String date, List nameLikeList, List nameNoLikeList, String typeEn, String typeCn, Map<String, String> typeMap, BigDecimal nocheckMaxUpSumTotal) {
         String channel = CHANNEL_ETF;
         System.out.println("    public static Map<String, String> TOP_" + typeEn + " = new HashMap<>();");//+ typeCn
         System.out.println("    static {");
         System.out.println("    }");
-        System.out.println("    public static Map<String, String> " + typeEn + " = new HashMap<>();");
+
 //        String typeEn = "";
 //        String typeCn = "";
         CondEtfAdrCount condition = new CondEtfAdrCount();
@@ -1677,22 +1693,59 @@ public class ContMapEtfAll {
 
 //
         List<EtfAdrCountVo> etfListLikeName = EtfAdrCountService.listEtfAdrCountLikeName(condition);//查询列表，模糊查询：名称列表
+        List<EtfAdrCountVo> listCommon = new ArrayList<>();//正常键值队
+        List<EtfAdrCountVo> listNoCheck = new ArrayList<>();//不检查键值队
 //        EtfControl.saveOrUpdateListNetLastDay(condition, date, true);//保存或更新ETF涨幅次数-批量更新基础信息
 
         if (etfListLikeName == null) {
             System.out.println("数据为null");
         }
-        int num = 0;//序号
+
         etfListLikeName = etfListLikeName.stream().filter(e -> e != null).sorted(Comparator.comparing(EtfAdrCountVo::getADR_UP_SUM_TOTAL, Comparator.nullsFirst(BigDecimal::compareTo)).reversed()).collect(Collectors.toList());
 
-        System.out.println("    static {");
         for (EtfAdrCountVo vo : etfListLikeName) {
-            StringBuffer sb = new StringBuffer();
-            String zqdm = vo.getF12();
-
+            BigDecimal upSumTotal = vo.getADR_UP_SUM_TOTAL();
+//            String zqdm = vo.getF12();
 //        if (zqdm.equals("516100")) {
 //            System.out.println("特定代码：" + zqdm);
 //        }
+
+            //正常键值队:高于涨幅合计阈值
+            if (upSumTotal == null || upSumTotal.compareTo(nocheckMaxUpSumTotal) < 0) {
+                listNoCheck.add(vo);
+//                System.out.println("低于涨幅合计阈值，不进入正常键值队：" + zqdm + ",涨幅合计修正值：" + upSumTotal);
+                continue;
+            } else {
+                listCommon.add(vo);
+            }
+
+        }
+
+        System.out.println("    public static Map<String, String> " + typeEn + " = new HashMap<>();");
+        System.out.println("    static {");
+        showAdrList(listCommon, typeEn);
+        System.out.println("    }");
+
+        String mapNameNoCheck = typeEn + "_NOCHECK";
+        System.out.println("    public static Map<String, String> " + mapNameNoCheck + " = new HashMap<>();");//+ typeCn
+        System.out.println("    static {");
+        showAdrList(listNoCheck, mapNameNoCheck);
+        System.out.println("    }");
+
+
+    }
+
+    /**
+     * 显示列表
+     *
+     * @param list   list
+     * @param typeEn 英文名称
+     */
+    private static void showAdrList(List<EtfAdrCountVo> list, String typeEn) {
+        int num = 0;//序号
+        for (EtfAdrCountVo vo : list) {
+            String zqdm = vo.getF12();
+            StringBuffer sb = new StringBuffer();
 
             sb.append("        ");
             sb.append(typeEn + ".put(\"").append(StockUtil.formatStName(zqdm, SIZE_6)).append("\"");
@@ -1799,7 +1852,6 @@ public class ContMapEtfAll {
 
             //周线比
             BigDecimal curAmt = vo.getF2() != null ? vo.getF2() : new BigDecimal("0");
-            BigDecimal yesterDayAmt = vo.getF18() != null ? vo.getF18() : new BigDecimal("0");
             BigDecimal maNet102 = vo.getMA_NET_60_102();
             BigDecimal maPct102 = EtfAdrCountService.handlerMaPct(curAmt, maNet102);
             BigDecimal maNet101 = vo.getMA_NET_60_101();
@@ -1850,16 +1902,8 @@ public class ContMapEtfAll {
             }
 
             sb.append(StockUtil.formatInt(++num, SIZE_6));
-
-
             System.out.println(sb);
         }
-        System.out.println("    }");
-
-        System.out.println("    public static Map<String, String> NOCHECK_" + typeEn + " = new HashMap<>();");//+ typeCn
-        System.out.println("    static {");
-        System.out.println("    }");
-
 
     }
 
@@ -1867,12 +1911,12 @@ public class ContMapEtfAll {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         String date = "2025-08-08";
 
-        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);//指数-外盘
+//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT, new BigDecimal("20"));//指数-外盘
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA,  ContEtfNameKey.INDEX_CN_NOT_USA_NOLIKE, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfAll.INDEX_CN_NOT_USA);//指数-外盘-美股
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, ContEtfNameKey.INDEX_CN_1000_NOLIKE, name, ContEtfTypeName.INDEX_CN_1000, ContMapEtfAll.INDEX_CN_1000);
 //        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfAll.INDEX_300);//指数-创业板
 //        findByTypeName(date, ContEtfNameKey.INDEX_688, ContEtfNameKey.INDEX_688_NOLIKE, "INDEX_688", ContEtfTypeName.INDEX_688, ContMapEtfAll.INDEX_688);//指数-科创板
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG);
+        findByTypeName(date, ContEtfNameKey.INDEX_CN_BIG, ContEtfNameKey.INDEX_CN_BIG_NOLIKE, "INDEX_CN_BIG", ContEtfTypeName.INDEX_CN_BIG, ContMapEtfAll.INDEX_CN_BIG, new BigDecimal("20"));
 
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_OIL, null, "ZIYUAN_OIL", ContEtfTypeName.ZIYUAN_OIL, ContMapEtfAll.ZIYUAN_OIL);//资源-石油
 //        findByTypeName(date, ContEtfNameKey.ZIYUAN_COMMON, ContEtfNameKey.ZIYUAN_COMMON_NOLIKE, "ZIYUAN_COMMON", ContEtfTypeName.ZIYUAN_COMMON, ContMapEtfAll.ZIYUAN_COMMON);//资源-通用
