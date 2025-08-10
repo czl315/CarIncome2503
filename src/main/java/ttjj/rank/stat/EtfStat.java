@@ -36,13 +36,15 @@ public class EtfStat {
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
         int days = 1;
-//        List<String> zqdmList = null;//顶级ETF
         List<String> zqdmListTop = new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet());//顶级ETF
         CondEtfAdrCount conditionRankN = new CondEtfAdrCount();
         conditionRankN.setDate(date);
         conditionRankN.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
         conditionRankN.setChannel(CHANNEL_ETF);
+
+//        List<String> zqdmList = null;//顶级ETF
         List<String> zqdmList = EtfAdrCountService.findListZqdmByRankN(conditionRankN);//查询列表：ETF；每种业务排名第n的数据
+        zqdmList.addAll(zqdmListTop);
 
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
         List<EtfAdrCountVo> rs = null;
@@ -52,24 +54,11 @@ public class EtfStat {
 //        condition.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
 //        condition.setBizList(Arrays.asList("资源-通用"));// "资源-通用", "资源-石油", "资源-稀有","资源-农业","金融-黄金","资源-农业"  科技-软件  金融-银行
 //        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
-//        boolean isShowMyPosition = true;//是否显示我的持仓
-        boolean isShowMyPosition = false;//是否显示我的持仓
-        if (isShowMyPosition) {
-            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_102);
-            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
-            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_101);
-            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
-            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_60);
-            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
-            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_30);
-            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
-            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_15);
-            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
-        }
+
         for (String day : dateList) {
 //            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
-            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
-//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近3日涨幅
+//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
+            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近3日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_5_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近5日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_10_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_20_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近60日涨幅
@@ -103,6 +92,21 @@ public class EtfStat {
 //            for (EtfAdrCountVo etf : rs) {
 //                zqdmSet.add(etf.getF12());
 //            }
+        }
+
+        //        boolean isShowMyPosition = true;//是否显示我的持仓
+        boolean isShowMyPosition = false;//是否显示我的持仓
+        if (isShowMyPosition) {
+            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_102);
+            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
+            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_101);
+            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
+            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_60);
+            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
+            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_30);
+            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
+            condition.setOrderByVoField(ORDER_BY_VO_MAPCT_15);
+            EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
         }
     }
 }

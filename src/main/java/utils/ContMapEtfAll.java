@@ -24,7 +24,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_ZIYUAN_OIL = new HashMap<>();//资源-石油
 
     static {
-        TOP_ZIYUAN_OIL.put("159518", "资源-石油             ");//标普油气ETF           市值：8.02      累涨：59.76     26.60     14.85     18.31     10日：4.58      2.57      1.45      -0.44     1         累涨修正：69.81     净值区间：38      55      17      39      66      1
     }
 
     public static Map<String, String> ZIYUAN_OIL = new HashMap<>();//资源-石油
@@ -233,9 +232,7 @@ public class ContMapEtfAll {
      * 医疗
      */
     public static Map<String, String> TOP_YILIAO_COMMON = new HashMap<>();
-
     static {
-        TOP_YILIAO_COMMON.put("159570", ContEtfTypeName.YILIAO_COMMON);//港股通创新药ETF       市值：118.80    累涨：71.31     23.31     23.33     24.67     10日：11.60     7.99      6.00      0.05      2         累涨修正：102.9     净值区间：43      55      76      81      87      1
     }
 
     public static Map<String, String> YILIAO_COMMON = new HashMap<>();
@@ -342,7 +339,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_KEJI_HK = new HashMap<>();
 
     static {
-        TOP_KEJI_HK.put("513980", ContEtfTypeName.KEJI_HK);//港股科技50ETF         市值：175.13    累涨：37.48     11.11     12.34     14.03     10日：7.46      2.30      1.28      0.00      1         累涨修正：49.8      净值区间：15      31      72      76      76      1
     }
 
     public static Map<String, String> KEJI_HK = new HashMap<>();
@@ -411,7 +407,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_KEJI_JUNGONG = new HashMap<>();
 
     static {
-        TOP_KEJI_JUNGONG.put("512710", ContEtfTypeName.KEJI_JUNGONG);//军工龙头ETF           市值：136.81    累涨：39.85     13.34     13.59     12.92     10日：7.95      4.20      2.17      0.00      2         累涨修正：56.34     净值区间：64      82      83      91      94      1
     }
 
     public static Map<String, String> KEJI_JUNGONG = new HashMap<>();
@@ -500,8 +495,8 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_KEJI_RUAN_JIAN = new HashMap<>();
 
     static {
-        TOP_KEJI_RUAN_JIAN.put("159388", ContEtfTypeName.KEJI_RUAN_JIAN);//创业板人工智能ETF国泰 市值：0.55      累涨：50.45     13.40     20.30     16.75     10日：8.38      5.05      4.06      0.79      1         累涨修正：72        净值区间：61      68      84      87      89      1
-        TOP_KEJI_RUAN_JIAN.put("516860", ContEtfTypeName.KEJI_RUAN_JIAN);//金融科技ETF           市值：12.92     累涨：46.90     11.91     20.52     14.47     10日：6.01      4.55      2.53      -1.04     13        累涨修正：62.52     净值区间：0       16      50      75      79      6
+//        TOP_KEJI_RUAN_JIAN.put("159388", ContEtfTypeName.KEJI_RUAN_JIAN);//创业板人工智能ETF国泰 市值：0.55      累涨：50.45     13.40     20.30     16.75     10日：8.38      5.05      4.06      0.79      1         累涨修正：72        净值区间：61      68      84      87      89      1
+//        TOP_KEJI_RUAN_JIAN.put("516860", ContEtfTypeName.KEJI_RUAN_JIAN);//金融科技ETF           市值：12.92     累涨：46.90     11.91     20.52     14.47     10日：6.01      4.55      2.53      -1.04     13        累涨修正：62.52     净值区间：0       16      50      75      79      6
     }
 
     public static Map<String, String> KEJI_RUAN_JIAN = new HashMap<>();
@@ -587,7 +582,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_KEJI_XIN_PIAN = new HashMap<>();
 
     static {
-        TOP_KEJI_XIN_PIAN.put("159909", ContEtfTypeName.KEJI_XIN_PIAN);//TMT50ETF              市值：5.11      累涨：41.71     11.91     15.05     14.75     10日：9.62      3.22      3.22      1.44      2         累涨修正：60.99     净值区间：100     100     100     100     100     1
     }
 
     public static Map<String, String> KEJI_XIN_PIAN = new HashMap<>();
@@ -795,9 +789,8 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_INDEX_CN_NOT = new HashMap<>();
 
     static {
-        TOP_INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
-//        TOP_INDEX_CN_NOT.put("513730", ContEtfTypeName.INDEX_CN_NOT);//东南亚科技ETF         市值：15.89     累涨：29.67     10.04     8.88      10.75     10日：6.72      2.65      1.28      -0.95     1         累涨修正：41.6      净值区间：11      63      68      77      77      6
-        TOP_INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.61     累涨：28.97     11.24     6.84      10.89     10日：4.22      2.61      1.37      -0.93     5         累涨修正：38.54     净值区间：35      54      50      78      82      9
+//        TOP_INDEX_CN_NOT.put("513520", ContEtfTypeName.INDEX_CN_NOT);//日经ETF               市值：14.53     累涨：24.89     7.19      8.93      8.77      10日：6.28      4.94      4.74      -1.64     2         累涨修正：45.59     净值区间：62      62      62      74      78      1
+//        TOP_INDEX_CN_NOT.put("159561", ContEtfTypeName.INDEX_CN_NOT);//德国ETF               市值：15.61     累涨：28.97     11.24     6.84      10.89     10日：4.22      2.61      1.37      -0.93     5         累涨修正：38.54     净值区间：35      54      50      78      82      9
     }
 
     public static Map<String, String> INDEX_CN_NOT = new HashMap<>();
@@ -1413,7 +1406,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_JINRONG_GOLD = new HashMap<>();
 
     static {
-        TOP_JINRONG_GOLD.put("517400", ContEtfTypeName.JINRONG_GOLD);//黄金股票ETF           市值：1.05      累涨：36.21     10.78     13.43     12.00     10日：6.95      4.62      3.75      -0.92     2         累涨修正：55.28     净值区间：57      59      59      57      65      1
     }
 
     public static Map<String, String> JINRONG_GOLD = new HashMap<>();
@@ -1444,7 +1436,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_JINRONG_BANK = new HashMap<>();
 
     static {
-        TOP_JINRONG_BANK.put("512700", ContEtfTypeName.JINRONG_BANK);//银行ETF南方           市值：15.79     累涨：29.33     9.62      10.37     9.34      10日：3.25      1.25      0.57      -1.42     1         累涨修正：34.97     净值区间：4       2       19      54      67      1
     }
 
     public static Map<String, String> JINRONG_BANK = new HashMap<>();
@@ -1504,7 +1495,6 @@ public class ContMapEtfAll {
     public static Map<String, String> TOP_JINRONG_FANGDICHAN = new HashMap<>();
 
     static {
-        TOP_JINRONG_FANGDICHAN.put("159745", ContEtfTypeName.JINRONG_FANGDICHAN);//建材ETF               市值：17.69     累涨：26.14     4.38      6.79      14.97     10日：8.21      7.37      4.37      -2.41     2         累涨修正：50.46     净值区间：41      54      62      66      66      1
     }
 
     public static Map<String, String> JINRONG_FANGDICHAN = new HashMap<>();
@@ -1866,6 +1856,10 @@ public class ContMapEtfAll {
         }
         System.out.println("    }");
 
+        System.out.println("    public static Map<String, String> NOCHECK_" + typeEn + " = new HashMap<>();");//+ typeCn
+        System.out.println("    static {");
+        System.out.println("    }");
+
 
     }
 
@@ -1873,7 +1867,7 @@ public class ContMapEtfAll {
 //        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
         String date = "2025-08-08";
 
-//        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);//指数-外盘
+        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT, null, "INDEX_CN_NOT", ContEtfTypeName.INDEX_CN_NOT, ContMapEtfAll.INDEX_CN_NOT);//指数-外盘
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_NOT_USA,  ContEtfNameKey.INDEX_CN_NOT_USA_NOLIKE, "INDEX_CN_NOT_USA", ContEtfTypeName.INDEX_CN_NOT_USA, ContMapEtfAll.INDEX_CN_NOT_USA);//指数-外盘-美股
 //        findByTypeName(date, ContEtfNameKey.INDEX_CN_1000, ContEtfNameKey.INDEX_CN_1000_NOLIKE, name, ContEtfTypeName.INDEX_CN_1000, ContMapEtfAll.INDEX_CN_1000);
 //        findByTypeName(date, ContEtfNameKey.INDEX_300, ContEtfNameKey.INDEX_300_NOLIKE, "INDEX_300", ContEtfTypeName.INDEX_300, ContMapEtfAll.INDEX_300);//指数-创业板
@@ -1901,7 +1895,7 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.KEJI_RUAN_JIAN, null, "KEJI_RUAN_JIAN", ContEtfTypeName.KEJI_RUAN_JIAN, ContMapEtfAll.KEJI_RUAN_JIAN);//科技-软件
 //        findByTypeName(date, ContEtfNameKey.KEJI_XIN_PIAN, null, "KEJI_XIN_PIAN", ContEtfTypeName.KEJI_XIN_PIAN, ContMapEtfAll.KEJI_XIN_PIAN);//科技-芯片
 //        findByTypeName(date, ContEtfNameKey.KEJI_TONG_XIN, null, "KEJI_TONG_XIN", ContEtfTypeName.KEJI_TONG_XIN, ContMapEtfAll.KEJI_TONG_XIN);//科技-通信
-        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);//科技-新能源
+//        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);//科技-新能源
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfAll.KEJI_NEW_CAR);//科技-汽车
     }
 }
