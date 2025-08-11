@@ -35,10 +35,10 @@ public class EtfControl {
     static String httpKlineApiType = Content.API_TYPE_SSE;
 
     public static void main(String[] args) {
-//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-        String date = "2025-08-08";
+        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+//        String date = "2025-08-08";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
-//            return;
+            return;
         }
 
         boolean updateEtf = true;//更新ETF
@@ -60,12 +60,12 @@ public class EtfControl {
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
         if (updateEtf) {
-//            saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
-//            saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
-//            List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
-//            updateAdrSumSse(date, etfList);
+            saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
+            saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
+            List<RankBizDataDiff> etfList = listEtfListLastDayByMarketValue(null, null, null);//1、查询etf列表   JINRONG_GOLD
+            updateAdrSumSse(date, etfList);
             updateUpSumOrder(date, CHANNEL_ETF);
-//            updateLatestDayAdr(condition, date, httpKlineApiType);
+            updateLatestDayAdr(condition, date, httpKlineApiType);
 //            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
 //            EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
 //            updateUpMaTypeTopN(date, 2, maKltList, CHANNEL_ETF);//更新超过均线-（每个类型涨幅前n个）
@@ -2561,12 +2561,8 @@ public class EtfControl {
      * @return 是否过滤
      */
     private static boolean checkFiterType(String zqdm) {
-        if (ContMapEtfAll.INDEX_CN_CITY_NOCHECK.containsKey(zqdm)) {
+        if (ContMapEtfAll.ETF_All_NOCHECK.containsKey(zqdm)) {
 //                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.INDEX_CN_CITY_NOCHECK);
-            return true;
-        }
-        if (ContMapEtfAll.JINRONG_CASH_NOCHECK.containsKey(zqdm)) {
-//                System.out.println("过滤类型：不更新类型：" + ContEtfTypeName.JINRONG_CASH_NOCHECK);
             return true;
         }
         return false;

@@ -11,10 +11,10 @@ public class ContEtfNameKey {
     /**
      * 资源
      */
-    public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源", "新材料", "材料", "农", "畜牧", "养殖", "粮食","稀有金属", "稀土", "有色");
+    public static List ZIYUAN_COMMON = Arrays.asList("钢铁", "豆粕", "矿业", "化工", "大宗", "资源", "煤炭", "能源", "新材料", "材料", "农", "畜牧", "养殖", "粮食", "稀有金属", "稀土", "有色");
     public static List ZIYUAN_COMMON_NOLIKE = Arrays.asList("油气", "新能源", "半导体");
     public static List ZIYUAN_OIL = Arrays.asList("石油", "石化", "油气");//资源-石油
-//    public static List ZIYUAN_XIYOU = Arrays.asList();
+    //    public static List ZIYUAN_XIYOU = Arrays.asList();
 //    public static List ZIYUAN_NONGYE = Arrays.asList("农", "畜牧", "养殖", "粮食");
     public static List ZIYUAN_NOLIKE = Arrays.asList("新能源", "半导体");
     public static List ZIYUAN = new ArrayList();
@@ -28,18 +28,19 @@ public class ContEtfNameKey {
 
     public static List INDEX_CN_NOT = Arrays.asList("德", "亚", "沙特", "法国", "日经", "日本");//指数-外盘
     public static List INDEX_CN_NOT_USA = Arrays.asList("标普", "纳", "道琼斯", "美国");//指数-外盘-美股
-    public static List INDEX_CN_NOT_USA_NOLIKE = Arrays.asList("标普油气","生物科技");
+    public static List INDEX_CN_NOT_USA_NOLIKE = Arrays.asList("标普油气", "生物科技");
 
     public static List INDEX_CN_CITY_NOCHECK = Arrays.asList("张江", "湖北", "杭州", "成渝", "大湾区", "长三角", "上海", "浙江", "长江", "浙商", "湾创");//指数-国内城市
     public static List INDEX_CN_1000 = Arrays.asList("2000", "1000", "800", "500", "民企", "中小100", "深成长");//指数-中小盘
     public static List INDEX_CN_1000_NOLIKE = Arrays.asList("标普");
-    public static List INDEX_CN_BIG = Arrays.asList("沪深300", "深证", "上证50", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "300", "上证综指",
-            "央视", "深价值", "A50", "红利", "深100", "国企", "380", "MSCI", "质量", "上证综合", "上证中盘", "基本面", "价值", "上证指数", "高股息", "一带一路", "50ETF基金");//指数-大盘
+    public static List INDEX_CN_BIG = Arrays.asList("深证", "央企", "A股", "深F60", "深成", "180", "深红利", "A100", "超大盘", "央视", "深价值", "红利", "深100", "国企", "380", "MSCI", "质量", "基本面", "价值", "高股息", "一带一路", "380");//指数-大盘
     public static List INDEX_CN_BIG_NOLIKE = Arrays.asList("恒生", "港股", "双创", "科创", "科创", "创业板", "标普", "中证1000", "500", "中证500", "央企科技", "深成长");
+    public static List INDEX_CN_BIG_QZ = Arrays.asList("沪深300", "300", "上证综指", "上证50", "A50", "50ETF基金", "上证综合", "上证中盘", "上证指数", "50ETF基金");//指数-大盘-权重
+    public static List INDEX_CN_BIG_QZ_NOLIKE = Arrays.asList("恒生", "港股", "双创", "科创", "科创", "创业板", "标普", "中证1000", "500", "中证500", "央企科技", "深成长", "深300");
     public static List INDEX_300 = Arrays.asList("创业", "创中盘", "创400", "创300", "创大盘", "创50", "创100", "深创");//指数-创业板
     public static List INDEX_300_NOLIKE = Arrays.asList("信创", "人工智能", "科创", "医药");//指数-创业板（不匹配）
     public static List INDEX_688 = Arrays.asList("科创", "双创");//指数-科创板
-    public static List INDEX_688_NOLIKE = Arrays.asList("芯片", "医药", "人工智能","AI", "新能源", "半导体");//指数-创业板（不匹配）
+    public static List INDEX_688_NOLIKE = Arrays.asList("芯片", "医药", "人工智能", "AI", "新能源", "半导体");//指数-创业板（不匹配）
     public static List INDEX_HK = Arrays.asList("港股", "恒生", "H股", "沪港深");//指数-港股
     public static List INDEX_HK_NOLIKE = Arrays.asList("创新药", "医", "生物", "汽车", "消费");
     public static List INDEX = new ArrayList();
@@ -85,11 +86,11 @@ public class ContEtfNameKey {
     }
 
     public static List KEJI_GONG_YE = Arrays.asList("物联网", "机床", "工业母机", "工业互联", "专精特新", "智能制造", "机械", "央企科技", "科技50", "科技ETF", "战略", "科技100", "核心",
-            "科技",  "漂亮", "国货", "ESG", "可持续", "产业升级", "创新100", "G60创新", "科技龙头");//科技-工业
+            "科技", "漂亮", "国货", "ESG", "可持续", "产业升级", "创新100", "G60创新", "科技龙头");//科技-工业
     public static List KEJI_GONG_YE_NOLIKE = Arrays.asList("纳指", "标普", "港股", "香港", "恒生", "中概", "东南亚", "生物", "金融", "货币", "沪港深科技", "科技ETF沪港深", "信息科技");//科技-工业
-//    public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
-    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "绿电", "电力","汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-新能源
-    public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济","VR");//科技-软件
+    //    public static List KEJI_NEW_CAR = Arrays.asList("汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-汽车
+    public static List KEJI_NEW_ENERGY = Arrays.asList("新能源50", "新能源ETF", "新能源主题", "新能源龙头", "光伏", "绿色能源", "电网", "环保", "碳", "绿电", "电力", "汽车", "智能驾驶", "新能源车", "智慧电车", "电动车", "电池", "智能汽车", "智能车", "电池", "新能源汽车", "新能源车", "新能车");//科技-新能源
+    public static List KEJI_RUAN_JIAN = Arrays.asList("数据", "云", "信创", "金融科技", "人工智能", "AI", "软件", "机器人", "信息", "计算机", "教育", "数字经济", "VR");//科技-软件
     public static List KEJI_XIN_PIAN = Arrays.asList("芯片", "集成电路", "半导体", "电子", "TMT", "消电", "智能消费");//科技-芯片
     public static List KEJI_TONG_XIN = Arrays.asList("5G", "通信", "电信");//科技-芯片
     public static List KEJI_HK = Arrays.asList("香港科技", "港股科技", "港股通科技", "港股互联网", "互联", "恒生科技", "恒生新经济", "中概", "沪港深科技", "科技ETF沪港深", "新经济", "香港消费", "港股消费", "恒生消费", "消费ETF沪港深", "线上消费", "在线消费");//科技-香港

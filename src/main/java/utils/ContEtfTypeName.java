@@ -78,6 +78,7 @@ public class ContEtfTypeName {
     public static String INDEX_CN_NOT_USA= "指数-外盘-美股";
     public static String INDEX_CN_1000 = "指数-中小盘";
     public static String INDEX_CN_BIG = "指数-大盘";
+    public static String INDEX_CN_BIG_QZ = "指数-大盘-权重";
     public static String INDEX_300 = "指数-创业板";
     public static String INDEX_688 = "指数-科创板";
     public static String INDEX_CN_CITY_NOCHECK = "指数-国内城市";
