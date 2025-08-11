@@ -2131,6 +2131,8 @@ public class EtfControl {
 //                System.out.println("特定证券代码：" + zqdm + "-" + etfVo.getF14());
 //            }
 
+            if (checkFiterType(zqdm)) continue;//检查过滤类型，减少http查询
+
             //当前交易日
             String curTradeDay = date.replace("-", "");
 
