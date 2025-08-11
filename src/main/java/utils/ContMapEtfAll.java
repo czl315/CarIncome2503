@@ -129,39 +129,47 @@ public class ContMapEtfAll {
     /**
      * 消费
      */
-    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();//消费-通用
-    public static Map<String, String> TOP_XIAOFEI_COMMON = new HashMap<>();//消费-通用
-
+    public static Map<String, String> TOP_XIAOFEI_COMMON = new HashMap<>();
     static {
-
     }
-
+    public static Map<String, String> XIAOFEI_COMMON = new HashMap<>();
     static {
-        XIAOFEI_COMMON.put("516560", "消费-通用             ");//养老ETF               市值：1.06      累涨：25.62     7.73      9.69      8.20      10日：4.29      4.05      2.84      -1.04     3         累涨修正：39.64     净值区间：69      76      84      92      93      1
-        XIAOFEI_COMMON.put("517880", "消费-通用             ");//品牌消费ETF           市值：0.35      累涨：28.58     11.04     11.84     5.70      10日：2.70      2.48      0.91      -0.11     1         累涨修正：35.58     净值区间：33      33      20      63      43      2
-        XIAOFEI_COMMON.put("515920", "消费-通用             ");//智能消费ETF           市值：1.81      累涨：25.66     6.32      13.28     6.06      10日：2.53      2.53      0.96      1.67      42        累涨修正：32.64     净值区间：92      79      47      63      52      3
-        XIAOFEI_COMMON.put("159996", "消费-通用             ");//家电ETF               市值：13.57     累涨：26.84     8.44      11.32     7.08      10日：1.51      1.51      0.99      0.15      1         累涨修正：31.84     净值区间：40      26      24      75      55      4
-        XIAOFEI_COMMON.put("516910", "消费-通用             ");//物流ETF               市值：0.54      累涨：25.35     4.34      11.23     9.78      10日：2.87      1.82      0.19      -0.48     2         累涨修正：30.42     净值区间：14      42      54      80      80      5
-        XIAOFEI_COMMON.put("516530", "消费-通用             ");//物流快递ETF           市值：0.71      累涨：24.00     4.32      10.15     9.53      10日：3.44      2.22      0.22      -0.44     4         累涨修正：30.1      净值区间：18      46      68      86      86      6
-        XIAOFEI_COMMON.put("561120", "消费-通用             ");//家电ETF               市值：1.01      累涨：25.55     8.14      10.82     6.59      10日：1.26      1.26      0.76      0.17      8         累涨修正：29.59     净值区间：38      24      21      73      58      7
-        XIAOFEI_COMMON.put("510630", "消费-通用             ");//消费30ETF             市值：4.37      累涨：25.55     10.95     10.36     4.24      10日：1.56      1.35      0.42      -0.41     5         累涨修正：29.3      净值区间：45      37      28      68      52      8
-        XIAOFEI_COMMON.put("562580", "消费-通用             ");//可选消费ETF           市值：0.33      累涨：27.62     8.51      12.78     6.33      10日：1.08      0.59                0.00      9         累涨修正：29.29     净值区间：14      6       6       70      61      9
-        XIAOFEI_COMMON.put("560880", "消费-通用             ");//家电ETF龙头           市值：4.12      累涨：25.34     7.99      10.70     6.65      10日：1.30      1.30      0.66      0.65      6         累涨修正：29.26     净值区间：50      32      29      75      60      10
-        XIAOFEI_COMMON.put("159936", "消费-通用             ");//可选消费ETF           市值：3.14      累涨：24.98     8.03      10.53     6.42      10日：1.81      1.09      0.50      0.15      7         累涨修正：28.88     净值区间：26      12      12      66      61      11
-        XIAOFEI_COMMON.put("516600", "消费-通用             ");//消费服务ETF           市值：0.82      累涨：20.58     7.95      6.83      5.80      10日：2.14      1.98      0.82      0.00      10        累涨修正：26.34     净值区间：91      77      75      94      74      12
-        XIAOFEI_COMMON.put("159730", "消费-通用             ");//龙头家电ETF           市值：0.38      累涨：23.76     8.85      8.00      6.91      10日：0.81      0.81      0.41      0.10      18        累涨修正：26.2      净值区间：24      13      13      67      52      13
-        XIAOFEI_COMMON.put("512600", "消费-通用             ");//必选消费ETF           市值：4.90      累涨：22.00     10.63     7.35      4.02      10日：1.59      1.01      0.72      -0.57     11        累涨修正：26.04     净值区间：55      54      32      65      54      14
-        XIAOFEI_COMMON.put("159928", "消费-通用             ");//消费ETF               市值：134.70    累涨：22.53     10.52     8.36      3.65      10日：1.22      0.98      0.49      -0.49     14        累涨修正：25.71     净值区间：46      47      31      65      55      15
-        XIAOFEI_COMMON.put("159672", "消费-通用             ");//主要消费ETF           市值：0.76      累涨：22.36     10.45     8.17      3.74      10日：1.04      1.04      0.52      -0.51     15        累涨修正：25.48     净值区间：45      43      25      63      50      16
-        XIAOFEI_COMMON.put("159689", "消费-通用             ");//消费ETF南方           市值：0.76      累涨：22.15     10.68     7.60      3.87      10日：1.17      1.04      0.52      -0.64     13        累涨修正：25.4      净值区间：40      43      26      63      54      17
-        XIAOFEI_COMMON.put("159328", "消费-通用             ");//家电ETF易方达         市值：1.17      累涨：22.80     8.19      8.49      6.12      10日：0.93      0.73      0.42      0.41      20        累涨修正：25.3      净值区间：9       9       9       55      52      18
-        XIAOFEI_COMMON.put("560680", "消费-通用             ");//消费ETF龙头           市值：1.24      累涨：21.90     10.21     8.11      3.58      10日：1.01      1.01      0.67      -0.78     19        累涨修正：25.26     净值区间：47      39      26      58      52      19
-        XIAOFEI_COMMON.put("515650", "消费-通用             ");//消费50ETF             市值：22.63     累涨：22.72     8.69      8.92      5.11      10日：1.02      0.94      0.26      -0.34     12        累涨修正：25.2      净值区间：7       5       12      72      68      20
-        XIAOFEI_COMMON.put("159798", "消费-通用             ");//消费ETF易方达         市值：0.77      累涨：21.60     9.02      7.75      4.83      10日：1.05      0.84      0.21      -0.42     17        累涨修正：23.91     净值区间：0       0       3       69      60      21
-        XIAOFEI_COMMON.put("510150", "消费-通用             ");//消费ETF               市值：16.34     累涨：20.52     8.58      7.43      4.51      10日：1.87      0.94      0.19      -0.37     16        累涨修正：23.71     净值区间：44      25      45      81      71      22
-        XIAOFEI_COMMON.put("159520", "消费-通用             ");//消费龙头ETF           市值：1.32      累涨：20.81     7.94      8.16      4.71      10日：0.86      0.77                -0.19     22        累涨修正：22.44     净值区间：9       6       6       71      60      23
-        XIAOFEI_COMMON.put("159670", "消费-通用             ");//消费ETF基金           市值：0.59      累涨：20.36     8.22      7.38      4.76      10日：0.83      0.83      0.21      -0.31     21        累涨修正：22.44     净值区间：5       3       9       71      64      24
-        XIAOFEI_COMMON.put("516130", "消费-通用             ");//消费龙头ETF           市值：1.00      累涨：19.13     8.47      6.66      4.00      10日：0.65      0.65      0.13      -0.39     23        累涨修正：20.69     净值区间：13      8       8       72      51      25
+        XIAOFEI_COMMON.put("516530", ContEtfTypeName.XIAOFEI_COMMON);//物流快递ETF           市值：0.72      累涨：20.22     1     5.88      2     5.38      8.96      10日：3.89      2.41      1.88      -0.10     2         累涨修正：28.4      净值区间：84      89      76      83      84      10.7    4.5     1.0     1.3     0.3     0.0     1
+        XIAOFEI_COMMON.put("516910", ContEtfTypeName.XIAOFEI_COMMON);//物流ETF               市值：0.58      累涨：20.14     2     5.27      4     6.12      8.75      10日：3.72      2.53      1.71      -0.09     1         累涨修正：28.1      净值区间：88      91      80      86      88      10.8    4.8     1.3     1.4     0.5     0.2     2
+        XIAOFEI_COMMON.put("560880", ContEtfTypeName.XIAOFEI_COMMON);//家电ETF龙头           市值：4.38      累涨：18.67     5     4.36      8     7.21      7.10      10日：3.26      3.12      1.10      0.82      4         累涨修正：26.15     净值区间：86      91      91      96      96                                                      3
+        XIAOFEI_COMMON.put("159996", ContEtfTypeName.XIAOFEI_COMMON);//家电ETF               市值：12.88     累涨：18.81     4     4.26      9     7.36      7.19      10日：3.25      2.96      0.86      1.28      3         累涨修正：25.88     净值区间：95      97      97      99      99                                                      4
+        XIAOFEI_COMMON.put("561120", ContEtfTypeName.XIAOFEI_COMMON);//家电ETF               市值：1.10      累涨：18.39     6     3.92      10    7.33      7.14      10日：3.07      2.99      0.96      1.36      5         累涨修正：25.41     净值区间：97      98      98      99      99                                                      5
+        XIAOFEI_COMMON.put("159328", ContEtfTypeName.XIAOFEI_COMMON);//家电ETF易方达         市值：1.27      累涨：17.42     8     3.47      13    6.77      7.18      10日：2.97      2.67      0.88      0.68      6         累涨修正：23.94     净值区间：88      93      64      68      68                                                      6
+        XIAOFEI_COMMON.put("159730", ContEtfTypeName.XIAOFEI_COMMON);//龙头家电ETF           市值：0.37      累涨：16.99     10    3.54      12    5.98      7.47      10日：3.12      2.61      1.00      0.50      7         累涨修正：23.72     净值区间：94      97      87      94      92                                                      7
+        XIAOFEI_COMMON.put("562580", ContEtfTypeName.XIAOFEI_COMMON);//可选消费ETF           市值：0.34      累涨：17.17     9     5.59      3     5.78      5.80      10日：2.49      2.40      1.62      0.59      10        累涨修正：23.68     净值区间：91      95      86      92      64                                                      8
+        XIAOFEI_COMMON.put("517880", ContEtfTypeName.XIAOFEI_COMMON);//品牌消费ETF           市值：0.30      累涨：18.10     7     4.49      6     5.69      7.92      10日：2.45      2.01      0.55      0.78      8         累涨修正：23.11     净值区间：57      71      63      76      76                                                      9
+        XIAOFEI_COMMON.put("516560", ContEtfTypeName.XIAOFEI_COMMON);//养老ETF               市值：1.03      累涨：18.99     3     8.47      1     4.68      5.84      10日：2.66      0.81      0.11      0.69      12        累涨修正：22.57     净值区间：91      78      89      92      92                                                      10
+        XIAOFEI_COMMON.put("159936", ContEtfTypeName.XIAOFEI_COMMON);//可选消费ETF           市值：2.88      累涨：16.82     12    5.21      5     5.47      6.14      10日：2.43      2.23      0.74      0.74      11        累涨修正：22.22     净值区间：91      94      79      89      64                                                      11
+        XIAOFEI_COMMON.put("159766", ContEtfTypeName.XIAOFEI_COMMON);//旅游ETF               市值：31.78     累涨：18.48     2     5.95      2     4.95      7.58      10日：1.61      1.32      0.73      0.29      3         累涨修正：22.14     净值区间：91      52      49      60      60      2.4     1.6     0.0     0.9     0.7     0.2     12
+        XIAOFEI_COMMON.put("512690", ContEtfTypeName.XIAOFEI_COMMON);//酒ETF                 市值：155.31    累涨：17.68     3     1.88      8     7.95      7.85      10日：2.26      1.57      0.34      1.92      1         累涨修正：21.85     净值区间：89      91      69      78      78      -1.5    2.5     1.2     2.1     1.4     0.7     13
+        XIAOFEI_COMMON.put("510150", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF               市值：14.51     累涨：16.84     11    3.57      11    5.55      7.72      10日：3.45      1.28      0.18      0.55      9         累涨修正：21.75     净值区间：78      42      61      75      75                                                      14
+        XIAOFEI_COMMON.put("562510", ContEtfTypeName.XIAOFEI_COMMON);//旅游ETF               市值：6.74      累涨：18.93     1     6.47      1     5.06      7.40      10日：1.16      1.02      0.44      0.43      4         累涨修正：21.55     净值区间：91      52      48      59      59                                                      15
+    }
+    public static Map<String, String> XIAOFEI_COMMON_NOCHECK = new HashMap<>();
+    static {
+        XIAOFEI_COMMON_NOCHECK.put("516600", ContEtfTypeName.XIAOFEI_COMMON);//消费服务ETF           市值：0.81      累涨：16.04     13    4.44      7     6.40      5.20      10日：2.18      0.78                0.63      14        累涨修正：19        净值区间：56      33      67      77      77                                                      1
+        XIAOFEI_COMMON_NOCHECK.put("159928", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF               市值：133.70    累涨：14.95     14    3.30      14    4.78      6.87      10日：2.21      1.36      0.12      0.98      13        累涨修正：18.64     净值区间：88      70      56      66      66                                                      2
+        XIAOFEI_COMMON_NOCHECK.put("159843", ContEtfTypeName.XIAOFEI_COMMON);//食品饮料ETF           市值：4.16      累涨：14.26     6     2.11      5     5.04      7.11      10日：2.32      1.40      0.46      1.08      2         累涨修正：18.44     净值区间：86      80      59      69      56                                                      3
+        XIAOFEI_COMMON_NOCHECK.put("516130", ContEtfTypeName.XIAOFEI_COMMON);//消费龙头ETF           市值：1.07      累涨：12.92     22    2.34      20    4.56      6.02      10日：2.49      1.97      0.39      0.92      16        累涨修正：17.77     净值区间：93      92      65      77      67                                                      4
+        XIAOFEI_COMMON_NOCHECK.put("159736", ContEtfTypeName.XIAOFEI_COMMON);//食品饮料ETF天弘       市值：49.86     累涨：14.37     4     3.19      3     4.79      6.39      10日：1.84      1.14      0.14      1.28      6         累涨修正：17.49     净值区间：87      67      68      75      65                                                      5
+        XIAOFEI_COMMON_NOCHECK.put("159862", ContEtfTypeName.XIAOFEI_COMMON);//食品ETF               市值：0.56      累涨：14.34     5     2.61      4     5.18      6.55      10日：1.79      1.05                1.20      5         累涨修正：17.18     净值区间：92      79      61      69      56                                                      6
+        XIAOFEI_COMMON_NOCHECK.put("560680", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF龙头           市值：1.18      累涨：13.80     15    3.03      15    4.25      6.52      10日：2.02      1.24      0.11      1.01      17        累涨修正：17.17     净值区间：93      75      57      65      65                                                      7
+        XIAOFEI_COMMON_NOCHECK.put("512600", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF嘉实           市值：5.62      累涨：13.70     16    2.74      17    4.17      6.79      10日：2.02      1.30      0.14      1.01      18        累涨修正：17.16     净值区间：100     77      60      67      67                                                      8
+        XIAOFEI_COMMON_NOCHECK.put("515650", ContEtfTypeName.XIAOFEI_COMMON);//消费50ETF             市值：23.34     累涨：13.19     17    2.21      22    4.95      6.03      10日：2.25      1.48      0.17      0.78      15        累涨修正：17.09     净值区间：95      80      52      68      61                                                      9
+        XIAOFEI_COMMON_NOCHECK.put("515170", ContEtfTypeName.XIAOFEI_COMMON);//食品饮料ETF           市值：34.71     累涨：13.71     7     2.04      7     4.67      7.00      10日：1.93      1.23      0.17      1.41      7         累涨修正：17.04     净值区间：83      74      57      66      54                                                      10
+        XIAOFEI_COMMON_NOCHECK.put("516900", ContEtfTypeName.XIAOFEI_COMMON);//食品饮料ETF基金       市值：0.99      累涨：13.23     9     2.10      6     4.60      6.53      10日：2.18      1.17      0.33      1.17      8         累涨修正：16.91     净值区间：92      83      59      67      49                                                      11
+        XIAOFEI_COMMON_NOCHECK.put("159798", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF易方达         市值：0.76      累涨：12.58     23    2.10      24    4.39      6.09      10日：2.25      1.61      0.43      0.53      21        累涨修正：16.87     净值区间：85      78      49      66      57                                                      12
+        XIAOFEI_COMMON_NOCHECK.put("159670", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF基金           市值：0.54      累涨：12.96     21    2.17      23    4.40      6.39      10日：2.63      1.05      0.10      0.63      19        累涨修正：16.74     净值区间：93      72      50      67      58                                                      13
+        XIAOFEI_COMMON_NOCHECK.put("159520", ContEtfTypeName.XIAOFEI_COMMON);//消费龙头ETF           市值：1.36      累涨：12.57     24    2.30      21    4.62      5.65      10日：2.24      1.66      0.19      0.68      22        累涨修正：16.66     净值区间：88      93      60      76      66                                                      14
+        XIAOFEI_COMMON_NOCHECK.put("159689", ContEtfTypeName.XIAOFEI_COMMON);//消费ETF南方           市值：0.73      累涨：13.03     20    2.84      16    3.98      6.21      10日：2.07      1.30      0.13      1.04      20        累涨修正：16.53     净值区间：55      64      56      65      65                                                      15
+        XIAOFEI_COMMON_NOCHECK.put("510630", ContEtfTypeName.XIAOFEI_COMMON);//消费30ETF             市值：4.57      累涨：13.06     19    2.39      19    4.06      6.61      10日：1.85      1.20      0.22      0.98      23        累涨修正：16.33     净值区间：73      62      47      48      29                                                      16
+        XIAOFEI_COMMON_NOCHECK.put("515710", ContEtfTypeName.XIAOFEI_COMMON);//食品ETF               市值：10.07     累涨：13.24     8     1.77      9     4.89      6.58      10日：1.98      1.00                1.32      9         累涨修正：16.22     净值区间：83      75      58      67      54                                                      17
+        XIAOFEI_COMMON_NOCHECK.put("159672", ContEtfTypeName.XIAOFEI_COMMON);//主要消费ETF           市值：0.82      累涨：13.11     18    2.59      18    4.66      5.86      10日：1.70      1.05      0.13      0.91      24        累涨修正：15.99     净值区间：93      75      55      64      64                                                      18
     }
 
     public static Map<String, String> TOP_XIAOFEI_MEDIA = new HashMap<>();
@@ -184,33 +192,12 @@ public class ContMapEtfAll {
         XIAOFEI_MEDIA.put("159855", ContEtfTypeName.XIAOFEI_MEDIA);//影视ETF               市值：0.71      累涨：31.71     8.93      15.34     7.44      10日：2.79      1.44      0.44      1.89      8         累涨修正：36.82     净值区间：100     100     100     95      96      9
     }
 
-    public static Map<String, String> TOP_XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
-
-    static {
-//        TOP_XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.02      累涨：24.21     12.52     7.22      4.47      10日：3.59      0.30      0.30      0.44      2         累涨修正：28.7      净值区间：88      56      63      63      32      1
-        TOP_XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：127.65    累涨：13.41     4.61      3.52      5.28      10日：1.99      0.54      0.18      0.90      3         累涨修正：16.3      净值区间：100     100     61      27      25      3
-    }
-
-    public static Map<String, String> XIAOFEI_WINE = new HashMap<>();//消费-吃喝玩乐
-
-    static {
-        XIAOFEI_WINE.put("562510", "消费-吃喝玩乐         ");//旅游ETF               市值：7.02      累涨：24.21     12.52     7.22      4.47      10日：3.59      0.30      0.30      0.44      2         累涨修正：28.7      净值区间：88      56      63      63      32      1
-        XIAOFEI_WINE.put("159766", "消费-吃喝玩乐         ");//旅游ETF               市值：30.66     累涨：23.85     12.94     6.57      4.34      10日：3.61      0.30      0.30      0.45      1         累涨修正：28.36     净值区间：75      53      62      62      31      2
-        XIAOFEI_WINE.put("512690", "消费-吃喝玩乐         ");//酒ETF                 市值：127.65    累涨：13.41     4.61      3.52      5.28      10日：1.99      0.54      0.18      0.90      3         累涨修正：16.3      净值区间：100     100     61      27      25      3
-        XIAOFEI_WINE.put("159736", "消费-吃喝玩乐         ");//食品饮料ETF天弘       市值：47.25     累涨：13.58     5.94      4.44      3.20      10日：1.89                          0.58      6         累涨修正：15.47     净值区间：71      78      34      23      20      4
-        XIAOFEI_WINE.put("515710", "消费-吃喝玩乐         ");//食品ETF               市值：9.09      累涨：12.30     5.24      3.35      3.71      10日：2.02      0.34      0.17      0.34      4         累涨修正：15        净值区间：57      56      29      16      16      5
-        XIAOFEI_WINE.put("159843", "消费-吃喝玩乐         ");//食品饮料ETF           市值：2.96      累涨：12.10     4.74      3.58      3.78      10日：1.89      0.16      0.16      0.63      5         累涨修正：14.47     净值区间：83      78      34      19      19      6
-        XIAOFEI_WINE.put("515170", "消费-吃喝玩乐         ");//食品饮料ETF           市值：31.99     累涨：11.85     5.07      3.55      3.23      10日：1.62      0.18      0.18      0.54      7         累涨修正：14.01     净值区间：71      63      32      18      18      7
-        XIAOFEI_WINE.put("516900", "消费-吃喝玩乐         ");//食品饮料ETF基金       市值：0.81      累涨：12.02     5.42      3.37      3.23      10日：1.19                          0.68      9         累涨修正：13.21     净值区间：100     67      33      17      16      8
-        XIAOFEI_WINE.put("159862", "消费-吃喝玩乐         ");//食品ETF               市值：0.42      累涨：11.10     3.86      3.75      3.49      10日：1.67      0.15                0.61      8         累涨修正：12.92     净值区间：57      45      32      17      17      9
-    }
-
     public static Map<String, String> XIAOFEI = new HashMap<>();
 
     static {
         XIAOFEI.putAll(XIAOFEI_COMMON);
         XIAOFEI.putAll(XIAOFEI_MEDIA);
-        XIAOFEI.putAll(XIAOFEI_WINE);
+//        XIAOFEI.putAll(XIAOFEI_WINE);
 //        XIAOFEI.putAll(XIAOFEI_HK);
 //        XIAOFEI.putAll(XIAOFEI_HOUSE);
 //        XIAOFEI.putAll(XIAOFEI_TRAVEL);
@@ -221,7 +208,7 @@ public class ContMapEtfAll {
     static {
         TOP_XIAOFEI.putAll(TOP_XIAOFEI_COMMON);
         TOP_XIAOFEI.putAll(TOP_XIAOFEI_MEDIA);
-        TOP_XIAOFEI.putAll(TOP_XIAOFEI_WINE);
+//        TOP_XIAOFEI.putAll(TOP_XIAOFEI_WINE);
     }
 
 
@@ -1348,32 +1335,7 @@ public class ContMapEtfAll {
         INDEX_CN_CITY_NOCHECK.put("510810", "指数-国内城市         ");//上海国企ETF           市值：76.95     累涨：20.42     7.35      10.53     5.90      3.39      2.18      16
     }
 
-    public static Map<String, String> INDEX = new HashMap<>();//指数-全部-etf
 
-    static {
-        INDEX.putAll(INDEX_CN_NOT);
-        INDEX.putAll(INDEX_CN_NOT_USA);
-        INDEX.putAll(INDEX_CN_BIG);
-        INDEX.putAll(INDEX_CN_1000);
-        INDEX.putAll(INDEX_688);
-        INDEX.putAll(INDEX_300);
-        INDEX.putAll(INDEX_CN_CITY_NOCHECK);
-//        INDEX.putAll(INDEX_HK);
-    }
-
-    public static Map<String, String> TOP_INDEX = new HashMap<>();//指数-全部-etf
-
-    static {
-        TOP_INDEX.putAll(TOP_INDEX_CN_NOT);
-        TOP_INDEX.putAll(TOP_INDEX_CN_NOT_USA);
-        TOP_INDEX.putAll(TOP_INDEX_CN_BIG);
-        TOP_INDEX.putAll(TOP_INDEX_CN_BIG_QZ);
-        TOP_INDEX.putAll(TOP_INDEX_CN_1000);
-        TOP_INDEX.putAll(TOP_INDEX_688);
-        TOP_INDEX.putAll(TOP_INDEX_300);
-//        TOP_INDEX.putAll(TOP_INDEX_CN_CITY);
-//        TOP_INDEX.putAll(INDEX_HK);
-    }
 
     /**
      * 金融
@@ -1563,6 +1525,34 @@ public class ContMapEtfAll {
         JINRONG_CASH_NOCHECK.put("159235", ContEtfTypeName.JINRONG_CASH_NOCHECK);//中证现金流ETF         市值：8.00      累涨：                                                    10日：                              0.73                累涨修正：          净值区间：                                                                                        55
     }
 
+    public static Map<String, String> INDEX = new HashMap<>();//指数-全部-etf
+
+    static {
+        INDEX.putAll(INDEX_CN_NOT);
+        INDEX.putAll(INDEX_CN_NOT_USA);
+        INDEX.putAll(INDEX_CN_BIG);
+        INDEX.putAll(INDEX_CN_BIG_QZ);
+        INDEX.putAll(INDEX_CN_1000);
+        INDEX.putAll(INDEX_688);
+        INDEX.putAll(INDEX_300);
+//        INDEX.putAll(INDEX_CN_CITY_NOCHECK);
+//        INDEX.putAll(INDEX_HK);
+    }
+
+    public static Map<String, String> TOP_INDEX = new HashMap<>();//指数-全部-etf
+
+    static {
+        TOP_INDEX.putAll(TOP_INDEX_CN_NOT);
+        TOP_INDEX.putAll(TOP_INDEX_CN_NOT_USA);
+        TOP_INDEX.putAll(TOP_INDEX_CN_BIG);
+        TOP_INDEX.putAll(TOP_INDEX_CN_BIG_QZ);
+        TOP_INDEX.putAll(TOP_INDEX_CN_1000);
+        TOP_INDEX.putAll(TOP_INDEX_688);
+        TOP_INDEX.putAll(TOP_INDEX_300);
+//        TOP_INDEX.putAll(TOP_INDEX_CN_CITY);
+//        TOP_INDEX.putAll(INDEX_HK);
+    }
+
     /**
      * 金融
      */
@@ -1612,17 +1602,7 @@ public class ContMapEtfAll {
         TOP_BIZ.putAll(TOP_ZIYUAN);
     }
 
-    /**
-     * ETF_All 全部：指数、板块
-     * 2022-10-31 etf共收录：670
-     * 2025-06-06 etf共收录：1068
-     */
-    public static Map<String, String> ETF_All = new HashMap<>();
 
-    static {
-        ETF_All.putAll(INDEX);
-        ETF_All.putAll(BIZ_ALL);
-    }
 
     /**
      *
@@ -1644,6 +1624,21 @@ public class ContMapEtfAll {
         ETF_All_NOCHECK.putAll(JINRONG_CASH_NOCHECK);
         ETF_All_NOCHECK.putAll(INDEX_CN_BIG_NOCHECK);
         ETF_All_NOCHECK.putAll(INDEX_CN_BIG_QZ_NOCHECK);
+        ETF_All_NOCHECK.putAll(XIAOFEI_COMMON_NOCHECK);
+        ETF_All_NOCHECK.putAll(INDEX_CN_NOT_NOCHECK);
+    }
+
+    /**
+     * ETF_All 全部：指数、板块
+     * 2022-10-31 etf共收录：670
+     * 2025-06-06 etf共收录：1068
+     */
+    public static Map<String, String> ETF_All = new HashMap<>();
+
+    static {
+        ETF_All.putAll(INDEX);
+        ETF_All.putAll(BIZ_ALL);
+        ETF_All.putAll(ETF_All_NOCHECK);
     }
 
 
@@ -1906,9 +1901,9 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.JINRONG_FANGDICHAN, null, "JINRONG_FANGDICHAN", ContEtfTypeName.JINRONG_FANGDICHAN, ContMapEtfAll.JINRONG_FANGDICHAN);//金融-地产
 //        findByTypeName(date, ContEtfNameKey.JINRONG_CASH_NOCHECK, null, "JINRONG_CASH_NOCHECK", ContEtfTypeName.JINRONG_CASH_NOCHECK, ContMapEtfAll.JINRONG_CASH_NOCHECK);//金融-现金
 
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON);
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_COMMON, ContEtfNameKey.XIAOFEI_COMMON_NOLIKE, "XIAOFEI_COMMON", ContEtfTypeName.XIAOFEI_COMMON, ContMapEtfAll.XIAOFEI_COMMON, new BigDecimal("20"));//消费-通用
+//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, name, ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);//消费-吃喝玩乐
 //        findByTypeName(date, ContEtfNameKey.XIAOFEI_MEDIA, null, "XIAOFEI_MEDIA", ContEtfTypeName.XIAOFEI_MEDIA, ContMapEtfAll.XIAOFEI_MEDIA);//消费-文娱传媒
-//        findByTypeName(date, ContEtfNameKey.XIAOFEI_WINE, null, name, ContEtfTypeName.XIAOFEI_WINE, ContMapEtfAll.XIAOFEI_WINE);
 
 //        findByTypeName(date, ContEtfNameKey.KEJI_HK, null, "KEJI_HK", ContEtfTypeName.KEJI_HK, ContMapEtfAll.KEJI_HK);//科技-香港
 //        findByTypeName(date, ContEtfNameKey.KEJI_JUNGONG, null, "KEJI_JUNGONG", ContEtfTypeName.KEJI_JUNGONG, ContMapEtfAll.KEJI_JUNGONG);//科技-军工
@@ -1919,6 +1914,6 @@ public class ContMapEtfAll {
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_ENERGY, null, "KEJI_NEW_ENERGY", ContEtfTypeName.KEJI_NEW_ENERGY, ContMapEtfAll.KEJI_NEW_ENERGY);//科技-新能源
 //        findByTypeName(date, ContEtfNameKey.KEJI_NEW_CAR, null, "KEJI_NEW_CAR", ContEtfTypeName.KEJI_NEW_CAR, ContMapEtfAll.KEJI_NEW_CAR);//科技-汽车
 
-        System.out.println(ETF_All_NOCHECK.size());
+//        System.out.println(ETF_All_NOCHECK.size());
     }
 }

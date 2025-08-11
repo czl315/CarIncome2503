@@ -16,8 +16,7 @@ import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static utils.ContEtfTypeName.INDEX_CN_CITY_NOCHECK;
-import static utils.ContEtfTypeName.JINRONG_CASH_NOCHECK;
+import static utils.ContEtfTypeName.*;
 import static utils.Content.*;
 
 /**
@@ -345,6 +344,7 @@ public class EtfAdrCountService {
         List<String> typeNameListNotIn = new ArrayList<>();
         typeNameListNotIn.add(JINRONG_CASH_NOCHECK);
         typeNameListNotIn.add(INDEX_CN_CITY_NOCHECK);
+        typeNameListNotIn.add(INDEX_CN_BIG);
         List<String> typeNameListNotInOri = condition.getTypeNameListNotIn();
         if (typeNameListNotInOri != null) {
             for (String typeName : typeNameListNotInOri) {

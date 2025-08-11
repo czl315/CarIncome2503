@@ -1062,7 +1062,11 @@ public class EtfControl {
         //1、查询etf列表
         List<RankBizDataDiff> etfList = listEtfListLastDay();
         for (RankBizDataDiff etf : etfList) {
-            String code = etf.getF12();
+            String zqdm = etf.getF12();
+
+            if (zqdm.equals("563280")) {
+                System.out.println("特殊代码：" + zqdm);
+            }
 
             //市值过滤
             BigDecimal marketValue = etf.getF20();
@@ -1075,10 +1079,10 @@ public class EtfControl {
             EtfAdrCount entity = new EtfAdrCount();
             entity.setChannel(channel);
             entity.setDate(date);
-            entity.setF12(code);
+            entity.setF12(zqdm);
 
             //更新类型
-            String type = ContMapEtfAll.ETF_All.get(code);
+            String type = ContMapEtfAll.ETF_All.get(zqdm);
             if (type != null) {
                 type = type.replace(" ", "");
                 entity.setType_name(type);

@@ -89,6 +89,7 @@ public class ContEtfTypeName {
         INDEX.add(INDEX_300);
         INDEX.add(INDEX_688);
         INDEX.add(INDEX_CN_BIG);
+        INDEX.add(INDEX_CN_BIG_QZ);
         INDEX.add(INDEX_CN_NOT);
         INDEX.add(INDEX_CN_NOT_USA);
 //        INDEX.add(INDEX_HK);
