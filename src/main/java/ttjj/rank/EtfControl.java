@@ -1064,9 +1064,9 @@ public class EtfControl {
         for (RankBizDataDiff etf : etfList) {
             String zqdm = etf.getF12();
 
-            if (zqdm.equals("563280")) {
-                System.out.println("特殊代码：" + zqdm);
-            }
+//            if (zqdm.equals("563280")) {
+//                System.out.println("特殊代码：" + zqdm);
+//            }
 
             //市值过滤
             BigDecimal marketValue = etf.getF20();
