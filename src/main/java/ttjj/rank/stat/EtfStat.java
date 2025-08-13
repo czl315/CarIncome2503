@@ -38,8 +38,8 @@ public class EtfStat {
         int days = 1;
         List<String> zqdmListTop = new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet());//顶级ETF
 
-//        List<String> zqdmList = null;
-        List<String> zqdmList = EtfAdrCountService.findListZqdmByRankN(new CondEtfAdrCount(date, CHANNEL_ETF, new BigDecimal("1")));//查询列表：ETF；每种业务排名第n的数据
+        List<String> zqdmList = null;
+        zqdmList = EtfAdrCountService.findListZqdmByRankN(new CondEtfAdrCount(date, CHANNEL_ETF, new BigDecimal("1")));//查询列表：ETF；每种业务排名第n的数据
         zqdmList.addAll(zqdmListTop);
 
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
@@ -52,11 +52,11 @@ public class EtfStat {
 //        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
 
         for (String day : dateList) {
-            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
+//            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//涨幅累计修正
-//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//近3日涨幅
-//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_5_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近5日涨幅
-//            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_10_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近10日涨幅
+            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//近3日涨幅
+            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_5_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近5日涨幅
+            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_10_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近10日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_20_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近20日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_20_40_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//上月涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_40_60_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//上2月涨幅
@@ -81,8 +81,18 @@ public class EtfStat {
 //            }
         }
 
-//        boolean isShowMyPosition = true;//是否显示我的持仓
-        boolean isShowMyPosition = false;//是否显示我的持仓
+//        myuPosition(date, condition);//我的持仓
+    }
+
+    /**
+     * 显示我的持仓
+     *
+     * @param date      日期
+     * @param condition 查询条件
+     */
+    private static void myuPosition(String date, CondEtfAdrCount condition) {
+        boolean isShowMyPosition = true;//是否显示我的持仓
+//        boolean isShowMyPosition = false;//是否显示我的持仓
         if (isShowMyPosition) {
             condition.setOrderByVoField(ORDER_BY_VO_MAPCT_102);
             EtfAdrCountService.findMyPosition(date, null, ADR_UP_SUM_TOTAL_DESC, null, ContentCookie.COOKIE_DFCF, condition);//查询我的ETF持仓
