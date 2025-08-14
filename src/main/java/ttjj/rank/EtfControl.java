@@ -672,7 +672,7 @@ public class EtfControl {
      * @param asList         超过均线类型列表
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
-    public static List<EtfAdrCountVo> findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin, int maxAdrUpSumOrderStat) {
+    public static List<EtfAdrCountVo> findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin, Integer maxAdrUpSumOrderStat,String channel) {
         List<EtfAdrCountVo> rs = null;
 
         if (date.length() == 8) {
@@ -684,7 +684,10 @@ public class EtfControl {
         condition.setUpMaKltOrList(asList);
         condition.setADR_UP_SUM_1_60(adrSum60PctMin);
 //        condition.setADR_UP_SUM_40_60(new BigDecimal("1"));
-        condition.setMaxAdrUpSumOrderStat(BigDecimal.valueOf(maxAdrUpSumOrderStat));
+        condition.setChannel(channel);
+        if (maxAdrUpSumOrderStat != null) {
+            condition.setMaxAdrUpSumOrderStat(BigDecimal.valueOf(maxAdrUpSumOrderStat));
+        }
 //        condition.setType_name(INDEX_CN_NOT_USA);
 //        condition.setTypeNameListNotIn(Arrays.asList(ZIYUAN_OIL));
         rs = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件

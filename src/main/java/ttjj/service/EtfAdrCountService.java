@@ -450,7 +450,7 @@ public class EtfAdrCountService {
      * @param stockAdrCountList etf涨幅统计列表
      * @param condFiter         过滤条件
      */
-    private static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
+    public static void handlerShowEtfAdr(List<EtfAdrCountVo> stockAdrCountList, CondEtfAdrCount condFiter) {
         StringBuffer sbHead = new StringBuffer();//首行标题信息
         boolean isShowCode = true;
         boolean isShowDownSum = true;//是否显示下跌累计

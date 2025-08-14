@@ -124,9 +124,9 @@ public class EtfAdrJob {
             try {
                 jobCountUpdateUpMa++;
                 if (jobCountUpdateUpMa % unit == 1) {
-                    EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
-                } else if (jobCountUpdateUpMa % unit == 0) {
                     EtfControl.updateUpMaTypeTopN(date, 2, maKltList, CHANNEL_ETF);//更新超过均线-（每个类型涨幅前n个）
+                } else if (jobCountUpdateUpMa % unit == 0) {
+//                    EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
                 }
             } catch (Exception e) {
                 e.printStackTrace();

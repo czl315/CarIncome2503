@@ -349,6 +349,7 @@ public class ContMapEtfAll {
         KEJI_HK.put("159751", ContEtfTypeName.KEJI_HK);//港股科技ETF           市值：6.93      累涨：33.41     17    12.72     17    10.90     9.79      10日：2.08      0.81      0.27      3.11      14        累涨修正：36.57     净值区间：100     100     90      95      95                                                      19
         KEJI_HK.put("517050", ContEtfTypeName.KEJI_HK);//互联网ETF华泰柏瑞     市值：3.99      累涨：31.31     21    11.44     29    12.77     7.10      10日：2.35      1.65      0.95      2.47      18        累涨修正：36.26     净值区间：100     100     100     100     100                                                     20
         KEJI_HK.put("159856", ContEtfTypeName.KEJI_HK);//互联网龙头ETF         市值：3.01      累涨：30.87     22    12.02     20    11.81     7.04      10日：2.37      1.19      0.80      2.38      19        累涨修正：35.23     净值区间：100     100     100     100     100                                                     21
+        KEJI_HK.put("159822", ContEtfTypeName.KEJI_HK);//新经济ETF             市值：5.64      累涨：19.01     47    3.07      48    7.87      8.07      10日：1.44      0.72                2.57      49        累涨修正：21.17     净值区间：96      97      97      99      97      13.6    4.8     2.0     2.3     2.1     1.1     27
     }
     public static Map<String, String> KEJI_HK_NOCHECK = new HashMap<>();
     static {
