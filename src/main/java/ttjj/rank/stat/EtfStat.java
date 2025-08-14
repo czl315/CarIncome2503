@@ -52,7 +52,7 @@ public class EtfStat {
 //        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
 
         for (String day : dateList) {
-//            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
+            rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_TOTAL_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//涨幅累计修正
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//近3日涨幅
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_UP_SUM_1_5_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//近5日涨幅
@@ -63,11 +63,8 @@ public class EtfStat {
 //            rs = EtfAdrCountService.findByDateOrderByField(day, NET_AREA_DAY_20, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//最近20日价格区间
 //            rs = EtfAdrCountService.findByDateOrderByField(day, ADR_DOWN_SUM_1_60_DESC, null, zqdmList, maxAdrUpSumOrderStat,  condition,CHANNEL_ETF);//排序字段：下跌累计-正序
 
-//            List<EtfAdrCountVo> rsBreakUpMa = EtfControl.findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), new BigDecimal("1"), maxAdrUpSumOrderStat,CHANNEL_ETF);//  KLT_102,KLT_101,KLT_60
-//            CondEtfAdrCount condFiter = new CondEtfAdrCount();//过滤条件
-////            condFiter.setMaxAdrUpSumOrderStat(maxAdrUpSumOrderStat == null ? null : new BigDecimal(maxAdrUpSumOrderStat));//涨序排序前n的数据
-////            condFiter.setShowCountTypeGroup(1);//每个类型限定n个
-//            EtfAdrCountService.handlerShowEtfAdr(rsBreakUpMa, condFiter);//显示etf涨幅统计列表数据
+//            List<EtfAdrCountVo> rsBreakUpMa = EtfControl.findBreakUpMa(day, Arrays.asList(KLT_102,KLT_101,KLT_60,KLT_30,KLT_15), new BigDecimal("10"), maxAdrUpSumOrderStat,CHANNEL_STOCK);//  KLT_102,KLT_101,KLT_60
+//            EtfAdrCountService.handlerShowEtfAdr(rsBreakUpMa, new CondEtfAdrCount());//显示etf涨幅统计列表数据
 
             {
                 CondEtfAdrCount conditionStock = new CondEtfAdrCount();//过滤条件
