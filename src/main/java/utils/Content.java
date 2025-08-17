@@ -1006,6 +1006,8 @@ public class Content {
         return null;
     }
 
+    public static int SIZE_2 = 2;
+    public static int SIZE_3 = 3;
     public static int SIZE_6 = 6;
     public static int SIZE_8 = 8;
     public static int SIZE_10 = 10;

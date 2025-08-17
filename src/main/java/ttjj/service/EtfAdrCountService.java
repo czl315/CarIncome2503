@@ -593,9 +593,14 @@ public class EtfAdrCountService {
                 sb.append(StockUtil.formatStName("", SIZE_8));
             }
             if (vo.getADR_UP_SUM_1_3() != null) {
-                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_3().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_6));//1_3和
             } else {
-                sb.append(StockUtil.formatStName("", SIZE_8));
+                sb.append(StockUtil.formatStName("", SIZE_6));
+            }
+            if (vo.getADR_UP_SUM_ORDER_1_3() != null) {
+                sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_ORDER_1_3(), SIZE_3));//1_3和排名
+            } else {
+                sb.append(StockUtil.formatStName("", SIZE_3));
             }
             if (vo.getADR_UP_SUM_1_2() != null) {
                 sb.append(StockUtil.formatDouble(vo.getADR_UP_SUM_1_2().setScale(2, BigDecimal.ROUND_HALF_UP), SIZE_8));

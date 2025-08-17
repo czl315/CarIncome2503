@@ -30,17 +30,25 @@ import static utils.Content.*;
  */
 public class EtfStat {
     public static void main(String[] args) {
-        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-08-14";
+//        String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
+        String date = "2025-08-15";
 
         //查询多日数据
         Integer maxAdrUpSumOrderStat = null;
         int days = 1;
-        List<String> zqdmListTop = new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet());//顶级ETF
 
         List<String> zqdmList = null;
-        zqdmList = EtfAdrCountService.findListZqdmByRankN(new CondEtfAdrCount(date, CHANNEL_ETF, new BigDecimal("1")));//查询列表：ETF；每种业务排名第n的数据
-        zqdmList.addAll(zqdmListTop);
+//        zqdmList.addAll( new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()));//顶级ETF
+        zqdmList = EtfAdrCountService.findListZqdmByRankN(new CondEtfAdrCount(date, CHANNEL_ETF, new BigDecimal("1")));//查询列表：ETF；每种业务累计排名第n的数据
+        //查询近3日各类中涨幅第1的数据
+        CondEtfAdrCount condEtfAdrCountLast3Day =new CondEtfAdrCount(date, CHANNEL_ETF);
+        condEtfAdrCountLast3Day.setMaxAdrUpSumRank1To3( new BigDecimal("1"));
+        List<String> zqdmListLastDay3 = EtfAdrCountService.findListZqdmByRankN(condEtfAdrCountLast3Day);//查询列表：ETF；每种业务累计排名第n的数据
+        CondEtfAdrCount condEtfAdrCountLast5Day =new CondEtfAdrCount(date, CHANNEL_ETF);
+        condEtfAdrCountLast5Day.setMaxAdrUpSumRank1To5( new BigDecimal("1"));
+        List<String> zqdmListLastDay5 = EtfAdrCountService.findListZqdmByRankN(condEtfAdrCountLast5Day);//查询列表：ETF；每种业务累计排名第n的数据
+        zqdmList.addAll(zqdmListLastDay3);
+        zqdmList.addAll(zqdmListLastDay5);
 
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
         List<EtfAdrCountVo> rs = null;
@@ -50,6 +58,8 @@ public class EtfStat {
 //        condition.setMaxAdrUpSumTotalRank(new BigDecimal("1"));
 //        condition.setBizList(Arrays.asList("指数-大盘-权重"));// "资源-通用", "资源-石油", "资源-稀有","资源-农业","金融-黄金","资源-农业"  科技-软件  金融-银行
 //        condition.setTypeNameListNotIn(Arrays.asList("医疗-通用"));//战争受益："资源-通用", "资源-石油","金融-黄金","科技-军工"
+
+//        myuPosition(date, condition);//我的持仓
 
         for (String day : dateList) {
             rs = EtfAdrCountService.findByDateOrderByField(day, F3_DESC, null, zqdmList, maxAdrUpSumOrderStat, condition, CHANNEL_ETF);//涨幅倒序
@@ -83,7 +93,7 @@ public class EtfStat {
 //            }
         }
 
-//        myuPosition(date, condition);//我的持仓
+
     }
 
     /**

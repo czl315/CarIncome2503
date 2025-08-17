@@ -159,6 +159,14 @@ public class CondEtfAdrCount extends EtfAdrCount {
      * 最高-上涨累计排名
      */
     private BigDecimal maxAdrUpSumTotalRank;
+    /**
+     * 最高-上涨累计排名（近3日）
+     */
+    private BigDecimal maxAdrUpSumRank1To3;
+    /**
+     * 最高-上涨累计排名（近5日）
+     */
+    private BigDecimal maxAdrUpSumRank1To5;
 
     /**
      * 每个类型限定n个
@@ -178,6 +186,21 @@ public class CondEtfAdrCount extends EtfAdrCount {
      */
     private List<Long> notInF148;
 
+    public BigDecimal getMaxAdrUpSumRank1To3() {
+        return maxAdrUpSumRank1To3;
+    }
+
+    public void setMaxAdrUpSumRank1To3(BigDecimal maxAdrUpSumRank1To3) {
+        this.maxAdrUpSumRank1To3 = maxAdrUpSumRank1To3;
+    }
+
+    public BigDecimal getMaxAdrUpSumRank1To5() {
+        return maxAdrUpSumRank1To5;
+    }
+
+    public void setMaxAdrUpSumRank1To5(BigDecimal maxAdrUpSumRank1To5) {
+        this.maxAdrUpSumRank1To5 = maxAdrUpSumRank1To5;
+    }
 
     public String getOrderByVoField() {
         return orderByVoField;
@@ -510,6 +533,11 @@ public class CondEtfAdrCount extends EtfAdrCount {
 
     public CondEtfAdrCount() {
 
+    }
+
+    public CondEtfAdrCount(String date, String channel) {
+        setDate(date);
+        setChannel(channel);
     }
 
     public CondEtfAdrCount(String date, String channel, BigDecimal maxAdrUpSumTotalRank) {

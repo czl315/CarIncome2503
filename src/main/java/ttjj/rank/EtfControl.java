@@ -36,7 +36,7 @@ public class EtfControl {
 
     public static void main(String[] args) {
         String date = DateUtil.getToday(DateUtil.YYYY_MM_DD);
-//        String date = "2025-08-08";
+//        String date = "2025-08-15";
         if (!DateUtil.isTodayBySpDate(date, DateUtil.YYYYMMDD)) {
             return;
         }
@@ -59,6 +59,7 @@ public class EtfControl {
         condition.setMaKltList(Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102));//价格区间周期列表
 //        condition.setMaKltList(Arrays.asList(KLT_102));//价格区间周期列表
 
+
         if (updateEtf) {
             saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
             saveOrUpdateListNetLastDay(condition, date, false, CHANNEL_ETF);//保存或更新ETF涨幅次数-批量更新基础信息
@@ -66,13 +67,14 @@ public class EtfControl {
             updateAdrSumSse(date, etfList);
             updateUpSumOrder(date, CHANNEL_ETF);
             updateLatestDayAdr(condition, date, httpKlineApiType);
-//            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
+            List<String> maKltList = Arrays.asList(KLT_5, KLT_15, KLT_30, KLT_60, KLT_101, KLT_102);
+            updateUpMaTypeTopN(date, 2, maKltList, CHANNEL_ETF);//更新超过均线-（每个类型涨幅前n个）
+            condition.setChannel(CHANNEL_ETF);
+            List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
+            updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
 //            EtfControl.updateUpMaByContMapEtfTop(date, maKltList);//更新超过均线（常用头部ETF）
-//            updateUpMaTypeTopN(date, 2, maKltList, CHANNEL_ETF);//更新超过均线-（每个类型涨幅前n个）
-//        List<EtfAdrCountVo> stockAdrCountList = EtfAdrCountService.findEtfList(condition);//查询列表-根据条件
 //        updateUpMaExchange(date, stockAdrCountList, condition, API_TYPE_SSE);//更新-超过均线信息（交易所）
 //        updateUpMaMyPosition(date, null,Arrays.asList(KLT_15, KLT_30, KLT_60, KLT_101, KLT_102),ContentCookie.COOKIE_DFCF);
-//        updateNetArea(date, stockAdrCountList, httpKlineApiType);//更新-价格区间
         }
         if (updateStock) {
             saveOrUpdateLastDayStock(condition, date, false, CHANNEL_STOCK);//保存或更新-股票
@@ -672,7 +674,7 @@ public class EtfControl {
      * @param asList         超过均线类型列表
      * @param adrSum60PctMin 近60交易日最低涨幅限定
      */
-    public static List<EtfAdrCountVo> findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin, Integer maxAdrUpSumOrderStat,String channel) {
+    public static List<EtfAdrCountVo> findBreakUpMa(String date, List<String> asList, BigDecimal adrSum60PctMin, Integer maxAdrUpSumOrderStat, String channel) {
         List<EtfAdrCountVo> rs = null;
 
         if (date.length() == 8) {
