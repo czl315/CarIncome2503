@@ -789,6 +789,10 @@ public class Content {
      */
     public static String F3_DESC = "F3 DESC";
     /**
+     * 排序字段
+     */
+    public static String TYPE_NAME_DESC = "TYPE_NAME DESC";
+    /**
      * 最高回撤
      */
     public static String ORDER_FIELD_MAXDOWN = "maxDown";

@@ -40,16 +40,6 @@ public class EtfStat {
         List<String> zqdmList = null;
 //        zqdmList.addAll( new ArrayList<>(ContMapEtfAll.ETF_TOP_All.keySet()));//顶级ETF
         zqdmList = EtfAdrCountService.findListZqdmByRankN(new CondEtfAdrCount(date, CHANNEL_ETF, new BigDecimal("1")));//查询列表：ETF；每种业务累计排名第n的数据
-        //查询近3日各类中涨幅第1的数据
-        CondEtfAdrCount condEtfAdrCountLast3Day =new CondEtfAdrCount(date, CHANNEL_ETF);
-        condEtfAdrCountLast3Day.setMaxAdrUpSumRank1To3( new BigDecimal("1"));
-        List<String> zqdmListLastDay3 = EtfAdrCountService.findListZqdmByRankN(condEtfAdrCountLast3Day);//查询列表：ETF；每种业务累计排名第n的数据
-        CondEtfAdrCount condEtfAdrCountLast5Day =new CondEtfAdrCount(date, CHANNEL_ETF);
-        condEtfAdrCountLast5Day.setMaxAdrUpSumRank1To5( new BigDecimal("1"));
-        List<String> zqdmListLastDay5 = EtfAdrCountService.findListZqdmByRankN(condEtfAdrCountLast5Day);//查询列表：ETF；每种业务累计排名第n的数据
-        zqdmList.addAll(zqdmListLastDay3);
-        zqdmList.addAll(zqdmListLastDay5);
-
         List<String> dateList = StockService.findListDateBefore(date, days, API_TYPE_SSE);//查询n个交易日之前的日期
         List<EtfAdrCountVo> rs = null;
         CondEtfAdrCount condition = new CondEtfAdrCount();//过滤条件

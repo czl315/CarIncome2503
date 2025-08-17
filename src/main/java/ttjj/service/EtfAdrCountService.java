@@ -29,6 +29,7 @@ public class EtfAdrCountService {
 
     /**
      * 涨幅统计-查询列表：每种业务排名前n的数据
+     *
      * @param condition 条件
      * @return rs
      */
@@ -49,11 +50,35 @@ public class EtfAdrCountService {
 
     /**
      * 查询列表（证券代码）：每种业务排名前n的数据
+     *
      * @param condition 条件
      * @return rs
      */
-    public static List<String> findListZqdmByRankN(CondEtfAdrCount condition ) {
+    public static List<String> findListZqdmByRankN(CondEtfAdrCount condition) {
         List<String> zqdmList = new ArrayList<>();
+        List<EtfAdrCountVo> rs = EtfAdrCountService.findListByRankN(condition);//查询列表：ETF；每种业务排名第一的数据
+        if (rs != null) {
+            for (EtfAdrCountVo vo : rs) {
+                zqdmList.add(vo.getF12());
+            }
+        }
+        return zqdmList;
+    }
+
+    /**
+     * 查询列表（证券代码）：查询近n日各类中涨幅第x的数据
+     *
+     * @param condition 条件
+     * @return rs
+     */
+    public static List<String> findListZqdmLastDayN(CondEtfAdrCount condition, BigDecimal rankNum, String dayArea) {
+        List<String> zqdmList = new ArrayList<>();
+        if (dayArea.equals("1To3")) {
+            condition.setMaxAdrUpSumRank1To3(rankNum);//查询近n日各类中涨幅第x的数据
+        }
+        if (dayArea.equals("1To5")) {
+            condition.setMaxAdrUpSumRank1To5(rankNum);
+        }
         List<EtfAdrCountVo> rs = EtfAdrCountService.findListByRankN(condition);//查询列表：ETF；每种业务排名第一的数据
         if (rs != null) {
             for (EtfAdrCountVo vo : rs) {
